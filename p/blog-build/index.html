@@ -73,7 +73,8 @@
         
         <div class="site-meta">
             <h1 class="site-name"><a href="/">李宇飞-Liyufei1</a></h1>
-            <h2 class="site-description">存放学习随笔的个人博客,主要有:Godot、Unreal、Blog、Cpp</h2>
+            <h2 class="site-description">存放学习随笔的个人博客,主要有:Godot、Unreal、Blog、Cpp.
+ 下方是个人的b站、gitbug链接:</h2>
         </div>
     </header><ol class="menu-social">
             
@@ -299,6 +300,13 @@
         <li><a href="#图片">图片</a></li>
       </ol>
     </li>
+    <li><a href="#步骤">步骤</a>
+      <ol>
+        <li><a href="#创建本地新站点">创建本地新站点</a></li>
+        <li><a href="#部署到github">部署到github</a></li>
+        <li><a href="#githug的自动构建">githug的自动构建</a></li>
+      </ol>
+    </li>
   </ol>
 </nav>
         </div>
@@ -329,12 +337,8 @@
     
     <header class="article-category">
         
-            <a href="/categories/misc/" >
+            <a href="/categories/misc/" style="background-color: #2a9d8f; color: #e9e5e5ff;">
                 Misc
-            </a>
-        
-            <a href="/categories/%E6%9D%82%E9%A1%B9/" >
-                杂项
             </a>
         
     </header>
@@ -383,7 +387,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 2 分钟
+                    阅读时长: 3 分钟
                 </time>
             </div>
         
@@ -418,9 +422,15 @@
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">// 启动服务
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">// 创建新站点
+</span></span><span class="line"><span class="cl">hugo new site myblog
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">// 启动服务
 </span></span><span class="line"><span class="cl">hugo server -D
 </span></span><span class="line"><span class="cl">hugo server --buildDrafts
 </span></span><span class="line"><span class="cl">
@@ -594,6 +604,194 @@
 	
 >
 <code>![图片说明](guidao2.jpg)</code></p>
+<h2 id="步骤">步骤
+</h2><h3 id="创建本地新站点">创建本地新站点
+</h3><ol>
+<li>运行命令<code>hugo new site dev</code>，利用hugo创建本地新站点。创建完成后，可以运行命令<code>hugo server -D</code>来运行新建的站点，在浏览器中可以验证是否创建成功。
+<img src="/p/blog-build/runhugo.png"
+	width="1176"
+	height="511"
+	srcset="/p/blog-build/runhugo_hu_e17f544f71fd302e.png 480w, /p/blog-build/runhugo_hu_3098825c88c43cc2.png 1024w"
+	loading="lazy"
+	
+		alt="命令行运行成功示例"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="230"
+		data-flex-basis="552px"
+	
+></li>
+<li>到上<a class="link" href="https://themes.gohugo.io/"  target="_blank" rel="noopener"
+    >hugo-theme</a>下载中意的主题（本博客采用stack），将下载的主题复制到新站点的themes文件夹下。
+<img src="/p/blog-build/step2.png"
+	width="1985"
+	height="787"
+	srcset="/p/blog-build/step2_hu_13db4c6788a887e8.png 480w, /p/blog-build/step2_hu_79dfb28ede1abfc4.png 1024w"
+	loading="lazy"
+	
+		alt="主题示例"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="252"
+		data-flex-basis="605px"
+	
+></li>
+<li>此时执行命令<code>hugo server -D</code>启动服务，在浏览器中访问本地地址，可以看到新建的模板网页
+<img src="/p/blog-build/step3.png"
+	width="1135"
+	height="758"
+	srcset="/p/blog-build/step3_hu_267a0678cb6ea527.png 480w, /p/blog-build/step3_hu_3210f60ad9a23106.png 1024w"
+	loading="lazy"
+	
+		alt="主题示例"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="149"
+		data-flex-basis="359px"
+	
+></li>
+</ol>
+<h3 id="部署到github">部署到github
+</h3><ol>
+<li>运行指令<code>hugo -D</code>利用hugo构建静态网页，此时在我们的本地网站文件夹下方，可以看到生成了一个名为<code>public</code>的文件夹，里面存放了静态网页。
+<img src="/p/blog-build/step4.png"
+	width="1684"
+	height="722"
+	srcset="/p/blog-build/step4_hu_9b09eaad1100fbc9.png 480w, /p/blog-build/step4_hu_ed830acd5db28bc8.png 1024w"
+	loading="lazy"
+	
+		alt="目录示例"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="233"
+		data-flex-basis="559px"
+	
+></li>
+<li>创建github仓库，需要注意仓库命名为：<code>&lt;github用户名&gt;.github.io</code>，只有按照这个规范命名，github才会将静态网页部署到githubPages中。</li>
+<li>将public文件夹下的所有文件上传到步骤2中创建的github仓库中。然后在仓库中运行Pages配置，等待一段时间，即可看到静态网页。
+<img src="/p/blog-build/step5.png"
+	width="2099"
+	height="1063"
+	srcset="/p/blog-build/step5_hu_df2d765846cb936b.png 480w, /p/blog-build/step5_hu_c52114aab6167df9.png 1024w"
+	loading="lazy"
+	
+		alt="Page配置示例"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="197"
+		data-flex-basis="473px"
+	
+></li>
+</ol>
+<h3 id="githug的自动构建">githug的自动构建
+</h3><ol>
+<li>创建github仓库，此仓库建议为私有仓库，用于保存本地的hugo网站，即真正的博客仓库（上方发布的仅为静态网页仓库）。</li>
+<li>创建<code>.github/workflows/hugo.yml</code>文件，并添加以下内容：<br>
+需要注意的是<code>TOKEN</code>为github的token，需要在github的setting中创建。同时注意同步的分支。
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">deploy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nt">on</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">     </span><span class="nt">push</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">         </span><span class="nt">branches</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">         </span>- <span class="l">master</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nt">deploy</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">     </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l">ubuntu-latest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">     </span><span class="nt">steps</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">         </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Checkout</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">         </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">actions/checkout@v4</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">         </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">             </span><span class="nt">fetch-depth</span><span class="p">:</span><span class="w"> </span><span class="m">0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">         </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Setup Hugo</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">         </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">peaceiris/actions-hugo@v3</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">         </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">             </span><span class="nt">hugo-version</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;latest&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">             </span><span class="nt">extended</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">         </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Build Web</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">         </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l">hugo -D</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">         </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Deploy Web</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">         </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">peaceiris/actions-gh-pages@v4</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">         </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">             </span><span class="nt">PERSONAL_TOKEN</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.TOKEN }}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">             </span><span class="nt">EXTERNAL_REPOSITORY</span><span class="p">:</span><span class="w"> </span><span class="l">Liyufei1/Liyufei1.github.io</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">             </span><span class="nt">PUBLISH_BRANCH</span><span class="p">:</span><span class="w"> </span><span class="l">master</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">             </span><span class="nt">PUBLISH_DIR</span><span class="p">:</span><span class="w"> </span><span class="l">./public</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">             </span><span class="nt">commit_message</span><span class="p">:</span><span class="w"> </span><span class="l">auto deploy</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>在github中创建TOKEN，并添加到blog仓库中。创建token时需要勾选<code>repo</code>权限以及<code>workflow</code>权限。创建完毕后，在blog仓库中配置该TOKEN。后续有代码提交时，就会自动构建静态网页并部署到githubPages中。
+<img src="/p/blog-build/step6.png"
+	width="2041"
+	height="571"
+	srcset="/p/blog-build/step6_hu_cbfea2ea2c38c880.png 480w, /p/blog-build/step6_hu_dfec89533b592258.png 1024w"
+	loading="lazy"
+	
+		alt="TOKEN配置"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="357"
+		data-flex-basis="857px"
+	
+>
+<img src="/p/blog-build/step7.png"
+	width="2037"
+	height="1269"
+	srcset="/p/blog-build/step7_hu_bbc0484b34e86e2a.png 480w, /p/blog-build/step7_hu_43610632e5d9705e.png 1024w"
+	loading="lazy"
+	
+		alt="TOKEN配置"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="160"
+		data-flex-basis="385px"
+	
+></li>
+</ol>
 
 </section>
 
