@@ -8,12 +8,159 @@
         <language>zh-cn</language>
         <copyright>李宇飞-Liyufei1</copyright>
         <lastBuildDate>Tue, 04 Nov 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://Liyufei1.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>【godot】开发环境部署及示例</title>
-        <link>https://Liyufei1.github.io/p/godot%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/</link>
+        <title>【godot】二、Modules开发指南</title>
+        <link>https://Liyufei1.github.io/p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/</link>
         <pubDate>Tue, 04 Nov 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://Liyufei1.github.io/p/godot%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/</guid>
-        <description>&lt;img src="https://Liyufei1.github.io/p/godot%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/guidao4.jpg" alt="Featured image of post 【godot】开发环境部署及示例" /&gt;&lt;h1 id=&#34;引擎编译&#34;&gt;引擎编译
+        <guid>https://Liyufei1.github.io/p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/</guid>
+        <description>&lt;img src="https://Liyufei1.github.io/p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/guidao4.jpg" alt="Featured image of post 【godot】二、Modules开发指南" /&gt;&lt;h1 id=&#34;常用头文件&#34;&gt;常用头文件
+&lt;/h1&gt;&lt;h2 id=&#34;print&#34;&gt;print
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;路径&lt;/strong&gt;：#include &amp;ldquo;core/string/print_string.h&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;用于标准日志的输出。在做引擎开发时使用。&lt;/p&gt;
+&lt;p&gt;在做GDExtension开发时，使用Utility_function头文件，进行日志打印。&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;接口&lt;/th&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;作用&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;示例&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;void print_line(const Variant &amp;amp;v）&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;打印日志&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;__print_line(&amp;ldquo;AAA&amp;rdquo;,10.0);&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;void print_error(const String &amp;amp;p_string)&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;打印错误&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;print_error(&amp;ldquo;BBBB&amp;rdquo;)&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;class_db&#34;&gt;class_db
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;路径&lt;/strong&gt;：#include &amp;ldquo;core/object/class_db.h&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;在_bind_methods中进行类型和函数注册的时候，使用到的类型注册函数就来自该头文件&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;接口&lt;/th&gt;
+          &lt;th&gt;作用&lt;/th&gt;
+          &lt;th&gt;示例&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;ClassDB::bind_method&lt;/td&gt;
+          &lt;td&gt;注册函数到脚本&lt;/td&gt;
+          &lt;td&gt;ClassDB::bind_method(D_METHOD(&amp;ldquo;test_print&amp;rdquo;), &amp;amp;CommandTool::test_print);&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;os&#34;&gt;OS
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;路径&lt;/strong&gt;：#include &amp;ldquo;sence/gui/xxx.h&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;提供了一系列操作系统层级的API，比如打印日、获取引擎运行时长等。&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;接口&lt;/th&gt;
+          &lt;th&gt;作用&lt;/th&gt;
+          &lt;th&gt;示例&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;get_ticks_usec&lt;/td&gt;
+          &lt;td&gt;获取引擎运行时长，单位为微秒&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;get_ticks_msec&lt;/td&gt;
+          &lt;td&gt;获取引擎运行时长，单位为毫秒&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;callable&#34;&gt;callable
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;路径&lt;/strong&gt;：#include &amp;ldquo;core/variant/callable.h&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;godot自身提供了一套用于&lt;strong&gt;安全、类型检查&lt;/strong&gt;的函数回调机制，也就是Callable，在进行信号连接时，我们就需要使用到它。&lt;/p&gt;
+&lt;p&gt;类似 C++ 的 &lt;code&gt;std::function&amp;lt;void()&amp;gt;&lt;/code&gt;，但它能在 Godot 对象系统中序列化、连接信号、跨语言调用。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;//基础构造函数，注意此处的method需要在_bind_method中被注册才能够通过字符串访问。
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Callable&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;c&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Callable&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;_on_something&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;//更安全高效的绑定
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Callable&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;c&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;callable_mp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;MyClass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;_on_timeout&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;gui&#34;&gt;gui
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;路径&lt;/strong&gt;：#include &amp;ldquo;sence/gui/xxx.h&amp;rdquo;&lt;/p&gt;
+&lt;h3 id=&#34;label&#34;&gt;Label
+&lt;/h3&gt;&lt;p&gt;Label是godot提供的UI控件，可以自适应内容的大小&lt;/p&gt;
+&lt;h3 id=&#34;richtextlabel&#34;&gt;RichTextLabel
+&lt;/h3&gt;&lt;p&gt;RichTextLabel是godot提供的UI控件，可以使用BBcode来控制显示的内容，比如设置当行文本颜色等&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;screen_output_label&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;set_use_bbcode&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;	&lt;span class=&#34;c1&#34;&gt;//使用bbcode，开启才能正确显示[color=red]XXXX[\color]的bbcode格式文本
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;screen_output_label&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;set_fit_content&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;	&lt;span class=&#34;c1&#34;&gt;//自适应文本高度
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;screen_output_label&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;set_autowrap_mode&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;TextServer&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;AutowrapMode&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;AUTOWRAP_OFF&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;//关闭宽度调整，与上方设置相结合，可以自适应宽高。
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;timer&#34;&gt;timer
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;9
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;//1.通过场景树（mainloop）设置简单的时间回调函数
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;	&lt;span class=&#34;c1&#34;&gt;// timer to show text for 3 seconds
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;auto&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;timer&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;get_scene_tree&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;create_timer&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;time&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;timer&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;connect&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;timeout&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;callable_mp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;CommandTool&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;reduce_screen_output_buffer&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;));&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;//2.c++原生的线程调用也可以实现，但是需要call_deferred来回到主线程
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;//3.tween，更加复杂，但是可以链式调用，以及设置缓动
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+        </item>
+        <item>
+        <title>【godot】一、开发环境部署及示例</title>
+        <link>https://Liyufei1.github.io/p/godot%E4%B8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/</link>
+        <pubDate>Tue, 04 Nov 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://Liyufei1.github.io/p/godot%E4%B8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/</guid>
+        <description>&lt;img src="https://Liyufei1.github.io/p/godot%E4%B8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/guidao4.jpg" alt="Featured image of post 【godot】一、开发环境部署及示例" /&gt;&lt;h1 id=&#34;引擎编译&#34;&gt;引擎编译
 &lt;/h1&gt;&lt;p&gt;官方源码仓库：&lt;a class=&#34;link&#34; href=&#34;https://github.com/godotengine/godot.git&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;godot&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;官方godot-cpp仓库：&lt;a class=&#34;link&#34; href=&#34;https://github.com/godotengine/godot-cpp.git&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
@@ -102,10 +249,10 @@
     &gt;自定义 C++ 模块 — Godot Engine (4.x) 简体中文文档&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;文件及结构&#34;&gt;文件及结构
 &lt;/h3&gt;&lt;p&gt;新建一个模块需要以下文件及结构，存放在E:\Godot\Godot_Engine\modules目录底下 。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/godot%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/modules-1.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/godot%E4%B8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/modules-1.png&#34;
 	width=&#34;627&#34;
 	height=&#34;194&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/godot%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/modules-1_hu_3ba383dce8c6f89d.png 480w, https://Liyufei1.github.io/p/godot%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/modules-1_hu_92229b79882f02de.png 1024w&#34;
+	srcset=&#34;https://Liyufei1.github.io/p/godot%E4%B8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/modules-1_hu_3ba383dce8c6f89d.png 480w, https://Liyufei1.github.io/p/godot%E4%B8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/modules-1_hu_92229b79882f02de.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;module文件结构&#34;
@@ -259,10 +406,10 @@
 &lt;/div&gt;&lt;h3 id=&#34;register_types&#34;&gt;register_types
 &lt;/h3&gt;&lt;p&gt;该文件负责对自身模块中声明的godot类型进行&lt;strong&gt;类型注册&lt;/strong&gt;，同时也可以在相对较早的阶段（main函数的setup阶段）进行一些单例类的实例化。
 如果在进行编辑器工具类的开发，则工具类的实例化和注册，也是在该阶段进行的。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/godot%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/modules-2.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/godot%E4%B8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/modules-2.png&#34;
 	width=&#34;1772&#34;
 	height=&#34;691&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/godot%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/modules-2_hu_fd2ed55dd6b23391.png 480w, https://Liyufei1.github.io/p/godot%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/modules-2_hu_94f08f527906f1a4.png 1024w&#34;
+	srcset=&#34;https://Liyufei1.github.io/p/godot%E4%B8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/modules-2_hu_fd2ed55dd6b23391.png 480w, https://Liyufei1.github.io/p/godot%E4%B8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/modules-2_hu_94f08f527906f1a4.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;模块注册时机代码&#34;
@@ -347,10 +494,10 @@
 &lt;p&gt;对于GDExtension中编写的c++代码，需要进行特定的&lt;strong&gt;注册&lt;/strong&gt;和&lt;strong&gt;编译&lt;/strong&gt;流程，才能形成给godot用的动态链接库&lt;/p&gt;
 &lt;h3 id=&#34;项目组织结构&#34;&gt;项目组织结构
 &lt;/h3&gt;&lt;p&gt;对于带GDExtension的godot项目，它具有以下的基本结构&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/godot%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/extrension-1.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/godot%E4%B8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/extrension-1.png&#34;
 	width=&#34;862&#34;
 	height=&#34;753&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/godot%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/extrension-1_hu_eca21e1e3b1052d7.png 480w, https://Liyufei1.github.io/p/godot%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/extrension-1_hu_97809e4f60e60419.png 1024w&#34;
+	srcset=&#34;https://Liyufei1.github.io/p/godot%E4%B8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/extrension-1_hu_eca21e1e3b1052d7.png 480w, https://Liyufei1.github.io/p/godot%E4%B8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/extrension-1_hu_97809e4f60e60419.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;GDExtension的godot项目&#34;

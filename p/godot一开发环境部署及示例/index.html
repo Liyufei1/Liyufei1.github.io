@@ -2,18 +2,18 @@
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="介绍了怎么搭建和编译godot的开发环境，GDExtension、Modules">
-<title>【godot】开发环境部署及示例</title>
+<title>【godot】一、开发环境部署及示例</title>
 
-<link rel='canonical' href='https://Liyufei1.github.io/p/godot%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/'>
+<link rel='canonical' href='https://Liyufei1.github.io/p/godot%E4%B8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/'>
 
-<link rel="stylesheet" href="/scss/style.min.b0e76e98cdd4f7082d1fc36f7af7e0843a81201db2197c03ca426751dc923735.css"><meta property='og:title' content="【godot】开发环境部署及示例">
+<link rel="stylesheet" href="/scss/style.min.b0e76e98cdd4f7082d1fc36f7af7e0843a81201db2197c03ca426751dc923735.css"><meta property='og:title' content="【godot】一、开发环境部署及示例">
 <meta property='og:description' content="介绍了怎么搭建和编译godot的开发环境，GDExtension、Modules">
-<meta property='og:url' content='https://Liyufei1.github.io/p/godot%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/'>
+<meta property='og:url' content='https://Liyufei1.github.io/p/godot%E4%B8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/'>
 <meta property='og:site_name' content='李宇飞-Liyufei1'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-11-04T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-11-04T00:00:00&#43;00:00'/><meta property='og:image' content='https://Liyufei1.github.io/p/godot%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/guidao4.jpg' />
-<meta name="twitter:title" content="【godot】开发环境部署及示例">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-11-04T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-11-04T00:00:00&#43;00:00'/><meta property='og:image' content='https://Liyufei1.github.io/p/godot%E4%B8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/guidao4.jpg' />
+<meta name="twitter:title" content="【godot】一、开发环境部署及示例">
 <meta name="twitter:description" content="介绍了怎么搭建和编译godot的开发环境，GDExtension、Modules"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='https://Liyufei1.github.io/p/godot%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/guidao4.jpg' />
+    <meta name="twitter:image" content='https://Liyufei1.github.io/p/godot%E4%B8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/guidao4.jpg' />
     <link rel="shortcut icon" href="/favicon.png" />
 
     </head>
@@ -318,13 +318,13 @@
     <article class="has-image main-article">
     <header class="article-header">
         <div class="article-image">
-            <a href="/p/godot%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/">
-                <img src="/p/godot%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/guidao4_hu_6f61d51a49f213b4.jpg"
-                        srcset="/p/godot%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/guidao4_hu_6f61d51a49f213b4.jpg 800w, /p/godot%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/guidao4_hu_ac1cc675e06103ac.jpg 1600w"
+            <a href="/p/godot%E4%B8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/">
+                <img src="/p/godot%E4%B8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/guidao4_hu_6f61d51a49f213b4.jpg"
+                        srcset="/p/godot%E4%B8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/guidao4_hu_6f61d51a49f213b4.jpg 800w, /p/godot%E4%B8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/guidao4_hu_ac1cc675e06103ac.jpg 1600w"
                         width="800" 
                         height="526" 
                         loading="lazy"
-                        alt="Featured image of post 【godot】开发环境部署及示例" />
+                        alt="Featured image of post 【godot】一、开发环境部署及示例" />
                 
             </a>
         </div>
@@ -343,7 +343,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/godot%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/">【godot】开发环境部署及示例</a>
+            <a href="/p/godot%E4%B8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/">【godot】一、开发环境部署及示例</a>
         </h2>
     
         
@@ -488,10 +488,10 @@
     >自定义 C++ 模块 — Godot Engine (4.x) 简体中文文档</a></p>
 <h3 id="文件及结构">文件及结构
 </h3><p>新建一个模块需要以下文件及结构，存放在E:\Godot\Godot_Engine\modules目录底下 。</p>
-<p><img src="/p/godot%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/modules-1.png"
+<p><img src="/p/godot%E4%B8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/modules-1.png"
 	width="627"
 	height="194"
-	srcset="/p/godot%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/modules-1_hu_3ba383dce8c6f89d.png 480w, /p/godot%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/modules-1_hu_92229b79882f02de.png 1024w"
+	srcset="/p/godot%E4%B8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/modules-1_hu_3ba383dce8c6f89d.png 480w, /p/godot%E4%B8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/modules-1_hu_92229b79882f02de.png 1024w"
 	loading="lazy"
 	
 		alt="module文件结构"
@@ -645,10 +645,10 @@
 </div><h3 id="register_types">register_types
 </h3><p>该文件负责对自身模块中声明的godot类型进行<strong>类型注册</strong>，同时也可以在相对较早的阶段（main函数的setup阶段）进行一些单例类的实例化。
 如果在进行编辑器工具类的开发，则工具类的实例化和注册，也是在该阶段进行的。</p>
-<p><img src="/p/godot%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/modules-2.png"
+<p><img src="/p/godot%E4%B8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/modules-2.png"
 	width="1772"
 	height="691"
-	srcset="/p/godot%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/modules-2_hu_fd2ed55dd6b23391.png 480w, /p/godot%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/modules-2_hu_94f08f527906f1a4.png 1024w"
+	srcset="/p/godot%E4%B8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/modules-2_hu_fd2ed55dd6b23391.png 480w, /p/godot%E4%B8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/modules-2_hu_94f08f527906f1a4.png 1024w"
 	loading="lazy"
 	
 		alt="模块注册时机代码"
@@ -733,10 +733,10 @@
 <p>对于GDExtension中编写的c++代码，需要进行特定的<strong>注册</strong>和<strong>编译</strong>流程，才能形成给godot用的动态链接库</p>
 <h3 id="项目组织结构">项目组织结构
 </h3><p>对于带GDExtension的godot项目，它具有以下的基本结构</p>
-<p><img src="/p/godot%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/extrension-1.png"
+<p><img src="/p/godot%E4%B8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/extrension-1.png"
 	width="862"
 	height="753"
-	srcset="/p/godot%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/extrension-1_hu_eca21e1e3b1052d7.png 480w, /p/godot%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/extrension-1_hu_97809e4f60e60419.png 1024w"
+	srcset="/p/godot%E4%B8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/extrension-1_hu_eca21e1e3b1052d7.png 480w, /p/godot%E4%B8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/extrension-1_hu_97809e4f60e60419.png 1024w"
 	loading="lazy"
 	
 		alt="GDExtension的godot项目"
@@ -1227,6 +1227,39 @@
     
 
     
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/">
+        
+        
+            <div class="article-image">
+                <img src="/p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/guidao4.4b77723082bb5f89da453fbd840599e9_hu_ae08b510ea7197fd.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 【godot】二、Modules开发指南"
+                        
+                        data-hash="md5-S3dyMIK7X4naRT&#43;9hAWZ6Q==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【godot】二、Modules开发指南</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
 
      
     
