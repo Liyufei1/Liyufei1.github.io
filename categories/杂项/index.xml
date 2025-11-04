@@ -2,23 +2,25 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>杂项 on 李宇飞-Liyufei1</title>
-        <link>http://localhost:1313/categories/%E6%9D%82%E9%A1%B9/</link>
+        <link>https://Liyufei1.github.io/categories/%E6%9D%82%E9%A1%B9/</link>
         <description>Recent content in 杂项 on 李宇飞-Liyufei1</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>李宇飞-Liyufei1</copyright>
-        <lastBuildDate>Mon, 03 Nov 2025 16:08:31 +0800</lastBuildDate><atom:link href="http://localhost:1313/categories/%E6%9D%82%E9%A1%B9/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 03 Nov 2025 16:08:31 +0800</lastBuildDate><atom:link href="https://Liyufei1.github.io/categories/%E6%9D%82%E9%A1%B9/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Blog Build</title>
-        <link>http://localhost:1313/p/blog-build/</link>
+        <link>https://Liyufei1.github.io/p/blog-build/</link>
         <pubDate>Mon, 03 Nov 2025 16:08:31 +0800</pubDate>
         
-        <guid>http://localhost:1313/p/blog-build/</guid>
-        <description>&lt;img src="http://localhost:1313/p/blog-build/guidao3.jpg" alt="Featured image of post Blog Build" /&gt;&lt;h2 id=&#34;前置工具&#34;&gt;前置工具
+        <guid>https://Liyufei1.github.io/p/blog-build/</guid>
+        <description>&lt;img src="https://Liyufei1.github.io/p/blog-build/guidao3.jpg" alt="Featured image of post Blog Build" /&gt;&lt;h2 id=&#34;前置工具&#34;&gt;前置工具
 &lt;/h2&gt;&lt;ol&gt;
 &lt;li&gt;网站前端工具-hugo软件 ：&lt;a class=&#34;link&#34; href=&#34;https://gohugo.io/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;hugo&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;hugo主题下载线仓库：&lt;a class=&#34;link&#34; href=&#34;https://themes.gohugo.io/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;hugo-theme&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;参考教程：&lt;a class=&#34;link&#34; href=&#34;https://letere-gzj.github.io/hugo-stack/p/hugo/custom-blog/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;教程&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id=&#34;hugo&#34;&gt;hugo
 &lt;/h2&gt;&lt;h3 id=&#34;hugo指令&#34;&gt;hugo指令
@@ -192,10 +194,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;图片&#34;&gt;图片
-&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/blog-build/guidao2.jpg&#34;
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/blog-build/guidao2.jpg&#34;
 	width=&#34;4000&#34;
 	height=&#34;2469&#34;
-	srcset=&#34;http://localhost:1313/p/blog-build/guidao2_hu_3f1d7ff4fb988ae9.jpg 480w, http://localhost:1313/p/blog-build/guidao2_hu_f0ad7a416457ec83.jpg 1024w&#34;
+	srcset=&#34;https://Liyufei1.github.io/p/blog-build/guidao2_hu_3f1d7ff4fb988ae9.jpg 480w, https://Liyufei1.github.io/p/blog-build/guidao2_hu_f0ad7a416457ec83.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;图片说明&#34;
