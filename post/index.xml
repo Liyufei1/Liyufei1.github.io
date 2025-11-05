@@ -7,13 +7,455 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>李宇飞-Liyufei1</copyright>
-        <lastBuildDate>Tue, 04 Nov 2025 16:38:31 +0800</lastBuildDate><atom:link href="https://Liyufei1.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 05 Nov 2025 09:18:31 +0800</lastBuildDate><atom:link href="https://Liyufei1.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>【godot】四、性能统计</title>
+        <link>https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/</link>
+        <pubDate>Wed, 05 Nov 2025 09:18:31 +0800</pubDate>
+        
+        <guid>https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/</guid>
+        <description>&lt;img src="https://Liyufei1.github.io/guidao4.jpg" alt="Featured image of post 【godot】四、性能统计" /&gt;&lt;h2 id=&#34;性能分析相关&#34;&gt;性能分析相关
+&lt;/h2&gt;&lt;p&gt;godot作为相对成熟的游戏引擎，其本身就提供了相对完善的运行时性能监测工具。本文将对常用的运行时性能参数的获取和使用进行一个简易的说明，旨在帮助大家了解获取及理解这些参数。&lt;/p&gt;
+&lt;h3 id=&#34;performance&#34;&gt;Performance
+&lt;/h3&gt;&lt;p&gt;Performance是godot内置的性能数据存储器，它提供对许多与性能相关的不同监视器的访问，例如&lt;strong&gt;贴图内存使用情况&lt;/strong&gt; :RENDER_BUFFER_MEM_USED（在glbufferData的时候，会对申请的size进行累加）、&lt;strong&gt;绘制调用&lt;/strong&gt;:RENDER_TOTAL_DRAW_CALLS_IN_FRAME （gldraw的时候加一）&lt;strong&gt;FPS&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;这些值与编辑器的调试器面板中的监视选项卡中显示的值相同。通过使用该类的 &lt;strong&gt;get_monitor()&lt;/strong&gt; 方法，你可以从代码中访问该数据。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250828131418698.png&#34;
+	width=&#34;2019&#34;
+	height=&#34;650&#34;
+	srcset=&#34;https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250828131418698_hu_5bbdb0b8352d90a0.png 480w, https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250828131418698_hu_30343c1c72539297.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250828131418698&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;310&#34;
+		data-flex-basis=&#34;745px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;注意：某些内置监视器&lt;strong&gt;仅在调试模式&lt;/strong&gt;下可用，并且在以发布模式导出的项目中使用时，将始终返回 0。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;注意：出于性能原因，某些内置监视器不会实时更新，所以在更改之间可能会有&lt;strong&gt;长达 1 秒的&lt;/strong&gt;延迟。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;注意：自定义监视器不支持负值。负值被钳制为 0&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;//Performance::TIME_FPS是提前内置的Monitor
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Performance&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;get_singleton&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;get_monitor&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Performance&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;TIME_FPS&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;名称&lt;/th&gt;
+          &lt;th&gt;作用&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;TIME_FPS&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;帧率（每秒帧数）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;TIME_PROCESS&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;每帧的处理时间（不包括物理和导航过程），c++/Gdscript&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;TIME_PHYSICS_PROCESS&lt;/td&gt;
+          &lt;td&gt;物理处理的时间&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;MEMORY_STATIC&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;静态内存使用量（不包括动态内存）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;MEMORY_STATIC_MAX&lt;/td&gt;
+          &lt;td&gt;静态内存的最大使用量&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;MEMORY_MESSAGE_BUFFER_MAX&lt;/td&gt;
+          &lt;td&gt;消息缓冲区的最大内存使用量&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;OBJECT_COUNT&lt;/td&gt;
+          &lt;td&gt;当前场景中的总对象数&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;OBJECT_RESOURCE_COUNT&lt;/td&gt;
+          &lt;td&gt;当前场景中资源的数量&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;OBJECT_NODE_COUNT&lt;/td&gt;
+          &lt;td&gt;当前场景中节点的数量&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;OBJECT_ORPHAN_NODE_COUNT&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;孤立节点的数量（没有父节点的节点）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;RENDER_TOTAL_OBJECTS_IN_FRAME&lt;/td&gt;
+          &lt;td&gt;每帧渲染的总对象数量&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;RENDER_TOTAL_PRIMITIVES_IN_FRAME&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;每帧渲染的总图形原语数量（如三角形、线条）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;RENDER_TOTAL_DRAW_CALLS_IN_FRAME&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;每帧渲染的总绘制调用次数&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;RENDER_TEXTURE_MEM_USED&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;渲染使用的纹理内存量&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;RENDER_BUFFER_MEM_USED&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;渲染使用的缓冲区内存量&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h4 id=&#34;memory_static&#34;&gt;MEMORY_STATIC
+&lt;/h4&gt;&lt;p&gt;Performance中的静态内存数据，包含了godot体系下的所有用户申请的内存，也即Variant中被标注的变量。&lt;/p&gt;
+&lt;p&gt;**注意：**cpp原生类型申请的内存空间并不会被统计进去。&lt;/p&gt;
+&lt;p&gt;该数据被实际存储在Memary类中，出于线程安全考虑，它被包装在一个原子类型中：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250828132259665.png&#34;
+	width=&#34;725&#34;
+	height=&#34;208&#34;
+	srcset=&#34;https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250828132259665_hu_39cf1ff9964529dc.png 480w, https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250828132259665_hu_1b9d7bdc4fd8815b.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250828132259665&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;348&#34;
+		data-flex-basis=&#34;836px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h4 id=&#34;render_&#34;&gt;&lt;strong&gt;RENDER_TEXTURE_MEM_USED&lt;/strong&gt;
+&lt;/h4&gt;&lt;p&gt;在gl渲染模式下，由于并没有RenderDevice层，都是直接使用的gl接口，因此数据的记录相对更加直接。&lt;/p&gt;
+&lt;p&gt;performancce中访问的&lt;strong&gt;RENDER_TEXTURE_MEM_USED&lt;/strong&gt;是通过**&lt;code&gt;RenderingServer&lt;/code&gt;&lt;strong&gt;提供的&lt;/strong&gt;&lt;code&gt;get_rendering_info&lt;/code&gt;**接口来获取的。&lt;/p&gt;
+&lt;p&gt;在往下走就是RGS::RendererUtilities提供的**&lt;code&gt;get_rendering_info&lt;/code&gt;**接口，在Utilities中，管理着gl申请出来的所有内存。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250828135026753.png&#34;
+	width=&#34;1129&#34;
+	height=&#34;234&#34;
+	srcset=&#34;https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250828135026753_hu_637d94453fb3b0a6.png 480w, https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250828135026753_hu_20cbe40bf1ffe180.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250828135026753&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;482&#34;
+		data-flex-basis=&#34;1157px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;在每一次申请和删除渲染gl内存时，Utilities都会对内存大小的统计数字做出相应的增减。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250828135818702.png&#34;
+	width=&#34;1350&#34;
+	height=&#34;1221&#34;
+	srcset=&#34;https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250828135818702_hu_dba862309af1c3ed.png 480w, https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250828135818702_hu_4d2d7554caf1dd81.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250828135818702&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;110&#34;
+		data-flex-basis=&#34;265px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;我们在日常开发中遇到的资源泄露报错，就来自于Utilities的析构函数。&lt;/p&gt;
+&lt;p&gt;当Utilities发生析构时，如果gl申请的内存未被完全释放，就会打印该条报错日志。（常由于孤立节点未被正确释放导致）&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250828140325345.png&#34;
+	width=&#34;1539&#34;
+	height=&#34;510&#34;
+	srcset=&#34;https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250828140325345_hu_6bffbe4023bd0440.png 480w, https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250828140325345_hu_eff955ddfa864e82.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250828140325345&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;301&#34;
+		data-flex-basis=&#34;724px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h4 id=&#34;render_total_draw_calls_in_frame&#34;&gt;RENDER_TOTAL_DRAW_CALLS_IN_FRAME
+&lt;/h4&gt;&lt;p&gt;performancce中访问的&lt;strong&gt;RENDER_TOTAL_DRAW_CALLS_IN_FRAME&lt;/strong&gt;也是通过**&lt;code&gt;RenderingServer&lt;/code&gt;&lt;strong&gt;提供的&lt;/strong&gt;&lt;code&gt;get_rendering_info&lt;/code&gt;&lt;strong&gt;接口来获取的。而RenderingServer查询的数据，则来自&lt;/strong&gt;&lt;code&gt;RendererViewport&lt;/code&gt;**的total_draw_calls_used。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250828143848023.png&#34;
+	width=&#34;1016&#34;
+	height=&#34;290&#34;
+	srcset=&#34;https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250828143848023_hu_e9ad131620a796af.png 480w, https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250828143848023_hu_64cef171009d94d8.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250828143848023&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;350&#34;
+		data-flex-basis=&#34;840px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;RendererViewport中这组数据，则是在绘制阶段draw_viewports()时，收集累加激活状态的Viewport中的render_info中的数据。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250828144652636.png&#34;
+	width=&#34;1533&#34;
+	height=&#34;668&#34;
+	srcset=&#34;https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250828144652636_hu_d225368a62bc75a9.png 480w, https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250828144652636_hu_4c86c8886db5b189.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250828144652636&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;229&#34;
+		data-flex-basis=&#34;550px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;对于每个激活的Viewport中的drawcall，会在gl光栅化的阶段，也就是实际调用gl绘制函数的时候，进行一次增加。&lt;/p&gt;
+&lt;p&gt;**注意：**基于这一点，手动调用的绘制操作glDrawElements等，不会被统计进godot的Drawcall中。因此应尽量避免gl相关函数的直接调用。而应该通过godot的封装层RenderingServer来调用。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250828145943941.png&#34;
+	width=&#34;1604&#34;
+	height=&#34;1069&#34;
+	srcset=&#34;https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250828145943941_hu_13c08394b49411e1.png 480w, https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250828145943941_hu_b5921d9467e199a6.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250828145943941&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;150&#34;
+		data-flex-basis=&#34;360px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;renderingserver&#34;&gt;RenderingServer
+&lt;/h3&gt;&lt;p&gt;Godot当中的RenderingServer相当于Unreal中的RHI，它是底层的&lt;strong&gt;渲染抽象层&lt;/strong&gt;，负责与图形 API（如 OpenGL、Vulkan、DirectX、Metal 等）交互。&lt;/p&gt;
+&lt;p&gt;同时它也存储了渲染相关的数据，并且提供了对应的获取接口。&lt;/p&gt;
+&lt;h4 id=&#34;get_rendering_info&#34;&gt;get_rendering_info
+&lt;/h4&gt;&lt;p&gt;get_rendering_info可以查询渲染绘制相关的信息，有以下几种：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;名称&lt;/th&gt;
+          &lt;th&gt;说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;RENDERING_INFO_TOTAL_OBJECTS_IN_FRAME&lt;/td&gt;
+          &lt;td&gt;绘制对象数量&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;RENDERING_INFO_TOTAL_PRIMITIVES_IN_FRAME&lt;/td&gt;
+          &lt;td&gt;绘制图元数量&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;RENDERING_INFO_TOTAL_DRAW_CALLS_IN_FRAME&lt;/td&gt;
+          &lt;td&gt;DrawCall&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;RENDERING_INFO_TEXTURE_MEM_USED&lt;/td&gt;
+          &lt;td&gt;贴图内存&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;RENDERING_INFO_BUFFER_MEM_USED&lt;/td&gt;
+          &lt;td&gt;glbuffer&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;RENDERING_INFO_VIDEO_MEM_USED&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;RENDERING_INFO_PIPELINE_COMPILATIONS_CANVAS&lt;/td&gt;
+          &lt;td&gt;渲染管线（Pipeline）编译的次数&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;RENDERING_INFO_PIPELINE_COMPILATIONS_MESH&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;RENDERING_INFO_PIPELINE_COMPILATIONS_SURFACE&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;RENDERING_INFO_PIPELINE_COMPILATIONS_DRAW&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;RENDERING_INFO_PIPELINE_COMPILATIONS_SPECIALIZATION&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;viewport_get_render_info&#34;&gt;viewport_get_render_info
+&lt;/h4&gt;&lt;p&gt;与上方接口差不多，但是针对某个视口，而非所有。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;enum&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;ViewportRenderInfo&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;VIEWPORT_RENDER_INFO_OBJECTS_IN_FRAME&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;VIEWPORT_RENDER_INFO_PRIMITIVES_IN_FRAME&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;VIEWPORT_RENDER_INFO_DRAW_CALLS_IN_FRAME&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;VIEWPORT_RENDER_INFO_MAX&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;};&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;enum&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;ViewportRenderInfoType&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;VIEWPORT_RENDER_INFO_TYPE_VISIBLE&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;VIEWPORT_RENDER_INFO_TYPE_SHADOW&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;VIEWPORT_RENDER_INFO_TYPE_CANVAS&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;VIEWPORT_RENDER_INFO_TYPE_MAX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;};&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;virtual&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;viewport_get_render_info&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;RID&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;p_viewport&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ViewportRenderInfoType&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;p_type&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ViewportRenderInfo&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;p_info&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;rander-gpu-and-cpu-time&#34;&gt;Rander GPU and CPU Time
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;，需要利用下面两个接口时，需要利用viewport_set_measure_render_time()接口提前开启时间统计，否则始终返回0.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;viewport_get_measured_render_time_cpu，CPU 在指定 Viewport 上执行渲染的耗时&lt;/li&gt;
+&lt;li&gt;viewport_get_measured_render_time_gpu，GPU 在指定 Viewport 上执行渲染的耗时&lt;/li&gt;
+&lt;li&gt;get_frame_setup_time_cpu &lt;strong&gt;准备渲染命令&lt;/strong&gt; 阶段所消耗的时间
+&lt;ul&gt;
+&lt;li&gt;场景剔除（Culling）&lt;/li&gt;
+&lt;li&gt;渲染对象排序&lt;/li&gt;
+&lt;li&gt;光源与阴影的分配&lt;/li&gt;
+&lt;li&gt;材质/渲染状态设置&lt;/li&gt;
+&lt;li&gt;将渲染数据写入命令缓冲（command buffer）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;time .get_ticks_usec()获取godot主线程时间&lt;/p&gt;
+&lt;h3 id=&#34;renderingdevicegl不支持&#34;&gt;RenderingDevice(gl不支持)
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;RENDER_TIMESTAMP&lt;/code&gt;&lt;/strong&gt; 其实是引擎渲染管线里的一类 &lt;strong&gt;GPU 时间戳 (Timestamp)&lt;/strong&gt; 标记。&lt;/p&gt;
+&lt;p&gt;通过**&lt;code&gt;RenderingDevice&lt;/code&gt;**可以获取某个阶段的时间戳。具体方法如下。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#include&lt;/span&gt; &lt;span class=&#34;cpf&#34;&gt;&amp;lt;godot_cpp/classes/rendering_server.hpp&amp;gt;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#include&lt;/span&gt; &lt;span class=&#34;cpf&#34;&gt;&amp;lt;godot_cpp/classes/rendering_device.hpp&amp;gt;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;using&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;namespace&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;godot&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;dump_gpu_pass_times_ms&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;Ref&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;RenderingDevice&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;rd&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;RenderingServer&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;get_singleton&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;get_rendering_device&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;rd&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;is_null&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;uint32_t&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;count&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;rd&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;get_captured_timestamps_count&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;      &lt;span class=&#34;c1&#34;&gt;// 采集到的标签数
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;uint64_t&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;frame&lt;/span&gt;  &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;rd&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;get_captured_timestamps_frame&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;     &lt;span class=&#34;c1&#34;&gt;// 对应的帧号（可选）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;uint32_t&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;count&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;++&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;String&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;name&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;rd&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;get_captured_timestamp_name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;            &lt;span class=&#34;c1&#34;&gt;// 例如 &amp;#34;Depth Prepass&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;        &lt;span class=&#34;kt&#34;&gt;double&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;gpu_ms&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;rd&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;get_captured_timestamp_gpu_time&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;1e6&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 纳秒→毫秒
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;        &lt;span class=&#34;kt&#34;&gt;double&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;cpu_ms&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;rd&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;get_captured_timestamp_cpu_time&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;1e6&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;// 你可以筛选/重命名/累加到自己的统计里
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;        &lt;span class=&#34;n&#34;&gt;UtilityFunctions&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;vformat&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;[%s] GPU %.3f ms, CPU %.3f ms (frame %d)&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                             &lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;gpu_ms&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;cpu_ms&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;frame&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;));&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;godott-benchmark&#34;&gt;godott-benchmark
+&lt;/h3&gt;&lt;p&gt;godott-benchmark是godot官方提供的测试工程，它可以针对不同芯片，测试当前godot版本的各项功能耗时。&lt;/p&gt;
+&lt;p&gt;可以利用它作为性能基准。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;渲染CPU：渲染每帧所花费的平均CPU时间（例如设置绘制调用）。这个度量不考虑过程/物理过程功能。&lt;/li&gt;
+&lt;li&gt;渲染GPU：每帧平均花费的GPU时间。&lt;/li&gt;
+&lt;li&gt;空闲：c++和GDScript进程函数每秒所花费的平均CPU时间。&lt;/li&gt;
+&lt;li&gt;物理：每秒在c++和GDScript物理处理函数中花费的平均CPU时间。&lt;/li&gt;
+&lt;li&gt;主线程时间：在主线程上设置场景所花费的时间。对于渲染基准测试，它作为加载时间度量。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250827113926201.png&#34;
+	width=&#34;1920&#34;
+	height=&#34;1080&#34;
+	srcset=&#34;https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250827113926201_hu_3f88a9cf9426db83.png 480w, https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250827113926201_hu_96d299b6f04b2e88.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250827113926201&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;177&#34;
+		data-flex-basis=&#34;426px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250827094135263.png&#34;
+	width=&#34;1480&#34;
+	height=&#34;894&#34;
+	srcset=&#34;https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250827094135263_hu_8beaff0790d7962a.png 480w, https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250827094135263_hu_d8b03b05dc11ff9e.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20250827094135263&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;165&#34;
+		data-flex-basis=&#34;397px&#34;
+	
+&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>【godot】三、GDExtension开发指南</title>
         <link>https://Liyufei1.github.io/p/godot%E4%B8%89gdextension%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/</link>
         <pubDate>Tue, 04 Nov 2025 16:38:31 +0800</pubDate>
         
         <guid>https://Liyufei1.github.io/p/godot%E4%B8%89gdextension%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/</guid>
-        <description>&lt;img src="https://Liyufei1.github.io/p/godot%E4%B8%89gdextension%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/guidao4.jpg" alt="Featured image of post 【godot】三、GDExtension开发指南" /&gt;&lt;h2 id=&#34;一src编写&#34;&gt;一、SRC编写
+        <description>&lt;img src="https://Liyufei1.github.io/guidao4.jpg" alt="Featured image of post 【godot】三、GDExtension开发指南" /&gt;&lt;h2 id=&#34;一src编写&#34;&gt;一、SRC编写
 &lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;Godot中不推荐使用#pragma once，而是推荐使用**#ifndef**的方式，来保证头文件的单次引用，参考下方行1。&lt;/li&gt;
 &lt;li&gt;类内第一行，必须打上Godot的对应宏&lt;strong&gt;GDCLASS(SelfClass,BaseClass)&lt;/strong&gt;，参考下方行12。&lt;/li&gt;
@@ -1795,7 +2237,7 @@
         <pubDate>Tue, 04 Nov 2025 16:18:31 +0800</pubDate>
         
         <guid>https://Liyufei1.github.io/p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/</guid>
-        <description>&lt;img src="https://Liyufei1.github.io/p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/guidao4.jpg" alt="Featured image of post 【godot】二、Modules开发指南" /&gt;&lt;h1 id=&#34;常用头文件&#34;&gt;常用头文件
+        <description>&lt;img src="https://Liyufei1.github.io/guidao4.jpg" alt="Featured image of post 【godot】二、Modules开发指南" /&gt;&lt;h1 id=&#34;常用头文件&#34;&gt;常用头文件
 &lt;/h1&gt;&lt;h2 id=&#34;print&#34;&gt;print
 &lt;/h2&gt;&lt;p&gt;&lt;strong&gt;路径&lt;/strong&gt;：#include &amp;ldquo;core/string/print_string.h&amp;rdquo;&lt;/p&gt;
 &lt;p&gt;用于标准日志的输出。在做引擎开发时使用。&lt;/p&gt;
@@ -1942,7 +2384,7 @@
         <pubDate>Tue, 04 Nov 2025 16:08:31 +0800</pubDate>
         
         <guid>https://Liyufei1.github.io/p/godot%E4%B8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/</guid>
-        <description>&lt;img src="https://Liyufei1.github.io/p/godot%E4%B8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/guidao4.jpg" alt="Featured image of post 【godot】一、开发环境部署及示例" /&gt;&lt;h1 id=&#34;引擎编译&#34;&gt;引擎编译
+        <description>&lt;img src="https://Liyufei1.github.io/guidao4.jpg" alt="Featured image of post 【godot】一、开发环境部署及示例" /&gt;&lt;h1 id=&#34;引擎编译&#34;&gt;引擎编译
 &lt;/h1&gt;&lt;p&gt;官方源码仓库：&lt;a class=&#34;link&#34; href=&#34;https://github.com/godotengine/godot.git&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;godot&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;官方godot-cpp仓库：&lt;a class=&#34;link&#34; href=&#34;https://github.com/godotengine/godot-cpp.git&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
