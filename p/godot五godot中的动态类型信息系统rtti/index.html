@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="基于godot4.4版本，学习随笔，浅读、尝试godot中的类型系统">
+<title>【godot】五、godot中的动态类型信息系统RTTI</title>
+
+<link rel='canonical' href='https://Liyufei1.github.io/p/godot%E4%BA%94godot%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9Frtti/'>
+
+<link rel="stylesheet" href="/scss/style.min.b0e76e98cdd4f7082d1fc36f7af7e0843a81201db2197c03ca426751dc923735.css"><meta property='og:title' content="【godot】五、godot中的动态类型信息系统RTTI">
+<meta property='og:description' content="基于godot4.4版本，学习随笔，浅读、尝试godot中的类型系统">
+<meta property='og:url' content='https://Liyufei1.github.io/p/godot%E4%BA%94godot%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9Frtti/'>
+<meta property='og:site_name' content='李宇飞-Liyufei1'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-11-07T09:18:31&#43;08:00'/><meta property='article:modified_time' content='2025-11-07T09:18:31&#43;08:00'/><meta property='og:image' content='https://Liyufei1.github.io/guidao4.jpg' />
+<meta name="twitter:title" content="【godot】五、godot中的动态类型信息系统RTTI">
+<meta name="twitter:description" content="基于godot4.4版本，学习随笔，浅读、尝试godot中的类型系统"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://Liyufei1.github.io/guidao4.jpg' />
+    <link rel="shortcut icon" href="/favicon.png" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/guidao1Icon_hu_f3a3851d912f0a8d.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🤣</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">李宇飞-Liyufei1</a></h1>
+            <h2 class="site-description">存放学习随笔的个人博客,主要有:Godot、Unreal、Blog、Cpp.
+ 下方是个人的b站、gitbug链接:</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://space.bilibili.com/7531504?spm_id_from=333.1007.0.0'
+                        target="_blank"
+                        title="Bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/Liyufei1'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友情链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://Liyufei1.github.io/en/" >English</option>
+                                
+                                    <option value="https://Liyufei1.github.io/" selected>中文</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#概述">概述</a></li>
+    <li><a href="#classdb介绍">ClassDB介绍</a>
+      <ol>
+        <li><a href="#类的查询查询接口">类的查询查询接口</a>
+          <ol>
+            <li><a href="#get_class_list">get_class_list</a></li>
+            <li><a href="#class_exists">class_exists</a></li>
+          </ol>
+        </li>
+        <li><a href="#函数的查询接口">函数的查询接口</a></li>
+      </ol>
+    </li>
+    <li><a href="#信息类">信息类</a>
+      <ol>
+        <li><a href="#classinfo">ClassInfo</a></li>
+        <li><a href="#methodinfo">MethodInfo</a></li>
+        <li><a href="#propertyinfo">PropertyInfo</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/godot%E4%BA%94godot%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9Frtti/">
+                
+                    <img src="/guidao4.jpg" loading="lazy" alt="Featured image of post 【godot】五、godot中的动态类型信息系统RTTI" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/godot/" style="background-color: #3121c0ff; color: #e9e5e5ff;">
+                Godot
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/godot%E4%BA%94godot%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9Frtti/">【godot】五、godot中的动态类型信息系统RTTI</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            基于godot4.4版本，学习随笔，浅读、尝试godot中的类型系统
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published" datetime='2025-11-07T09:18:31&#43;08:00'>2025-11-07</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 5 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="概述">概述
+</h2><p>在游戏开发中，动态性和灵活性是至关重要的特性。python，C#，java等编程语言，从语音层面就是支持反射或动态类型系统的，可以运行时动态地查看对象的类型、成员、方法，甚至动态调用或修改它们。而游戏引擎为了追求运行时的效率，一般会采用Cpp语言进行开发，Cpp语言本身不支持反射，所以各大游戏引擎都各显神通地添加了反射系统，以支持运行时动态类型信息。</p>
+<ol>
+<li>在虚幻引擎当中，是通过UObject类来收集元信息的。通过UPROPTERTY()等宏标记，用UHT工具，在编译前进行一次头文件的生成，从而生成UPROPERTY()所标记的属性元信息的U类。对于虚幻的反射实现感兴趣的朋友，可以参考大钊在知乎上的文章：<a class="link" href="hhttps://zhuanlan.zhihu.com/p/24319968" >虚幻引擎的元信息机制</a>
+<img src="/p/godot%E4%BA%94godot%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9Frtti/image1.png"
+	width="1304"
+	height="770"
+	srcset="/p/godot%E4%BA%94godot%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9Frtti/image1_hu_fb22fc0ac96753ce.png 480w, /p/godot%E4%BA%94godot%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9Frtti/image1_hu_137715a43995b4cd.png 1024w"
+	loading="lazy"
+	
+		alt="虚幻代码"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="169"
+		data-flex-basis="406px"
+	
+></li>
+<li>在Unity中，反射系统由C#提供的。</li>
+<li>在godot中，反射系统则是由名为<code>ClassDB</code>提供，它记录了所有派生自<code>Object</code>类的类型信息。在业务代码层，我们可以通过它提供的一系列静态方法来运行时访问类的类型信息，比如获取类的成员变量、方法、属性等信息。<img src="/p/godot%E4%BA%94godot%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9Frtti/image2.png"
+	width="1476"
+	height="732"
+	srcset="/p/godot%E4%BA%94godot%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9Frtti/image2_hu_18eb524199bcb37d.png 480w, /p/godot%E4%BA%94godot%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9Frtti/image2_hu_37d3d3a18397e749.png 1024w"
+	loading="lazy"
+	
+		alt="ClassDB"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="201"
+		data-flex-basis="483px"
+	
+></li>
+</ol>
+<h2 id="classdb介绍">ClassDB介绍
+</h2><p>对于godot来说<code>ClassDB</code>是一个全局类信息库，可以对所有注册类的元数据进行访问。</p>
+<ol>
+<li><code>ClassDB</code>利用<code>静态成员变量</code>来存储类的元数据，比如类的继承关系、成员变量、方法、属性等信息。</li>
+<li><code>ClassDB</code>提供了一系列的<code>静态成员函数</code>给用户来进行元数据查询。</li>
+<li>因此<code>ClassDB</code>并没有实例化的需求。</li>
+</ol>
+<p>下方截取了<strong>4.4版本godot源码</strong>中<code>ClassDB</code>类的部分代码，并标注了一些重要的信息，帮助我们去整体的理解<code>ClassDB</code>的运行原理。为了方便理解，方法和属性的顺序，并非与源码严格一致。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">ClassDB</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//读写锁，防止多线程问题
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">static</span> <span class="n">RWLock</span> <span class="n">lock</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">//所有注册的类信息
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">static</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">StringName</span><span class="p">,</span> <span class="n">ClassInfo</span><span class="o">&gt;</span> <span class="n">classes</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">//
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">static</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">StringName</span><span class="p">,</span> <span class="n">StringName</span><span class="o">&gt;</span> <span class="n">resource_base_extensions</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">static</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">StringName</span><span class="p">,</span> <span class="n">StringName</span><span class="o">&gt;</span> <span class="n">compat_classes</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//查询所有类的名称列表
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">static</span> <span class="kt">void</span> <span class="n">get_class_list</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">StringName</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">p_classes</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//查询所有GDExtension的类名称列表
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">static</span> <span class="kt">void</span> <span class="nf">get_extensions_class_list</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">StringName</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">p_classes</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">//按照名称查询类是否存在
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">static</span> <span class="kt">bool</span> <span class="nf">class_exists</span><span class="p">(</span><span class="k">const</span> <span class="n">StringName</span> <span class="o">&amp;</span><span class="n">p_class</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="类的查询查询接口">类的查询查询接口
+</h3><p>在理解ClassDB中的静态成员变量<code>static HashMap&lt;StringName, ClassInfo&gt; classes;</code>存储了所有的类信息后，下方两个查询的接口，就非常好理解了。</p>
+<h4 id="get_class_list">get_class_list
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">ClassDB</span><span class="o">::</span><span class="n">get_class_list</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">StringName</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">p_classes</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">     <span class="c1">//创建读锁，godot定义的宏，可以不关注它的实现细节
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>     <span class="n">OBJTYPE_RLOCK</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">     <span class="c1">//遍历存放所有类信息的HashMap：classes，拿到它的键值，也就是类名，添加进输出列表
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>     <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="n">KeyValue</span><span class="o">&lt;</span><span class="n">StringName</span><span class="p">,</span> <span class="n">ClassInfo</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="nl">E</span> <span class="p">:</span> <span class="n">classes</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">         <span class="n">p_classes</span><span class="o">-&gt;</span><span class="n">push_back</span><span class="p">(</span><span class="n">E</span><span class="p">.</span><span class="n">key</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">     <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">     <span class="c1">//对 p_classes 列表中的所有类名（StringName）按照字母顺序进行排序。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>     <span class="n">p_classes</span><span class="o">-&gt;</span><span class="n">sort_custom</span><span class="o">&lt;</span><span class="n">StringName</span><span class="o">::</span><span class="n">AlphCompare</span><span class="o">&gt;</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"> <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>下方是该接口的测试结果：<img src="/p/godot%E4%BA%94godot%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9Frtti/classDBTest1.png"
+	width="1270"
+	height="754"
+	srcset="/p/godot%E4%BA%94godot%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9Frtti/classDBTest1_hu_11df2d577bf22d8a.png 480w, /p/godot%E4%BA%94godot%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9Frtti/classDBTest1_hu_185c117e62cb2e03.png 1024w"
+	loading="lazy"
+	
+		alt="get_class_list"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="168"
+		data-flex-basis="404px"
+	
+></p>
+<h4 id="class_exists">class_exists
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">bool</span> <span class="n">ClassDB</span><span class="o">::</span><span class="n">class_exists</span><span class="p">(</span><span class="k">const</span> <span class="n">StringName</span> <span class="o">&amp;</span><span class="n">p_class</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//创建读锁
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">OBJTYPE_RLOCK</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//根据键值查询哈希表
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">return</span> <span class="n">classes</span><span class="p">.</span><span class="n">has</span><span class="p">(</span><span class="n">p_class</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>测试结果：<img src="/p/godot%E4%BA%94godot%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9Frtti/classDBTest2.png"
+	width="985"
+	height="255"
+	srcset="/p/godot%E4%BA%94godot%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9Frtti/classDBTest2_hu_ea14ff0e54bfa35.png 480w, /p/godot%E4%BA%94godot%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9Frtti/classDBTest2_hu_7a718c05785e9841.png 1024w"
+	loading="lazy"
+	
+		alt="class_exists"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="386"
+		data-flex-basis="927px"
+	
+></p>
+<h3 id="函数的查询接口">函数的查询接口
+</h3><h2 id="信息类">信息类
+</h2><h3 id="classinfo">ClassInfo
+</h3><p><code>ClassInfo</code>是ClassDB中定义的类信息结构体，它保存了类的元数据，比如类的名称、继承关系、成员变量、方法、属性等信息。下方截取了4.4版本godot源码中<code>ClassInfo</code>类的部分代码，并标注了一些重要的信息，帮助我们去整体的理解<code>ClassInfo</code>的运行原理。为了方便理解，方法和属性的顺序，并非与源码严格一致。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">ClassInfo</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 根据注册的时机和接口不同，API类型有以下5种：
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// API_CORE、
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// API_EDITOR、
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// API_EXTENSION、
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// API_EDITOR_EXTENSION、
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// API_NONE
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">APIType</span> <span class="n">api</span> <span class="o">=</span> <span class="n">API_NONE</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">ClassInfo</span> <span class="o">*</span><span class="n">inherits_ptr</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="o">*</span><span class="n">class_ptr</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">ObjectGDExtension</span> <span class="o">*</span><span class="n">gdextension</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">StringName</span><span class="p">,</span> <span class="n">MethodBind</span> <span class="o">*&gt;</span> <span class="n">method_map</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">StringName</span><span class="p">,</span> <span class="n">LocalVector</span><span class="o">&lt;</span><span class="n">MethodBind</span> <span class="o">*&gt;&gt;</span> <span class="n">method_map_compatibility</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">StringName</span><span class="p">,</span> <span class="kt">int64_t</span><span class="o">&gt;</span> <span class="n">constant_map</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="nc">EnumInfo</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">List</span><span class="o">&lt;</span><span class="n">StringName</span><span class="o">&gt;</span> <span class="n">constants</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">bool</span> <span class="n">is_bitfield</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">StringName</span><span class="p">,</span> <span class="n">EnumInfo</span><span class="o">&gt;</span> <span class="n">enum_map</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">StringName</span><span class="p">,</span> <span class="n">MethodInfo</span><span class="o">&gt;</span> <span class="n">signal_map</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">List</span><span class="o">&lt;</span><span class="n">PropertyInfo</span><span class="o">&gt;</span> <span class="n">property_list</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">StringName</span><span class="p">,</span> <span class="n">PropertyInfo</span><span class="o">&gt;</span> <span class="n">property_map</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#ifdef DEBUG_METHODS_ENABLED
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="n">List</span><span class="o">&lt;</span><span class="n">StringName</span><span class="o">&gt;</span> <span class="n">constant_order</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">List</span><span class="o">&lt;</span><span class="n">StringName</span><span class="o">&gt;</span> <span class="n">method_order</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">StringName</span><span class="o">&gt;</span> <span class="n">methods_in_properties</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">List</span><span class="o">&lt;</span><span class="n">MethodInfo</span><span class="o">&gt;</span> <span class="n">virtual_methods</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">StringName</span><span class="p">,</span> <span class="n">MethodInfo</span><span class="o">&gt;</span> <span class="n">virtual_methods_map</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">StringName</span><span class="p">,</span> <span class="n">Vector</span><span class="o">&lt;</span><span class="n">Error</span><span class="o">&gt;&gt;</span> <span class="n">method_error_values</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">StringName</span><span class="p">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">StringName</span><span class="o">&gt;&gt;</span> <span class="n">linked_properties</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#endif
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">StringName</span><span class="p">,</span> <span class="n">PropertySetGet</span><span class="o">&gt;</span> <span class="n">property_setget</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">StringName</span><span class="p">,</span> <span class="n">Vector</span><span class="o">&lt;</span><span class="kt">uint32_t</span><span class="o">&gt;&gt;</span> <span class="n">virtual_methods_compat</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">StringName</span> <span class="n">inherits</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">StringName</span> <span class="n">name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">disabled</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">exposed</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">reloadable</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">is_virtual</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">is_runtime</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// The bool argument indicates the need to postinitialize.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">Object</span> <span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="n">creation_func</span><span class="p">)(</span><span class="kt">bool</span><span class="p">)</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">ClassInfo</span><span class="p">()</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">~</span><span class="n">ClassInfo</span><span class="p">()</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="methodinfo">MethodInfo
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">MethodInfo</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">String</span> <span class="n">name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">PropertyInfo</span> <span class="n">return_val</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">uint32_t</span> <span class="n">flags</span> <span class="o">=</span> <span class="n">METHOD_FLAGS_DEFAULT</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">id</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">List</span><span class="o">&lt;</span><span class="n">PropertyInfo</span><span class="o">&gt;</span> <span class="n">arguments</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">Vector</span><span class="o">&lt;</span><span class="n">Variant</span><span class="o">&gt;</span> <span class="n">default_arguments</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">return_val_metadata</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">Vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">arguments_metadata</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="nf">get_argument_meta</span><span class="p">(</span><span class="kt">int</span> <span class="n">p_arg</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">ERR_FAIL_COND_V</span><span class="p">(</span><span class="n">p_arg</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">1</span> <span class="o">||</span> <span class="n">p_arg</span> <span class="o">&gt;</span> <span class="n">arguments</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">(</span><span class="n">p_arg</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="n">return_val_metadata</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="n">arguments_metadata</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">p_arg</span> <span class="o">?</span> <span class="n">arguments_metadata</span><span class="p">[</span><span class="n">p_arg</span><span class="p">]</span> <span class="o">:</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="kr">inline</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span> <span class="n">MethodInfo</span> <span class="o">&amp;</span><span class="n">p_method</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">id</span> <span class="o">==</span> <span class="n">p_method</span><span class="p">.</span><span class="n">id</span> <span class="o">&amp;&amp;</span> <span class="n">name</span> <span class="o">==</span> <span class="n">p_method</span><span class="p">.</span><span class="n">name</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="kr">inline</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">&lt;</span><span class="p">(</span><span class="k">const</span> <span class="n">MethodInfo</span> <span class="o">&amp;</span><span class="n">p_method</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">id</span> <span class="o">==</span> <span class="n">p_method</span><span class="p">.</span><span class="n">id</span> <span class="o">?</span> <span class="p">(</span><span class="n">name</span> <span class="o">&lt;</span> <span class="n">p_method</span><span class="p">.</span><span class="n">name</span><span class="p">)</span> <span class="o">:</span> <span class="p">(</span><span class="n">id</span> <span class="o">&lt;</span> <span class="n">p_method</span><span class="p">.</span><span class="n">id</span><span class="p">);</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">operator</span> <span class="nf">Dictionary</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">static</span> <span class="n">MethodInfo</span> <span class="nf">from_dict</span><span class="p">(</span><span class="k">const</span> <span class="n">Dictionary</span> <span class="o">&amp;</span><span class="n">p_dict</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="kt">uint32_t</span> <span class="nf">get_compatibility_hash</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">MethodInfo</span><span class="p">()</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">explicit</span> <span class="nf">MethodInfo</span><span class="p">(</span><span class="k">const</span> <span class="n">GDExtensionMethodInfo</span> <span class="o">&amp;</span><span class="n">pinfo</span><span class="p">)</span> <span class="o">:</span>
+</span></span><span class="line"><span class="cl">			<span class="n">name</span><span class="p">(</span><span class="o">*</span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="n">StringName</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">pinfo</span><span class="p">.</span><span class="n">name</span><span class="p">)),</span>
+</span></span><span class="line"><span class="cl">			<span class="n">return_val</span><span class="p">(</span><span class="n">PropertyInfo</span><span class="p">(</span><span class="n">pinfo</span><span class="p">.</span><span class="n">return_value</span><span class="p">)),</span>
+</span></span><span class="line"><span class="cl">			<span class="n">flags</span><span class="p">(</span><span class="n">pinfo</span><span class="p">.</span><span class="n">flags</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">			<span class="n">id</span><span class="p">(</span><span class="n">pinfo</span><span class="p">.</span><span class="n">id</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">for</span> <span class="p">(</span><span class="kt">uint32_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">pinfo</span><span class="p">.</span><span class="n">argument_count</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="n">arguments</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">PropertyInfo</span><span class="p">(</span><span class="n">pinfo</span><span class="p">.</span><span class="n">arguments</span><span class="p">[</span><span class="n">j</span><span class="p">]));</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="k">const</span> <span class="n">Variant</span> <span class="o">*</span><span class="n">def_values</span> <span class="o">=</span> <span class="p">(</span><span class="k">const</span> <span class="n">Variant</span> <span class="o">*</span><span class="p">)</span><span class="n">pinfo</span><span class="p">.</span><span class="n">default_arguments</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="k">for</span> <span class="p">(</span><span class="kt">uint32_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">pinfo</span><span class="p">.</span><span class="n">default_argument_count</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="n">default_arguments</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">def_values</span><span class="p">[</span><span class="n">j</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="kt">void</span> <span class="nf">_push_params</span><span class="p">(</span><span class="k">const</span> <span class="n">PropertyInfo</span> <span class="o">&amp;</span><span class="n">p_param</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">arguments</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">p_param</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span><span class="p">...</span> <span class="n">VarArgs</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">void</span> <span class="n">_push_params</span><span class="p">(</span><span class="k">const</span> <span class="n">PropertyInfo</span> <span class="o">&amp;</span><span class="n">p_param</span><span class="p">,</span> <span class="n">VarArgs</span><span class="p">...</span> <span class="n">p_params</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">arguments</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">p_param</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="n">_push_params</span><span class="p">(</span><span class="n">p_params</span><span class="p">...);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">MethodInfo</span><span class="p">(</span><span class="k">const</span> <span class="n">String</span> <span class="o">&amp;</span><span class="n">p_name</span><span class="p">)</span> <span class="p">{</span> <span class="n">name</span> <span class="o">=</span> <span class="n">p_name</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span><span class="p">...</span> <span class="n">VarArgs</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">MethodInfo</span><span class="p">(</span><span class="k">const</span> <span class="n">String</span> <span class="o">&amp;</span><span class="n">p_name</span><span class="p">,</span> <span class="n">VarArgs</span><span class="p">...</span> <span class="n">p_params</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">name</span> <span class="o">=</span> <span class="n">p_name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">_push_params</span><span class="p">(</span><span class="n">p_params</span><span class="p">...);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">MethodInfo</span><span class="p">(</span><span class="n">Variant</span><span class="o">::</span><span class="n">Type</span> <span class="n">ret</span><span class="p">)</span> <span class="p">{</span> <span class="n">return_val</span><span class="p">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">ret</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="n">MethodInfo</span><span class="p">(</span><span class="n">Variant</span><span class="o">::</span><span class="n">Type</span> <span class="n">ret</span><span class="p">,</span> <span class="k">const</span> <span class="n">String</span> <span class="o">&amp;</span><span class="n">p_name</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">return_val</span><span class="p">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">ret</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">name</span> <span class="o">=</span> <span class="n">p_name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span><span class="p">...</span> <span class="n">VarArgs</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">MethodInfo</span><span class="p">(</span><span class="n">Variant</span><span class="o">::</span><span class="n">Type</span> <span class="n">ret</span><span class="p">,</span> <span class="k">const</span> <span class="n">String</span> <span class="o">&amp;</span><span class="n">p_name</span><span class="p">,</span> <span class="n">VarArgs</span><span class="p">...</span> <span class="n">p_params</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">name</span> <span class="o">=</span> <span class="n">p_name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">return_val</span><span class="p">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">ret</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">_push_params</span><span class="p">(</span><span class="n">p_params</span><span class="p">...);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">MethodInfo</span><span class="p">(</span><span class="k">const</span> <span class="n">PropertyInfo</span> <span class="o">&amp;</span><span class="n">p_ret</span><span class="p">,</span> <span class="k">const</span> <span class="n">String</span> <span class="o">&amp;</span><span class="n">p_name</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">return_val</span> <span class="o">=</span> <span class="n">p_ret</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">name</span> <span class="o">=</span> <span class="n">p_name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span><span class="p">...</span> <span class="n">VarArgs</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">MethodInfo</span><span class="p">(</span><span class="k">const</span> <span class="n">PropertyInfo</span> <span class="o">&amp;</span><span class="n">p_ret</span><span class="p">,</span> <span class="k">const</span> <span class="n">String</span> <span class="o">&amp;</span><span class="n">p_name</span><span class="p">,</span> <span class="n">VarArgs</span><span class="p">...</span> <span class="n">p_params</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">return_val</span> <span class="o">=</span> <span class="n">p_ret</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">name</span> <span class="o">=</span> <span class="n">p_name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">_push_params</span><span class="p">(</span><span class="n">p_params</span><span class="p">...);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="propertyinfo">PropertyInfo
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">PropertyInfo</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">Variant</span><span class="o">::</span><span class="n">Type</span> <span class="n">type</span> <span class="o">=</span> <span class="n">Variant</span><span class="o">::</span><span class="n">NIL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">String</span> <span class="n">name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">StringName</span> <span class="n">class_name</span><span class="p">;</span> <span class="c1">// For classes
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">PropertyHint</span> <span class="n">hint</span> <span class="o">=</span> <span class="n">PROPERTY_HINT_NONE</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">String</span> <span class="n">hint_string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">uint32_t</span> <span class="n">usage</span> <span class="o">=</span> <span class="n">PROPERTY_USAGE_DEFAULT</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// If you are thinking about adding another member to this class, ask the maintainer (Juan) first.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">	<span class="n">_FORCE_INLINE_</span> <span class="n">PropertyInfo</span> <span class="nf">added_usage</span><span class="p">(</span><span class="kt">uint32_t</span> <span class="n">p_fl</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">PropertyInfo</span> <span class="n">pi</span> <span class="o">=</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">pi</span><span class="p">.</span><span class="n">usage</span> <span class="o">|=</span> <span class="n">p_fl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="n">pi</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">operator</span> <span class="nf">Dictionary</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">static</span> <span class="n">PropertyInfo</span> <span class="nf">from_dict</span><span class="p">(</span><span class="k">const</span> <span class="n">Dictionary</span> <span class="o">&amp;</span><span class="n">p_dict</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">PropertyInfo</span><span class="p">()</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">PropertyInfo</span><span class="p">(</span><span class="k">const</span> <span class="n">Variant</span><span class="o">::</span><span class="n">Type</span> <span class="n">p_type</span><span class="p">,</span> <span class="k">const</span> <span class="n">String</span> <span class="o">&amp;</span><span class="n">p_name</span><span class="p">,</span> <span class="k">const</span> <span class="n">PropertyHint</span> <span class="n">p_hint</span> <span class="o">=</span> <span class="n">PROPERTY_HINT_NONE</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">    <span class="n">dddddddssssasdaasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasddjqiejlanmiasdconst</span> <span class="n">String</span> <span class="o">&amp;</span><span class="n">p_hint_string</span> <span class="o">=</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="k">const</span> <span class="kt">uint32_t</span> <span class="n">p_usage</span> <span class="o">=</span> <span class="n">PROPERTY_USAGE_DEFAULT</span><span class="p">,</span> <span class="k">const</span> <span class="n">StringName</span> <span class="o">&amp;</span><span class="n">p_class_name</span> <span class="o">=</span> <span class="n">StringName</span><span class="p">())</span> <span class="o">:</span>
+</span></span><span class="line"><span class="cl">			<span class="n">type</span><span class="p">(</span><span class="n">p_type</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">			<span class="n">name</span><span class="p">(</span><span class="n">p_name</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">			<span class="n">hint</span><span class="p">(</span><span class="n">p_hint</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">			<span class="n">hint_string</span><span class="p">(</span><span class="n">p_hint_string</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">			<span class="n">usage</span><span class="p">(</span><span class="n">p_usage</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">(</span><span class="n">hint</span> <span class="o">==</span> <span class="n">PROPERTY_HINT_RESOURCE_TYPE</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="n">class_name</span> <span class="o">=</span> <span class="n">hint_string</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="n">class_name</span> <span class="o">=</span> <span class="n">p_class_name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">PropertyInfo</span><span class="p">(</span><span class="k">const</span> <span class="n">StringName</span> <span class="o">&amp;</span><span class="n">p_class_name</span><span class="p">)</span> <span class="o">:</span>
+</span></span><span class="line"><span class="cl">			<span class="n">type</span><span class="p">(</span><span class="n">Variant</span><span class="o">::</span><span class="n">OBJECT</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">			<span class="n">class_name</span><span class="p">(</span><span class="n">p_class_name</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">explicit</span> <span class="nf">PropertyInfo</span><span class="p">(</span><span class="k">const</span> <span class="n">GDExtensionPropertyInfo</span> <span class="o">&amp;</span><span class="n">pinfo</span><span class="p">)</span> <span class="o">:</span>
+</span></span><span class="line"><span class="cl">			<span class="n">type</span><span class="p">((</span><span class="n">Variant</span><span class="o">::</span><span class="n">Type</span><span class="p">)</span><span class="n">pinfo</span><span class="p">.</span><span class="n">type</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">			<span class="n">name</span><span class="p">(</span><span class="o">*</span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="n">StringName</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">pinfo</span><span class="p">.</span><span class="n">name</span><span class="p">)),</span>
+</span></span><span class="line"><span class="cl">			<span class="n">class_name</span><span class="p">(</span><span class="o">*</span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="n">StringName</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">pinfo</span><span class="p">.</span><span class="n">class_name</span><span class="p">)),</span>
+</span></span><span class="line"><span class="cl">			<span class="n">hint</span><span class="p">((</span><span class="n">PropertyHint</span><span class="p">)</span><span class="n">pinfo</span><span class="p">.</span><span class="n">hint</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">			<span class="n">hint_string</span><span class="p">(</span><span class="o">*</span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="n">String</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">pinfo</span><span class="p">.</span><span class="n">hint_string</span><span class="p">)),</span>
+</span></span><span class="line"><span class="cl">			<span class="n">usage</span><span class="p">(</span><span class="n">pinfo</span><span class="p">.</span><span class="n">usage</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="kt">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span> <span class="n">PropertyInfo</span> <span class="o">&amp;</span><span class="n">p_info</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="p">((</span><span class="n">type</span> <span class="o">==</span> <span class="n">p_info</span><span class="p">.</span><span class="n">type</span><span class="p">)</span> <span class="o">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">				<span class="p">(</span><span class="n">name</span> <span class="o">==</span> <span class="n">p_info</span><span class="p">.</span><span class="n">name</span><span class="p">)</span> <span class="o">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">				<span class="p">(</span><span class="n">class_name</span> <span class="o">==</span> <span class="n">p_info</span><span class="p">.</span><span class="n">class_name</span><span class="p">)</span> <span class="o">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">				<span class="p">(</span><span class="n">hint</span> <span class="o">==</span> <span class="n">p_info</span><span class="p">.</span><span class="n">hint</span><span class="p">)</span> <span class="o">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">				<span class="p">(</span><span class="n">hint_string</span> <span class="o">==</span> <span class="n">p_info</span><span class="p">.</span><span class="n">hint_string</span><span class="p">)</span> <span class="o">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">				<span class="p">(</span><span class="n">usage</span> <span class="o">==</span> <span class="n">p_info</span><span class="p">.</span><span class="n">usage</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="kt">bool</span> <span class="k">operator</span><span class="o">&lt;</span><span class="p">(</span><span class="k">const</span> <span class="n">PropertyInfo</span> <span class="o">&amp;</span><span class="n">p_info</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="n">name</span> <span class="o">&lt;</span> <span class="n">p_info</span><span class="p">.</span><span class="n">name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under <a class="link" href="https://github.com/Liyufei1"  target="_blank" rel="noopener"
+    >Liyufei1</a></span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        const elementsToRender = [".main-article", ".widget--toc"];
+
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/guidao4.jpg" loading="lazy" data-key="" data-hash="/guidao4.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【godot】四、性能统计</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/godot%E4%B8%89gdextension%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/guidao4.jpg" loading="lazy" data-key="" data-hash="/guidao4.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【godot】三、GDExtension开发指南</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/guidao4.jpg" loading="lazy" data-key="" data-hash="/guidao4.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【godot】二、Modules开发指南</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/godot%E4%B8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/guidao4.jpg" loading="lazy" data-key="" data-hash="/guidao4.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【godot】一、开发环境部署及示例</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2025 李宇飞-Liyufei1
+    </section>
+    
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.32.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
