@@ -310,6 +310,7 @@
             <li><a href="#add_property_array"><code>add_property_array</code></a></li>
             <li><a href="#add_property_array_count"><code>add_property_array_count</code></a></li>
             <li><a href="#add_property_group"><code>add_property_group</code></a></li>
+            <li><a href="#add_property_subgroup"><code>add_property_subgroup</code></a></li>
           </ol>
         </li>
         <li><a href="#函数接口">函数接口</a></li>
@@ -1156,7 +1157,7 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="属性接口">属性接口
-</h3><p>属性相关的信息，存储在<code>ClassInfo</code>的<code>signal_map</code>当中</p>
+</h3><p>属性相关的信息，存储在<code>ClassInfo</code>的<code>property_list</code>、<code>property_map</code>和<code>property_setget</code>当中</p>
 <div class="table-wrapper"><table>
   <thead>
       <tr>
@@ -1182,8 +1183,8 @@
           <td style="text-align: left">为 Inspector中显示的属性分组</td>
       </tr>
       <tr>
-          <td style="text-align: left"></td>
-          <td></td>
+          <td style="text-align: left">add_property_subgroup</td>
+          <td style="text-align: left">创建 缩进更深一级的子分组</td>
       </tr>
   </tbody>
 </table></div>
@@ -1395,6 +1396,20 @@
 <li>它是一个 虚拟属性（Variant::NIL） ，仅用于 UI 分组。</li>
 <li>它配合add_property/ADD_PROPERTYI使用，可以创建一个定长数组属性。</li>
 <li>它配合_set()/_get()/_get_property_list()使用，可以创建一个动态数组属性。</li>
+<li><img src="/p/godot%E4%BA%94godot%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9Frtti/add_array.png"
+	width="470"
+	height="270"
+	srcset="/p/godot%E4%BA%94godot%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9Frtti/add_array_hu_12f721f4c6592ca0.png 480w, /p/godot%E4%BA%94godot%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9Frtti/add_array_hu_cc96c8256881e89d.png 1024w"
+	loading="lazy"
+	
+		alt="add_array.png"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="174"
+		data-flex-basis="417px"
+	
+></li>
 </ul>
 <p><strong>注意</strong>：它的使用非常复杂,需要结合Object的宏<code>get_property_list</code>使用。后续会有专门的章节讲解。此处仅给出一个简短的示例</p>
 <p><strong>方法签名</strong></p>
@@ -1523,6 +1538,20 @@
 <li>通常结合自定义的_setter_ 和 _getter_以及_get_property_list_使用</li>
 <li>可以实现自定义的变长数组</li>
 <li>它只注册长度属性本身</li>
+<li><img src="/p/godot%E4%BA%94godot%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9Frtti/add_array_count.png"
+	width="547"
+	height="527"
+	srcset="/p/godot%E4%BA%94godot%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9Frtti/add_array_count_hu_e0d6695c924f94e1.png 480w, /p/godot%E4%BA%94godot%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9Frtti/add_array_count_hu_3e3a909b8df623c3.png 1024w"
+	loading="lazy"
+	
+		alt="add_array_count.png"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="103"
+		data-flex-basis="249px"
+	
+></li>
 </ul>
 <p><strong>方法签名</strong></p>
 <div class="highlight"><div class="chroma">
@@ -1701,7 +1730,21 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="add_property_group"><code>add_property_group</code>
-</h4><p><code>ClassDB::add_property_group()</code>用于在 Godot Inspector（属性面板）中创建一条分组标题，让多个属性显示在同一个折叠组下，从而让 Inspector 清晰整洁。</p>
+</h4><p><code>ClassDB::add_property_group()</code>用于在 Godot Inspector（属性面板）中创建一条分组标题，让多个属性显示在同一个折叠组下，从而让 Inspector 清晰整洁。
+<img src="/p/godot%E4%BA%94godot%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9Frtti/add_group_sub.png"
+	width="473"
+	height="359"
+	srcset="/p/godot%E4%BA%94godot%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9Frtti/add_group_sub_hu_e1352e507248fe76.png 480w, /p/godot%E4%BA%94godot%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9Frtti/add_group_sub_hu_98976151ad09508.png 1024w"
+	loading="lazy"
+	
+		alt="add_group.png"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="131"
+		data-flex-basis="316px"
+	
+></p>
 <p><strong>方法签名</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1739,21 +1782,41 @@
 </div><p><strong>使用示例</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">Resource</span><span class="o">::</span><span class="n">_bind_methods</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">	<span class="n">ADD_GROUP</span><span class="p">(</span><span class="s">&#34;Resource&#34;</span><span class="p">,</span> <span class="s">&#34;resource_&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">	<span class="n">ADD_PROPERTY</span><span class="p">(</span><span class="n">PropertyInfo</span><span class="p">(</span><span class="n">Variant</span><span class="o">::</span><span class="n">BOOL</span><span class="p">,</span> <span class="s">&#34;resource_local_to_scene&#34;</span><span class="p">),</span> <span class="s">&#34;set_local_to_scene&#34;</span><span class="p">,</span> <span class="s">&#34;is_local_to_scene&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">	<span class="n">ADD_PROPERTY</span><span class="p">(</span><span class="n">PropertyInfo</span><span class="p">(</span><span class="n">Variant</span><span class="o">::</span><span class="n">STRING</span><span class="p">,</span> <span class="s">&#34;resource_path&#34;</span><span class="p">,</span> <span class="n">PROPERTY_HINT_NONE</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="n">PROPERTY_USAGE_EDITOR</span><span class="p">),</span> <span class="s">&#34;set_path&#34;</span><span class="p">,</span> <span class="s">&#34;get_path&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">	<span class="n">ADD_PROPERTY</span><span class="p">(</span><span class="n">PropertyInfo</span><span class="p">(</span><span class="n">Variant</span><span class="o">::</span><span class="n">STRING</span><span class="p">,</span> <span class="s">&#34;resource_name&#34;</span><span class="p">),</span> <span class="s">&#34;set_name&#34;</span><span class="p">,</span> <span class="s">&#34;get_name&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">	<span class="n">ADD_PROPERTY</span><span class="p">(</span><span class="n">PropertyInfo</span><span class="p">(</span><span class="n">Variant</span><span class="o">::</span><span class="n">STRING</span><span class="p">,</span> <span class="s">&#34;resource_scene_unique_id&#34;</span><span class="p">,</span> <span class="n">PROPERTY_HINT_NONE</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="n">PROPERTY_USAGE_NONE</span><span class="p">),</span> <span class="s">&#34;set_scene_unique_id&#34;</span><span class="p">,</span> <span class="s">&#34;get_scene_unique_id&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">ADD_GROUP</span><span class="p">(</span><span class="s">&#34;AddGroup1&#34;</span><span class="p">,</span> <span class="s">&#34;addGroup1_&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">ADD_PROPERTY</span><span class="p">(</span><span class="n">PropertyInfo</span><span class="p">(</span><span class="n">Variant</span><span class="o">::</span><span class="n">COLOR</span><span class="p">,</span><span class="s">&#34;addGroup1_Color0&#34;</span><span class="p">),</span> <span class="s">&#34;set_color_Group&#34;</span><span class="p">,</span> <span class="s">&#34;get_color_Group&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">ADD_PROPERTY</span><span class="p">(</span><span class="n">PropertyInfo</span><span class="p">(</span><span class="n">Variant</span><span class="o">::</span><span class="n">COLOR</span><span class="p">,</span><span class="s">&#34;addGroup1_Color1&#34;</span><span class="p">),</span> <span class="s">&#34;set_color_Group&#34;</span><span class="p">,</span> <span class="s">&#34;get_color_Group&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">ADD_GROUP_INDENT</span><span class="p">(</span><span class="s">&#34;AddGroup2&#34;</span><span class="p">,</span> <span class="s">&#34;AddGroup2_&#34;</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">ADD_PROPERTY</span><span class="p">(</span><span class="n">PropertyInfo</span><span class="p">(</span><span class="n">Variant</span><span class="o">::</span><span class="n">COLOR</span><span class="p">,</span><span class="s">&#34;AddGroup2_Color2&#34;</span><span class="p">),</span> <span class="s">&#34;set_color_Group&#34;</span><span class="p">,</span> <span class="s">&#34;get_color_Group&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">ADD_PROPERTY</span><span class="p">(</span><span class="n">PropertyInfo</span><span class="p">(</span><span class="n">Variant</span><span class="o">::</span><span class="n">COLOR</span><span class="p">,</span><span class="s">&#34;AddGroup2_Color3&#34;</span><span class="p">),</span> <span class="s">&#34;set_color_Group&#34;</span><span class="p">,</span> <span class="s">&#34;get_color_Group&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">ADD_SUBGROUP</span><span class="p">(</span><span class="s">&#34;AddGroup3&#34;</span><span class="p">,</span> <span class="s">&#34;addGroup3_&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">ADD_PROPERTY</span><span class="p">(</span><span class="n">PropertyInfo</span><span class="p">(</span><span class="n">Variant</span><span class="o">::</span><span class="n">COLOR</span><span class="p">,</span><span class="s">&#34;addGroup3_Color4&#34;</span><span class="p">),</span> <span class="s">&#34;set_color_Group&#34;</span><span class="p">,</span> <span class="s">&#34;get_color_Group&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">ADD_PROPERTY</span><span class="p">(</span><span class="n">PropertyInfo</span><span class="p">(</span><span class="n">Variant</span><span class="o">::</span><span class="n">COLOR</span><span class="p">,</span><span class="s">&#34;addGroup3_Color5&#34;</span><span class="p">),</span> <span class="s">&#34;set_color_Group&#34;</span><span class="p">,</span> <span class="s">&#34;get_color_Group&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">ADD_SUBGROUP_INDENT</span><span class="p">(</span><span class="s">&#34;AddGroup4&#34;</span><span class="p">,</span> <span class="s">&#34;addGroup4_&#34;</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">ADD_PROPERTY</span><span class="p">(</span><span class="n">PropertyInfo</span><span class="p">(</span><span class="n">Variant</span><span class="o">::</span><span class="n">COLOR</span><span class="p">,</span><span class="s">&#34;addGroup4_Color6&#34;</span><span class="p">),</span> <span class="s">&#34;set_color_Group&#34;</span><span class="p">,</span> <span class="s">&#34;get_color_Group&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">ADD_PROPERTY</span><span class="p">(</span><span class="n">PropertyInfo</span><span class="p">(</span><span class="n">Variant</span><span class="o">::</span><span class="n">COLOR</span><span class="p">,</span><span class="s">&#34;addGroup4_Color7&#34;</span><span class="p">),</span> <span class="s">&#34;set_color_Group&#34;</span><span class="p">,</span> <span class="s">&#34;get_color_Group&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -1807,6 +1870,35 @@
 </span></span><span class="line"><span class="cl">		<span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="add_property_subgroup"><code>add_property_subgroup</code>
+</h4><p><strong>方法签名</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"></code></pre></td></tr></table>
+</div>
+</div><p><strong>常用的宏定义</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"></code></pre></td></tr></table>
+</div>
+</div><p><strong>使用示例</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"></code></pre></td></tr></table>
+</div>
+</div><p><strong>源码解读（带注释）</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"></code></pre></td></tr></table>
 </div>
 </div><h3 id="函数接口">函数接口
 </h3><h2 id="信息类">信息类
