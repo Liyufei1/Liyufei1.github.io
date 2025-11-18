@@ -310,17 +310,26 @@
             <li><a href="#add_property_array"><code>add_property_array</code></a></li>
             <li><a href="#add_property_array_count"><code>add_property_array_count</code></a></li>
             <li><a href="#add_property_group"><code>add_property_group</code></a></li>
-            <li><a href="#add_property_subgroup"><code>add_property_subgroup</code></a></li>
+            <li><a href="#get_property_list"><code>get_property_list</code></a></li>
+            <li><a href="#get_property"><code>get_property</code></a></li>
           </ol>
         </li>
-        <li><a href="#函数接口">函数接口</a></li>
+        <li><a href="#函数接口">函数接口</a>
+          <ol>
+            <li><a href="#bind_method">bind_method</a></li>
+            <li><a href="#get_method_list">get_method_list</a></li>
+          </ol>
+        </li>
       </ol>
     </li>
     <li><a href="#信息类">信息类</a>
       <ol>
         <li><a href="#classinfo">ClassInfo</a></li>
+        <li><a href="#methoddefinition">MethodDefinition</a></li>
         <li><a href="#methodinfo">MethodInfo</a></li>
+        <li><a href="#methodbind">MethodBind</a></li>
         <li><a href="#propertyinfo">PropertyInfo</a></li>
+        <li><a href="#propertysetget">PropertySetGet</a></li>
       </ol>
     </li>
   </ol>
@@ -399,7 +408,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 13 分钟
+                    阅读时长: 19 分钟
                 </time>
             </div>
         
@@ -1186,6 +1195,46 @@
           <td style="text-align: left">add_property_subgroup</td>
           <td style="text-align: left">创建 缩进更深一级的子分组</td>
       </tr>
+      <tr>
+          <td style="text-align: left">add_linked_property</td>
+          <td style="text-align: left">链接属性，将子属下关联到父属性</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><a class="link" href="#get_property_list" >get_property_list</a></td>
+          <td style="text-align: left">获取某个类的所有属性列表</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">get_property_info</td>
+          <td style="text-align: left">获取某个类的某个属性，注意由于是通过ClassInfo：：property_map来进行查询的，因此占位的属性信息会返回false</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><a class="link" href="#get_property" >get_property</a></td>
+          <td style="text-align: left">获取某个实例的属性值，信息存放在ClassInfo::PropertySetGet中</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">set_property</td>
+          <td style="text-align: left">设置某个实例的属性值，信息存放在ClassInfo::PropertySetGet中</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">has_property</td>
+          <td style="text-align: left">查询某个类是否定义过某个属性，信息存放在ClassInfo::PropertySetGet中</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">get_property_index</td>
+          <td style="text-align: left">查询属性索引，信息存放在ClassInfo::PropertySetGet中</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">get_property_type</td>
+          <td style="text-align: left">获取属性类型，信息存放在ClassInfo::PropertySetGet中</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">get_property_setter</td>
+          <td style="text-align: left">获取属性setter方法名，信息存放在ClassInfo::PropertySetGet中</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">get_property_getter</td>
+          <td style="text-align: left">获取属性getter方法名，信息存放在ClassInfo::PropertySetGet中</td>
+      </tr>
   </tbody>
 </table></div>
 <h4 id="add_property"><code>add_property</code>
@@ -1871,37 +1920,459 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="add_property_subgroup"><code>add_property_subgroup</code>
-</h4><p><strong>方法签名</strong></p>
+</div><h4 id="get_property_list"><code>get_property_list</code>
+</h4><p>本质还是对ClassInfo中的property_list的遍历读.<br>
+注意，此处的ClassDB::get_property_list仅有查询的功能，并不会触发我们自己重写的_get_property_list()函数。<br>
+如果需要走自定义的_get_property_list()函数，请使用YourObject.get_property_list()的方式来查询。<br>
+object中的GDCLASS(m_class, m_inherits)宏中包装了_get_property_listv方法，用于获取属性列表时调用自定义的_get_property_list()函数。</p>
+<p><strong>方法签名</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code></code></pre></td>
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"></code></pre></td></tr></table>
-</div>
-</div><p><strong>常用的宏定义</strong></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">static</span> <span class="kt">void</span> <span class="nf">get_property_list</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="k">const</span> <span class="n">StringName</span> <span class="o">&amp;</span><span class="n">p_class</span><span class="p">,</span> <span class="c1">//需要查询类的名称
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">List</span><span class="o">&lt;</span><span class="n">PropertyInfo</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">p_list</span><span class="p">,</span> <span class="c1">//返回的属性列表
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="kt">bool</span> <span class="n">p_no_inheritance</span> <span class="o">=</span> <span class="nb">false</span><span class="p">,</span><span class="c1">//是否向上查询父类,默认查询
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">const</span> <span class="n">Object</span> <span class="o">*</span><span class="n">p_validator</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">)</span><span class="c1">//关联的实际类，可以不关联
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>使用示例</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code></code></pre></td>
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">List</span><span class="o">&lt;</span><span class="n">PropertyInfo</span><span class="o">&gt;</span> <span class="n">list</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">ClassDB</span><span class="o">::</span><span class="n">get_property_list</span><span class="p">(</span><span class="s">&#34;YourObject&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">list</span><span class="p">,</span><span class="nb">true</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>源码解读（带注释）</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code></code></pre></td>
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">ClassDB</span><span class="o">::</span><span class="n">get_property_list</span><span class="p">(</span><span class="k">const</span> <span class="n">StringName</span> <span class="o">&amp;</span><span class="n">p_class</span><span class="p">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">PropertyInfo</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">p_list</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">p_no_inheritance</span><span class="p">,</span> <span class="k">const</span> <span class="n">Object</span> <span class="o">*</span><span class="n">p_validator</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">//锁上读锁,直到出作用域
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">OBJTYPE_RLOCK</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">//逐级向父类查询类型信息
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">ClassInfo</span> <span class="o">*</span><span class="n">type</span> <span class="o">=</span> <span class="n">classes</span><span class="p">.</span><span class="n">getptr</span><span class="p">(</span><span class="n">p_class</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">ClassInfo</span> <span class="o">*</span><span class="n">check</span> <span class="o">=</span> <span class="n">type</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">while</span> <span class="p">(</span><span class="n">check</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">//遍历属性列表信息
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="n">PropertyInfo</span> <span class="o">&amp;</span><span class="nl">pi</span> <span class="p">:</span> <span class="n">check</span><span class="o">-&gt;</span><span class="n">property_list</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="c1">//是否关联实例
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="k">if</span> <span class="p">(</span><span class="n">p_validator</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="c1">// Making a copy as we may modify it.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>				<span class="n">PropertyInfo</span> <span class="n">pi_mut</span> <span class="o">=</span> <span class="n">pi</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">				<span class="n">p_validator</span><span class="o">-&gt;</span><span class="n">validate_property</span><span class="p">(</span><span class="n">pi_mut</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">				<span class="n">p_list</span><span class="o">-&gt;</span><span class="n">push_back</span><span class="p">(</span><span class="n">pi_mut</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="c1">//不关联就将property_list直接推入列表p_list
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>				<span class="n">p_list</span><span class="o">-&gt;</span><span class="n">push_back</span><span class="p">(</span><span class="n">pi</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">//是否查询父类，如果不查询，直接返回
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">if</span> <span class="p">(</span><span class="n">p_no_inheritance</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">//变更为父类类型信息指针
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="n">check</span> <span class="o">=</span> <span class="n">check</span><span class="o">-&gt;</span><span class="n">inherits_ptr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="get_property"><code>get_property</code>
+</h4><p><strong>方法签名</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">bool</span> <span class="n">ClassDB</span><span class="o">::</span><span class="n">get_property</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="n">Object</span> <span class="o">*</span><span class="n">p_object</span><span class="p">,</span> <span class="c1">//被查询的实例
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">const</span> <span class="n">StringName</span> <span class="o">&amp;</span><span class="n">p_property</span><span class="p">,</span> <span class="c1">//属性名
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">Variant</span> <span class="o">&amp;</span><span class="n">r_value</span><span class="c1">//属性值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>使用示例</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">bool</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">ClassDB</span><span class="o">::</span><span class="n">get_property</span><span class="p">(</span><span class="s">&#34;MyObject&#34;</span><span class="p">,</span> <span class="s">&#34;property_name&#34;</span><span class="p">,</span> <span class="n">value</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>源码解读（带注释）</strong></p>
+<p>注：<a class="link" href="#propertysetget" >PropertySetGet</a>定义详见此处</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">bool</span> <span class="n">ClassDB</span><span class="o">::</span><span class="n">get_property</span><span class="p">(</span><span class="n">Object</span> <span class="o">*</span><span class="n">p_object</span><span class="p">,</span> <span class="k">const</span> <span class="n">StringName</span> <span class="o">&amp;</span><span class="n">p_property</span><span class="p">,</span> <span class="n">Variant</span> <span class="o">&amp;</span><span class="n">r_value</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">//空指针检测
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">ERR_FAIL_NULL_V</span><span class="p">(</span><span class="n">p_object</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">//向上逐级查询类型信息
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">ClassInfo</span> <span class="o">*</span><span class="n">type</span> <span class="o">=</span> <span class="n">classes</span><span class="p">.</span><span class="n">getptr</span><span class="p">(</span><span class="n">p_object</span><span class="o">-&gt;</span><span class="n">get_class_name</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">	<span class="n">ClassInfo</span> <span class="o">*</span><span class="n">check</span> <span class="o">=</span> <span class="n">type</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">while</span> <span class="p">(</span><span class="n">check</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">//查询类型信息中的property_setget
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">const</span> <span class="n">PropertySetGet</span> <span class="o">*</span><span class="n">psg</span> <span class="o">=</span> <span class="n">check</span><span class="o">-&gt;</span><span class="n">property_setget</span><span class="p">.</span><span class="n">getptr</span><span class="p">(</span><span class="n">p_property</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">(</span><span class="n">psg</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="c1">//存在PropertySetGet，但是没有getter方法
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">psg</span><span class="o">-&gt;</span><span class="n">getter</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="k">return</span> <span class="nb">true</span><span class="p">;</span> <span class="c1">//return true but do nothing
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">			<span class="k">if</span> <span class="p">(</span><span class="n">psg</span><span class="o">-&gt;</span><span class="n">index</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="n">Variant</span> <span class="n">index</span> <span class="o">=</span> <span class="n">psg</span><span class="o">-&gt;</span><span class="n">index</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">				<span class="k">const</span> <span class="n">Variant</span> <span class="o">*</span><span class="n">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span> <span class="o">&amp;</span><span class="n">index</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">				<span class="n">Callable</span><span class="o">::</span><span class="n">CallError</span> <span class="n">ce</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">				<span class="c1">//利用对象实例的callp方法，动态调用该属性的getter方法
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>				<span class="c1">//对于索引不为-1（数组）的属性值，需要传入索引参数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>				<span class="k">const</span> <span class="n">Variant</span> <span class="n">value</span> <span class="o">=</span> <span class="n">p_object</span><span class="o">-&gt;</span><span class="n">callp</span><span class="p">(</span><span class="n">psg</span><span class="o">-&gt;</span><span class="n">getter</span><span class="p">,</span> <span class="n">arg</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ce</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">				<span class="n">r_value</span> <span class="o">=</span> <span class="p">(</span><span class="n">ce</span><span class="p">.</span><span class="n">error</span> <span class="o">==</span> <span class="n">Callable</span><span class="o">::</span><span class="n">CallError</span><span class="o">::</span><span class="n">CALL_OK</span><span class="p">)</span> <span class="o">?</span> <span class="nl">value</span> <span class="p">:</span> <span class="n">Variant</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">			<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="n">Callable</span><span class="o">::</span><span class="n">CallError</span> <span class="n">ce</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">				<span class="k">if</span> <span class="p">(</span><span class="n">psg</span><span class="o">-&gt;</span><span class="n">_getptr</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">					<span class="c1">//通过MethodBind指针_getptr调用getter方法
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>					<span class="n">r_value</span> <span class="o">=</span> <span class="n">psg</span><span class="o">-&gt;</span><span class="n">_getptr</span><span class="o">-&gt;</span><span class="n">call</span><span class="p">(</span><span class="n">p_object</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ce</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">				<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">					<span class="k">const</span> <span class="n">Variant</span> <span class="n">value</span> <span class="o">=</span> <span class="n">p_object</span><span class="o">-&gt;</span><span class="n">callp</span><span class="p">(</span><span class="n">psg</span><span class="o">-&gt;</span><span class="n">getter</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ce</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">					<span class="n">r_value</span> <span class="o">=</span> <span class="p">(</span><span class="n">ce</span><span class="p">.</span><span class="n">error</span> <span class="o">==</span> <span class="n">Callable</span><span class="o">::</span><span class="n">CallError</span><span class="o">::</span><span class="n">CALL_OK</span><span class="p">)</span> <span class="o">?</span> <span class="nl">value</span> <span class="p">:</span> <span class="n">Variant</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">				<span class="p">}</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="k">const</span> <span class="kt">int64_t</span> <span class="o">*</span><span class="n">c</span> <span class="o">=</span> <span class="n">check</span><span class="o">-&gt;</span><span class="n">constant_map</span><span class="p">.</span><span class="n">getptr</span><span class="p">(</span><span class="n">p_property</span><span class="p">);</span> <span class="c1">//constants count
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">if</span> <span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="n">r_value</span> <span class="o">=</span> <span class="o">*</span><span class="n">c</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">(</span><span class="n">check</span><span class="o">-&gt;</span><span class="n">method_map</span><span class="p">.</span><span class="n">has</span><span class="p">(</span><span class="n">p_property</span><span class="p">))</span> <span class="p">{</span> <span class="c1">//methods count
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="n">r_value</span> <span class="o">=</span> <span class="n">Callable</span><span class="p">(</span><span class="n">p_object</span><span class="p">,</span> <span class="n">p_property</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">(</span><span class="n">check</span><span class="o">-&gt;</span><span class="n">signal_map</span><span class="p">.</span><span class="n">has</span><span class="p">(</span><span class="n">p_property</span><span class="p">))</span> <span class="p">{</span> <span class="c1">//signals count
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="n">r_value</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="n">p_object</span><span class="p">,</span> <span class="n">p_property</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="n">check</span> <span class="o">=</span> <span class="n">check</span><span class="o">-&gt;</span><span class="n">inherits_ptr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// The &#34;free()&#34; method is special, so we assume it exists and return a Callable.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">if</span> <span class="p">(</span><span class="n">p_property</span> <span class="o">==</span> <span class="n">CoreStringName</span><span class="p">(</span><span class="n">free_</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">r_value</span> <span class="o">=</span> <span class="n">Callable</span><span class="p">(</span><span class="n">p_object</span><span class="p">,</span> <span class="n">p_property</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="函数接口">函数接口
-</h3><h2 id="信息类">信息类
+</h3><p>函数相关的接口，是ClassDB中最复杂的一组，涉及到函数的绑定，所以godot用了非常多的模板来实现。
+它的信息存储在<code>ClassInfo</code>的下面两个成员变量中：</p>
+<ul>
+<li><code>HashMap&lt;StringName, MethodBind *&gt; method_map;</code></li>
+<li><code>HashMap&lt;StringName, LocalVector&lt;MethodBind *&gt;&gt; method_map_compatibility;</code></li>
+</ul>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th style="text-align: left">接口</th>
+          <th style="text-align: left">作用</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left"><a class="link" href="#bind_method" >bind_method</a></td>
+          <td style="text-align: left">类型注册时的函数绑定方法，用的非常广泛</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">has_method</td>
+          <td style="text-align: left">查询是类否包含某个函数，通过classinfo的method_map来查询</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><a class="link" href="#get_method_list" >get_method_list</a></td>
+          <td style="text-align: left">查询某个类的所有函数信息MethodInfo,通过classinfo的method_map来查询</td>
+      </tr>
+  </tbody>
+</table></div>
+<h4 id="bind_method">bind_method
+</h4><p><code>bind_method</code>的主要作用是把一个C++成员函数，封装成一个<code>MethodBind</code>，然后再注册进ClassDB的类型信息中，路径为：<code>classdb::classes-&gt;ClassInfo::method_map</code></p>
+<p>该方法使用非常简单，但是内部实现极其复杂，笔者代码能力有限，仅能做部分代码的解读。因此该函数的介绍，会更偏向使用。</p>
+<ul>
+<li><a class="link" href="#methoddefinition" >MethodDefinition</a> 在下方有详细描述，它仅是字符串的描述</li>
+<li></li>
+</ul>
+<p><strong>方法签名</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">N</span><span class="p">,</span> <span class="k">typename</span> <span class="n">M</span><span class="p">,</span> <span class="k">typename</span><span class="p">...</span> <span class="n">VarArgs</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="n">MethodBind</span> <span class="o">*</span><span class="n">bind_method</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="n">N</span> <span class="n">p_method_name</span><span class="p">,</span> <span class="c1">//函数名、参数列表的描述，MethodDefinition类型，利用D_METHOD()生成
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">M</span> <span class="n">p_method</span><span class="p">,</span> <span class="c1">//成员函数指针，例如 &amp;Input::warp_mouse
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">VarArgs</span><span class="p">...</span> <span class="n">p_args</span> <span class="c1">//函数默认值参数包
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>使用示例</strong></p>
+<p>DEFVAL用于函数默认值参数的包装，它的排序对应函数签名的后N位。<br>
+以下方testfunc的函数绑定为例：</p>
+<ul>
+<li>arg4 = 0.0f</li>
+<li>arg5 = -1.0f</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">Input</span><span class="o">::</span><span class="n">_bind_methods</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">ClassDB</span><span class="o">::</span><span class="n">bind_method</span><span class="p">(</span><span class="n">D_METHOD</span><span class="p">(</span><span class="s">&#34;is_anything_pressed&#34;</span><span class="p">),</span> <span class="o">&amp;</span><span class="n">Input</span><span class="o">::</span><span class="n">is_anything_pressed</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">ClassDB</span><span class="o">::</span><span class="n">bind_method</span><span class="p">(</span><span class="n">D_METHOD</span><span class="p">(</span><span class="s">&#34;testfunc&#34;</span><span class="p">,</span> <span class="s">&#34;arg1&#34;</span><span class="p">,</span> <span class="s">&#34;arg2&#34;</span><span class="p">,</span> <span class="s">&#34;arg3&#34;</span><span class="p">,</span> <span class="s">&#34;arg4&#34;</span><span class="p">,</span> <span class="s">&#34;arg5&#34;</span><span class="p">),</span> <span class="o">&amp;</span><span class="n">Input</span><span class="o">::</span><span class="n">testfunc</span><span class="p">,</span> <span class="n">DEFVAL</span><span class="p">(</span><span class="mf">0.0f</span><span class="p">),</span><span class="n">DEFVAL</span><span class="p">(</span><span class="o">-</span><span class="mf">1.0f</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>源码解读（带注释）</strong></p>
+<p>通过上面的示例代码，可以看到要正确绑定一个函数，需要使用两个函数</p>
+<ol>
+<li><code>D_METHOD</code>
+创建MethodDefinition，用于描述函数的参数列表</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span><span class="p">...</span> <span class="n">VarArgs</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="n">MethodDefinition</span> <span class="n">D_METHOD</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">p_name</span><span class="p">,</span> <span class="k">const</span> <span class="n">VarArgs</span><span class="p">...</span> <span class="n">p_args</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">//创建参数列表args,利用列表初始化展开参数包p_args
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">//收集所有参数名称
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">args</span><span class="p">[</span><span class="k">sizeof</span><span class="p">...(</span><span class="n">p_args</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span> <span class="n">p_args</span><span class="p">...,</span> <span class="k">nullptr</span> <span class="p">};</span> <span class="c1">// +1 makes sure zero sized arrays are also supported.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="k">const</span> <span class="o">*</span><span class="n">argptrs</span><span class="p">[</span><span class="k">sizeof</span><span class="p">...(</span><span class="n">p_args</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="p">(</span><span class="kt">uint32_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="k">sizeof</span><span class="p">...(</span><span class="n">p_args</span><span class="p">);</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">argptrs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">args</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">//将收集的参数列表，传入D_METHODP()进行MD的创建
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">return</span> <span class="nf">D_METHODP</span><span class="p">(</span><span class="n">p_name</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">...(</span><span class="n">p_args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">?</span> <span class="k">nullptr</span> <span class="o">:</span> <span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="k">const</span> <span class="o">**</span><span class="p">)</span><span class="n">argptrs</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">...(</span><span class="n">p_args</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">MethodDefinition</span> <span class="nf">D_METHODP</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">p_name</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="k">const</span> <span class="o">**</span><span class="n">p_args</span><span class="p">,</span> <span class="kt">uint32_t</span> <span class="n">p_argcount</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">//实际创建MethodDefinition，填入函数名称和参数名称列表
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">MethodDefinition</span> <span class="n">md</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">md</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">StaticCString</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="n">p_name</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">md</span><span class="p">.</span><span class="n">args</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">p_argcount</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="p">(</span><span class="kt">uint32_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">p_argcount</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">md</span><span class="p">.</span><span class="n">args</span><span class="p">.</span><span class="n">write</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">StaticCString</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="o">*</span><span class="n">p_args</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="n">md</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li><code>ClassDB::bind_method</code>
+执行函数绑定</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">N</span><span class="p">,</span> <span class="k">typename</span> <span class="n">M</span><span class="p">,</span> <span class="k">typename</span><span class="p">...</span> <span class="n">VarArgs</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="n">MethodBind</span> <span class="o">*</span><span class="n">bind_method</span><span class="p">(</span><span class="n">N</span> <span class="n">p_method_name</span><span class="p">,</span> <span class="n">M</span> <span class="n">p_method</span><span class="p">,</span> <span class="n">VarArgs</span><span class="p">...</span> <span class="n">p_args</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">//创建参数列表args,利用列表初始化展开参数包p_args
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">Variant</span> <span class="n">args</span><span class="p">[</span><span class="k">sizeof</span><span class="p">...(</span><span class="n">p_args</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span> <span class="n">p_args</span><span class="p">...,</span> <span class="n">Variant</span><span class="p">()</span> <span class="p">};</span> <span class="c1">// +1 makes sure zero sized arrays are also supported.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">//创建参数指针列表argptrs
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">const</span> <span class="n">Variant</span> <span class="o">*</span><span class="n">argptrs</span><span class="p">[</span><span class="k">sizeof</span><span class="p">...(</span><span class="n">p_args</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">//遍历参数列表args，并将参数指针保存到argptrs中
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">for</span> <span class="p">(</span><span class="kt">uint32_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="k">sizeof</span><span class="p">...(</span><span class="n">p_args</span><span class="p">);</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">argptrs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">args</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">//创建函数绑定MethodBind
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">//此处比较复杂，暂时不展开
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">MethodBind</span> <span class="o">*</span><span class="n">bind</span> <span class="o">=</span> <span class="n">create_method_bind</span><span class="p">(</span><span class="n">p_method</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nf">constexpr</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">is_same_v</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">member_function_traits</span><span class="o">&lt;</span><span class="n">M</span><span class="o">&gt;::</span><span class="n">return_type</span><span class="p">,</span> <span class="n">Object</span> <span class="o">*&gt;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">bind</span><span class="o">-&gt;</span><span class="n">set_return_type_is_raw_object_ptr</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">//将函数绑定信息的注册到ClassDB中
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">return</span> <span class="nf">bind_methodfi</span><span class="p">(</span><span class="n">METHOD_FLAGS_DEFAULT</span><span class="p">,</span> <span class="n">bind</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="n">p_method_name</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">...(</span><span class="n">p_args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">?</span> <span class="k">nullptr</span> <span class="o">:</span> <span class="p">(</span><span class="k">const</span> <span class="n">Variant</span> <span class="o">**</span><span class="p">)</span><span class="n">argptrs</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">...(</span><span class="n">p_args</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="get_method_list">get_method_list
+</h4><h2 id="信息类">信息类
 </h2><h3 id="classinfo">ClassInfo
 </h3><p><code>ClassInfo</code>是ClassDB中定义的类信息结构体，它保存了类的元数据，比如类的名称、继承关系、成员变量、方法、属性等信息。下方截取了4.4版本godot源码中<code>ClassInfo</code>类的部分代码，并标注了一些重要的信息，帮助我们去整体的理解<code>ClassInfo</code>的运行原理。为了方便理解，方法和属性的顺序，并非与源码严格一致。</p>
 <div class="highlight"><div class="chroma">
@@ -2019,6 +2490,31 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="n">ClassInfo</span><span class="p">()</span> <span class="p">{}</span>
 </span></span><span class="line"><span class="cl">    <span class="o">~</span><span class="n">ClassInfo</span><span class="p">()</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="methoddefinition">MethodDefinition
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">MethodDefinition</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">StringName</span> <span class="n">name</span><span class="p">;</span><span class="c1">//方法名称
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">Vector</span><span class="o">&lt;</span><span class="n">StringName</span><span class="o">&gt;</span> <span class="n">args</span><span class="p">;</span><span class="c1">//方法参数名称列表
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">MethodDefinition</span><span class="p">()</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">	<span class="n">MethodDefinition</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">p_name</span><span class="p">)</span> <span class="o">:</span>
+</span></span><span class="line"><span class="cl">			<span class="n">name</span><span class="p">(</span><span class="n">p_name</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">	<span class="n">MethodDefinition</span><span class="p">(</span><span class="k">const</span> <span class="n">StringName</span> <span class="o">&amp;</span><span class="n">p_name</span><span class="p">)</span> <span class="o">:</span>
+</span></span><span class="line"><span class="cl">			<span class="n">name</span><span class="p">(</span><span class="n">p_name</span><span class="p">)</span> <span class="p">{}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -2201,6 +2697,48 @@
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span></code></pre></td></tr></table>
 </div>
+</div><h3 id="methodbind">MethodBind
+</h3><p><code>MethodBind</code>实现比较复杂，此处仅列出部分成员函数和成员变量，用于理解它的作用。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">MethodBind</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">method_id</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">uint32_t</span> <span class="n">hint_flags</span> <span class="o">=</span> <span class="n">METHOD_FLAGS_DEFAULT</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">StringName</span> <span class="n">name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">StringName</span> <span class="n">instance_class</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">Vector</span><span class="o">&lt;</span><span class="n">Variant</span><span class="o">&gt;</span> <span class="n">default_arguments</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">default_argument_count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">argument_count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="kt">bool</span> <span class="n">_static</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">bool</span> <span class="n">_const</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">bool</span> <span class="n">_returns</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">bool</span> <span class="n">_returns_raw_obj_ptr</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// ...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
 </div><h3 id="propertyinfo">PropertyInfo
 </h3><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2326,6 +2864,29 @@
 </span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="n">name</span> <span class="o">&lt;</span> <span class="n">p_info</span><span class="p">.</span><span class="n">name</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">	<span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="propertysetget">PropertySetGet
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">PropertySetGet</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">index</span><span class="p">;</span>	<span class="c1">//属性索引，默认为-1，数组索引从0开始
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">StringName</span> <span class="n">setter</span><span class="p">;</span>	<span class="c1">//setter函数名
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">StringName</span> <span class="n">getter</span><span class="p">;</span>	<span class="c1">//getter函数名
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">MethodBind</span> <span class="o">*</span><span class="n">_setptr</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span> <span class="c1">//setter函数包指针
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">MethodBind</span> <span class="o">*</span><span class="n">_getptr</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span> <span class="c1">//getter函数包指针
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">Variant</span><span class="o">::</span><span class="n">Type</span> <span class="n">type</span><span class="p">;</span>	<span class="c1">//属性类型
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">};</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div>
