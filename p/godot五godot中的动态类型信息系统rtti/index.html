@@ -298,6 +298,7 @@
         </li>
         <li><a href="#信号接口">信号接口</a>
           <ol>
+            <li><a href="#基本使用示例">基本使用示例：</a></li>
             <li><a href="#add_signal">add_signal</a></li>
             <li><a href="#has_signal">has_signal</a></li>
             <li><a href="#get_signal">get_signal</a></li>
@@ -408,7 +409,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 19 分钟
+                    阅读时长: 21 分钟
                 </time>
             </div>
         
@@ -885,8 +886,14 @@
       </tr>
   </tbody>
 </table></div>
-<h4 id="add_signal">add_signal
-</h4><p>为某个类添加一个信号</p>
+<h4 id="基本使用示例">基本使用示例：
+</h4><p>godot中的signal类似于ue中的动态多播代理。它可以将一个信号（可以带参数）发送到所有监听函数。</p>
+<ul>
+<li>信号的创建一般放在_bind_methods中</li>
+<li>监听信号的绑定，则需要结合实际的监听者（Object*），因此不会在静态函数_bind_methods中绑定。</li>
+<li>信号的发送，也需要结合实际的发送者。</li>
+</ul>
+<p>注意，由于信号功能的实现，依赖了Object内的方法，所以相关的函数需要被注册进类型信息当中，否则Object无法通过call动态的调用绑定的函数。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -915,33 +922,117 @@
 </span><span class="lnt">24
 </span><span class="lnt">25
 </span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">//常用的宏的定义
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#define ADD_SIGNAL(m_signal) ::ClassDB::add_signal(get_class_static(), m_signal)
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl"><span class="c1">//使用示例
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">//信号创建
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="n">MyNode</span><span class="o">::</span><span class="n">_bind_methods</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">MethodInfo</span> <span class="nf">sig</span><span class="p">(</span><span class="s">&#34;hit&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="n">sig</span><span class="p">.</span><span class="n">arguments</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">PropertyInfo</span><span class="p">(</span><span class="n">Variant</span><span class="o">::</span><span class="n">INT</span><span class="p">,</span> <span class="s">&#34;damage&#34;</span><span class="p">));</span>
-</span></span><span class="line"><span class="cl">    <span class="n">ClassDB</span><span class="o">::</span><span class="n">add_signal</span><span class="p">(</span><span class="s">&#34;MyNode&#34;</span><span class="p">,</span> <span class="n">sig</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="c1">//宏版本
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">ADD_SIGNAL</span><span class="p">(</span><span class="n">MethodInfo</span><span class="p">(</span><span class="s">&#34;joy_connection_changed&#34;</span><span class="p">,</span> <span class="n">PropertyInfo</span><span class="p">(</span><span class="n">Variant</span><span class="o">::</span><span class="n">INT</span><span class="p">,</span> <span class="s">&#34;device&#34;</span><span class="p">),</span> <span class="n">PropertyInfo</span><span class="p">(</span><span class="n">Variant</span><span class="o">::</span><span class="n">BOOL</span><span class="p">,</span> <span class="s">&#34;connected&#34;</span><span class="p">)));</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">//定义信号的属性
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">MethodInfo</span> <span class="nf">mi</span><span class="p">(</span><span class="s">&#34;TestSignal&#34;</span><span class="p">);</span> <span class="c1">//信号名称为TestSignal
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">mi</span><span class="p">.</span><span class="n">_push_params</span><span class="p">(</span><span class="n">PropertyInfo</span><span class="p">(</span><span class="n">Variant</span><span class="o">::</span><span class="n">INT</span><span class="p">,</span><span class="s">&#34;Arg1&#34;</span><span class="p">));</span> <span class="c1">//具有一个类型为int的参数Arg1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">ClassDB</span><span class="o">::</span><span class="n">add_signal</span><span class="p">(</span><span class="s">&#34;NsTestResource&#34;</span><span class="p">,</span> <span class="n">mi</span><span class="p">);</span>	<span class="c1">//添加信号
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">	<span class="c1">//宏的实现版本
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">//信号名称为TestSignal，信号具有一个参数，类型为int
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">ADD_SIGNAL</span><span class="p">(</span><span class="n">MethodInfo</span><span class="p">(</span><span class="s">&#34;NsTestResource&#34;</span><span class="p">,</span> <span class="n">PropertyInfo</span><span class="p">(</span><span class="n">Variant</span><span class="o">::</span><span class="n">INT</span><span class="p">,</span> <span class="s">&#34;TestSignal&#34;</span><span class="p">)));</span>	
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">//源码解读
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="n">ClassDB</span><span class="o">::</span><span class="n">add_signal</span><span class="p">(</span><span class="k">const</span> <span class="n">StringName</span> <span class="o">&amp;</span><span class="n">p_class</span><span class="p">,</span> <span class="k">const</span> <span class="n">MethodInfo</span> <span class="o">&amp;</span><span class="n">p_signal</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//定义被调用函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="n">NsTestResource</span><span class="o">::</span><span class="n">test_func_for_signal</span><span class="p">(</span><span class="kt">int</span> <span class="n">AAA</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">	<span class="n">print_line</span><span class="p">(</span><span class="s">&#34;test_func_for_signal::&#34;</span><span class="p">,</span><span class="n">AAA</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//绑定信号
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="n">NsTestResource</span><span class="o">::</span><span class="n">test_func_for_connect</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">	<span class="n">connect</span><span class="p">(</span><span class="s">&#34;TestSignal&#34;</span><span class="p">,</span> <span class="n">Callable</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="s">&#34;test_func_for_signal&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//发射信号
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="n">NsTestResource</span><span class="o">::</span><span class="n">test_func_for_emit</span><span class="p">(</span><span class="kt">int</span> <span class="n">AAA</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">	<span class="n">emit_signal</span><span class="p">(</span><span class="s">&#34;TestSignal&#34;</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="add_signal">add_signal
+</h4><p>为某个类添加一个信号,<a class="link" href="#methodinfo" >MethodInfo参考链接</a></p>
+<p><strong>方法签名</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">ClassDB</span><span class="o">::</span><span class="n">add_signal</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="k">const</span> <span class="n">StringName</span> <span class="o">&amp;</span><span class="n">p_class</span><span class="p">,</span> <span class="c1">//类名
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">const</span> <span class="n">MethodInfo</span> <span class="o">&amp;</span><span class="n">p_signal</span>	<span class="c1">//信号信息
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>常用的宏定义</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#define ADD_SIGNAL(m_signal) ::ClassDB::add_signal(get_class_static(), m_signal)
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>使用示例</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">MyNode</span><span class="o">::</span><span class="n">_bind_methods</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">//定义信号的属性
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">MethodInfo</span> <span class="nf">mi</span><span class="p">(</span><span class="s">&#34;TestSignal&#34;</span><span class="p">);</span> <span class="c1">//信号名称为TestSignal
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">mi</span><span class="p">.</span><span class="n">_push_params</span><span class="p">(</span><span class="n">PropertyInfo</span><span class="p">(</span><span class="n">Variant</span><span class="o">::</span><span class="n">INT</span><span class="p">,</span><span class="s">&#34;Arg1&#34;</span><span class="p">));</span> <span class="c1">//具有一个类型为int的参数Arg1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">ClassDB</span><span class="o">::</span><span class="n">add_signal</span><span class="p">(</span><span class="s">&#34;NsTestResource&#34;</span><span class="p">,</span> <span class="n">mi</span><span class="p">);</span>	<span class="c1">//添加信号
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">	<span class="c1">//宏的实现版本
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">//信号名称为TestSignal，信号具有一个参数，类型为int
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">ADD_SIGNAL</span><span class="p">(</span><span class="n">MethodInfo</span><span class="p">(</span><span class="s">&#34;NsTestResource&#34;</span><span class="p">,</span> <span class="n">PropertyInfo</span><span class="p">(</span><span class="n">Variant</span><span class="o">::</span><span class="n">INT</span><span class="p">,</span> <span class="s">&#34;TestSignal&#34;</span><span class="p">)));</span>	
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>源码解读（带注释）</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">ClassDB</span><span class="o">::</span><span class="n">add_signal</span><span class="p">(</span><span class="k">const</span> <span class="n">StringName</span> <span class="o">&amp;</span><span class="n">p_class</span><span class="p">,</span> <span class="k">const</span> <span class="n">MethodInfo</span> <span class="o">&amp;</span><span class="n">p_signal</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">	<span class="c1">//锁上写锁
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">OBJTYPE_WLOCK</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
@@ -967,6 +1058,39 @@
 </div>
 </div><h4 id="has_signal">has_signal
 </h4><p>检查某个类是否定义过某个信号</p>
+<p><strong>方法签名</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">bool</span> <span class="n">ClassDB</span><span class="o">::</span><span class="n">has_signal</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="k">const</span> <span class="n">StringName</span> <span class="o">&amp;</span><span class="n">p_class</span><span class="p">,</span> <span class="c1">//类名
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">const</span> <span class="n">StringName</span> <span class="o">&amp;</span><span class="n">p_signal</span><span class="p">,</span> <span class="c1">//信号名
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="kt">bool</span> <span class="n">p_no_inheritance</span> <span class="c1">//是否忽略继承关系
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>使用示例</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">testfun</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">bool</span> <span class="n">exists</span> <span class="o">=</span> <span class="n">ClassDB</span><span class="o">::</span><span class="n">has_signal</span><span class="p">(</span><span class="s">&#34;Node&#34;</span><span class="p">,</span> <span class="s">&#34;tree_entered&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">print_line</span><span class="p">(</span><span class="n">vformat</span><span class="p">(</span><span class="s">&#34;Has signal? %s&#34;</span><span class="p">,</span> <span class="n">exists</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>源码解读（带注释）</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -989,19 +1113,9 @@
 </span><span class="lnt">18
 </span><span class="lnt">19
 </span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">testfun</span><span class="p">(){</span>
-</span></span><span class="line"><span class="cl">	<span class="kt">bool</span> <span class="n">exists</span> <span class="o">=</span> <span class="n">ClassDB</span><span class="o">::</span><span class="n">has_signal</span><span class="p">(</span><span class="s">&#34;Node&#34;</span><span class="p">,</span> <span class="s">&#34;tree_entered&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">	<span class="n">print_line</span><span class="p">(</span><span class="n">vformat</span><span class="p">(</span><span class="s">&#34;Has signal? %s&#34;</span><span class="p">,</span> <span class="n">exists</span><span class="p">));</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="n">ClassDB</span><span class="o">::</span><span class="n">has_signal</span><span class="p">(</span><span class="k">const</span> <span class="n">StringName</span> <span class="o">&amp;</span><span class="n">p_class</span><span class="p">,</span> <span class="k">const</span> <span class="n">StringName</span> <span class="o">&amp;</span><span class="n">p_signal</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">p_no_inheritance</span><span class="p">)</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">bool</span> <span class="n">ClassDB</span><span class="o">::</span><span class="n">has_signal</span><span class="p">(</span><span class="k">const</span> <span class="n">StringName</span> <span class="o">&amp;</span><span class="n">p_class</span><span class="p">,</span> <span class="k">const</span> <span class="n">StringName</span> <span class="o">&amp;</span><span class="n">p_signal</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">p_no_inheritance</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">	<span class="c1">//锁上读锁
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">OBJTYPE_RLOCK</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">	<span class="c1">//类信息非空判断
@@ -1024,7 +1138,53 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="get_signal">get_signal
-</h4><p>获取信号的完整信息存入MethodInfo，如果信号存在返回true 并填充p_signal</p>
+</h4><p>获取信号的完整信息存入MethodInfo，如果信号存在返回true 并填充p_signal<br>
+<a class="link" href="#methodinfo" >MethodInfo链接</a></p>
+<p><strong>方法签名</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">bool</span> <span class="n">ClassDB</span><span class="o">::</span><span class="n">get_signal</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="k">const</span> <span class="n">StringName</span> <span class="o">&amp;</span><span class="n">p_class</span><span class="p">,</span> <span class="c1">// 类名
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">const</span> <span class="n">StringName</span> <span class="o">&amp;</span><span class="n">p_signal</span><span class="p">,</span> <span class="c1">// 信号名
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">MethodInfo</span> <span class="o">*</span><span class="n">r_signal</span> <span class="c1">// 存储信号的MethodInfo
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">)</span><span class="err">；</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>使用示例</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">testfun</span><span class="p">(){</span> 
+</span></span><span class="line"><span class="cl">	<span class="n">MethodInfo</span> <span class="n">info</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">ClassDB</span><span class="o">::</span><span class="n">get_signal</span><span class="p">(</span><span class="s">&#34;MyNode&#34;</span><span class="p">,</span> <span class="s">&#34;hit&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">info</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">print_line</span><span class="p">(</span><span class="s">&#34;Signal name: &#34;</span> <span class="o">+</span> <span class="n">info</span><span class="p">.</span><span class="n">name</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">arg</span> <span class="p">:</span> <span class="n">info</span><span class="p">.</span><span class="n">arguments</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="n">print_line</span><span class="p">(</span><span class="s">&#34;Arg: &#34;</span> <span class="o">+</span> <span class="n">arg</span><span class="p">.</span><span class="n">name</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>源码解读（带注释）</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -1049,31 +1209,9 @@
 </span><span class="lnt">20
 </span><span class="lnt">21
 </span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">testfun</span><span class="p">(){</span> 
-</span></span><span class="line"><span class="cl">	<span class="n">MethodInfo</span> <span class="n">info</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">ClassDB</span><span class="o">::</span><span class="n">get_signal</span><span class="p">(</span><span class="s">&#34;MyNode&#34;</span><span class="p">,</span> <span class="s">&#34;hit&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">info</span><span class="p">))</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="n">print_line</span><span class="p">(</span><span class="s">&#34;Signal name: &#34;</span> <span class="o">+</span> <span class="n">info</span><span class="p">.</span><span class="n">name</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">		<span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">arg</span> <span class="p">:</span> <span class="n">info</span><span class="p">.</span><span class="n">arguments</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">			<span class="n">print_line</span><span class="p">(</span><span class="s">&#34;Arg: &#34;</span> <span class="o">+</span> <span class="n">arg</span><span class="p">.</span><span class="n">name</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">		<span class="p">}</span>
-</span></span><span class="line"><span class="cl">	<span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="n">ClassDB</span><span class="o">::</span><span class="n">get_signal</span><span class="p">(</span><span class="k">const</span> <span class="n">StringName</span> <span class="o">&amp;</span><span class="n">p_class</span><span class="p">,</span> <span class="k">const</span> <span class="n">StringName</span> <span class="o">&amp;</span><span class="n">p_signal</span><span class="p">,</span> <span class="n">MethodInfo</span> <span class="o">*</span><span class="n">r_signal</span><span class="p">)</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">bool</span> <span class="n">ClassDB</span><span class="o">::</span><span class="n">get_signal</span><span class="p">(</span><span class="k">const</span> <span class="n">StringName</span> <span class="o">&amp;</span><span class="n">p_class</span><span class="p">,</span> <span class="k">const</span> <span class="n">StringName</span> <span class="o">&amp;</span><span class="n">p_signal</span><span class="p">,</span> <span class="n">MethodInfo</span> <span class="o">*</span><span class="n">r_signal</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">	<span class="c1">//锁上读锁 
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">OBJTYPE_RLOCK</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">	<span class="n">ClassInfo</span> <span class="o">*</span><span class="n">type</span> <span class="o">=</span> <span class="n">classes</span><span class="p">.</span><span class="n">getptr</span><span class="p">(</span><span class="n">p_class</span><span class="p">);</span>
@@ -1099,6 +1237,47 @@
 </div>
 </div><h4 id="get_signal_list">get_signal_list
 </h4><p>获取某个类所有信号,包括父类信号</p>
+<p><strong>方法签名</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">ClassDB</span><span class="o">::</span><span class="n">get_signal_list</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="k">const</span> <span class="n">StringName</span> <span class="o">&amp;</span><span class="n">p_class</span><span class="p">,</span> <span class="c1">//类名
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">List</span><span class="o">&lt;</span><span class="n">MethodInfo</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">p_signals</span><span class="p">,</span> <span class="c1">//信号列表引用，用于返回查询结果
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="kt">bool</span> <span class="n">p_no_inheritance</span> <span class="c1">//是否查询父类信号
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>使用示例</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">testfun</span><span class="p">(){</span> 
+</span></span><span class="line"><span class="cl">	<span class="n">List</span><span class="o">&lt;</span><span class="n">MethodInfo</span><span class="o">&gt;</span> <span class="n">signals</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">ClassDB</span><span class="o">::</span><span class="n">get_signal_list</span><span class="p">(</span><span class="s">&#34;Node2D&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">signals</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">MethodInfo</span><span class="o">&gt;::</span><span class="n">Element</span> <span class="o">*</span><span class="n">E</span> <span class="o">=</span> <span class="n">signals</span><span class="p">.</span><span class="n">front</span><span class="p">();</span> <span class="n">E</span><span class="p">;</span> <span class="n">E</span> <span class="o">=</span> <span class="n">E</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">print_line</span><span class="p">(</span><span class="s">&#34;Signal: &#34;</span> <span class="o">+</span> <span class="n">E</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">().</span><span class="n">name</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>源码解读（带注释）</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -1120,29 +1299,9 @@
 </span><span class="lnt">17
 </span><span class="lnt">18
 </span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">testfun</span><span class="p">(){</span> 
-</span></span><span class="line"><span class="cl">	<span class="n">List</span><span class="o">&lt;</span><span class="n">MethodInfo</span><span class="o">&gt;</span> <span class="n">signals</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">	<span class="n">ClassDB</span><span class="o">::</span><span class="n">get_signal_list</span><span class="p">(</span><span class="s">&#34;Node2D&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">signals</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">MethodInfo</span><span class="o">&gt;::</span><span class="n">Element</span> <span class="o">*</span><span class="n">E</span> <span class="o">=</span> <span class="n">signals</span><span class="p">.</span><span class="n">front</span><span class="p">();</span> <span class="n">E</span><span class="p">;</span> <span class="n">E</span> <span class="o">=</span> <span class="n">E</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">())</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="n">print_line</span><span class="p">(</span><span class="s">&#34;Signal: &#34;</span> <span class="o">+</span> <span class="n">E</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">().</span><span class="n">name</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">	<span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">ClassDB</span><span class="o">::</span><span class="n">get_signal_list</span><span class="p">(</span><span class="k">const</span> <span class="n">StringName</span> <span class="o">&amp;</span><span class="n">p_class</span><span class="p">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">MethodInfo</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">p_signals</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">p_no_inheritance</span><span class="p">)</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">ClassDB</span><span class="o">::</span><span class="n">get_signal_list</span><span class="p">(</span><span class="k">const</span> <span class="n">StringName</span> <span class="o">&amp;</span><span class="n">p_class</span><span class="p">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">MethodInfo</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">p_signals</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">p_no_inheritance</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">	<span class="c1">//锁上读锁 非空判断
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">OBJTYPE_RLOCK</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">	<span class="n">ClassInfo</span> <span class="o">*</span><span class="n">type</span> <span class="o">=</span> <span class="n">classes</span><span class="p">.</span><span class="n">getptr</span><span class="p">(</span><span class="n">p_class</span><span class="p">);</span>
@@ -1155,11 +1314,9 @@
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">for</span> <span class="p">(</span><span class="n">KeyValue</span><span class="o">&lt;</span><span class="n">StringName</span><span class="p">,</span> <span class="n">MethodInfo</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="nl">E</span> <span class="p">:</span> <span class="n">check</span><span class="o">-&gt;</span><span class="n">signal_map</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">			<span class="n">p_signals</span><span class="o">-&gt;</span><span class="n">push_back</span><span class="p">(</span><span class="n">E</span><span class="p">.</span><span class="n">value</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">		<span class="p">}</span>
-</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">(</span><span class="n">p_no_inheritance</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">			<span class="k">return</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">		<span class="p">}</span>
-</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">		<span class="n">check</span> <span class="o">=</span> <span class="n">check</span><span class="o">-&gt;</span><span class="n">inherits_ptr</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">	<span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
