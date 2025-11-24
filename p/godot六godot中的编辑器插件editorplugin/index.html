@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="个人工具文档，针对GodotModules开发。介绍相关头文件的使用和最小使用示例">
-<title>【godot】二、Modules开发指南</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="基于godot4.4版本，学习随笔，尝试创建一个编辑器插件，会介绍各个接口">
+<title>【godot】六、godot中的编辑器插件EditorPlugin</title>
 
-<link rel='canonical' href='https://Liyufei1.github.io/p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/'>
+<link rel='canonical' href='https://Liyufei1.github.io/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/'>
 
-<link rel="stylesheet" href="/scss/style.min.b0e76e98cdd4f7082d1fc36f7af7e0843a81201db2197c03ca426751dc923735.css"><meta property='og:title' content="【godot】二、Modules开发指南">
-<meta property='og:description' content="个人工具文档，针对GodotModules开发。介绍相关头文件的使用和最小使用示例">
-<meta property='og:url' content='https://Liyufei1.github.io/p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/'>
+<link rel="stylesheet" href="/scss/style.min.b0e76e98cdd4f7082d1fc36f7af7e0843a81201db2197c03ca426751dc923735.css"><meta property='og:title' content="【godot】六、godot中的编辑器插件EditorPlugin">
+<meta property='og:description' content="基于godot4.4版本，学习随笔，尝试创建一个编辑器插件，会介绍各个接口">
+<meta property='og:url' content='https://Liyufei1.github.io/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/'>
 <meta property='og:site_name' content='李宇飞-Liyufei1'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-11-04T16:18:31&#43;08:00'/><meta property='article:modified_time' content='2025-11-04T16:18:31&#43;08:00'/><meta property='og:image' content='https://Liyufei1.github.io/guidao4.jpg' />
-<meta name="twitter:title" content="【godot】二、Modules开发指南">
-<meta name="twitter:description" content="个人工具文档，针对GodotModules开发。介绍相关头文件的使用和最小使用示例"><meta name="twitter:card" content="summary_large_image">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-11-20T09:18:31&#43;08:00'/><meta property='article:modified_time' content='2025-11-20T09:18:31&#43;08:00'/><meta property='og:image' content='https://Liyufei1.github.io/guidao4.jpg' />
+<meta name="twitter:title" content="【godot】六、godot中的编辑器插件EditorPlugin">
+<meta name="twitter:description" content="基于godot4.4版本，学习随笔，尝试创建一个编辑器插件，会介绍各个接口"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://Liyufei1.github.io/guidao4.jpg' />
     <link rel="shortcut icon" href="/favicon.png" />
 
@@ -286,17 +286,13 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#print">print</a></li>
-    <li><a href="#class_db">class_db</a></li>
-    <li><a href="#os">OS</a></li>
-    <li><a href="#callable">callable</a></li>
-    <li><a href="#gui">gui</a>
+    <li><a href="#概述">概述</a></li>
+    <li><a href="#node3deditor">Node3DEditor</a>
       <ol>
-        <li><a href="#label">Label</a></li>
-        <li><a href="#richtextlabel">RichTextLabel</a></li>
+        <li><a href="#ui扩展往3d编辑器的各种panel添加控件">UI扩展：往3D编辑器的各种Panel添加控件</a></li>
       </ol>
     </li>
-    <li><a href="#timer">timer</a></li>
+    <li><a href="#editorplugin">EditorPlugin</a></li>
   </ol>
 </nav>
         </div>
@@ -311,9 +307,9 @@
     <article class="has-image main-article">
     <header class="article-header">
         <div class="article-image">
-            <a href="/p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/">
+            <a href="/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/">
                 
-                    <img src="/guidao4.jpg" loading="lazy" alt="Featured image of post 【godot】二、Modules开发指南" />
+                    <img src="/guidao4.jpg" loading="lazy" alt="Featured image of post 【godot】六、godot中的编辑器插件EditorPlugin" />
                 
             </a>
         </div>
@@ -332,12 +328,12 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/">【godot】二、Modules开发指南</a>
+            <a href="/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/">【godot】六、godot中的编辑器插件EditorPlugin</a>
         </h2>
     
         
         <h3 class="article-subtitle">
-            个人工具文档，针对GodotModules开发。介绍相关头文件的使用和最小使用示例
+            基于godot4.4版本，学习随笔，尝试创建一个编辑器插件，会介绍各个接口
         </h3>
         
     </div>
@@ -358,7 +354,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published" datetime='2025-11-04T16:18:31&#43;08:00'>2025-11-04</time>
+                <time class="article-time--published" datetime='2025-11-20T09:18:31&#43;08:00'>2025-11-20</time>
             </div>
         
 
@@ -388,144 +384,103 @@
     <section class="article-content">
     
     
-    <h1 id="常用头文件">常用头文件
-</h1><h2 id="print">print
-</h2><p><strong>路径</strong>：#include &ldquo;core/string/print_string.h&rdquo;</p>
-<p>用于标准日志的输出。在做引擎开发时使用。</p>
-<p>在做GDExtension开发时，使用Utility_function头文件，进行日志打印。</p>
-<div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th style="text-align: left">接口</th>
-          <th style="text-align: center">作用</th>
-          <th style="text-align: left">示例</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: left">void print_line(const Variant &amp;v）</td>
-          <td style="text-align: center">打印日志</td>
-          <td style="text-align: left">__print_line(&ldquo;AAA&rdquo;,10.0);</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">void print_error(const String &amp;p_string)</td>
-          <td style="text-align: center">打印错误</td>
-          <td style="text-align: left">print_error(&ldquo;BBBB&rdquo;)</td>
-      </tr>
-  </tbody>
-</table></div>
-<h2 id="class_db">class_db
-</h2><p><strong>路径</strong>：#include &ldquo;core/object/class_db.h&rdquo;</p>
-<p>在_bind_methods中进行类型和函数注册的时候，使用到的类型注册函数就来自该头文件</p>
-<div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>接口</th>
-          <th>作用</th>
-          <th>示例</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>ClassDB::bind_method</td>
-          <td>注册函数到脚本</td>
-          <td>ClassDB::bind_method(D_METHOD(&ldquo;test_print&rdquo;), &amp;CommandTool::test_print);</td>
-      </tr>
-  </tbody>
-</table></div>
-<h2 id="os">OS
-</h2><p><strong>路径</strong>：#include &ldquo;sence/gui/xxx.h&rdquo;</p>
-<p>提供了一系列操作系统层级的API，比如打印日、获取引擎运行时长等。</p>
-<div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>接口</th>
-          <th>作用</th>
-          <th>示例</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>get_ticks_usec</td>
-          <td>获取引擎运行时长，单位为微秒</td>
-          <td></td>
-      </tr>
-      <tr>
-          <td>get_ticks_msec</td>
-          <td>获取引擎运行时长，单位为毫秒</td>
-          <td></td>
-      </tr>
-      <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-      </tr>
-  </tbody>
-</table></div>
-<h2 id="callable">callable
-</h2><p><strong>路径</strong>：#include &ldquo;core/variant/callable.h&rdquo;</p>
-<p>godot自身提供了一套用于<strong>安全、类型检查</strong>的函数回调机制，也就是Callable，在进行信号连接时，我们就需要使用到它。</p>
-<p>类似 C++ 的 <code>std::function&lt;void()&gt;</code>，但它能在 Godot 对象系统中序列化、连接信号、跨语言调用。</p>
+    <h2 id="概述">概述
+</h2><p>Node3DEditor是Godot内置3D编辑器的核心插件，它是3D场景的编辑界面的主体，包括了：3D物体的齐次线性变换、工具栏、Gizmo、网格等等。<br>
+CanvasItemEditor是Godot内置2D编辑器的核心插件，它是2D场景的编辑界面的主体，包括了：2D物体的变换、工具栏、网格等等。</p>
+<h2 id="node3deditor">Node3DEditor
+</h2><p>Node3DEditor是Godot内置3D编辑器的核心插件，它是3D场景的编辑界面的主体，包括了：视口、工具栏、Gizmo、网格等等。</p>
+<ul>
+<li>初始化：在main函数的start阶段，会创建一个EditorNode，并且利用add_child挂载到sml（<code>SceneTree_MainLoop</code>）的root根节点（windows）上。而在EditorNode的构造函数中，则会创建一个EditorNode（<code>add_editor_plugin(memnew(Node3DEditorPlugin));</code>）。</li>
+</ul>
+<h3 id="ui扩展往3d编辑器的各种panel添加控件">UI扩展：往3D编辑器的各种Panel添加控件
+</h3><p><img src="/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/menu_panel.png"
+	width="1533"
+	height="335"
+	srcset="/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/menu_panel_hu_b726b5b2a9ace7d9.png 480w, /p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/menu_panel_hu_528965c59b2d5442.png 1024w"
+	loading="lazy"
+	
+		alt="menu_panel"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="457"
+		data-flex-basis="1098px"
+	
+></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">//基础构造函数，注意此处的method需要在_bind_method中被注册才能够通过字符串访问。
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Callable</span> <span class="n">c</span> <span class="o">=</span> <span class="n">Callable</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="s">&#34;_on_something&#34;</span><span class="p">);</span>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">add_control_to_menu_panel</span><span class="p">(</span><span class="n">Control</span> <span class="o">*</span><span class="n">p_control</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">remove_control_from_menu_panel</span><span class="p">(</span><span class="n">Control</span> <span class="o">*</span><span class="n">p_control</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">//更安全高效的绑定
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Callable</span> <span class="n">c</span> <span class="o">=</span> <span class="n">callable_mp</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">MyClass</span><span class="o">::</span><span class="n">_on_timeout</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">add_control_to_left_panel</span><span class="p">(</span><span class="n">Control</span> <span class="o">*</span><span class="n">p_control</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">remove_control_from_left_panel</span><span class="p">(</span><span class="n">Control</span> <span class="o">*</span><span class="n">p_control</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">add_control_to_right_panel</span><span class="p">(</span><span class="n">Control</span> <span class="o">*</span><span class="n">p_control</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">remove_control_from_right_panel</span><span class="p">(</span><span class="n">Control</span> <span class="o">*</span><span class="n">p_control</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">move_control_to_left_panel</span><span class="p">(</span><span class="n">Control</span> <span class="o">*</span><span class="n">p_control</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">move_control_to_right_panel</span><span class="p">(</span><span class="n">Control</span> <span class="o">*</span><span class="n">p_control</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">VSplitContainer</span> <span class="o">*</span><span class="nf">get_shader_split</span><span class="p">();</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="gui">gui
-</h2><p><strong>路径</strong>：#include &ldquo;sence/gui/xxx.h&rdquo;</p>
-<h3 id="label">Label
-</h3><p>Label是godot提供的UI控件，可以自适应内容的大小</p>
-<h3 id="richtextlabel">RichTextLabel
-</h3><p>RichTextLabel是godot提供的UI控件，可以使用BBcode来控制显示的内容，比如设置当行文本颜色等</p>
+</div><h2 id="editorplugin">EditorPlugin
+</h2><p>在使用编辑器的过程中，我们会选中各种各样的对象，包括：的文件系统中的文件、场景树中的节点、场景中的物体等等。当我们选中其中任意一个时，都会触发一次<code>bool EditorPlugin::handles(Object *p_object)</code>方法，该方法的作用是判断当前选中的对象是否应该被插件处理，当返回true，或上一次调用返回为true时，则会触发处理流程。这种说法有点拗口，通俗的理解就是进入和退出特定对象的编辑时，都会触发一次后续流程。</p>
+<p>触发流程时会依次调用：<code>void EditorPlugin::make_visible(bool p_visible);</code>和<code>void EditorPlugin::edit(Object *p_object)</code></p>
+<ul>
+<li>进入时，p_visible为true，p_object为选中的对象</li>
+<li>退出时，p_visible为false，p_object为nullptr</li>
+</ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="n">screen_output_label</span><span class="o">-&gt;</span><span class="n">set_use_bbcode</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>	<span class="c1">//使用bbcode，开启才能正确显示[color=red]XXXX[\color]的bbcode格式文本
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl"><span class="n">screen_output_label</span><span class="o">-&gt;</span><span class="n">set_fit_content</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>	<span class="c1">//自适应文本高度
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">screen_output_label</span><span class="o">-&gt;</span><span class="n">set_autowrap_mode</span><span class="p">(</span><span class="n">TextServer</span><span class="o">::</span><span class="n">AutowrapMode</span><span class="o">::</span><span class="n">AUTOWRAP_OFF</span><span class="p">);</span><span class="c1">//关闭宽度调整，与上方设置相结合，可以自适应宽高。
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="timer">timer
-</h2><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">//1.通过场景树（mainloop）设置简单的时间回调函数
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">// timer to show text for 3 seconds
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">auto</span> <span class="n">timer</span> <span class="o">=</span> <span class="n">get_scene_tree</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">create_timer</span><span class="p">(</span><span class="n">time</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="n">timer</span><span class="o">-&gt;</span><span class="n">connect</span><span class="p">(</span><span class="s">&#34;timeout&#34;</span><span class="p">,</span> <span class="n">callable_mp</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="o">&amp;</span><span class="n">CommandTool</span><span class="o">::</span><span class="n">reduce_screen_output_buffer</span><span class="p">));</span>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">LyfTestEditorPlugin</span> <span class="o">:</span> <span class="k">public</span> <span class="n">EditorPlugin</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">GDCLASS</span><span class="p">(</span><span class="n">LyfTestEditorPlugin</span><span class="p">,</span> <span class="n">EditorPlugin</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">//2.c++原生的线程调用也可以实现，但是需要call_deferred来回到主线程
+</span></span><span class="line"><span class="cl">	<span class="c1">// MeshInstance3DEditor *mesh_editor = nullptr;
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">	<span class="k">virtual</span> <span class="n">String</span> <span class="n">get_plugin_name</span><span class="p">()</span> <span class="k">const</span> <span class="k">override</span> <span class="p">{</span> <span class="k">return</span> <span class="s">&#34;LyfTestEditorPlugin&#34;</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">bool</span> <span class="nf">has_main_screen</span><span class="p">()</span> <span class="k">const</span> <span class="k">override</span> <span class="p">{</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">virtual</span> <span class="kt">void</span> <span class="nf">edit</span><span class="p">(</span><span class="n">Object</span> <span class="o">*</span><span class="n">p_object</span><span class="p">)</span> <span class="k">override</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">virtual</span> <span class="kt">bool</span> <span class="nf">handles</span><span class="p">(</span><span class="n">Object</span> <span class="o">*</span><span class="n">p_object</span><span class="p">)</span> <span class="k">const</span> <span class="k">override</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">virtual</span> <span class="kt">void</span> <span class="nf">make_visible</span><span class="p">(</span><span class="kt">bool</span> <span class="n">p_visible</span><span class="p">)</span> <span class="k">override</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">//3.tween，更加复杂，但是可以链式调用，以及设置缓动
-</span></span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">	<span class="n">LyfTestEditorPlugin</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">	<span class="o">~</span><span class="n">LyfTestEditorPlugin</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div>
 </section>
@@ -596,25 +551,6 @@
             
                 
 <article class="has-image">
-    <a href="/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/">
-        
-        
-            <div class="article-image">
-                
-                    <img src="/guidao4.jpg" loading="lazy" data-key="" data-hash="/guidao4.jpg"/>
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">【godot】六、godot中的编辑器插件EditorPlugin</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
     <a href="/p/godot%E4%BA%94godot%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9Frtti/">
         
         
@@ -665,6 +601,25 @@
 
         <div class="article-details">
             <h2 class="article-title">【godot】三、GDExtension开发指南</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/guidao4.jpg" loading="lazy" data-key="" data-hash="/guidao4.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【godot】二、Modules开发指南</h2>
         </div>
     </a>
 </article>

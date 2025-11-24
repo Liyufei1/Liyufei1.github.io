@@ -435,6 +435,15 @@
 </span><span class="lnt">19
 </span><span class="lnt">20
 </span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">1.windows平台编译
@@ -445,8 +454,17 @@
 </span></span><span class="line"><span class="cl">2.android的libgodot_android.so编译
 </span></span><span class="line"><span class="cl">	生成路径：E:<span class="se">\G</span>odot<span class="se">\G</span>odot_Engine<span class="se">\p</span>latform<span class="se">\a</span>ndroid<span class="se">\j</span>ava<span class="se">\l</span>ib<span class="se">\l</span>ibs<span class="se">\d</span>ebug<span class="se">\a</span>rm64-v8a
 </span></span><span class="line"><span class="cl">	编译路径：E:<span class="se">\G</span>odot<span class="se">\G</span>odot_Engine
-</span></span><span class="line"><span class="cl">	编译指令：scons <span class="nv">platform</span><span class="o">=</span>android <span class="nv">target</span><span class="o">=</span>template_debug <span class="nv">debug_symbols</span><span class="o">=</span>yes
+</span></span><span class="line"><span class="cl">	编译指令：scons <span class="nv">platform</span><span class="o">=</span>android <span class="nv">target</span><span class="o">=</span>template_debug <span class="nv">debug_symbols</span><span class="o">=</span>yes <span class="nv">compiledb</span><span class="o">=</span><span class="nb">true</span>
+</span></span><span class="line"><span class="cl">    或scons <span class="nv">platform</span><span class="o">=</span>android <span class="nv">store_release</span><span class="o">=</span><span class="nb">true</span> <span class="nv">production</span><span class="o">=</span><span class="nb">true</span> <span class="nv">dev_mode</span><span class="o">=</span><span class="nb">false</span> <span class="nv">dev_build</span><span class="o">=</span><span class="nb">false</span> <span class="nv">debug_symbols</span><span class="o">=</span><span class="nb">true</span> <span class="nv">tests</span><span class="o">=</span><span class="nb">false</span> <span class="nv">target</span><span class="o">=</span>template_release <span class="nv">arch</span><span class="o">=</span>arm64 <span class="nv">compiledb</span><span class="o">=</span><span class="nb">true</span>
 </span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">6.生成Android导出模板
+</span></span><span class="line"><span class="cl">    前置生成：
+</span></span><span class="line"><span class="cl">        生成debug的so：scons <span class="nv">platform</span><span class="o">=</span>android <span class="nv">target</span><span class="o">=</span>template_debug <span class="nv">arch</span><span class="o">=</span>arm64 <span class="nv">dev_build</span><span class="o">=</span>yes <span class="nv">generate_android_binaries</span><span class="o">=</span>yes
+</span></span><span class="line"><span class="cl">        生成release的so：scons <span class="nv">platform</span><span class="o">=</span>android <span class="nv">target</span><span class="o">=</span>template_release <span class="nv">arch</span><span class="o">=</span>arm64 <span class="nv">dev_build</span><span class="o">=</span>yes <span class="nv">generate_android_binaries</span><span class="o">=</span>yes
+</span></span><span class="line"><span class="cl">    生成路径：E:<span class="se">\G</span>odot<span class="se">\G</span>odot_Engine<span class="se">\b</span>in<span class="se">\a</span>ndroid_release.apk
+</span></span><span class="line"><span class="cl">	编译路径：E:<span class="se">\G</span>odot<span class="se">\G</span>odot_Engine<span class="se">\p</span>latform<span class="se">\a</span>ndroid<span class="se">\j</span>ava
+</span></span><span class="line"><span class="cl">    编译指令：./gradlew.bat generateGodotTemplates
+</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">3.android的aar的编译，godot-lib.template_debug.aar
 </span></span><span class="line"><span class="cl">	生成路径：E:<span class="se">\G</span>odot<span class="se">\G</span>odot_Engine<span class="se">\p</span>latform<span class="se">\a</span>ndroid<span class="se">\j</span>ava<span class="se">\l</span>ib<span class="se">\b</span>uild<span class="se">\o</span>utputs<span class="se">\a</span>ar
 </span></span><span class="line"><span class="cl">	编译路径：E:<span class="se">\G</span>odot<span class="se">\G</span>odot_Engine<span class="se">\p</span>latform<span class="se">\a</span>ndroid<span class="se">\j</span>ava
@@ -457,7 +475,7 @@
 </span></span><span class="line"><span class="cl">	
 </span></span><span class="line"><span class="cl">5.生成GDExtension的胶水代码
 </span></span><span class="line"><span class="cl">	1. 编译extension_api.json文件： bin<span class="se">\g</span>odot.windows.editor.x86_64.exe --dump-extension-api 
-</span></span><span class="line"><span class="cl">	2. 在godot-cpp中执行代码生成： scons <span class="nv">debug_symbols</span><span class="o">=</span>yes <span class="nv">verbose</span><span class="o">=</span>yes <span class="nv">generate_bindings</span><span class="o">=</span>yes <span class="nv">custom_api_file</span><span class="o">=</span>E:<span class="se">\G</span>odot<span class="se">\g</span>odot-cpp<span class="se">\g</span>dextension<span class="se">\e</span>xtension_api.json 
+</span></span><span class="line"><span class="cl">	2. 在godot-cpp中执行代码生成： scons <span class="nv">debug_symbols</span><span class="o">=</span>yes <span class="nv">verbose</span><span class="o">=</span>yes <span class="nv">generate_bindings</span><span class="o">=</span>yes <span class="nv">custom_api_file</span><span class="o">=</span>E:<span class="se">\G</span>odot<span class="se">\g</span>odot-cpp<span class="se">\g</span>dextension<span class="se">\e</span>xtension_api.json
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="运行指令">运行指令
@@ -1228,6 +1246,25 @@
     <h2 class="section-title">相关文章</h2>
     <div class="related-content">
         <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/guidao4.jpg" loading="lazy" data-key="" data-hash="/guidao4.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【godot】六、godot中的编辑器插件EditorPlugin</h2>
+        </div>
+    </a>
+</article>
+
             
                 
 <article class="has-image">
