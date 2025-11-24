@@ -444,6 +444,12 @@
 </span><span class="lnt">28
 </span><span class="lnt">29
 </span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">1.windows平台编译
@@ -457,25 +463,31 @@
 </span></span><span class="line"><span class="cl">	编译指令：scons <span class="nv">platform</span><span class="o">=</span>android <span class="nv">target</span><span class="o">=</span>template_debug <span class="nv">debug_symbols</span><span class="o">=</span>yes <span class="nv">compiledb</span><span class="o">=</span><span class="nb">true</span>
 </span></span><span class="line"><span class="cl">    或scons <span class="nv">platform</span><span class="o">=</span>android <span class="nv">store_release</span><span class="o">=</span><span class="nb">true</span> <span class="nv">production</span><span class="o">=</span><span class="nb">true</span> <span class="nv">dev_mode</span><span class="o">=</span><span class="nb">false</span> <span class="nv">dev_build</span><span class="o">=</span><span class="nb">false</span> <span class="nv">debug_symbols</span><span class="o">=</span><span class="nb">true</span> <span class="nv">tests</span><span class="o">=</span><span class="nb">false</span> <span class="nv">target</span><span class="o">=</span>template_release <span class="nv">arch</span><span class="o">=</span>arm64 <span class="nv">compiledb</span><span class="o">=</span><span class="nb">true</span>
 </span></span><span class="line"><span class="cl">	
-</span></span><span class="line"><span class="cl">6.生成Android导出模板
+</span></span><span class="line"><span class="cl">3.生成Android导出模板
 </span></span><span class="line"><span class="cl">    前置生成：
 </span></span><span class="line"><span class="cl">        生成debug的so：scons <span class="nv">platform</span><span class="o">=</span>android <span class="nv">target</span><span class="o">=</span>template_debug <span class="nv">arch</span><span class="o">=</span>arm64 <span class="nv">dev_build</span><span class="o">=</span>yes <span class="nv">generate_android_binaries</span><span class="o">=</span>yes
 </span></span><span class="line"><span class="cl">        生成release的so：scons <span class="nv">platform</span><span class="o">=</span>android <span class="nv">target</span><span class="o">=</span>template_release <span class="nv">arch</span><span class="o">=</span>arm64 <span class="nv">dev_build</span><span class="o">=</span>yes <span class="nv">generate_android_binaries</span><span class="o">=</span>yes
 </span></span><span class="line"><span class="cl">    生成路径：E:<span class="se">\G</span>odot<span class="se">\G</span>odot_Engine<span class="se">\b</span>in<span class="se">\a</span>ndroid_release.apk
-</span></span><span class="line"><span class="cl">	编译路径：E:<span class="se">\G</span>odot<span class="se">\G</span>odot_Engine<span class="se">\p</span>latform<span class="se">\a</span>ndroid<span class="se">\j</span>ava
+</span></span><span class="line"><span class="cl">    编译路径：E:<span class="se">\G</span>odot<span class="se">\G</span>odot_Engine<span class="se">\p</span>latform<span class="se">\a</span>ndroid<span class="se">\j</span>ava
 </span></span><span class="line"><span class="cl">    编译指令：./gradlew.bat generateGodotTemplates
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">3.android的aar的编译，godot-lib.template_debug.aar
+</span></span><span class="line"><span class="cl">4.android的aar的编译，godot-lib.template_debug.aar
 </span></span><span class="line"><span class="cl">	生成路径：E:<span class="se">\G</span>odot<span class="se">\G</span>odot_Engine<span class="se">\p</span>latform<span class="se">\a</span>ndroid<span class="se">\j</span>ava<span class="se">\l</span>ib<span class="se">\b</span>uild<span class="se">\o</span>utputs<span class="se">\a</span>ar
 </span></span><span class="line"><span class="cl">	编译路径：E:<span class="se">\G</span>odot<span class="se">\G</span>odot_Engine<span class="se">\p</span>latform<span class="se">\a</span>ndroid<span class="se">\j</span>ava
 </span></span><span class="line"><span class="cl">	编译指令：gradlew.bat   :lib:bundleTemplateDebugAar
 </span></span><span class="line"><span class="cl">	
-</span></span><span class="line"><span class="cl">4.生成sln文件
+</span></span><span class="line"><span class="cl">5.生成sln文件
 </span></span><span class="line"><span class="cl">	scons <span class="nv">vsproj</span><span class="o">=</span>yes
 </span></span><span class="line"><span class="cl">	
-</span></span><span class="line"><span class="cl">5.生成GDExtension的胶水代码
+</span></span><span class="line"><span class="cl">6.生成GDExtension的胶水代码
 </span></span><span class="line"><span class="cl">	1. 编译extension_api.json文件： bin<span class="se">\g</span>odot.windows.editor.x86_64.exe --dump-extension-api 
 </span></span><span class="line"><span class="cl">	2. 在godot-cpp中执行代码生成： scons <span class="nv">debug_symbols</span><span class="o">=</span>yes <span class="nv">verbose</span><span class="o">=</span>yes <span class="nv">generate_bindings</span><span class="o">=</span>yes <span class="nv">custom_api_file</span><span class="o">=</span>E:<span class="se">\G</span>odot<span class="se">\g</span>odot-cpp<span class="se">\g</span>dextension<span class="se">\e</span>xtension_api.json
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">7.导出资源包zip/pck
+</span></span><span class="line"><span class="cl">    生成路径：<span class="si">${</span><span class="nv">YourProjectPath</span><span class="si">}</span>
+</span></span><span class="line"><span class="cl">    编译路径：<span class="si">${</span><span class="nv">YourProjectPath</span><span class="si">}</span>
+</span></span><span class="line"><span class="cl">    1. E:<span class="se">\G</span>odot<span class="se">\G</span>odot_Engine<span class="se">\b</span>in<span class="se">\g</span>odot.windows.editor.x86_64.exe --headless --export-pack <span class="s2">&#34;Android&#34;</span> game.zip
+</span></span><span class="line"><span class="cl">    2. E:<span class="se">\G</span>odot<span class="se">\G</span>odot_Engine<span class="se">\b</span>in<span class="se">\g</span>odot.windows.editor.x86_64.exe --headless --export-pack <span class="s2">&#34;Android&#34;</span> game.pck
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="运行指令">运行指令
