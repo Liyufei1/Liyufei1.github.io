@@ -14,9 +14,30 @@
         
         <guid>https://Liyufei1.github.io/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/</guid>
         <description>&lt;img src="https://Liyufei1.github.io/guidao4.jpg" alt="Featured image of post 【godot】六、godot中的编辑器插件EditorPlugin" /&gt;&lt;h2 id=&#34;概述&#34;&gt;概述
-&lt;/h2&gt;&lt;p&gt;Node3DEditor是Godot内置3D编辑器的核心插件，它是3D场景的编辑界面的主体，包括了：3D物体的齐次线性变换、工具栏、Gizmo、网格等等。&lt;br&gt;
-CanvasItemEditor是Godot内置2D编辑器的核心插件，它是2D场景的编辑界面的主体，包括了：2D物体的变换、工具栏、网格等等。&lt;/p&gt;
-&lt;h2 id=&#34;node3deditor&#34;&gt;Node3DEditor
+&lt;/h2&gt;&lt;p&gt;对于追求极客精神的小伙伴而言，对godot编辑器的改造无疑是一件非常酷的事情。它可以为godot编辑器添加一些定制化的操作，用于提升开发效率，加速工程实现。对于泛用的编辑器功能或是自定义功能类的调式补充界面，做成编辑器插件是非常不错的，比如：批量的实体放置、批量的材质复制、曲线的debug绘制等。
+&lt;img src=&#34;https://Liyufei1.github.io/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/curve-ui.png&#34;
+	width=&#34;1409&#34;
+	height=&#34;922&#34;
+	srcset=&#34;https://Liyufei1.github.io/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/curve-ui_hu_389c1e5144c533d6.png 480w, https://Liyufei1.github.io/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/curve-ui_hu_75811bc85132f5b4.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Curve&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;152&#34;
+		data-flex-basis=&#34;366px&#34;
+	
+&gt;
+需要实现一个自定义的编辑器插件，会涉及到下方几个类：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;EditorPlugin&lt;/code&gt;：Godot内置的插件基类，提供了与编辑器进行交互的接口。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Node3DEditor&lt;/code&gt;：Godot内置3D编辑器的核心插件，它是3D场景的编辑界面的主体，包括了：3D物体的齐次线性变换、工具栏、Gizmo、网格等等。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;CanvasItemEditor&lt;/code&gt;：Godot内置2D编辑器的核心插件，它是2D场景的编辑界面的主体，包括了：2D物体的变换、工具栏、网格等等。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;editorplugin&#34;&gt;EditorPlugin
+&lt;/h2&gt;&lt;h3 id=&#34;接口&#34;&gt;接口
+&lt;/h3&gt;&lt;h2 id=&#34;node3deditor&#34;&gt;Node3DEditor
 &lt;/h2&gt;&lt;p&gt;Node3DEditor是Godot内置3D编辑器的核心插件，它是3D场景的编辑界面的主体，包括了：视口、工具栏、Gizmo、网格等等。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;初始化：在main函数的start阶段，会创建一个EditorNode，并且利用add_child挂载到sml（&lt;code&gt;SceneTree_MainLoop&lt;/code&gt;）的root根节点（windows）上。而在EditorNode的构造函数中，则会创建一个EditorNode（&lt;code&gt;add_editor_plugin(memnew(Node3DEditorPlugin));&lt;/code&gt;）。&lt;/li&gt;
@@ -68,7 +89,7 @@ CanvasItemEditor是Godot内置2D编辑器的核心插件，它是2D场景的编�
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;VSplitContainer&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;get_shader_split&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;editorplugin&#34;&gt;EditorPlugin
+&lt;/div&gt;&lt;h2 id=&#34;editorplugin-1&#34;&gt;EditorPlugin
 &lt;/h2&gt;&lt;p&gt;在使用编辑器的过程中，我们会选中各种各样的对象，包括：的文件系统中的文件、场景树中的节点、场景中的物体等等。当我们选中其中任意一个时，都会触发一次&lt;code&gt;bool EditorPlugin::handles(Object *p_object)&lt;/code&gt;方法，该方法的作用是判断当前选中的对象是否应该被插件处理，当返回true，或上一次调用返回为true时，则会触发处理流程。这种说法有点拗口，通俗的理解就是进入和退出特定对象的编辑时，都会触发一次后续流程。&lt;/p&gt;
 &lt;p&gt;触发流程时会依次调用：&lt;code&gt;void EditorPlugin::make_visible(bool p_visible);&lt;/code&gt;和&lt;code&gt;void EditorPlugin::edit(Object *p_object)&lt;/code&gt;&lt;/p&gt;
 &lt;ul&gt;
