@@ -289,15 +289,31 @@
     <li><a href="#概述">概述</a></li>
     <li><a href="#editorplugin">EditorPlugin</a>
       <ol>
-        <li><a href="#接口">接口</a></li>
+        <li><a href="#初始化"><strong>👉初始化</strong></a></li>
+        <li><a href="#扩展-godot-编辑器"><strong>👉扩展 Godot 编辑器</strong></a>
+          <ol>
+            <li><a href="#add_control_to_container">add_control_to_container</a></li>
+            <li><a href="#add_control_to_bottom_panel">add_control_to_bottom_panel</a></li>
+            <li><a href="#add_control_to_dock">add_control_to_dock</a></li>
+            <li><a href="#add_tool_menu_item">add_tool_menu_item</a></li>
+          </ol>
+        </li>
+        <li><a href="#处理用户选中的对象"><strong>👉处理用户选中的对象</strong></a></li>
+        <li><a href="#添加特定的编辑器插件"><strong>👉添加特定的编辑器插件</strong></a></li>
       </ol>
     </li>
     <li><a href="#node3deditor">Node3DEditor</a>
       <ol>
-        <li><a href="#ui扩展往3d编辑器的各种panel添加控件">UI扩展：往3D编辑器的各种Panel添加控件</a></li>
+        <li><a href="#初始化-1">✔️初始化</a></li>
+        <li><a href="#ui扩展往3d界面编辑器的上下左右添加控件">✔️UI扩展：往3D界面编辑器的上下左右添加控件</a></li>
+        <li><a href="#gizmo扩展添加自定义gizmo">Gizmo扩展：添加自定义Gizmo</a></li>
       </ol>
     </li>
-    <li><a href="#editorplugin-1">EditorPlugin</a></li>
+    <li><a href="#canvasitemeditor">CanvasItemEditor</a>
+      <ol>
+        <li><a href="#ui扩展往2d界面编辑器的上下左右添加控件">UI扩展：往2D界面编辑器的上下左右添加控件</a></li>
+      </ol>
+    </li>
   </ol>
 </nav>
         </div>
@@ -374,7 +390,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 3 分钟
+                    阅读时长: 4 分钟
                 </time>
             </div>
         
@@ -391,86 +407,196 @@
     
     <h2 id="概述">概述
 </h2><p>对于追求极客精神的小伙伴而言，对godot编辑器的改造无疑是一件非常酷的事情。它可以为godot编辑器添加一些定制化的操作，用于提升开发效率，加速工程实现。对于泛用的编辑器功能或是自定义功能类的调式补充界面，做成编辑器插件是非常不错的，比如：批量的实体放置、批量的材质复制、曲线的debug绘制等。
-<img src="/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/curve-ui.png"
-	width="1409"
-	height="922"
-	srcset="/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/curve-ui_hu_389c1e5144c533d6.png 480w, /p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/curve-ui_hu_75811bc85132f5b4.png 1024w"
+<img src="/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/image5.jpg"
+	width="2469"
+	height="1379"
+	srcset="/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/image5_hu_e53b87e685a86a82.jpg 480w, /p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/image5_hu_8b4983599b2441f3.jpg 1024w"
 	loading="lazy"
 	
-		alt="Curve"
+		alt="image"
 	
 	
 		class="gallery-image" 
-		data-flex-grow="152"
-		data-flex-basis="366px"
+		data-flex-grow="179"
+		data-flex-basis="429px"
 	
 >
 需要实现一个自定义的编辑器插件，会涉及到下方几个类：</p>
 <ul>
+<li><code>EditorNode</code>:Godot编辑器的核心控制类,管理所有编辑器面板/场景编辑器/文件浏览器/脚本编辑器/编辑器插件等,<code>EditorPlugin</code>、<code>Node3DEditor</code>、<code>CanvasItemEditor</code> 和<code>EditorDockManager</code>都集成在它的里面.</li>
 <li><code>EditorPlugin</code>：Godot内置的插件基类，提供了与编辑器进行交互的接口。</li>
-<li><code>Node3DEditor</code>：Godot内置3D编辑器的核心插件，它是3D场景的编辑界面的主体，包括了：3D物体的齐次线性变换、工具栏、Gizmo、网格等等。</li>
-<li><code>CanvasItemEditor</code>：Godot内置2D编辑器的核心插件，它是2D场景的编辑界面的主体，包括了：2D物体的变换、工具栏、网格等等。</li>
+<li><code>Node3DEditor</code>：Godot内置3D场景编辑器的核心插件，它是3D场景的编辑界面的主体，包括了：3D物体的齐次线性变换、工具栏、Gizmo、网格等等。</li>
+<li><code>CanvasItemEditor</code>：Godot内置2D场景编辑器的核心插件，它是2D场景的编辑界面的主体，包括了：2D物体的变换、工具栏等等。</li>
+<li><code>EditorDockManager</code>:</li>
 </ul>
 <h2 id="editorplugin">EditorPlugin
-</h2><h3 id="接口">接口
-</h3><h2 id="node3deditor">Node3DEditor
-</h2><p>Node3DEditor是Godot内置3D编辑器的核心插件，它是3D场景的编辑界面的主体，包括了：视口、工具栏、Gizmo、网格等等。</p>
+</h2><p><code>EditorPlugin</code>是Godot编辑器插件系统的核心类，也是我们开发插件的起点。</p>
+<h3 id="初始化"><strong>👉初始化</strong>
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">//在register_editor_types.cpp中注册插件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">EditorPlugins</span><span class="o">::</span><span class="n">add_by_type</span><span class="o">&lt;</span><span class="n">LyfTestEditorPlugin</span><span class="o">&gt;</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//在EditorData的构造阶段,实际创建并收集插件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">EditorPlugins</span><span class="o">::</span><span class="n">get_plugin_count</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">add_editor_plugin</span><span class="p">(</span><span class="n">EditorPlugins</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="n">i</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="扩展-godot-编辑器"><strong>👉扩展 Godot 编辑器</strong>
+</h3><p>我们可以可以添加工具面板、菜单按钮、自定义检查器、操作2D/3D编辑器(Node3DEditor/CanvasItemEditor)等。<br>
+<code>EditorPlugin</code>UI拓展的实现,依赖实际的工作类，比如：<code>Node3DEditor</code>、<code>CanvasItemEditor</code>、<code>EditorDockManager</code>。它只是对工作类的接口进行封装。</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th style="text-align: left">接口</th>
+          <th style="text-align: left">作用</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left"><a class="link" href="#add_control_to_container" >add_control_to_container</a></td>
+          <td style="text-align: left">添加控件到指定位置</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><a class="link" href="#add_control_to_bottom_panel" >add_control_to_bottom_panel</a></td>
+          <td style="text-align: left">编辑器底部面板添加一个新的工具选项卡</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><a class="link" href="#add_control_to_dock" >add_control_to_dock</a></td>
+          <td style="text-align: left">编辑器添加一个可停靠的自定义面板</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><a class="link" href="#add_tool_menu_item" >add_tool_menu_item</a></td>
+          <td style="text-align: left">在工具栏添加一个菜单项</td>
+      </tr>
+  </tbody>
+</table></div>
+<h4 id="add_control_to_container">add_control_to_container
+</h4><p><code>add_control_to_container</code>存在多个停靠位置:</p>
 <ul>
-<li>初始化：在main函数的start阶段，会创建一个EditorNode，并且利用add_child挂载到sml（<code>SceneTree_MainLoop</code>）的root根节点（windows）上。而在EditorNode的构造函数中，则会创建一个EditorNode（<code>add_editor_plugin(memnew(Node3DEditorPlugin));</code>）。</li>
-</ul>
-<h3 id="ui扩展往3d编辑器的各种panel添加控件">UI扩展：往3D编辑器的各种Panel添加控件
-</h3><p><img src="/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/menu_panel.png"
-	width="1533"
-	height="335"
-	srcset="/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/menu_panel_hu_b726b5b2a9ace7d9.png 480w, /p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/menu_panel_hu_528965c59b2d5442.png 1024w"
+<li>CONTAINER_TOOLBAR : 上方工具栏,<img src="/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/toolbar.jpg"
+	width="603"
+	height="128"
+	srcset="/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/toolbar_hu_e3d3f27424234713.jpg 480w, /p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/toolbar_hu_7a8a6891f72f9770.jpg 1024w"
+	loading="lazy"
+	
+		alt="toolbar"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="471"
+		data-flex-basis="1130px"
+	
+></li>
+<li>CONTAINER_SPATIAL_EDITOR_MENU :   3D视口上方菜单栏</li>
+<li>CONTAINER_SPATIAL_EDITOR_SIDE_LEFT :   3D视口左方</li>
+<li>CONTAINER_SPATIAL_EDITOR_SIDE_RIGHT :   3D视口右方</li>
+<li>CONTAINER_SPATIAL_EDITOR_BOTTOM :   3D视口下方 <img src="/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/image.png"
+	width="1639"
+	height="827"
+	srcset="/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/image_hu_c1b0528da848e080.png 480w, /p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/image_hu_28fe0e12675bdcf4.png 1024w"
 	loading="lazy"
 	
 		alt="menu_panel"
 	
 	
 		class="gallery-image" 
-		data-flex-grow="457"
-		data-flex-basis="1098px"
+		data-flex-grow="198"
+		data-flex-basis="475px"
+	
+></li>
+<li>CONTAINER_CANVAS_EDITOR_MENU :   2D视口上方菜单栏</li>
+<li>CONTAINER_CANVAS_EDITOR_SIDE_LEFT :   2D视口左方</li>
+<li>CONTAINER_CANVAS_EDITOR_SIDE_RIGHT :   2D视口右方</li>
+<li>CONTAINER_CANVAS_EDITOR_BOTTOM :   2D视口下方</li>
+<li>CONTAINER_INSPECTOR_BOTTOM : 检查器下方 <img src="/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/penal1.jpg"
+	width="761"
+	height="195"
+	srcset="/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/penal1_hu_ecd09c170c816430.jpg 480w, /p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/penal1_hu_8b5079dd991e2497.jpg 1024w"
+	loading="lazy"
+	
+		alt="penal1"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="390"
+		data-flex-basis="936px"
+	
+></li>
+<li>CONTAINER_PROJECT_SETTING_TAB_LEFT : 项目设置左侧</li>
+<li>CONTAINER_PROJECT_SETTING_TAB_RIGHT : 项目设置右侧</li>
+</ul>
+<h4 id="add_control_to_bottom_panel">add_control_to_bottom_panel
+</h4><p><img src="/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/image2.jpg"
+	width="1710"
+	height="729"
+	srcset="/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/image2_hu_e765c0fb650771a5.jpg 480w, /p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/image2_hu_8c72edb1151c8314.jpg 1024w"
+	loading="lazy"
+	
+		alt="image2.jpg"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="234"
+		data-flex-basis="562px"
 	
 ></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">add_control_to_menu_panel</span><span class="p">(</span><span class="n">Control</span> <span class="o">*</span><span class="n">p_control</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">remove_control_from_menu_panel</span><span class="p">(</span><span class="n">Control</span> <span class="o">*</span><span class="n">p_control</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">add_control_to_left_panel</span><span class="p">(</span><span class="n">Control</span> <span class="o">*</span><span class="n">p_control</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">remove_control_from_left_panel</span><span class="p">(</span><span class="n">Control</span> <span class="o">*</span><span class="n">p_control</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">add_control_to_right_panel</span><span class="p">(</span><span class="n">Control</span> <span class="o">*</span><span class="n">p_control</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">remove_control_from_right_panel</span><span class="p">(</span><span class="n">Control</span> <span class="o">*</span><span class="n">p_control</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">move_control_to_left_panel</span><span class="p">(</span><span class="n">Control</span> <span class="o">*</span><span class="n">p_control</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">move_control_to_right_panel</span><span class="p">(</span><span class="n">Control</span> <span class="o">*</span><span class="n">p_control</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">VSplitContainer</span> <span class="o">*</span><span class="nf">get_shader_split</span><span class="p">();</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="editorplugin-1">EditorPlugin
-</h2><p>在使用编辑器的过程中，我们会选中各种各样的对象，包括：的文件系统中的文件、场景树中的节点、场景中的物体等等。当我们选中其中任意一个时，都会触发一次<code>bool EditorPlugin::handles(Object *p_object)</code>方法，该方法的作用是判断当前选中的对象是否应该被插件处理，当返回true，或上一次调用返回为true时，则会触发处理流程。这种说法有点拗口，通俗的理解就是进入和退出特定对象的编辑时，都会触发一次后续流程。</p>
-<p>触发流程时会依次调用：<code>void EditorPlugin::make_visible(bool p_visible);</code>和<code>void EditorPlugin::edit(Object *p_object)</code></p>
+<h4 id="add_control_to_dock">add_control_to_dock
+</h4><p><img src="/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/image3.jpg"
+	width="641"
+	height="1369"
+	srcset="/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/image3_hu_aea549eba7545db6.jpg 480w, /p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/image3_hu_17504b377d1421ef.jpg 1024w"
+	loading="lazy"
+	
+		alt="image3.jpg"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="46"
+		data-flex-basis="112px"
+	
+></p>
+<h4 id="add_tool_menu_item">add_tool_menu_item
+</h4><p><img src="/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/image4.jpg"
+	width="707"
+	height="522"
+	srcset="/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/image4_hu_22e823ea81c701c4.jpg 480w, /p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/image4_hu_334e1a74fdbbb8b.jpg 1024w"
+	loading="lazy"
+	
+		alt="image4.jpg"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="135"
+		data-flex-basis="325px"
+	
+></p>
+<h3 id="处理用户选中的对象"><strong>👉处理用户选中的对象</strong>
+</h3><p>编辑器每次选中对象时都会调用：<code>bool EditorPlugin::handles(Object *p_object)</code>判断当前选中的对象是否应该被插件处理。<br>
+当插件决定“接管某对象”时，会触发对象进入/退出编辑模式：</p>
 <ul>
-<li>进入时，p_visible为true，p_object为选中的对象</li>
-<li>退出时，p_visible为false，p_object为nullptr</li>
+<li><code>void EditorPlugin::make_visible(bool p_visible);</code>
+<ul>
+<li>进入时，p_visible为true；</li>
+<li>退出时：p_visible为false</li>
+</ul>
+</li>
+<li><code>void EditorPlugin::edit(Object *p_object)</code>
+<ul>
+<li>进入时：p_object为选中的对象；</li>
+<li>退出时：p_object为nullptr</li>
+</ul>
+</li>
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -489,9 +615,12 @@
 </span><span class="lnt">13
 </span><span class="lnt">14
 </span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">LyfTestEditorPlugin</span> <span class="o">:</span> <span class="k">public</span> <span class="n">EditorPlugin</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">//EditorPlugin子类的基本样式
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">class</span> <span class="nc">LyfTestEditorPlugin</span> <span class="o">:</span> <span class="k">public</span> <span class="n">EditorPlugin</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">	<span class="n">GDCLASS</span><span class="p">(</span><span class="n">LyfTestEditorPlugin</span><span class="p">,</span> <span class="n">EditorPlugin</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">	<span class="c1">// MeshInstance3DEditor *mesh_editor = nullptr;
@@ -499,13 +628,206 @@
 </span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
 </span></span><span class="line"><span class="cl">	<span class="k">virtual</span> <span class="n">String</span> <span class="n">get_plugin_name</span><span class="p">()</span> <span class="k">const</span> <span class="k">override</span> <span class="p">{</span> <span class="k">return</span> <span class="s">&#34;LyfTestEditorPlugin&#34;</span><span class="p">;</span> <span class="p">}</span>
 </span></span><span class="line"><span class="cl">	<span class="kt">bool</span> <span class="nf">has_main_screen</span><span class="p">()</span> <span class="k">const</span> <span class="k">override</span> <span class="p">{</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span> <span class="p">}</span>
-</span></span><span class="line"><span class="cl">	<span class="k">virtual</span> <span class="kt">void</span> <span class="nf">edit</span><span class="p">(</span><span class="n">Object</span> <span class="o">*</span><span class="n">p_object</span><span class="p">)</span> <span class="k">override</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">	<span class="k">virtual</span> <span class="kt">bool</span> <span class="nf">handles</span><span class="p">(</span><span class="n">Object</span> <span class="o">*</span><span class="n">p_object</span><span class="p">)</span> <span class="k">const</span> <span class="k">override</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">	<span class="k">virtual</span> <span class="kt">void</span> <span class="nf">make_visible</span><span class="p">(</span><span class="kt">bool</span> <span class="n">p_visible</span><span class="p">)</span> <span class="k">override</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">virtual</span> <span class="kt">void</span> <span class="nf">edit</span><span class="p">(</span><span class="n">Object</span> <span class="o">*</span><span class="n">p_object</span><span class="p">)</span> <span class="k">override</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">	<span class="n">LyfTestEditorPlugin</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">	<span class="o">~</span><span class="n">LyfTestEditorPlugin</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="添加特定的编辑器插件"><strong>👉添加特定的编辑器插件</strong>
+</h3><p>godot还封装了一系列具有完整功能的编辑器插件:</p>
+<ul>
+<li><code>EditorTranslationParserPlugin</code>：用于解析翻译文件，比如：.pot文件。</li>
+<li><code>EditorImportPlugin</code>: 资源导入插件，比如：自定义.fbx文件导入。</li>
+<li><code>EditorNode3DGizmoPlugin</code>: 用来在3D视图里为某些Node3D类型绘制自定义gizmo（操作手柄/可视辅助）</li>
+<li><code>EditorInspectorPlugin</code>: 检查器属性编辑插件</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">add_translation_parser_plugin</span><span class="p">(</span><span class="k">const</span> <span class="n">Ref</span><span class="o">&lt;</span><span class="n">EditorTranslationParserPlugin</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">p_parser</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">add_import_plugin</span><span class="p">(</span><span class="k">const</span> <span class="n">Ref</span><span class="o">&lt;</span><span class="n">EditorImportPlugin</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">p_importer</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">p_first_priority</span> <span class="o">=</span> <span class="nb">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">add_export_plugin</span><span class="p">(</span><span class="k">const</span> <span class="n">Ref</span><span class="o">&lt;</span><span class="n">EditorExportPlugin</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">p_exporter</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">add_export_platform</span><span class="p">(</span><span class="k">const</span> <span class="n">Ref</span><span class="o">&lt;</span><span class="n">EditorExportPlatform</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">p_platform</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">add_node_3d_gizmo_plugin</span><span class="p">(</span><span class="k">const</span> <span class="n">Ref</span><span class="o">&lt;</span><span class="n">EditorNode3DGizmoPlugin</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">p_gizmo_plugin</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">add_inspector_plugin</span><span class="p">(</span><span class="k">const</span> <span class="n">Ref</span><span class="o">&lt;</span><span class="n">EditorInspectorPlugin</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">p_plugin</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">add_scene_format_importer_plugin</span><span class="p">(</span><span class="k">const</span> <span class="n">Ref</span><span class="o">&lt;</span><span class="n">EditorSceneFormatImporter</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">p_importer</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">p_first_priority</span> <span class="o">=</span> <span class="nb">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">add_scene_post_import_plugin</span><span class="p">(</span><span class="k">const</span> <span class="n">Ref</span><span class="o">&lt;</span><span class="n">EditorScenePostImportPlugin</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">p_importer</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">p_first_priority</span> <span class="o">=</span> <span class="nb">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">add_autoload_singleton</span><span class="p">(</span><span class="k">const</span> <span class="n">String</span> <span class="o">&amp;</span><span class="n">p_name</span><span class="p">,</span> <span class="k">const</span> <span class="n">String</span> <span class="o">&amp;</span><span class="n">p_path</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">add_debugger_plugin</span><span class="p">(</span><span class="k">const</span> <span class="n">Ref</span><span class="o">&lt;</span><span class="n">EditorDebuggerPlugin</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">p_plugin</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">add_resource_conversion_plugin</span><span class="p">(</span><span class="k">const</span> <span class="n">Ref</span><span class="o">&lt;</span><span class="n">EditorResourceConversionPlugin</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">p_plugin</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">add_context_menu_plugin</span><span class="p">(</span><span class="n">EditorContextMenuPlugin</span><span class="o">::</span><span class="n">ContextMenuSlot</span> <span class="n">p_slot</span><span class="p">,</span> <span class="k">const</span> <span class="n">Ref</span><span class="o">&lt;</span><span class="n">EditorContextMenuPlugin</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">p_plugin</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="node3deditor">Node3DEditor
+</h2><p>Node3DEditor是Godot内置3D场景编辑器的核心插件，它是3D场景的编辑界面的主体，包括了：视口、工具栏、Gizmo、网格等等。</p>
+<h3 id="初始化-1">✔️初始化
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">//在EditorNode的构造阶段,创建并注册
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">add_editor_plugin</span><span class="p">(</span><span class="n">memnew</span><span class="p">(</span><span class="n">Node3DEditorPlugin</span><span class="p">));</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="ui扩展往3d界面编辑器的上下左右添加控件">✔️UI扩展：往3D界面编辑器的上下左右添加控件
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th style="text-align: left">接口</th>
+          <th style="text-align: left">作用</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">add_control_to_menu_panel</td>
+          <td style="text-align: left">在上方菜单栏添加控件</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">add_control_to_left_panel</td>
+          <td style="text-align: left">在视口左侧添加控件</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">add_control_to_right_panel</td>
+          <td style="text-align: left">在视口右侧添加控件</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">get_shader_split</td>
+          <td style="text-align: left">获取视口底部的容器盒</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><img src="/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/image.png"
+	width="1639"
+	height="827"
+	srcset="/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/image_hu_c1b0528da848e080.png 480w, /p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/image_hu_28fe0e12675bdcf4.png 1024w"
+	loading="lazy"
+	
+		alt="menu_panel"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="198"
+		data-flex-basis="475px"
+	
+></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">//使用示例
+</span></span></span><span class="line"><span class="cl"><span class="c1">//在上方菜单栏添加控件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Node3DEditor</span><span class="o">::</span><span class="n">get_singleton</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add_control_to_menu_panel</span><span class="p">(</span><span class="n">p_control</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//在视口左侧添加控件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Node3DEditor</span><span class="o">::</span><span class="n">get_singleton</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add_control_to_left_panel</span><span class="p">(</span><span class="n">p_control</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//在视口右侧添加控件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Node3DEditor</span><span class="o">::</span><span class="n">get_singleton</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add_control_to_right_panel</span><span class="p">(</span><span class="n">p_control</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//在视口底部添加控件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Node3DEditor</span><span class="o">::</span><span class="n">get_singleton</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">get_shader_split</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add_child</span><span class="p">(</span><span class="n">p_control</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="gizmo扩展添加自定义gizmo">Gizmo扩展：添加自定义Gizmo
+</h3><h2 id="canvasitemeditor">CanvasItemEditor
+</h2><p>CanvasItemEditor是Godot内置2D编辑器的核心插件，它是2D场景的编辑界面的主体。</p>
+<h3 id="ui扩展往2d界面编辑器的上下左右添加控件">UI扩展：往2D界面编辑器的上下左右添加控件
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th style="text-align: left">接口</th>
+          <th style="text-align: left">作用</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">add_control_to_menu_panel</td>
+          <td style="text-align: left">在上方菜单栏添加控件</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">add_control_to_left_panel</td>
+          <td style="text-align: left">在视口左侧添加控件</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">add_control_to_right_panel</td>
+          <td style="text-align: left">在视口右侧添加控件</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">get_bottom_split</td>
+          <td style="text-align: left">获取视口底部的容器盒</td>
+      </tr>
+  </tbody>
+</table></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">//使用示例
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">case</span> <span class="nl">CONTAINER_CANVAS_EDITOR_MENU</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">//在上方菜单栏添加控件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">CanvasItemEditor</span><span class="o">::</span><span class="n">get_singleton</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add_control_to_menu_panel</span><span class="p">(</span><span class="n">p_control</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">case</span> <span class="nl">CONTAINER_CANVAS_EDITOR_SIDE_LEFT</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">//在视口左侧添加控件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">CanvasItemEditor</span><span class="o">::</span><span class="n">get_singleton</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add_control_to_left_panel</span><span class="p">(</span><span class="n">p_control</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">case</span> <span class="nl">CONTAINER_CANVAS_EDITOR_SIDE_RIGHT</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">//在视口右侧添加控件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">CanvasItemEditor</span><span class="o">::</span><span class="n">get_singleton</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add_control_to_right_panel</span><span class="p">(</span><span class="n">p_control</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">case</span> <span class="nl">CONTAINER_CANVAS_EDITOR_BOTTOM</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">//在视口底部添加控件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">CanvasItemEditor</span><span class="o">::</span><span class="n">get_singleton</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">get_bottom_split</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add_child</span><span class="p">(</span><span class="n">p_control</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">break</span><span class="p">;</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div>
