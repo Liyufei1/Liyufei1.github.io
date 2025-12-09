@@ -296,6 +296,7 @@
       <ol>
         <li><a href="#vectort"><code>Vector&lt;T&gt;</code></a></li>
         <li><a href="#vmapkv"><code>VMap&lt;K,V&gt;</code></a></li>
+        <li><a href="#listt"><code>List&lt;T&gt;</code></a></li>
         <li><a href="#vsett"><code>VSet&lt;T&gt;</code></a></li>
         <li><a href="#hashmapkv"><code>HashMap&lt;K,V&gt;</code></a></li>
         <li><a href="#rbmap">RBMap</a></li>
@@ -411,7 +412,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 9 分钟
+                    阅读时长: 10 分钟
                 </time>
             </div>
         
@@ -784,6 +785,182 @@
 </span></span><span class="line"><span class="cl">    <span class="c1">// --- 删 (Delete) ---
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">player_names</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span> <span class="c1">// 移除 key 为 10 的元素
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="listt"><code>List&lt;T&gt;</code>
+</h3><p><strong>✨头文件</strong>:``<br>
+<strong>✨作用</strong>:<br>
+非连续内存： 节点散落在内存中，通过指针连接。
+插入/删除快： 在头部、尾部或任意已知节点处插入/删除元素是 $O(1)$ 操作。
+随机访问慢： 想要访问第 N 个元素（list[N]），必须从头遍历，是 $O(N)$ 操作。这是它和 Vector 最大的区别。
+迭代器： 使用 List<T>::Element * 指针作为迭代器
+<strong>✨使用示例</strong>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;core/templates/list.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;core/string/ustring.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">demo_list</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// --- 1. 创建 (Create) ---
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">chat_log</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// --- 2. 增 (Add) ---
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 尾部添加 O(1)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">chat_log</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="s">&#34;Player joined&#34;</span><span class="p">);</span> 
+</span></span><span class="line"><span class="cl">    <span class="n">chat_log</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="s">&#34;Player said: Hello&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 头部添加 O(1) - 适合做队列
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">chat_log</span><span class="p">.</span><span class="n">push_front</span><span class="p">(</span><span class="s">&#34;System: Welcome&#34;</span><span class="p">);</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 在特定位置插入
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// List 的插入通常依赖于 Element 指针
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;::</span><span class="n">Element</span> <span class="o">*</span><span class="n">E</span> <span class="o">=</span> <span class="n">chat_log</span><span class="p">.</span><span class="n">front</span><span class="p">();</span> <span class="c1">// 获取第一个节点 (&#34;System: Welcome&#34;)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">E</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 在第一个节点后面插入
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">chat_log</span><span class="p">.</span><span class="n">insert_after</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="s">&#34;System: Message of the day&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 此时顺序: 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// [0] System: Welcome
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// [1] System: Message of the day
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// [2] Player joined
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// [3] Player said: Hello
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// --- 3. 查 (Read) ---
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    
+</span></span><span class="line"><span class="cl">    <span class="c1">// A. 访问头尾 O(1)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">chat_log</span><span class="p">.</span><span class="n">is_empty</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">String</span> <span class="n">first</span> <span class="o">=</span> <span class="n">chat_log</span><span class="p">.</span><span class="n">front</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">String</span> <span class="n">last</span> <span class="o">=</span> <span class="n">chat_log</span><span class="p">.</span><span class="n">back</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// B. 遍历 (推荐方式 1: 范围 for 循环 - Godot 4.x)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="n">String</span> <span class="o">&amp;</span><span class="nl">msg</span> <span class="p">:</span> <span class="n">chat_log</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">print_line</span><span class="p">(</span><span class="s">&#34;Log: &#34;</span> <span class="o">+</span> <span class="n">msg</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// C. 遍历 (传统方式/手动方式: 使用 Element 指针)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 这种方式在你需要操作节点(如删除当前节点)时很有用
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">for</span> <span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;::</span><span class="n">Element</span> <span class="o">*</span><span class="n">E</span> <span class="o">=</span> <span class="n">chat_log</span><span class="p">.</span><span class="n">front</span><span class="p">();</span> <span class="n">E</span><span class="p">;</span> <span class="n">E</span> <span class="o">=</span> <span class="n">E</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// E 是节点指针，E-&gt;get() 获取值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">E</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">()</span> <span class="o">==</span> <span class="s">&#34;Player joined&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">print_line</span><span class="p">(</span><span class="s">&#34;Found join event!&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// D. 随机访问 (警告：极慢！)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// List 重载了 []，但它是 O(N) 的，不建议在循环中使用
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// String val = chat_log[2]; // 性能差，慎用
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// --- 4. 改 (Update) ---
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 通过节点指针直接修改
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;::</span><span class="n">Element</span> <span class="o">*</span><span class="n">msg_node</span> <span class="o">=</span> <span class="n">chat_log</span><span class="p">.</span><span class="n">back</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">msg_node</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">msg_node</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">()</span> <span class="o">=</span> <span class="s">&#34;Player said: Bye&#34;</span><span class="p">;</span> <span class="c1">// 修改值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// --- 5. 删 (Delete) ---
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    
+</span></span><span class="line"><span class="cl">    <span class="c1">// A. 移除头尾 O(1)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">chat_log</span><span class="p">.</span><span class="n">pop_front</span><span class="p">();</span> <span class="c1">// 移除第一个
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">chat_log</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>  <span class="c1">// 移除最后一个
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// B. 移除特定值 O(N) - 需要查找
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">chat_log</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="s">&#34;Player joined&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// C. 通过迭代器移除 O(1) - 最高效的中间删除方式
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;::</span><span class="n">Element</span> <span class="o">*</span><span class="n">node_to_delete</span> <span class="o">=</span> <span class="n">chat_log</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 假设我们找到了要删的节点指针
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">node_to_delete</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">chat_log</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">node_to_delete</span><span class="p">);</span> <span class="c1">// 直接把这个节点摘除
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 清空
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">chat_log</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="vsett"><code>VSet&lt;T&gt;</code>

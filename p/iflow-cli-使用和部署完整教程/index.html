@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="iFlow CLI工具完整使用和部署指南，包含Windows平台安装、登录和卸载步骤">
+<title>iFlow CLI 使用和部署完整教程</title>
+
+<link rel='canonical' href='https://Liyufei1.github.io/p/iflow-cli-%E4%BD%BF%E7%94%A8%E5%92%8C%E9%83%A8%E7%BD%B2%E5%AE%8C%E6%95%B4%E6%95%99%E7%A8%8B/'>
+
+<link rel="stylesheet" href="/scss/style.min.b0e76e98cdd4f7082d1fc36f7af7e0843a81201db2197c03ca426751dc923735.css"><meta property='og:title' content="iFlow CLI 使用和部署完整教程">
+<meta property='og:description' content="iFlow CLI工具完整使用和部署指南，包含Windows平台安装、登录和卸载步骤">
+<meta property='og:url' content='https://Liyufei1.github.io/p/iflow-cli-%E4%BD%BF%E7%94%A8%E5%92%8C%E9%83%A8%E7%BD%B2%E5%AE%8C%E6%95%B4%E6%95%99%E7%A8%8B/'>
+<meta property='og:site_name' content='李宇飞-Liyufei1'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-09T10:00:00&#43;08:00'/><meta property='article:modified_time' content='2025-12-09T10:00:00&#43;08:00'/><meta property='og:image' content='https://Liyufei1.github.io/guidao5.jpg' />
+<meta name="twitter:title" content="iFlow CLI 使用和部署完整教程">
+<meta name="twitter:description" content="iFlow CLI工具完整使用和部署指南，包含Windows平台安装、登录和卸载步骤"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://Liyufei1.github.io/guidao5.jpg' />
+    <link rel="shortcut icon" href="/favicon.png" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/guidao1Icon_hu_f3a3851d912f0a8d.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🤣</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">李宇飞-Liyufei1</a></h1>
+            <h2 class="site-description">存放学习随笔的个人博客,主要有:Godot、Unreal、Blog、Cpp.
+ 下方是个人的b站、gitbug链接:</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://space.bilibili.com/7531504?spm_id_from=333.1007.0.0'
+                        target="_blank"
+                        title="Bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/Liyufei1'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友情链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://Liyufei1.github.io/en/" >English</option>
+                                
+                                    <option value="https://Liyufei1.github.io/" selected>中文</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#iflow初步认识">iFlow初步认识</a>
+      <ol>
+        <li><a href="#核心特性">核心特性</a></li>
+        <li><a href="#核心功能">核心功能</a></li>
+      </ol>
+    </li>
+    <li><a href="#windows平台的安装部署">Windows平台的安装部署</a>
+      <ol>
+        <li><a href="#系统要求">系统要求</a></li>
+        <li><a href="#安装步骤">安装步骤</a>
+          <ol>
+            <li><a href="#方法一标准安装">方法一：标准安装</a></li>
+            <li><a href="#方法二中国大陆用户专用安装推荐">方法二：中国大陆用户专用安装（推荐）</a></li>
+          </ol>
+        </li>
+        <li><a href="#验证安装">验证安装</a></li>
+      </ol>
+    </li>
+    <li><a href="#登录和使用">登录和使用</a>
+      <ol>
+        <li><a href="#获取-api-key">获取 API Key</a></li>
+        <li><a href="#快速开始">快速开始</a></li>
+        <li><a href="#创建新项目">创建新项目</a></li>
+        <li><a href="#处理现有项目">处理现有项目</a></li>
+        <li><a href="#常见使用场景">常见使用场景</a>
+          <ol>
+            <li><a href="#信息查询与规划">信息查询与规划</a></li>
+            <li><a href="#文件管理">文件管理</a></li>
+            <li><a href="#数据分析">数据分析</a></li>
+            <li><a href="#开发支持">开发支持</a></li>
+            <li><a href="#工作流自动化">工作流自动化</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#卸载">卸载</a>
+      <ol>
+        <li><a href="#额外清理">额外清理</a></li>
+      </ol>
+    </li>
+    <li><a href="#iflow中的命令和使用示例">iFlow中的&rsquo;/&lsquo;命令和使用示例</a>
+      <ol>
+        <li><a href="#常用斜杠命令">常用斜杠命令</a></li>
+        <li><a href="#实际应用场景示例">实际应用场景示例</a></li>
+      </ol>
+    </li>
+    <li><a href="#结语">结语</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/iflow-cli-%E4%BD%BF%E7%94%A8%E5%92%8C%E9%83%A8%E7%BD%B2%E5%AE%8C%E6%95%B4%E6%95%99%E7%A8%8B/">
+                
+                    <img src="/guidao5.jpg" loading="lazy" alt="Featured image of post iFlow CLI 使用和部署完整教程" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/iflow/" >
+                IFlow
+            </a>
+        
+            <a href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/" >
+                工具使用
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/iflow-cli-%E4%BD%BF%E7%94%A8%E5%92%8C%E9%83%A8%E7%BD%B2%E5%AE%8C%E6%95%B4%E6%95%99%E7%A8%8B/">iFlow CLI 使用和部署完整教程</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            iFlow CLI工具完整使用和部署指南，包含Windows平台安装、登录和卸载步骤
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published" datetime='2025-12-09T10:00:00&#43;08:00'>2025-12-09</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 6 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="iflow-cli-使用和部署完整教程">iFlow CLI 使用和部署完整教程
+</h1><h2 id="iflow初步认识">iFlow初步认识
+</h2><p>iFlow CLI 是一款直接在终端中运行的强大 AI 助手。它能够无缝分析代码仓库、执行编程任务、理解上下文需求，通过自动化处理从简单的文件操作到复杂的工作流程，全面提升您的工作效率。</p>
+<h3 id="核心特性">核心特性
+</h3><ol>
+<li><strong>免费 AI 模型</strong>：通过 <a class="link" href="https://platform.iflow.cn/docs/api-mode"  target="_blank" rel="noopener"
+    >心流开放平台</a> 访问强大的免费 AI 模型，包括 Kimi K2、Qwen3 Coder、DeepSeek v3 等</li>
+<li><strong>灵活集成</strong>：保留你喜欢的开发工具，也可集成到现有系统实现自动化</li>
+<li><strong>自然语言交互</strong>：告别复杂命令，用日常对话驱动 AI，从代码开发到生活助理</li>
+<li><strong>开放平台</strong>：从<a class="link" href="https://platform.iflow.cn/"  target="_blank" rel="noopener"
+    >心流开放市场</a>中可以一键安装SubAgent和MCP，快速扩展智能体，组建只属于你的AI团队</li>
+</ol>
+<h3 id="核心功能">核心功能
+</h3><ul>
+<li>支持4种运行模式：yolo模式（模型拥有最大权限，可执行任何操作）、接受编辑模式（模型仅拥有文件修改权限）、计划模式（先计划后执行）、默认模式（模型无权限）</li>
+<li>升级subAgent功能：将CLI从通用助手转变为专家团队，提供更专业准确的建议。使用 /agent 查看更多预配置代理</li>
+<li>升级task工具：有效压缩上下文长度，让CLI更彻底地完成您的任务。当上下文达到70%时自动压缩</li>
+<li>集成心流开放市场：快速安装有用的MCP工具、Subagents和自定义指令。使用 /mcp 了解更多</li>
+<li>免费多模态模型使用：现在您也可以在CLI中粘贴图片了（Ctrl+V粘贴图片）</li>
+<li>支持对话历史保存和回滚（iflow &ndash;resume 和 /chat 命令）</li>
+<li>支持更多有用的终端命令（iflow -h 查看更多命令）</li>
+<li>VSCode插件支持</li>
+<li>自动升级：iFlow CLI自动检测当前版本是否为最新版本</li>
+</ul>
+<p>更多使用教程请访问：<a class="link" href="https://platform.iflow.cn/"  target="_blank" rel="noopener"
+    >iFlow平台</a></p>
+<h2 id="windows平台的安装部署">Windows平台的安装部署
+</h2><h3 id="系统要求">系统要求
+</h3><ul>
+<li>操作系统：Windows 10+（使用 WSL 1、WSL 2 或 Git for Windows）</li>
+<li>硬件：4GB+ 内存</li>
+<li>软件：Node.js 22+</li>
+<li>网络：需要互联网连接用于身份验证和 AI 处理</li>
+<li>Shell：在 Bash、Zsh 或 Fish 中效果最佳</li>
+</ul>
+<h3 id="安装步骤">安装步骤
+</h3><h4 id="方法一标准安装">方法一：标准安装
+</h4><ol>
+<li>访问 <a class="link" href="https://nodejs.org/zh-cn/download"  target="_blank" rel="noopener"
+    >Node.js官网</a> 下载最新的 Node.js 安装程序</li>
+<li>运行安装程序来安装 Node.js</li>
+<li>重启终端：CMD 或 PowerShell</li>
+<li>运行 <code>npm install -g @iflow-ai/iflow-cli</code> 来安装 iFlow CLI</li>
+<li>运行 <code>iflow</code> 来启动 iFlow CLI</li>
+</ol>
+<h4 id="方法二中国大陆用户专用安装推荐">方法二：中国大陆用户专用安装（推荐）
+</h4><p>如果您在中国大陆，可以使用以下命令安装 iFlow CLI：</p>
+<ol>
+<li>访问 <a class="link" href="https://cloud.iflow.cn/iflow-cli/nvm-setup.exe"  target="_blank" rel="noopener"
+    >iFlow CLI nvm安装包</a> 下载最新的 nvm 安装程序</li>
+<li>运行安装程序来安装 nvm</li>
+<li><strong>重启终端：CMD 或 PowerShell</strong></li>
+<li>运行 <code>nvm node_mirror https://npmmirror.com/mirrors/node/</code> 和 <code>nvm npm_mirror https://npmmirror.com/mirrors/npm/</code></li>
+<li>运行 <code>nvm install 22</code> 来安装 Node.js 22，稍等片刻</li>
+<li>运行 <code>nvm use 22</code> 来使用 Node.js 22</li>
+<li>运行 <code>npm install -g @iflow-ai/iflow-cli</code> 来安装 iFlow CLI</li>
+<li>运行 <code>iflow</code> 来启动 iFlow CLI</li>
+</ol>
+<h3 id="验证安装">验证安装
+</h3><p>安装完成后，可以在终端中运行以下命令验证是否安装成功：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">iflow --version
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果显示版本号，则表示安装成功。</p>
+<h2 id="登录和使用">登录和使用
+</h2><p>iFlow CLI提供两种身份验证方式：</p>
+<ol>
+<li><strong>推荐方式</strong>：使用 iFlow 原生身份验证</li>
+<li><strong>备选方式</strong>：通过 OpenAI 兼容 API 连接</li>
+</ol>
+<h3 id="获取-api-key">获取 API Key
+</h3><p>获取 API Key的步骤：</p>
+<ol>
+<li>注册 iFlow 账户</li>
+<li>进入<a class="link" href="https://iflow.cn/?open=setting"  target="_blank" rel="noopener"
+    >个人设置页面</a>或点击此直达链接</li>
+<li>在弹出对话框中点击&quot;重置&quot;生成新的 API 密钥</li>
+</ol>
+<p>生成密钥后，将其粘贴到终端提示符中即可完成设置。<strong>注意</strong>：在 Windows 的 CMD 或者 PowerShell 中，请点击右键进行粘贴。</p>
+<h3 id="快速开始">快速开始
+</h3><p>要启动 iFlow CLI，请在终端中导航到您的工作空间并输入：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">iflow
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="创建新项目">创建新项目
+</h3><p>对于新项目，只需描述您想要创建的内容：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">cd</span> new-project/
+</span></span><span class="line"><span class="cl">iflow
+</span></span><span class="line"><span class="cl">&gt; 使用 HTML 创建一个基于网页的我的世界游戏
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="处理现有项目">处理现有项目
+</h3><p>对于现有代码库，建议先使用 <code>/init</code> 命令帮助 iFlow 理解您的项目：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">cd</span> project1/
+</span></span><span class="line"><span class="cl">iflow
+</span></span><span class="line"><span class="cl">&gt; /init
+</span></span><span class="line"><span class="cl">&gt; 根据 requirement.md 文件中的 PRD 文档分析需求，输出技术文档，然后实现解决方案。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>/init</code> 命令会扫描您的代码库，学习其结构，并创建包含完整文档的 IFLOW.md 文件。</p>
+<p>有关斜杠命令的完整列表和使用说明，请查看<a class="link" href="https://github.com/iflow-ai/iflow-cli/blob/main/i18/cn/commands.md"  target="_blank" rel="noopener"
+    >iFlow命令文档</a>。</p>
+<h3 id="常见使用场景">常见使用场景
+</h3><p>iFlow CLI 的功能远不止编程，它能处理各种类型的任务：</p>
+<h4 id="信息查询与规划">信息查询与规划
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">&gt; 帮我找到北京评分最高的餐厅，制定一个3天的美食之旅行程。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">&gt; 搜索最新的 iPhone 价格对比，找到最具性价比的购买方案。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="文件管理">文件管理
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">&gt; 将我桌面上的文件按文件类型整理到不同的文件夹中。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">&gt; 批量下载这个网页上的所有图片，并按日期重命名。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="数据分析">数据分析
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">&gt; 分析这个 Excel 表格中的销售数据，生成简单的图表。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">&gt; 从这些 CSV 文件中提取客户信息，合并成统一的表格。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="开发支持">开发支持
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">&gt; 分析这个系统的主要架构组件和模块依赖关系。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">&gt; 我的请求后出现了空指针异常，请帮我找到问题原因。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="工作流自动化">工作流自动化
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">&gt; 创建一个脚本，定期将我的重要文件备份到云存储。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">&gt; 编写一个程序，每天下载股票价格并发送邮件通知。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="卸载">卸载
+</h2><p>如果需要卸载 iFlow CLI，可以使用以下命令：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">npm uninstall -g @iflow-ai/iflow-cli
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>此命令将完全移除 iFlow CLI 及其相关文件。</p>
+<h3 id="额外清理">额外清理
+</h3><p>如果需要彻底清理所有相关配置文件，可以删除以下目录：</p>
+<ul>
+<li>Windows: <code>C:\Users\{用户名}\.iflow</code></li>
+<li>配置文件: <code>~/.iflow/settings.json</code></li>
+</ul>
+<h2 id="iflow中的命令和使用示例">iFlow中的&rsquo;/&lsquo;命令和使用示例
+</h2><p>iFlow CLI 提供了丰富的斜杠命令（Slash Commands），这些命令可以帮助用户更高效地控制和使用AI助手。斜杠命令以 <code>/</code> 开头，可以快速执行特定功能。</p>
+<h3 id="常用斜杠命令">常用斜杠命令
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>命令</th>
+          <th>功能描述</th>
+          <th>使用示例</th>
+          <th>适用场景</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>/help</code> 或 <code>/?</code></td>
+          <td>显示所有可用的斜杠命令列表和帮助信息</td>
+          <td><code>&gt; /help</code></td>
+          <td>需要查看所有可用命令时</td>
+      </tr>
+      <tr>
+          <td><code>/init</code></td>
+          <td>分析当前项目结构，扫描代码库并生成IFLOW.md文档，帮助iFlow更好地理解您的项目</td>
+          <td><code>&gt; /init</code><br><code>&gt; 正在分析项目结构...</code></td>
+          <td>项目初始化时</td>
+      </tr>
+      <tr>
+          <td><code>/chat</code></td>
+          <td>管理对话历史，查看之前的对话记录或切换到不同的对话</td>
+          <td><code>&gt; /chat list</code> # 列出所有对话<br><code>&gt; /chat resume</code> # 恢复之前的对话</td>
+          <td>管理对话历史时</td>
+      </tr>
+      <tr>
+          <td><code>/agent</code></td>
+          <td>使用预配置的专家代理（subagent）来处理特定领域的任务</td>
+          <td><code>&gt; /agent</code> # 查看可用的代理<br><code>&gt; /agent code</code> # 使用代码专家代理</td>
+          <td>需要专业领域帮助时</td>
+      </tr>
+      <tr>
+          <td><code>/mcp</code></td>
+          <td>访问心流开放市场中的MCP（Model Context Protocol）工具，扩展iFlow的功能</td>
+          <td><code>&gt; /mcp</code> # 查看可用的MCP工具<br><code>&gt; /mcp install</code> # 安装MCP工具</td>
+          <td>扩展功能时</td>
+      </tr>
+      <tr>
+          <td><code>/task</code></td>
+          <td>使用任务管理工具，将复杂任务分解为可管理的子任务</td>
+          <td><code>&gt; /task create</code> # 创建任务列表<br><code>&gt; /task list</code> # 查看任务进度</td>
+          <td>处理复杂任务时</td>
+      </tr>
+      <tr>
+          <td><code>/plan</code></td>
+          <td>进入计划模式，先制定详细计划再执行任务，确保执行过程更加可控</td>
+          <td><code>&gt; /plan</code> # 进入计划模式</td>
+          <td>需要先制定计划再执行时</td>
+      </tr>
+      <tr>
+          <td><code>/yolo</code></td>
+          <td>进入YOLO（You Only Live Once）模式，赋予AI模型最大权限，可执行任何操作</td>
+          <td><code>&gt; /yolo</code> # 进入YOLO模式（谨慎使用）</td>
+          <td>需要AI完全自主操作时</td>
+      </tr>
+      <tr>
+          <td><code>/accept</code></td>
+          <td>进入接受编辑模式，AI模型仅拥有文件修改权限，更安全</td>
+          <td><code>&gt; /accept</code> # 进入接受编辑模式</td>
+          <td>需要更安全的操作模式时</td>
+      </tr>
+      <tr>
+          <td><code>/compact</code></td>
+          <td>压缩对话上下文，减少内存占用，提高响应速度</td>
+          <td><code>&gt; /compact</code> # 压缩对话历史</td>
+          <td>对话历史过长时</td>
+      </tr>
+      <tr>
+          <td><code>/search</code></td>
+          <td>执行网络搜索任务，获取实时信息</td>
+          <td><code>&gt; /search</code> # 执行搜索</td>
+          <td>需要获取实时信息时</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="实际应用场景示例">实际应用场景示例
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>场景</th>
+          <th>命令示例</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>项目初始化</td>
+          <td><code>&gt; /init</code><br><code>&gt; 分析项目结构后，生成文档并提供优化建议。</code></td>
+      </tr>
+      <tr>
+          <td>代码审查</td>
+          <td><code>&gt; /agent code</code><br><code>&gt; 审查当前目录下的所有代码文件，找出潜在问题。</code></td>
+      </tr>
+      <tr>
+          <td>任务分解</td>
+          <td><code>&gt; /task create</code><br><code>&gt; 请帮我实现用户注册功能，包含前端表单、后端接口和数据库设计</code></td>
+      </tr>
+      <tr>
+          <td>高级权限操作</td>
+          <td><code>&gt; /yolo</code><br><code>&gt; 创建新项目目录，安装依赖，生成基本代码结构</code></td>
+      </tr>
+  </tbody>
+</table></div>
+<p>这些斜杠命令极大地增强了iFlow CLI的功能性，让您可以更精确地控制AI助手的行为，提高开发效率。有关斜杠命令的完整列表和最新功能，请查看<a class="link" href="https://github.com/iflow-ai/iflow-cli/blob/main/i18/cn/commands.md"  target="_blank" rel="noopener"
+    >iFlow命令文档</a>。</p>
+<h2 id="结语">结语
+</h2><p>iFlow CLI 是一个强大的开发助手，通过本教程，您应该已经掌握了如何在 Windows 平台上安装、登录使用和卸载 iFlow CLI。更多高级功能和使用技巧，请访问官方文档：<a class="link" href="https://github.com/iflow-ai/iflow-cli/blob/main/README_CN.md"  target="_blank" rel="noopener"
+    >iFlow CLI GitHub仓库</a></p>
+<p>如需加入社区交流，可以扫描官方微信群二维码：<a class="link" href="https://github.com/iflow-ai/iflow-cli/blob/main/assets/iflow-wechat.jpg"  target="_blank" rel="noopener"
+    >iFlow微信社区</a></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under <a class="link" href="https://github.com/Liyufei1"  target="_blank" rel="noopener"
+    >Liyufei1</a></span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        const elementsToRender = [".main-article", ".widget--toc"];
+
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2025 李宇飞-Liyufei1
+    </section>
+    
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.32.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

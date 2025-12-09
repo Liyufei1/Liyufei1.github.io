@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://Liyufei1.github.io/</loc>
-    <lastmod>2025-11-20T09:18:31+08:00</lastmod>
+    <lastmod>2025-12-09T10:00:00+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -15,11 +15,8 @@
                 href="https://Liyufei1.github.io/"
                 />
   </url><url>
-    <loc>https://Liyufei1.github.io/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/</loc>
-    <lastmod>2025-11-20T09:18:31+08:00</lastmod>
-  </url><url>
     <loc>https://Liyufei1.github.io/categories/</loc>
-    <lastmod>2025-11-20T09:18:31+08:00</lastmod>
+    <lastmod>2025-12-09T10:00:00+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -31,10 +28,22 @@
                 href="https://Liyufei1.github.io/categories/"
                 />
   </url><url>
-    <loc>https://Liyufei1.github.io/categories/godot/</loc>
-    <lastmod>2025-11-20T09:18:31+08:00</lastmod>
+    <loc>https://Liyufei1.github.io/categories/iflow/</loc>
+    <lastmod>2025-12-09T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://Liyufei1.github.io/p/iflow-cli-%E4%BD%BF%E7%94%A8%E5%92%8C%E9%83%A8%E7%BD%B2%E5%AE%8C%E6%95%B4%E6%95%99%E7%A8%8B/</loc>
+    <lastmod>2025-12-09T10:00:00+08:00</lastmod>
   </url><url>
     <loc>https://Liyufei1.github.io/post/</loc>
+    <lastmod>2025-12-09T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://Liyufei1.github.io/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/</loc>
+    <lastmod>2025-12-09T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://Liyufei1.github.io/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/</loc>
+    <lastmod>2025-11-20T09:18:31+08:00</lastmod>
+  </url><url>
+    <loc>https://Liyufei1.github.io/categories/godot/</loc>
     <lastmod>2025-11-20T09:18:31+08:00</lastmod>
   </url><url>
     <loc>https://Liyufei1.github.io/p/godot%E4%BA%94godot%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9Frtti/</loc>
@@ -109,6 +118,8 @@
   </url><url>
     <loc>https://Liyufei1.github.io/p/emoji-support/</loc>
     <lastmod>2019-03-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Liyufei1.github.io/p/</loc>
   </url><url>
     <loc>https://Liyufei1.github.io/categories/test/</loc>
   </url><url>
