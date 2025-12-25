@@ -59,7 +59,7 @@
                     
                     
                         
-                        <img src="/img/guidao1Icon_hu_f3a3851d912f0a8d.png" width="300"
+                        <img src="/img/guidao1Icon_hu_4c95e88ebc9c8e46.png" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -623,12 +623,12 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">//----------------头文件----------------
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#ifndef TEST_H
+</span></span></span><span class="line"><span class="cl"><span class="cp">#ifndef TEST_H
 </span></span></span><span class="line"><span class="cl"><span class="cp">#define TEST_H
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;godot_cpp/classes/node3d.hpp&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;godot_cpp/classes/texture2d.hpp&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="k">namespace</span> <span class="n">godot</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Test</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Node3D</span>
@@ -689,14 +689,14 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="cp">#endif
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">//----------------源文件----------------
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#include</span> <span class="cpf">&#34;Test.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;Test.h&#34;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;godot_cpp/core/class_db.hpp&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;godot_cpp/variant/utility_functions.hpp&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;godot_cpp/classes/image_texture.hpp&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">Test</span><span class="o">::</span><span class="n">Test</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="n">connect</span><span class="p">(</span><span class="s">&#34;ready&#34;</span><span class="p">,</span><span class="n">Callable</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="s">&#34;StartTest2&#34;</span><span class="p">));</span>
@@ -723,7 +723,7 @@
 </span></span><span class="line"><span class="cl">    <span class="n">UtilityFunctions</span><span class="o">::</span><span class="n">print</span><span class="p">(</span><span class="s">&#34;BBBBBBBBBBBBBBB:&#34;</span><span class="p">,</span><span class="n">IValue</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="n">emit_signal</span><span class="p">(</span><span class="s">&#34;HelloSignal&#34;</span><span class="p">,</span><span class="s">&#34;CCCCCCCCCCCCCCCCCCC&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// UtilityFunctions::print(&#34;BBBBBBBBBBBBBBB:&#34;,IValue,&#34;---&#34;,FValue,&#34;---&#34;,SValue,&#34;---&#34;,TValue-&gt;get_name());
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">Test</span><span class="o">::</span><span class="n">GetIValue</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
@@ -870,11 +870,11 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">//----------------头文件----------------
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#ifndef TEST_H
+</span></span></span><span class="line"><span class="cl"><span class="cp">#ifndef TEST_H
 </span></span></span><span class="line"><span class="cl"><span class="cp">#define TEST_H
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;godot_cpp/classes/node3d.hpp&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="k">namespace</span> <span class="n">godot</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Test</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Node3D</span>
@@ -887,13 +887,13 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span><span class="line"><span class="cl"><span class="cp">#endif
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">//----------------源文件----------------
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#include</span> <span class="cpf">&#34;Test.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;Test.h&#34;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;godot_cpp/core/class_db.hpp&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;godot_cpp/variant/utility_functions.hpp&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">Test</span><span class="o">::</span><span class="n">StartTest</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
@@ -1037,12 +1037,12 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">//----------------头文件----------------
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#ifndef TEST_H
+</span></span></span><span class="line"><span class="cl"><span class="cp">#ifndef TEST_H
 </span></span></span><span class="line"><span class="cl"><span class="cp">#define TEST_H
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;godot_cpp/classes/node3d.hpp&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;godot_cpp/classes/texture2d.hpp&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="k">namespace</span> <span class="n">godot</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Test</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Node3D</span>
@@ -1089,14 +1089,14 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="cp">#endif
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">//----------------源文件----------------
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#include</span> <span class="cpf">&#34;Test.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;Test.h&#34;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;godot_cpp/core/class_db.hpp&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;godot_cpp/variant/utility_functions.hpp&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;godot_cpp/classes/image_texture.hpp&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">Test</span><span class="o">::</span><span class="n">GetIValue</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
@@ -1141,22 +1141,22 @@
 </span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">Test</span><span class="o">::</span><span class="n">_bind_methods</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">//int变量
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">ClassDB</span><span class="o">::</span><span class="n">bind_method</span><span class="p">(</span><span class="n">D_METHOD</span><span class="p">(</span><span class="s">&#34;GetIValue&#34;</span><span class="p">),</span><span class="o">&amp;</span><span class="n">Test</span><span class="o">::</span><span class="n">GetIValue</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">ClassDB</span><span class="o">::</span><span class="n">bind_method</span><span class="p">(</span><span class="n">D_METHOD</span><span class="p">(</span><span class="s">&#34;GetIValue&#34;</span><span class="p">),</span><span class="o">&amp;</span><span class="n">Test</span><span class="o">::</span><span class="n">GetIValue</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="n">ClassDB</span><span class="o">::</span><span class="n">bind_method</span><span class="p">(</span><span class="n">D_METHOD</span><span class="p">(</span><span class="s">&#34;SetIValue&#34;</span><span class="p">,</span><span class="s">&#34;IValue&#34;</span><span class="p">),</span><span class="o">&amp;</span><span class="n">Test</span><span class="o">::</span><span class="n">SetIValue</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="n">ADD_PROPERTY</span><span class="p">(</span><span class="n">PropertyInfo</span><span class="p">(</span><span class="n">Variant</span><span class="o">::</span><span class="n">INT</span><span class="p">,</span><span class="s">&#34;IValue&#34;</span><span class="p">),</span><span class="s">&#34;SetIValue&#34;</span><span class="p">,</span><span class="s">&#34;GetIValue&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">//资源变量
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">ClassDB</span><span class="o">::</span><span class="n">bind_method</span><span class="p">(</span><span class="n">D_METHOD</span><span class="p">(</span><span class="s">&#34;GetTValue&#34;</span><span class="p">),</span><span class="o">&amp;</span><span class="n">Test</span><span class="o">::</span><span class="n">GetTValue</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">ClassDB</span><span class="o">::</span><span class="n">bind_method</span><span class="p">(</span><span class="n">D_METHOD</span><span class="p">(</span><span class="s">&#34;GetTValue&#34;</span><span class="p">),</span><span class="o">&amp;</span><span class="n">Test</span><span class="o">::</span><span class="n">GetTValue</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="n">ClassDB</span><span class="o">::</span><span class="n">bind_method</span><span class="p">(</span><span class="n">D_METHOD</span><span class="p">(</span><span class="s">&#34;SetTValue&#34;</span><span class="p">,</span><span class="s">&#34;TValue&#34;</span><span class="p">),</span><span class="o">&amp;</span><span class="n">Test</span><span class="o">::</span><span class="n">SetTValue</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="n">ADD_PROPERTY</span><span class="p">(</span><span class="n">PropertyInfo</span><span class="p">(</span><span class="n">Variant</span><span class="o">::</span><span class="n">OBJECT</span><span class="p">,</span><span class="s">&#34;TValue&#34;</span><span class="p">,</span><span class="n">PROPERTY_HINT_RESOURCE_TYPE</span><span class="p">,</span><span class="s">&#34;Texture2D&#34;</span><span class="p">),</span><span class="s">&#34;SetIValue&#34;</span><span class="p">,</span><span class="s">&#34;GetIValue&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">//枚举变量
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">ClassDB</span><span class="o">::</span><span class="n">bind_method</span><span class="p">(</span><span class="n">D_METHOD</span><span class="p">(</span><span class="s">&#34;GetEValue&#34;</span><span class="p">),</span><span class="o">&amp;</span><span class="n">Test</span><span class="o">::</span><span class="n">GetEValue</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">ClassDB</span><span class="o">::</span><span class="n">bind_method</span><span class="p">(</span><span class="n">D_METHOD</span><span class="p">(</span><span class="s">&#34;GetEValue&#34;</span><span class="p">),</span><span class="o">&amp;</span><span class="n">Test</span><span class="o">::</span><span class="n">GetEValue</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="n">ClassDB</span><span class="o">::</span><span class="n">bind_method</span><span class="p">(</span><span class="n">D_METHOD</span><span class="p">(</span><span class="s">&#34;SetEValue&#34;</span><span class="p">,</span><span class="s">&#34;EValue&#34;</span><span class="p">),</span><span class="o">&amp;</span><span class="n">Test</span><span class="o">::</span><span class="n">SetEValue</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="n">ADD_PROPERTY</span><span class="p">(</span><span class="n">PropertyInfo</span><span class="p">(</span><span class="n">Variant</span><span class="o">::</span><span class="n">INT</span><span class="p">,</span><span class="s">&#34;EValue&#34;</span><span class="p">,</span><span class="n">PROPERTY_HINT_ENUM</span><span class="p">,</span><span class="s">&#34;None , Enum1 , Enum2&#34;</span><span class="p">),</span><span class="s">&#34;SetEValue&#34;</span><span class="p">,</span><span class="s">&#34;GetEValue&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">//位域变量
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">ClassDB</span><span class="o">::</span><span class="n">bind_method</span><span class="p">(</span><span class="n">D_METHOD</span><span class="p">(</span><span class="s">&#34;GetFlagValue&#34;</span><span class="p">),</span><span class="o">&amp;</span><span class="n">Test</span><span class="o">::</span><span class="n">GetFlagValue</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">ClassDB</span><span class="o">::</span><span class="n">bind_method</span><span class="p">(</span><span class="n">D_METHOD</span><span class="p">(</span><span class="s">&#34;GetFlagValue&#34;</span><span class="p">),</span><span class="o">&amp;</span><span class="n">Test</span><span class="o">::</span><span class="n">GetFlagValue</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="n">ClassDB</span><span class="o">::</span><span class="n">bind_method</span><span class="p">(</span><span class="n">D_METHOD</span><span class="p">(</span><span class="s">&#34;SetFlagValue&#34;</span><span class="p">,</span><span class="s">&#34;flag&#34;</span><span class="p">),</span><span class="o">&amp;</span><span class="n">Test</span><span class="o">::</span><span class="n">SetFlagValue</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="n">ADD_PROPERTY</span><span class="p">(</span><span class="n">PropertyInfo</span><span class="p">(</span><span class="n">Variant</span><span class="o">::</span><span class="n">INT</span><span class="p">,</span><span class="s">&#34;flag&#34;</span><span class="p">,</span><span class="n">PROPERTY_HINT_FLAGS</span><span class="p">,</span><span class="s">&#34;FlagNone , Flag1 , Flag2 , Flag3&#34;</span><span class="p">),</span><span class="s">&#34;SetFlagValue&#34;</span><span class="p">,</span><span class="s">&#34;GetFlagValue&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
@@ -1230,12 +1230,12 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">//----------------头文件----------------
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#ifndef TEST_H
+</span></span></span><span class="line"><span class="cl"><span class="cp">#ifndef TEST_H
 </span></span></span><span class="line"><span class="cl"><span class="cp">#define TEST_H
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;godot_cpp/classes/node3d.hpp&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;godot_cpp/classes/texture2d.hpp&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="k">namespace</span> <span class="n">godot</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Test</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Node3D</span>
@@ -1261,13 +1261,13 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">VARIANT_ENUM_CAST</span><span class="p">(</span><span class="n">Test</span><span class="o">::</span><span class="n">ETest</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="cp">#endif
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">//----------------源文件----------------
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#include</span> <span class="cpf">&#34;Test.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;Test.h&#34;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;godot_cpp/core/class_db.hpp&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;godot_cpp/variant/utility_functions.hpp&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;godot_cpp/classes/image_texture.hpp&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">Test</span><span class="o">::</span><span class="n">ETest</span> <span class="n">Test</span><span class="o">::</span><span class="n">GetEValue</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">EValue</span><span class="p">;</span>
@@ -1286,7 +1286,7 @@
 </span></span><span class="line"><span class="cl">    <span class="n">BIND_ENUM_CONSTANT</span><span class="p">(</span><span class="n">Num</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">//枚举变量
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">ClassDB</span><span class="o">::</span><span class="n">bind_method</span><span class="p">(</span><span class="n">D_METHOD</span><span class="p">(</span><span class="s">&#34;GetEValue&#34;</span><span class="p">),</span><span class="o">&amp;</span><span class="n">Test</span><span class="o">::</span><span class="n">GetEValue</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">ClassDB</span><span class="o">::</span><span class="n">bind_method</span><span class="p">(</span><span class="n">D_METHOD</span><span class="p">(</span><span class="s">&#34;GetEValue&#34;</span><span class="p">),</span><span class="o">&amp;</span><span class="n">Test</span><span class="o">::</span><span class="n">GetEValue</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="n">ClassDB</span><span class="o">::</span><span class="n">bind_method</span><span class="p">(</span><span class="n">D_METHOD</span><span class="p">(</span><span class="s">&#34;SetEValue&#34;</span><span class="p">,</span><span class="s">&#34;EValue&#34;</span><span class="p">),</span><span class="o">&amp;</span><span class="n">Test</span><span class="o">::</span><span class="n">SetEValue</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="n">ADD_PROPERTY</span><span class="p">(</span><span class="n">PropertyInfo</span><span class="p">(</span><span class="n">Variant</span><span class="o">::</span><span class="n">INT</span><span class="p">,</span><span class="s">&#34;EValue&#34;</span><span class="p">,</span><span class="n">PROPERTY_HINT_ENUM</span><span class="p">,</span><span class="s">&#34;None , Enum1 , Enum2&#34;</span><span class="p">),</span><span class="s">&#34;SetEValue&#34;</span><span class="p">,</span><span class="s">&#34;GetEValue&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
@@ -1360,12 +1360,12 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">//----------------头文件----------------
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#ifndef TEST_H
+</span></span></span><span class="line"><span class="cl"><span class="cp">#ifndef TEST_H
 </span></span></span><span class="line"><span class="cl"><span class="cp">#define TEST_H
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;godot_cpp/classes/node3d.hpp&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;godot_cpp/classes/texture2d.hpp&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="k">namespace</span> <span class="n">godot</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Test</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Node3D</span>
@@ -1390,14 +1390,14 @@
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span><span class="line"><span class="cl"><span class="n">VARIANT_BITFIELD_CAST</span><span class="p">(</span><span class="n">Test</span><span class="o">::</span><span class="n">EFlag</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="cp">#endif
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">//----------------源文件----------------
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#include</span> <span class="cpf">&#34;Test.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;Test.h&#34;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;godot_cpp/core/class_db.hpp&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;godot_cpp/variant/utility_functions.hpp&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;godot_cpp/classes/image_texture.hpp&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">BitField</span><span class="o">&lt;</span><span class="n">Test</span><span class="o">::</span><span class="n">EFlag</span><span class="o">&gt;</span> <span class="n">Test</span><span class="o">::</span><span class="n">GetFlagValue</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">flag</span><span class="p">;</span>
@@ -1416,7 +1416,7 @@
 </span></span><span class="line"><span class="cl">    <span class="n">BIND_BITFIELD_FLAG</span><span class="p">(</span><span class="n">Flag3</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">//位域变量
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">ClassDB</span><span class="o">::</span><span class="n">bind_method</span><span class="p">(</span><span class="n">D_METHOD</span><span class="p">(</span><span class="s">&#34;GetFlagValue&#34;</span><span class="p">),</span><span class="o">&amp;</span><span class="n">Test</span><span class="o">::</span><span class="n">GetFlagValue</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">ClassDB</span><span class="o">::</span><span class="n">bind_method</span><span class="p">(</span><span class="n">D_METHOD</span><span class="p">(</span><span class="s">&#34;GetFlagValue&#34;</span><span class="p">),</span><span class="o">&amp;</span><span class="n">Test</span><span class="o">::</span><span class="n">GetFlagValue</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="n">ClassDB</span><span class="o">::</span><span class="n">bind_method</span><span class="p">(</span><span class="n">D_METHOD</span><span class="p">(</span><span class="s">&#34;SetFlagValue&#34;</span><span class="p">,</span><span class="s">&#34;flag&#34;</span><span class="p">),</span><span class="o">&amp;</span><span class="n">Test</span><span class="o">::</span><span class="n">SetFlagValue</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="n">ADD_PROPERTY</span><span class="p">(</span><span class="n">PropertyInfo</span><span class="p">(</span><span class="n">Variant</span><span class="o">::</span><span class="n">INT</span><span class="p">,</span><span class="s">&#34;flag&#34;</span><span class="p">,</span><span class="n">PROPERTY_HINT_FLAGS</span><span class="p">,</span><span class="s">&#34;FlagNone , Flag1 , Flag2 , Flag3&#34;</span><span class="p">),</span><span class="s">&#34;SetFlagValue&#34;</span><span class="p">,</span><span class="s">&#34;GetFlagValue&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
@@ -1470,12 +1470,12 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">//----------------头文件----------------
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#ifndef TEST_H
+</span></span></span><span class="line"><span class="cl"><span class="cp">#ifndef TEST_H
 </span></span></span><span class="line"><span class="cl"><span class="cp">#define TEST_H
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;godot_cpp/classes/node3d.hpp&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;godot_cpp/classes/texture2d.hpp&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="k">namespace</span> <span class="n">godot</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Test</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Node3D</span>
@@ -1487,13 +1487,13 @@
 </span></span><span class="line"><span class="cl">    <span class="k">static</span> <span class="kt">void</span> <span class="n">_bind_methods</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span><span class="line"><span class="cl"><span class="cp">#endif
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">//----------------源文件----------------
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#include</span> <span class="cpf">&#34;Test.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;Test.h&#34;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;godot_cpp/core/class_db.hpp&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;godot_cpp/variant/utility_functions.hpp&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">Test</span><span class="o">::</span><span class="n">Test</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="n">connect</span><span class="p">(</span><span class="s">&#34;ready&#34;</span><span class="p">,</span><span class="n">Callable</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="s">&#34;StartTest2&#34;</span><span class="p">));</span>
@@ -1536,11 +1536,11 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">//godot对于内存管理有自己的封装，所以对于非原生类，需要用它定义的创建/删除方法。
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">memnew</span><span class="p">(</span><span class="n">ImageTexture</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="n">memnew</span><span class="p">(</span><span class="n">ImageTexture</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="n">memdelete</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">//一般使用引用计数来控制资源生命周期，而非手动管理
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Ref</span><span class="o">&lt;</span><span class="n">ImageTexture</span><span class="o">&gt;</span> <span class="n">AA</span><span class="p">(</span><span class="n">memnew</span><span class="p">(</span><span class="n">ImageTexture</span><span class="p">));</span>
+</span></span></span><span class="line"><span class="cl"><span class="n">Ref</span><span class="o">&lt;</span><span class="n">ImageTexture</span><span class="o">&gt;</span> <span class="n">AA</span><span class="p">(</span><span class="n">memnew</span><span class="p">(</span><span class="n">ImageTexture</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl"><span class="n">UtilityFunctions</span><span class="o">::</span><span class="n">print</span><span class="p">(</span><span class="s">&#34;reference count:&#34;</span><span class="p">,</span><span class="n">AA</span><span class="o">-&gt;</span><span class="n">get_reference_count</span><span class="p">());</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -1567,9 +1567,9 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">// 备注：没有内存泄漏风险。Ref自动管理了内存
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">Ref</span><span class="o">&lt;</span><span class="n">Tween</span><span class="o">&gt;</span> <span class="n">tween</span> <span class="o">=</span> <span class="n">create_tween</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">Ref</span><span class="o">&lt;</span><span class="n">Tween</span><span class="o">&gt;</span> <span class="n">tween</span> <span class="o">=</span> <span class="n">create_tween</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">    <span class="kt">double</span> <span class="n">Index</span> <span class="o">=</span> <span class="n">Duration</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.0f</span> <span class="o">*</span> <span class="n">Times</span><span class="p">);</span> <span class="c1">// Times是闪烁次数也是循环次数，Index是闪烁间隔
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">Times</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">Times</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="n">tween</span><span class="o">-&gt;</span><span class="n">tween_property</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="s">&#34;modulate:a&#34;</span><span class="p">,</span> <span class="mf">0.0f</span><span class="p">,</span> <span class="n">Index</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        <span class="n">tween</span><span class="o">-&gt;</span><span class="n">tween_property</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="s">&#34;modulate:a&#34;</span><span class="p">,</span> <span class="mf">1.0f</span><span class="p">,</span> <span class="n">Index</span><span class="p">);</span>
@@ -1675,12 +1675,12 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">//======================头文件========================
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#pragma once
+</span></span></span><span class="line"><span class="cl"><span class="cp">#pragma once
 </span></span></span><span class="line"><span class="cl"><span class="cp">#ifndef SPLINE_GIZMO_PLUGIN_H
 </span></span></span><span class="line"><span class="cl"><span class="cp">#define SPLINE_GIZMO_PLUGIN_H
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;godot_cpp/classes/editor_node3d_gizmo_plugin.hpp&#34;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="k">namespace</span> <span class="n">godot</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">SplineGizmoPlugin</span> <span class="o">:</span> <span class="k">public</span> <span class="n">EditorNode3DGizmoPlugin</span>
@@ -1692,7 +1692,7 @@
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">	<span class="c1">// virtual bool _has_gizmo(Node3D *p_for_node_3d) const override;
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">	<span class="k">virtual</span> <span class="n">Ref</span><span class="o">&lt;</span><span class="n">EditorNode3DGizmo</span><span class="o">&gt;</span> <span class="n">_create_gizmo</span><span class="p">(</span><span class="n">Node3D</span> <span class="o">*</span><span class="n">p_for_node_3d</span><span class="p">)</span> <span class="k">const</span> <span class="k">override</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">_redraw</span><span class="p">(</span><span class="k">const</span> <span class="n">Ref</span><span class="o">&lt;</span><span class="n">EditorNode3DGizmo</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">p_gizmo</span><span class="p">)</span> <span class="k">override</span><span class="p">;</span>
@@ -1700,29 +1700,29 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="s">&#34;SplineGizmo&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// virtual int32_t _get_priority() const override{
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//     return -1;
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// }
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">};</span>
+</span></span></span><span class="line"><span class="cl">    <span class="c1">//     return -1;
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// }
+</span></span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="cp">#endif 
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">//======================源文件========================
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#include</span> <span class="cpf">&#34;SplineGizmoPlugin.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;SplineGizmoPlugin.h&#34;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;Spline.h&#34;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;SplineGizmo.h&#34;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;godot_cpp/classes/object.hpp&#34;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;godot_cpp/core/memory.hpp&#34;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;godot_cpp/variant/utility_functions.hpp&#34;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// bool SplineGizmoPlugin::_has_gizmo(Node3D *p_for_node_3d) const {
 </span></span></span><span class="line"><span class="cl"><span class="c1">//     UtilityFunctions::print(&#34;SplineGizmoPlugin::_has_gizmo :: AAAAAAAAAAAA&#34;);
 </span></span></span><span class="line"><span class="cl"><span class="c1">//     UtilityFunctions::print(__FUNCTION__,p_for_node_3d-&gt;get_name());
 </span></span></span><span class="line"><span class="cl"><span class="c1">//     return Object::cast_to&lt;Spline&gt;(p_for_node_3d) != nullptr;
 </span></span></span><span class="line"><span class="cl"><span class="c1">// }
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">Ref</span><span class="o">&lt;</span><span class="n">EditorNode3DGizmo</span><span class="o">&gt;</span> <span class="n">SplineGizmoPlugin</span><span class="o">::</span><span class="n">_create_gizmo</span><span class="p">(</span><span class="n">Node3D</span> <span class="o">*</span><span class="n">p_for_node_3d</span><span class="p">)</span> <span class="k">const</span><span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="n">UtilityFunctions</span><span class="o">::</span><span class="n">print</span><span class="p">(</span><span class="s">&#34;SplineGizmoPlugin::_create_gizmo :: Try to create gizmo for :: &#34;</span><span class="p">,</span><span class="n">p_for_node_3d</span><span class="o">-&gt;</span><span class="n">get_name</span><span class="p">());</span>
 </span></span><span class="line"><span class="cl">
@@ -1895,19 +1895,19 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">//======================头文件========================
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#pragma once
+</span></span></span><span class="line"><span class="cl"><span class="cp">#pragma once
 </span></span></span><span class="line"><span class="cl"><span class="cp">#ifndef SPLINE_GIZMO_H
 </span></span></span><span class="line"><span class="cl"><span class="cp">#define SPLINE_GIZMO_H
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;Spline.h&#34;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;godot_cpp/classes/node3d.hpp&#34;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// #include &#34;godot_cpp/classes/editor_node3d_gizmo_plugin.hpp&#34;
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#include</span> <span class="cpf">&#34;godot_cpp/classes/editor_node3d_gizmo.hpp&#34;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="c1">// #include &#34;godot_cpp/classes/node3d_gizmo.hpp&#34;
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#include</span> <span class="cpf">&#34;godot_cpp/classes/camera3d.hpp&#34;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;godot_cpp/classes/editor_node3d_gizmo.hpp&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="c1">// #include &#34;godot_cpp/classes/node3d_gizmo.hpp&#34;
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;godot_cpp/classes/camera3d.hpp&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="k">namespace</span> <span class="n">godot</span><span class="p">;</span>
@@ -1933,10 +1933,10 @@
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="cp">#endif 
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">//======================源文件========================
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#include</span> <span class="cpf">&#34;SplineGizmo.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;SplineGizmo.h&#34;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;Spline.h&#34;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;godot_cpp/classes/object.hpp&#34;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;godot_cpp/classes/editor_node3d_gizmo_plugin.hpp&#34;</span><span class="cp">
@@ -1946,7 +1946,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;godot_cpp/variant/array.hpp&#34;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;godot_cpp/variant/utility_functions.hpp&#34;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;godot_cpp/variant/vector3.hpp&#34;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">SplineGizmo</span><span class="o">::</span><span class="n">SplineGizmo</span><span class="p">(</span><span class="n">Node3D</span> <span class="o">*</span><span class="n">p_node</span><span class="p">){</span>
 </span></span><span class="line"><span class="cl">    <span class="n">set_node_3d</span><span class="p">(</span><span class="n">p_node</span><span class="p">);</span>
@@ -1992,7 +1992,7 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">SplineGizmo</span><span class="o">::</span><span class="n">_set_handle</span><span class="p">(</span><span class="kt">int32_t</span> <span class="n">p_id</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">p_secondary</span><span class="p">,</span> <span class="n">Camera3D</span> <span class="o">*</span><span class="n">p_camera</span><span class="p">,</span> <span class="k">const</span> <span class="n">Vector2</span> <span class="o">&amp;</span><span class="n">p_point</span><span class="p">){</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// UtilityFunctions::print(&#34;SplineGizmo::_set_handle :: id :: &#34;, p_id , &#34; , Screen Point :: &#34;, p_point );
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">SplineInstance</span> <span class="o">||</span> <span class="o">!</span><span class="n">p_camera</span> <span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">SplineInstance</span> <span class="o">||</span> <span class="o">!</span><span class="n">p_camera</span> <span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="k">return</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
@@ -2005,17 +2005,17 @@
 </span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">Vector3</span> <span class="n">ray_d</span> <span class="o">=</span> <span class="n">p_camera</span><span class="o">-&gt;</span><span class="n">project_ray_normal</span><span class="p">(</span><span class="n">p_point</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// UtilityFunctions::print(&#34;SplineGizmo::_set_handle :: id :: &#34;, p_id , &#34; , ray_o :: &#34;,ray_o,&#34; , ray_d :: &#34;,ray_d);
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// 构造“屏幕平面”：过当前把手点，法线 = 相机前向（-Z 列）
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">const</span> <span class="n">Vector3</span> <span class="n">cam_fwd</span> <span class="o">=</span> <span class="o">-</span><span class="n">p_camera</span><span class="o">-&gt;</span><span class="n">get_global_transform</span><span class="p">().</span><span class="n">basis</span><span class="p">.</span><span class="n">get_column</span><span class="p">(</span><span class="mi">2</span><span class="p">).</span><span class="n">normalized</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">Vector3</span> <span class="n">cam_fwd</span> <span class="o">=</span> <span class="o">-</span><span class="n">p_camera</span><span class="o">-&gt;</span><span class="n">get_global_transform</span><span class="p">().</span><span class="n">basis</span><span class="p">.</span><span class="n">get_column</span><span class="p">(</span><span class="mi">2</span><span class="p">).</span><span class="n">normalized</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">    <span class="n">Plane</span> <span class="nf">view_plane</span><span class="p">(</span><span class="n">cam_fwd</span><span class="p">,</span> <span class="n">WorldLocation</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// UtilityFunctions::print(&#34;cam_fwd :: &#34;, cam_fwd );
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="n">Vector3</span> <span class="n">hit</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">view_plane</span><span class="p">.</span><span class="n">intersects_ray</span><span class="p">(</span><span class="n">ray_o</span><span class="p">,</span> <span class="n">ray_d</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">hit</span><span class="p">))</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// 射线与平面近平行，忽略这帧
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">return</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">        <span class="k">return</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    <span class="n">UtilityFunctions</span><span class="o">::</span><span class="n">print</span><span class="p">(</span><span class="s">&#34;Hit :: &#34;</span><span class="p">,</span><span class="n">hit</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
@@ -2126,7 +2126,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">//=================类的定义=======================
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">class</span> <span class="nc">MyEditorPlugin</span> <span class="o">:</span> <span class="k">public</span> <span class="n">EditorPlugin</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">MyEditorPlugin</span> <span class="o">:</span> <span class="k">public</span> <span class="n">EditorPlugin</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="n">GDCLASS</span><span class="p">(</span><span class="n">MyEditorPlugin</span><span class="p">,</span> <span class="n">EditorPlugin</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="n">Ref</span><span class="o">&lt;</span><span class="n">SplineGizmoPlugin</span><span class="o">&gt;</span> <span class="n">gizmo_plugin</span><span class="p">;</span>
@@ -2156,7 +2156,7 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">//==================使用示例=======================
 </span></span></span><span class="line"><span class="cl"><span class="c1">//==================register_types.cpp=======================
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">initialize_GodotTest_module</span><span class="p">(</span><span class="n">ModuleInitializationLevel</span> <span class="n">p_level</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">initialize_GodotTest_module</span><span class="p">(</span><span class="n">ModuleInitializationLevel</span> <span class="n">p_level</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">p_level</span> <span class="o">==</span> <span class="n">MODULE_INITIALIZATION_LEVEL_SCENE</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="n">UtilityFunctions</span><span class="o">::</span><span class="n">print</span><span class="p">(</span><span class="s">&#34;Init :: Scene&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        <span class="n">GDREGISTER_CLASS</span><span class="p">(</span><span class="n">FowTexture</span><span class="p">);</span>
@@ -2246,6 +2246,19 @@
         <div class="flex article-list--tile">
             
                 
+<article class="">
+    <a href="/p/godot-4.4-%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Godot 4.4 启动参数完整指南</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
 <article class="has-image">
     <a href="/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/">
         
@@ -2316,25 +2329,6 @@
 
         <div class="article-details">
             <h2 class="article-title">【godot】二、Modules开发指南</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/p/godot%E4%B8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/">
-        
-        
-            <div class="article-image">
-                
-                    <img src="/guidao4.jpg" loading="lazy" data-key="" data-hash="/guidao4.jpg"/>
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">【godot】一、开发环境部署及示例</h2>
         </div>
     </a>
 </article>

@@ -59,7 +59,7 @@
                     
                     
                         
-                        <img src="/img/guidao1Icon_hu_f3a3851d912f0a8d.png" width="300"
+                        <img src="/img/guidao1Icon_hu_4c95e88ebc9c8e46.png" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -487,47 +487,47 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;core/variant/array.h&#34;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;core/variant/variant.h&#34;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">demo_array</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// --- 创建 (Create) ---
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">Array</span> <span class="n">arr</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">Array</span> <span class="n">arr</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// 也可以创建并指定为特定类型的数组（例如只存 int）
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// Array typed_arr;
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// typed_arr.set_typed(Variant::INT, StringName(), Variant());
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// Array typed_arr;
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// typed_arr.set_typed(Variant::INT, StringName(), Variant());
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// --- 增 (Add) ---
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">arr</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>          <span class="c1">// 自动封装为 Variant(10)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">arr</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#34;Hello&#34;</span><span class="p">);</span>        <span class="c1">// 自动封装为 Variant(&#34;Hello&#34;)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">arr</span><span class="p">.</span><span class="n">push_front</span><span class="p">(</span><span class="mf">3.14</span><span class="p">);</span>       <span class="c1">// 插入到头部
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    
+</span></span></span><span class="line"><span class="cl">    <span class="n">arr</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>          <span class="c1">// 自动封装为 Variant(10)
+</span></span></span><span class="line"><span class="cl">    <span class="n">arr</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#34;Hello&#34;</span><span class="p">);</span>        <span class="c1">// 自动封装为 Variant(&#34;Hello&#34;)
+</span></span></span><span class="line"><span class="cl">    <span class="n">arr</span><span class="p">.</span><span class="n">push_front</span><span class="p">(</span><span class="mf">3.14</span><span class="p">);</span>       <span class="c1">// 插入到头部
+</span></span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 此时数组内容可能为: [3.14, 10, &#34;Hello&#34;]
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// --- 查 (Read) ---
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">arr</span><span class="p">.</span><span class="n">is_empty</span><span class="p">())</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">arr</span><span class="p">.</span><span class="n">is_empty</span><span class="p">())</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// operator[] 返回的是 Variant &amp;
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">Variant</span> <span class="n">v</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> 
+</span></span></span><span class="line"><span class="cl">        <span class="n">Variant</span> <span class="n">v</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> 
 </span></span><span class="line"><span class="cl">        
 </span></span><span class="line"><span class="cl">        <span class="c1">// 需要根据类型转换
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">v</span><span class="p">.</span><span class="n">get_type</span><span class="p">()</span> <span class="o">==</span> <span class="n">Variant</span><span class="o">::</span><span class="n">FLOAT</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">v</span><span class="p">.</span><span class="n">get_type</span><span class="p">()</span> <span class="o">==</span> <span class="n">Variant</span><span class="o">::</span><span class="n">FLOAT</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="kt">double</span> <span class="n">d</span> <span class="o">=</span> <span class="n">v</span><span class="p">;</span> <span class="c1">// 自动转型操作符
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">print_line</span><span class="p">(</span><span class="n">rtos</span><span class="p">(</span><span class="n">d</span><span class="p">));</span>
+</span></span></span><span class="line"><span class="cl">            <span class="n">print_line</span><span class="p">(</span><span class="n">rtos</span><span class="p">(</span><span class="n">d</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// 遍历
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">arr</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">arr</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="n">Variant</span> <span class="n">item</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// print_line(item); // Variant 重载了 String 转换
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// --- 改 (Update) ---
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">arr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#34;New Value&#34;</span><span class="p">;</span> <span class="c1">// 将索引 1 的 10 改为字符串
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">arr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#34;New Value&#34;</span><span class="p">;</span> <span class="c1">// 将索引 1 的 10 改为字符串
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// --- 删 (Delete) ---
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">arr</span><span class="p">.</span><span class="n">remove_at</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span> <span class="c1">// 移除第一个元素
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">arr</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="s">&#34;New Value&#34;</span><span class="p">);</span> <span class="c1">// 移除匹配值的元素（线性查找）
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">arr</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">arr</span><span class="p">.</span><span class="n">remove_at</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span> <span class="c1">// 移除第一个元素
+</span></span></span><span class="line"><span class="cl">    <span class="n">arr</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="s">&#34;New Value&#34;</span><span class="p">);</span> <span class="c1">// 移除匹配值的元素（线性查找）
+</span></span></span><span class="line"><span class="cl">    <span class="n">arr</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -585,44 +585,44 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;core/variant/dictionary.h&#34;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;core/variant/variant.h&#34;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">demo_dictionary</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// --- 创建 (Create) ---
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">Dictionary</span> <span class="n">dict</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">Dictionary</span> <span class="n">dict</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// --- 增 (Add) / 改 (Update) ---
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">dict</span><span class="p">[</span><span class="s">&#34;name&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#34;Godot&#34;</span><span class="p">;</span>      <span class="c1">// 键是 String, 值是 String
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">dict</span><span class="p">[</span><span class="mi">100</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#34;One Hundred&#34;</span><span class="p">;</span>   <span class="c1">// 键是 int, 值是 String
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    
+</span></span></span><span class="line"><span class="cl">    <span class="n">dict</span><span class="p">[</span><span class="s">&#34;name&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#34;Godot&#34;</span><span class="p">;</span>      <span class="c1">// 键是 String, 值是 String
+</span></span></span><span class="line"><span class="cl">    <span class="n">dict</span><span class="p">[</span><span class="mi">100</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#34;One Hundred&#34;</span><span class="p">;</span>   <span class="c1">// 键是 int, 值是 String
+</span></span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 也可以作为左值修改
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">dict</span><span class="p">[</span><span class="s">&#34;name&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#34;Godot Engine&#34;</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">dict</span><span class="p">[</span><span class="s">&#34;name&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#34;Godot Engine&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// --- 查 (Read) ---
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 检查键是否存在
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">dict</span><span class="p">.</span><span class="n">has</span><span class="p">(</span><span class="s">&#34;name&#34;</span><span class="p">))</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// 检查键是否存在
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">dict</span><span class="p">.</span><span class="n">has</span><span class="p">(</span><span class="s">&#34;name&#34;</span><span class="p">))</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="n">Variant</span> <span class="n">v</span> <span class="o">=</span> <span class="n">dict</span><span class="p">[</span><span class="s">&#34;name&#34;</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">        <span class="n">String</span> <span class="n">s</span> <span class="o">=</span> <span class="n">v</span><span class="p">;</span> 
 </span></span><span class="line"><span class="cl">        <span class="n">print_line</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// 安全获取（带默认值）
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 如果 &#34;score&#34; 不存在，返回 0
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">score</span> <span class="o">=</span> <span class="n">dict</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#34;score&#34;</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// 如果 &#34;score&#34; 不存在，返回 0
+</span></span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">score</span> <span class="o">=</span> <span class="n">dict</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#34;score&#34;</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// 遍历
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 注意：遍历字典通常遍历的是 Key
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">List</span><span class="o">&lt;</span><span class="n">Variant</span><span class="o">&gt;</span> <span class="n">keys</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// 注意：遍历字典通常遍历的是 Key
+</span></span></span><span class="line"><span class="cl">    <span class="n">List</span><span class="o">&lt;</span><span class="n">Variant</span><span class="o">&gt;</span> <span class="n">keys</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="n">dict</span><span class="p">.</span><span class="n">get_key_list</span><span class="p">(</span><span class="o">&amp;</span><span class="n">keys</span><span class="p">);</span> <span class="c1">// 获取所有 key 到一个 List 中
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    
+</span></span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="n">Variant</span> <span class="o">&amp;</span><span class="nl">key</span> <span class="p">:</span> <span class="n">keys</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="n">Variant</span> <span class="n">value</span> <span class="o">=</span> <span class="n">dict</span><span class="p">[</span><span class="n">key</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">        <span class="n">print_line</span><span class="p">(</span><span class="n">String</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#34; : &#34;</span> <span class="o">+</span> <span class="n">String</span><span class="p">(</span><span class="n">value</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// --- 删 (Delete) ---
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">dict</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span> <span class="c1">// 删除键为 100 的条目
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">bool</span> <span class="n">removed</span> <span class="o">=</span> <span class="n">dict</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="s">&#34;name&#34;</span><span class="p">);</span> <span class="c1">// 返回是否删除成功
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">dict</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span> <span class="c1">// 删除键为 100 的条目
+</span></span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">removed</span> <span class="o">=</span> <span class="n">dict</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="s">&#34;name&#34;</span><span class="p">);</span> <span class="c1">// 返回是否删除成功
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="godot底层容器">Godot底层容器
@@ -670,30 +670,30 @@
 <pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">Vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">v</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 增：尾部插入
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">v</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="n">v</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="n">v</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="n">v</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">30</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 查：按下标访问
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>           <span class="c1">// 20
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="n">v</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>    <span class="c1">// 3
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>           <span class="c1">// 20
+</span></span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="n">v</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>    <span class="c1">// 3
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 改：修改某个元素
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">v</span><span class="p">.</span><span class="n">write</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">200</span><span class="p">;</span>  <span class="c1">// Godot 4 的 Vector 用 write[]
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="c1">// 有些版本是 `v.set(1, 200);`
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="c1">// 或 `v[1] = 200`（取决于绑定）
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl"><span class="n">v</span><span class="p">.</span><span class="n">write</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">200</span><span class="p">;</span>  <span class="c1">// Godot 4 的 Vector 用 write[]
+</span></span></span><span class="line"><span class="cl">                    <span class="c1">// 有些版本是 `v.set(1, 200);`
+</span></span></span><span class="line"><span class="cl">                    <span class="c1">// 或 `v[1] = 200`（取决于绑定）
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 查：遍历
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">v</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">v</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="n">print_line</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 删：按下标删除
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">v</span><span class="p">.</span><span class="n">remove_at</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>   <span class="c1">// 删除第 0 个元素，现在内容 [200, 30]
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl"><span class="n">v</span><span class="p">.</span><span class="n">remove_at</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>   <span class="c1">// 删除第 0 个元素，现在内容 [200, 30]
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 查：是否包含某值（简单类型可以这样）
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="n">idx</span> <span class="o">=</span> <span class="n">v</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="mi">30</span><span class="p">);</span>   <span class="c1">// 找到则返回 index，否则 -1
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">if</span> <span class="p">(</span><span class="n">idx</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">idx</span> <span class="o">=</span> <span class="n">v</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="mi">30</span><span class="p">);</span>   <span class="c1">// 找到则返回 index，否则 -1
+</span></span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">idx</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="n">print_line</span><span class="p">(</span><span class="s">&#34;found 30 at &#34;</span><span class="p">,</span> <span class="n">idx</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
@@ -749,42 +749,42 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;core/templates/vmap.h&#34;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">demo_vmap</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="n">VMap</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">player_names</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// --- 增 (Add) ---
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 注意：insert 会检查键是否存在，存在则覆盖，不存在则保持排序插入
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">player_names</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s">&#34;Alice&#34;</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// 注意：insert 会检查键是否存在，存在则覆盖，不存在则保持排序插入
+</span></span></span><span class="line"><span class="cl">    <span class="n">player_names</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s">&#34;Alice&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="n">player_names</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s">&#34;Bob&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="n">player_names</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s">&#34;Boss&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// --- 查 (Read) ---
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 检查是否存在
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">player_names</span><span class="p">.</span><span class="n">has</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// 检查是否存在
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">player_names</span><span class="p">.</span><span class="n">has</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// 获取值，如果 key 不存在会 crash，所以最好先检查 has
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">String</span> <span class="n">name</span> <span class="o">=</span> <span class="n">player_names</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span> 
+</span></span></span><span class="line"><span class="cl">        <span class="n">String</span> <span class="n">name</span> <span class="o">=</span> <span class="n">player_names</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span> 
 </span></span><span class="line"><span class="cl">        
 </span></span><span class="line"><span class="cl">        <span class="c1">// 或者使用 getptr，如果不存在返回 nullptr
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">const</span> <span class="n">String</span> <span class="o">*</span><span class="n">name_ptr</span> <span class="o">=</span> <span class="n">player_names</span><span class="p">.</span><span class="n">getptr</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">        <span class="k">const</span> <span class="n">String</span> <span class="o">*</span><span class="n">name_ptr</span> <span class="o">=</span> <span class="n">player_names</span><span class="p">.</span><span class="n">getptr</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 查找索引（用于遍历内部 vector）
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">idx</span> <span class="o">=</span> <span class="n">player_names</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span> <span class="c1">// 返回内部 vector 的 index
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">idx</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">idx</span> <span class="o">=</span> <span class="n">player_names</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span> <span class="c1">// 返回内部 vector 的 index
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">idx</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// 通过 vector 索引访问
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">String</span> <span class="n">val</span> <span class="o">=</span> <span class="n">player_names</span><span class="p">.</span><span class="n">get_value_at_index</span><span class="p">(</span><span class="n">idx</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">        <span class="n">String</span> <span class="n">val</span> <span class="o">=</span> <span class="n">player_names</span><span class="p">.</span><span class="n">get_value_at_index</span><span class="p">(</span><span class="n">idx</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// --- 改 (Update) ---
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">player_names</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s">&#34;AliceUpdated&#34;</span><span class="p">);</span> <span class="c1">// insert 兼具更新功能
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    
+</span></span></span><span class="line"><span class="cl">    <span class="n">player_names</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s">&#34;AliceUpdated&#34;</span><span class="p">);</span> <span class="c1">// insert 兼具更新功能
+</span></span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 如果你有索引，也可以通过索引改
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// player_names.get_value_at_index(0) = &#34;NewName&#34;;
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// player_names.get_value_at_index(0) = &#34;NewName&#34;;
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// --- 删 (Delete) ---
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">player_names</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span> <span class="c1">// 移除 key 为 10 的元素
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">player_names</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span> <span class="c1">// 移除 key 为 10 的元素
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="listt"><code>List&lt;T&gt;</code>
@@ -882,84 +882,84 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;core/templates/list.h&#34;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;core/string/ustring.h&#34;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">demo_list</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// --- 1. 创建 (Create) ---
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">chat_log</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">chat_log</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// --- 2. 增 (Add) ---
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 尾部添加 O(1)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">chat_log</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="s">&#34;Player joined&#34;</span><span class="p">);</span> 
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// 尾部添加 O(1)
+</span></span></span><span class="line"><span class="cl">    <span class="n">chat_log</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="s">&#34;Player joined&#34;</span><span class="p">);</span> 
 </span></span><span class="line"><span class="cl">    <span class="n">chat_log</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="s">&#34;Player said: Hello&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 头部添加 O(1) - 适合做队列
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">chat_log</span><span class="p">.</span><span class="n">push_front</span><span class="p">(</span><span class="s">&#34;System: Welcome&#34;</span><span class="p">);</span> 
+</span></span></span><span class="line"><span class="cl">    <span class="n">chat_log</span><span class="p">.</span><span class="n">push_front</span><span class="p">(</span><span class="s">&#34;System: Welcome&#34;</span><span class="p">);</span> 
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// 在特定位置插入
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// List 的插入通常依赖于 Element 指针
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;::</span><span class="n">Element</span> <span class="o">*</span><span class="n">E</span> <span class="o">=</span> <span class="n">chat_log</span><span class="p">.</span><span class="n">front</span><span class="p">();</span> <span class="c1">// 获取第一个节点 (&#34;System: Welcome&#34;)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">E</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// List 的插入通常依赖于 Element 指针
+</span></span></span><span class="line"><span class="cl">    <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;::</span><span class="n">Element</span> <span class="o">*</span><span class="n">E</span> <span class="o">=</span> <span class="n">chat_log</span><span class="p">.</span><span class="n">front</span><span class="p">();</span> <span class="c1">// 获取第一个节点 (&#34;System: Welcome&#34;)
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">E</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// 在第一个节点后面插入
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">chat_log</span><span class="p">.</span><span class="n">insert_after</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="s">&#34;System: Message of the day&#34;</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">        <span class="n">chat_log</span><span class="p">.</span><span class="n">insert_after</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="s">&#34;System: Message of the day&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// 此时顺序: 
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// [0] System: Welcome
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// [1] System: Message of the day
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// [2] Player joined
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// [3] Player said: Hello
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// [0] System: Welcome
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// [1] System: Message of the day
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// [2] Player joined
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// [3] Player said: Hello
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// --- 3. 查 (Read) ---
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    
+</span></span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// A. 访问头尾 O(1)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">chat_log</span><span class="p">.</span><span class="n">is_empty</span><span class="p">())</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">chat_log</span><span class="p">.</span><span class="n">is_empty</span><span class="p">())</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="n">String</span> <span class="n">first</span> <span class="o">=</span> <span class="n">chat_log</span><span class="p">.</span><span class="n">front</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">        <span class="n">String</span> <span class="n">last</span> <span class="o">=</span> <span class="n">chat_log</span><span class="p">.</span><span class="n">back</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// B. 遍历 (推荐方式 1: 范围 for 循环 - Godot 4.x)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="n">String</span> <span class="o">&amp;</span><span class="nl">msg</span> <span class="p">:</span> <span class="n">chat_log</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="n">String</span> <span class="o">&amp;</span><span class="nl">msg</span> <span class="p">:</span> <span class="n">chat_log</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="n">print_line</span><span class="p">(</span><span class="s">&#34;Log: &#34;</span> <span class="o">+</span> <span class="n">msg</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// C. 遍历 (传统方式/手动方式: 使用 Element 指针)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 这种方式在你需要操作节点(如删除当前节点)时很有用
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">for</span> <span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;::</span><span class="n">Element</span> <span class="o">*</span><span class="n">E</span> <span class="o">=</span> <span class="n">chat_log</span><span class="p">.</span><span class="n">front</span><span class="p">();</span> <span class="n">E</span><span class="p">;</span> <span class="n">E</span> <span class="o">=</span> <span class="n">E</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">())</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// 这种方式在你需要操作节点(如删除当前节点)时很有用
+</span></span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;::</span><span class="n">Element</span> <span class="o">*</span><span class="n">E</span> <span class="o">=</span> <span class="n">chat_log</span><span class="p">.</span><span class="n">front</span><span class="p">();</span> <span class="n">E</span><span class="p">;</span> <span class="n">E</span> <span class="o">=</span> <span class="n">E</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">())</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// E 是节点指针，E-&gt;get() 获取值
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">E</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">()</span> <span class="o">==</span> <span class="s">&#34;Player joined&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">E</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">()</span> <span class="o">==</span> <span class="s">&#34;Player joined&#34;</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="n">print_line</span><span class="p">(</span><span class="s">&#34;Found join event!&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// D. 随机访问 (警告：极慢！)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// List 重载了 []，但它是 O(N) 的，不建议在循环中使用
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// String val = chat_log[2]; // 性能差，慎用
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// List 重载了 []，但它是 O(N) 的，不建议在循环中使用
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// String val = chat_log[2]; // 性能差，慎用
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// --- 4. 改 (Update) ---
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 通过节点指针直接修改
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;::</span><span class="n">Element</span> <span class="o">*</span><span class="n">msg_node</span> <span class="o">=</span> <span class="n">chat_log</span><span class="p">.</span><span class="n">back</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// 通过节点指针直接修改
+</span></span></span><span class="line"><span class="cl">    <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;::</span><span class="n">Element</span> <span class="o">*</span><span class="n">msg_node</span> <span class="o">=</span> <span class="n">chat_log</span><span class="p">.</span><span class="n">back</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">msg_node</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="n">msg_node</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">()</span> <span class="o">=</span> <span class="s">&#34;Player said: Bye&#34;</span><span class="p">;</span> <span class="c1">// 修改值
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// --- 5. 删 (Delete) ---
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    
+</span></span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// A. 移除头尾 O(1)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">chat_log</span><span class="p">.</span><span class="n">pop_front</span><span class="p">();</span> <span class="c1">// 移除第一个
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">chat_log</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>  <span class="c1">// 移除最后一个
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">chat_log</span><span class="p">.</span><span class="n">pop_front</span><span class="p">();</span> <span class="c1">// 移除第一个
+</span></span></span><span class="line"><span class="cl">    <span class="n">chat_log</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>  <span class="c1">// 移除最后一个
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// B. 移除特定值 O(N) - 需要查找
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">chat_log</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="s">&#34;Player joined&#34;</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">chat_log</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="s">&#34;Player joined&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// C. 通过迭代器移除 O(1) - 最高效的中间删除方式
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;::</span><span class="n">Element</span> <span class="o">*</span><span class="n">node_to_delete</span> <span class="o">=</span> <span class="n">chat_log</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;::</span><span class="n">Element</span> <span class="o">*</span><span class="n">node_to_delete</span> <span class="o">=</span> <span class="n">chat_log</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 假设我们找到了要删的节点指针
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">node_to_delete</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">node_to_delete</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="n">chat_log</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">node_to_delete</span><span class="p">);</span> <span class="c1">// 直接把这个节点摘除
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// 清空
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">chat_log</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">chat_log</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -1003,35 +1003,35 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;core/templates/vset.h&#34;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">demo_vset</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="n">VSet</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">unique_ids</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// --- 增 (Add) ---
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">unique_ids</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">50</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">unique_ids</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">50</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="n">unique_ids</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="n">unique_ids</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">50</span><span class="p">);</span> <span class="c1">// 重复插入无效，集合中只有一个 50
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 此时内部状态为有序：[10, 50]
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// 此时内部状态为有序：[10, 50]
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// --- 查 (Read) ---
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">unique_ids</span><span class="p">.</span><span class="n">has</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">unique_ids</span><span class="p">.</span><span class="n">has</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="n">print_line</span><span class="p">(</span><span class="s">&#34;ID 10 exists&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 查找索引
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">idx</span> <span class="o">=</span> <span class="n">unique_ids</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="mi">50</span><span class="p">);</span> <span class="c1">// 返回 1
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">idx</span> <span class="o">=</span> <span class="n">unique_ids</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="mi">50</span><span class="p">);</span> <span class="c1">// 返回 1
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// 遍历
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">unique_ids</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">unique_ids</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">val</span> <span class="o">=</span> <span class="n">unique_ids</span><span class="p">[</span><span class="n">i</span><span class="p">];</span> <span class="c1">// 像数组一样访问
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// --- 改 (Update) ---
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// Set 通常不直接修改元素值（因为这会破坏排序），
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 而是先 erase 旧值，再 insert 新值。
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// Set 通常不直接修改元素值（因为这会破坏排序），
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// 而是先 erase 旧值，再 insert 新值。
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// --- 删 (Delete) ---
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">unique_ids</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">unique_ids</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -1080,36 +1080,36 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;core/templates/hash_map.h&#34;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">demo_hashmap</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">inventory</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// --- 增 (Add) / 改 (Update) ---
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">inventory</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="s">&#34;Apple&#34;</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">inventory</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="s">&#34;Apple&#34;</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="n">inventory</span><span class="p">[</span><span class="s">&#34;Banana&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span> <span class="c1">// 类似 std::map，如果不存在则创建，存在则更新
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">inventory</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="s">&#34;Apple&#34;</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span> <span class="c1">// 更新 Apple 的值为 8
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">inventory</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="s">&#34;Apple&#34;</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span> <span class="c1">// 更新 Apple 的值为 8
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// --- 查 (Read) ---
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">inventory</span><span class="p">.</span><span class="n">has</span><span class="p">(</span><span class="s">&#34;Banana&#34;</span><span class="p">))</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">inventory</span><span class="p">.</span><span class="n">has</span><span class="p">(</span><span class="s">&#34;Banana&#34;</span><span class="p">))</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="n">inventory</span><span class="p">[</span><span class="s">&#34;Banana&#34;</span><span class="p">];</span> <span class="c1">// 获取值
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// 使用 find 获取迭代器/指针，避免两次哈希计算
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;::</span><span class="n">Iterator</span> <span class="n">E</span> <span class="o">=</span> <span class="n">inventory</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#34;Apple&#34;</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;::</span><span class="n">Iterator</span> <span class="n">E</span> <span class="o">=</span> <span class="n">inventory</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#34;Apple&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">E</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">val</span> <span class="o">=</span> <span class="n">E</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// E-&gt;key 获取键
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 遍历
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="n">KeyValue</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="nl">E</span> <span class="p">:</span> <span class="n">inventory</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="n">KeyValue</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="nl">E</span> <span class="p">:</span> <span class="n">inventory</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="n">print_line</span><span class="p">(</span><span class="n">E</span><span class="p">.</span><span class="n">key</span> <span class="o">+</span> <span class="s">&#34;: &#34;</span> <span class="o">+</span> <span class="n">itos</span><span class="p">(</span><span class="n">E</span><span class="p">.</span><span class="n">value</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// --- 删 (Delete) ---
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">inventory</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="s">&#34;Banana&#34;</span><span class="p">);</span> <span class="c1">// 如果存在则删除
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">bool</span> <span class="n">removed</span> <span class="o">=</span> <span class="n">inventory</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span><span class="s">&#34;Apple&#34;</span><span class="p">);</span> <span class="c1">// remove 也是删除
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">inventory</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="s">&#34;Banana&#34;</span><span class="p">);</span> <span class="c1">// 如果存在则删除
+</span></span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">removed</span> <span class="o">=</span> <span class="n">inventory</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span><span class="s">&#34;Apple&#34;</span><span class="p">);</span> <span class="c1">// remove 也是删除
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="rbmap">RBMap
@@ -1202,10 +1202,10 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">//基础构造函数，注意此处的method需要在_bind_method中被注册才能够通过字符串访问。
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Callable</span> <span class="n">c</span> <span class="o">=</span> <span class="n">Callable</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="s">&#34;_on_something&#34;</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="n">Callable</span> <span class="n">c</span> <span class="o">=</span> <span class="n">Callable</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="s">&#34;_on_something&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">//更安全高效的绑定
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Callable</span> <span class="n">c</span> <span class="o">=</span> <span class="n">callable_mp</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">MyClass</span><span class="o">::</span><span class="n">_on_timeout</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="n">Callable</span> <span class="n">c</span> <span class="o">=</span> <span class="n">callable_mp</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">MyClass</span><span class="o">::</span><span class="n">_on_timeout</span><span class="p">);</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="gui">gui
@@ -1303,7 +1303,7 @@ err_dialog_control-&gt;draw_line(Point2(0,0), Point2(100,100),Color(1,0,0));</p>
 <img src="/p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/image2.png"
 	width="679"
 	height="254"
-	srcset="/p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/image2_hu_20254e2a2d0f3f69.png 480w, /p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/image2_hu_a39251049943b494.png 1024w"
+	srcset="/p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/image2_hu_471b1875b77f0f2.png 480w, /p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/image2_hu_7180241c118e6673.png 1024w"
 	loading="lazy"
 	
 		alt="RichTextLabel"
@@ -1322,8 +1322,8 @@ err_dialog_control-&gt;draw_line(Point2(0,0), Point2(100,100),Color(1,0,0));</p>
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="n">screen_output_label</span><span class="o">-&gt;</span><span class="n">set_use_bbcode</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>	<span class="c1">//使用bbcode，开启才能正确显示[color=red]XXXX[\color]的bbcode格式文本
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">screen_output_label</span><span class="o">-&gt;</span><span class="n">set_fit_content</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>	<span class="c1">//自适应文本高度
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">screen_output_label</span><span class="o">-&gt;</span><span class="n">set_autowrap_mode</span><span class="p">(</span><span class="n">TextServer</span><span class="o">::</span><span class="n">AutowrapMode</span><span class="o">::</span><span class="n">AUTOWRAP_OFF</span><span class="p">);</span><span class="c1">//关闭宽度调整，与上方设置相结合，可以自适应宽高。
+</span></span></span><span class="line"><span class="cl"><span class="n">screen_output_label</span><span class="o">-&gt;</span><span class="n">set_fit_content</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>	<span class="c1">//自适应文本高度
+</span></span></span><span class="line"><span class="cl"><span class="n">screen_output_label</span><span class="o">-&gt;</span><span class="n">set_autowrap_mode</span><span class="p">(</span><span class="n">TextServer</span><span class="o">::</span><span class="n">AutowrapMode</span><span class="o">::</span><span class="n">AUTOWRAP_OFF</span><span class="p">);</span><span class="c1">//关闭宽度调整，与上方设置相结合，可以自适应宽高。
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="按钮类">按钮类
@@ -1340,7 +1340,7 @@ err_dialog_control-&gt;draw_line(Point2(0,0), Point2(100,100),Color(1,0,0));</p>
 <img src="/p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/image1.png"
 	width="645"
 	height="169"
-	srcset="/p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/image1_hu_b1b9eeef737f2294.png 480w, /p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/image1_hu_94fcd585b78f4e9a.png 1024w"
+	srcset="/p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/image1_hu_8de5fb112c68c811.png 480w, /p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/image1_hu_e9849d8ddd545b01.png 1024w"
 	loading="lazy"
 	
 		alt="OptionButton"
@@ -1386,22 +1386,22 @@ err_dialog_control-&gt;draw_line(Point2(0,0), Point2(100,100),Color(1,0,0));</p>
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 创建 OptionButton
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">option_button</span> <span class="o">=</span> <span class="n">memnew</span><span class="p">(</span><span class="n">OptionButton</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="n">option_button</span> <span class="o">=</span> <span class="n">memnew</span><span class="p">(</span><span class="n">OptionButton</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="n">add_child</span><span class="p">(</span><span class="n">option_button</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 添加选项
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">option_button</span><span class="o">-&gt;</span><span class="n">add_item</span><span class="p">(</span><span class="s">&#34;Easy&#34;</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="n">option_button</span><span class="o">-&gt;</span><span class="n">add_item</span><span class="p">(</span><span class="s">&#34;Easy&#34;</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="n">option_button</span><span class="o">-&gt;</span><span class="n">add_item</span><span class="p">(</span><span class="s">&#34;Normal&#34;</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="n">option_button</span><span class="o">-&gt;</span><span class="n">add_icon_item</span><span class="p">(</span><span class="n">p_icon</span><span class="p">,</span><span class="s">&#34;Hard&#34;</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 选择默认项
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">option_button</span><span class="o">-&gt;</span><span class="n">select</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="c1">// Normal
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl"><span class="n">option_button</span><span class="o">-&gt;</span><span class="n">select</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="c1">// Normal
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 绑定信号
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">option_button</span><span class="o">-&gt;</span><span class="n">connect</span><span class="p">(</span><span class="s">&#34;item_selected&#34;</span><span class="p">,</span> <span class="n">Callable</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="s">&#34;_on_item_selected&#34;</span><span class="p">));</span>
+</span></span></span><span class="line"><span class="cl"><span class="n">option_button</span><span class="o">-&gt;</span><span class="n">connect</span><span class="p">(</span><span class="s">&#34;item_selected&#34;</span><span class="p">,</span> <span class="n">Callable</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="s">&#34;_on_item_selected&#34;</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 加一个 Label 显示信息
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">info_label</span> <span class="o">=</span> <span class="n">memnew</span><span class="p">(</span><span class="n">Label</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="n">info_label</span> <span class="o">=</span> <span class="n">memnew</span><span class="p">(</span><span class="n">Label</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="n">info_label</span><span class="o">-&gt;</span><span class="n">set_position</span><span class="p">(</span><span class="n">Vector2</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">40</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl"><span class="n">add_child</span><span class="p">(</span><span class="n">info_label</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
@@ -1409,7 +1409,7 @@ err_dialog_control-&gt;draw_line(Point2(0,0), Point2(100,100),Color(1,0,0));</p>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 信号回调
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">_on_item_selected</span><span class="p">(</span><span class="kt">int</span> <span class="n">index</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">_on_item_selected</span><span class="p">(</span><span class="kt">int</span> <span class="n">index</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">id</span> <span class="o">=</span> <span class="n">option_button</span><span class="o">-&gt;</span><span class="n">get_item_id</span><span class="p">(</span><span class="n">index</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="n">String</span> <span class="n">name</span> <span class="o">=</span> <span class="n">option_button</span><span class="o">-&gt;</span><span class="n">get_item_text</span><span class="p">(</span><span class="n">index</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
@@ -1424,7 +1424,7 @@ err_dialog_control-&gt;draw_line(Point2(0,0), Point2(100,100),Color(1,0,0));</p>
 <img src="/p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/image3.png"
 	width="490"
 	height="119"
-	srcset="/p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/image3_hu_48210a221f578988.png 480w, /p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/image3_hu_c6b97798917e6ed2.png 1024w"
+	srcset="/p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/image3_hu_6b7dab717ad5a16.png 480w, /p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/image3_hu_2b73addfdda6f1f1.png 1024w"
 	loading="lazy"
 	
 		alt="MenuButton"
@@ -1459,13 +1459,13 @@ err_dialog_control-&gt;draw_line(Point2(0,0), Point2(100,100),Color(1,0,0));</p>
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">//初始化
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">err_dialog</span> <span class="o">=</span> <span class="n">memnew</span><span class="p">(</span><span class="n">AcceptDialog</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="n">err_dialog</span> <span class="o">=</span> <span class="n">memnew</span><span class="p">(</span><span class="n">AcceptDialog</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="n">add_child</span><span class="p">(</span><span class="n">err_dialog</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="n">err_dialog</span><span class="o">-&gt;</span><span class="n">get_ok_button</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">set_text</span><span class="p">(</span><span class="s">&#34;不ok&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="n">err_dialog</span><span class="o">-&gt;</span><span class="n">get_ok_button</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">connect</span><span class="p">(</span><span class="s">&#34;pressed&#34;</span><span class="p">,</span><span class="n">callable_mp</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">LyfTestEditor</span><span class="o">::</span><span class="n">test_func</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">//设置文本，并唤起弹窗
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">err_dialog</span><span class="o">-&gt;</span><span class="n">set_text</span><span class="p">(</span><span class="s">&#34;LyfTestEditorPlugin::MENU_OPTION_CREATE_111&#34;</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="n">err_dialog</span><span class="o">-&gt;</span><span class="n">set_text</span><span class="p">(</span><span class="s">&#34;LyfTestEditorPlugin::MENU_OPTION_CREATE_111&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="n">err_dialog</span><span class="o">-&gt;</span><span class="n">popup_centered</span><span class="p">();</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -1488,12 +1488,12 @@ err_dialog_control-&gt;draw_line(Point2(0,0), Point2(100,100),Color(1,0,0));</p>
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">//1.通过场景树（mainloop）设置简单的时间回调函数
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">// timer to show text for 3 seconds
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">auto</span> <span class="n">timer</span> <span class="o">=</span> <span class="n">get_scene_tree</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">create_timer</span><span class="p">(</span><span class="n">time</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">	<span class="c1">// timer to show text for 3 seconds
+</span></span></span><span class="line"><span class="cl">    <span class="k">auto</span> <span class="n">timer</span> <span class="o">=</span> <span class="n">get_scene_tree</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">create_timer</span><span class="p">(</span><span class="n">time</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="n">timer</span><span class="o">-&gt;</span><span class="n">connect</span><span class="p">(</span><span class="s">&#34;timeout&#34;</span><span class="p">,</span> <span class="n">callable_mp</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="o">&amp;</span><span class="n">CommandTool</span><span class="o">::</span><span class="n">reduce_screen_output_buffer</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">//2.c++原生的线程调用也可以实现，但是需要call_deferred来回到主线程
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">//3.tween，更加复杂，但是可以链式调用，以及设置缓动
 </span></span></span></code></pre></td></tr></table>
@@ -1566,6 +1566,19 @@ err_dialog_control-&gt;draw_line(Point2(0,0), Point2(100,100),Color(1,0,0));</p>
         <div class="flex article-list--tile">
             
                 
+<article class="">
+    <a href="/p/godot-4.4-%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Godot 4.4 启动参数完整指南</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
 <article class="has-image">
     <a href="/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/">
         
@@ -1636,25 +1649,6 @@ err_dialog_control-&gt;draw_line(Point2(0,0), Point2(100,100),Color(1,0,0));</p>
 
         <div class="article-details">
             <h2 class="article-title">【godot】三、GDExtension开发指南</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/p/godot%E4%B8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/">
-        
-        
-            <div class="article-image">
-                
-                    <img src="/guidao4.jpg" loading="lazy" data-key="" data-hash="/guidao4.jpg"/>
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">【godot】一、开发环境部署及示例</h2>
         </div>
     </a>
 </article>

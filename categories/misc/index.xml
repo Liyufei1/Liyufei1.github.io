@@ -74,17 +74,17 @@
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;l&#34;&gt;//配置每页文章数量&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;pagination&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;pagination&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;pagerSize&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;m&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;l&#34;&gt;//配置链接&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;baseurl&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;https://example.com/&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;l&#34;&gt;//配置链接&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;baseurl&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;https://example.com/&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;l&#34;&gt;//页面标签的小图标设置&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;favicon&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;/favicon.png&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;l&#34;&gt;//页面标签的小图标设置&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;favicon&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;/favicon.png&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;article&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;article&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;math&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;//数学公式&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;toc&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;   &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;//目录&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;readingTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;   &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;//阅读时间&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
@@ -203,7 +203,7 @@
 &lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/blog-build/guidao2.jpg&#34;
 	width=&#34;4000&#34;
 	height=&#34;2469&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/blog-build/guidao2_hu_3f1d7ff4fb988ae9.jpg 480w, https://Liyufei1.github.io/p/blog-build/guidao2_hu_f0ad7a416457ec83.jpg 1024w&#34;
+	srcset=&#34;https://Liyufei1.github.io/p/blog-build/guidao2_hu_290625566ad1fe7f.jpg 480w, https://Liyufei1.github.io/p/blog-build/guidao2_hu_2251fc3b6d6b2af3.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;图片说明&#34;
@@ -222,7 +222,7 @@
 &lt;img src=&#34;https://Liyufei1.github.io/p/blog-build/runhugo.png&#34;
 	width=&#34;1176&#34;
 	height=&#34;511&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/blog-build/runhugo_hu_e17f544f71fd302e.png 480w, https://Liyufei1.github.io/p/blog-build/runhugo_hu_3098825c88c43cc2.png 1024w&#34;
+	srcset=&#34;https://Liyufei1.github.io/p/blog-build/runhugo_hu_e8fced23b862a264.png 480w, https://Liyufei1.github.io/p/blog-build/runhugo_hu_40bf775e7be051ee.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;命令行运行成功示例&#34;
@@ -238,7 +238,7 @@
 &lt;img src=&#34;https://Liyufei1.github.io/p/blog-build/step2.png&#34;
 	width=&#34;1985&#34;
 	height=&#34;787&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/blog-build/step2_hu_13db4c6788a887e8.png 480w, https://Liyufei1.github.io/p/blog-build/step2_hu_79dfb28ede1abfc4.png 1024w&#34;
+	srcset=&#34;https://Liyufei1.github.io/p/blog-build/step2_hu_e6164482008cde14.png 480w, https://Liyufei1.github.io/p/blog-build/step2_hu_f8f90289cbde20f6.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;主题示例&#34;
@@ -253,7 +253,7 @@
 &lt;img src=&#34;https://Liyufei1.github.io/p/blog-build/step3.png&#34;
 	width=&#34;1135&#34;
 	height=&#34;758&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/blog-build/step3_hu_267a0678cb6ea527.png 480w, https://Liyufei1.github.io/p/blog-build/step3_hu_3210f60ad9a23106.png 1024w&#34;
+	srcset=&#34;https://Liyufei1.github.io/p/blog-build/step3_hu_e09a0d24b402a55e.png 480w, https://Liyufei1.github.io/p/blog-build/step3_hu_c24f60935de7fac7.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;主题示例&#34;
@@ -271,7 +271,7 @@
 &lt;img src=&#34;https://Liyufei1.github.io/p/blog-build/step4.png&#34;
 	width=&#34;1684&#34;
 	height=&#34;722&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/blog-build/step4_hu_9b09eaad1100fbc9.png 480w, https://Liyufei1.github.io/p/blog-build/step4_hu_ed830acd5db28bc8.png 1024w&#34;
+	srcset=&#34;https://Liyufei1.github.io/p/blog-build/step4_hu_153264f9b3e3067a.png 480w, https://Liyufei1.github.io/p/blog-build/step4_hu_2432a091177af3b5.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;目录示例&#34;
@@ -287,7 +287,7 @@
 &lt;img src=&#34;https://Liyufei1.github.io/p/blog-build/step5.png&#34;
 	width=&#34;2099&#34;
 	height=&#34;1063&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/blog-build/step5_hu_df2d765846cb936b.png 480w, https://Liyufei1.github.io/p/blog-build/step5_hu_c52114aab6167df9.png 1024w&#34;
+	srcset=&#34;https://Liyufei1.github.io/p/blog-build/step5_hu_852ce20cef28b17.png 480w, https://Liyufei1.github.io/p/blog-build/step5_hu_e35f73d9b67c73d8.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Page配置示例&#34;
@@ -377,7 +377,7 @@
 &lt;img src=&#34;https://Liyufei1.github.io/p/blog-build/step6.png&#34;
 	width=&#34;2041&#34;
 	height=&#34;571&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/blog-build/step6_hu_cbfea2ea2c38c880.png 480w, https://Liyufei1.github.io/p/blog-build/step6_hu_dfec89533b592258.png 1024w&#34;
+	srcset=&#34;https://Liyufei1.github.io/p/blog-build/step6_hu_639a7ff14ff302f.png 480w, https://Liyufei1.github.io/p/blog-build/step6_hu_7019630d52142f53.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;TOKEN配置&#34;
@@ -391,7 +391,7 @@
 &lt;img src=&#34;https://Liyufei1.github.io/p/blog-build/step7.png&#34;
 	width=&#34;2037&#34;
 	height=&#34;1269&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/blog-build/step7_hu_bbc0484b34e86e2a.png 480w, https://Liyufei1.github.io/p/blog-build/step7_hu_43610632e5d9705e.png 1024w&#34;
+	srcset=&#34;https://Liyufei1.github.io/p/blog-build/step7_hu_b0668d66f3043974.png 480w, https://Liyufei1.github.io/p/blog-build/step7_hu_b8b65b6354b64fff.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;TOKEN配置&#34;
@@ -427,7 +427,7 @@
 &lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/test-chinese/florian-klauer-nptLmg6jqDo-unsplash.jpg&#34;
 	width=&#34;667&#34;
 	height=&#34;1000&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/test-chinese/florian-klauer-nptLmg6jqDo-unsplash_hu_e98fca2b4272416e.jpg 480w, https://Liyufei1.github.io/p/test-chinese/florian-klauer-nptLmg6jqDo-unsplash_hu_e3d37c9ded115b12.jpg 1024w&#34;
+	srcset=&#34;https://Liyufei1.github.io/p/test-chinese/florian-klauer-nptLmg6jqDo-unsplash_hu_7b8a06820e6d5c.jpg 480w, https://Liyufei1.github.io/p/test-chinese/florian-klauer-nptLmg6jqDo-unsplash_hu_a347f10e565b40ff.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Photo by Florian Klauer on Unsplash&#34;
@@ -440,7 +440,7 @@
 &gt;  &lt;img src=&#34;https://Liyufei1.github.io/p/test-chinese/luca-bravo-alS7ewQ41M8-unsplash.jpg&#34;
 	width=&#34;1000&#34;
 	height=&#34;667&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/test-chinese/luca-bravo-alS7ewQ41M8-unsplash_hu_e13c58d5189f892c.jpg 480w, https://Liyufei1.github.io/p/test-chinese/luca-bravo-alS7ewQ41M8-unsplash_hu_8fc948b7ee525251.jpg 1024w&#34;
+	srcset=&#34;https://Liyufei1.github.io/p/test-chinese/luca-bravo-alS7ewQ41M8-unsplash_hu_258fc4da0cfc7de9.jpg 480w, https://Liyufei1.github.io/p/test-chinese/luca-bravo-alS7ewQ41M8-unsplash_hu_d415bcea096fe061.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Photo by Luca Bravo on Unsplash&#34;
@@ -454,7 +454,7 @@
 &lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/test-chinese/helena-hertz-wWZzXlDpMog-unsplash.jpg&#34;
 	width=&#34;1000&#34;
 	height=&#34;750&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/test-chinese/helena-hertz-wWZzXlDpMog-unsplash_hu_503c0ebcc5245e10.jpg 480w, https://Liyufei1.github.io/p/test-chinese/helena-hertz-wWZzXlDpMog-unsplash_hu_48c98de55fb3c999.jpg 1024w&#34;
+	srcset=&#34;https://Liyufei1.github.io/p/test-chinese/helena-hertz-wWZzXlDpMog-unsplash_hu_dfbb0c559c3df461.jpg 480w, https://Liyufei1.github.io/p/test-chinese/helena-hertz-wWZzXlDpMog-unsplash_hu_212d0718b8e99eaa.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Photo by Helena Hertz on Unsplash&#34;
@@ -467,7 +467,7 @@
 &gt;  &lt;img src=&#34;https://Liyufei1.github.io/p/test-chinese/hudai-gayiran-3Od_VKcDEAA-unsplash.jpg&#34;
 	width=&#34;667&#34;
 	height=&#34;1000&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/test-chinese/hudai-gayiran-3Od_VKcDEAA-unsplash_hu_f81a3588c5c4a663.jpg 480w, https://Liyufei1.github.io/p/test-chinese/hudai-gayiran-3Od_VKcDEAA-unsplash_hu_1c52ba2a4ad7b9a0.jpg 1024w&#34;
+	srcset=&#34;https://Liyufei1.github.io/p/test-chinese/hudai-gayiran-3Od_VKcDEAA-unsplash_hu_41819e288bf4a8c0.jpg 480w, https://Liyufei1.github.io/p/test-chinese/hudai-gayiran-3Od_VKcDEAA-unsplash_hu_1277885c87f69490.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Photo by Hudai Gayiran on Unsplash&#34;
@@ -664,7 +664,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git = &amp;#34;https://github.com/bevyengine/bevy&amp;#34;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;rev = &amp;#34;11f52b8c72fc3a568e8bb4a4cd1f3eb025ac2e13&amp;#34;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;gd&#34;&gt;- features = [&amp;#34;dynamic&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;gd&#34;&gt;&lt;/span&gt;&lt;span class=&#34;gi&#34;&gt;+ features = [&amp;#34;jpeg&amp;#34;, &amp;#34;dynamic&amp;#34;]
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;gi&#34;&gt;+ features = [&amp;#34;jpeg&amp;#34;, &amp;#34;dynamic&amp;#34;]
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h2 id=&#34;list-types&#34;&gt;List Types

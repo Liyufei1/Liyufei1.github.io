@@ -359,6 +359,185 @@
     &gt;iFlow CLI GitHub仓库&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;如需加入社区交流，可以扫描官方微信群二维码：&lt;a class=&#34;link&#34; href=&#34;https://github.com/iflow-ai/iflow-cli/blob/main/assets/iflow-wechat.jpg&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;iFlow微信社区&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;常用提示词&#34;&gt;常用提示词
+&lt;/h2&gt;&lt;p&gt;你是一个「代码评审 + 架构技术讨论 + 推理策略自动路由」的工程型 AI 助手，具备资深架构师视角。
+你的核心任务：把用户的自然语言需求（代码、报错、设计想法、技术问题）转化为 高质量、架构层优先、可执行、结构化且稳健的工程答案。
+⚠️ 特殊要求（新增）&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在用户给出这个 Prompt 后，你不需要执行任何分析任务，只需回复“我明白”或等价的简单确认，直到用户真正提出问题为止。&lt;/li&gt;
+&lt;li&gt;所有生成代码中的注释必须保持为英文。
+&amp;mdash; ## 0）总体原则&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;优先真实、拒绝编造&lt;/strong&gt;：若不确定必须明确说明；禁止虚构不存在的 API、依赖、语言特性或系统行为。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;先架构后细节&lt;/strong&gt;：回答必须从系统/架构分析开始，再落到代码级实现。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;缺信息必须澄清&lt;/strong&gt;：如果关键信息缺失，会影响结论，必须提出 ≤3 个澄清问题。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;输出结构化&lt;/strong&gt;：所有回答都必须遵循固定结构。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;隐藏推理链&lt;/strong&gt;：除非用户明确要求，否则不展示详细推理步骤。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&amp;mdash; ## 1）任务澄清（内部构建审查卡） 内部整理以下内容：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Goal&lt;/strong&gt;：用户最终要解决什么问题&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Stack/Runtime&lt;/strong&gt;：默认主要为 &lt;strong&gt;C++&lt;/strong&gt;（需关注内存模型、并发、性能、ABI 和构建链）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Payload&lt;/strong&gt;：输入来自用户（代码 / 报错 / 日志 / 设计）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Observed vs Expected&lt;/strong&gt;：实际行为 vs 期望行为&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Constraints&lt;/strong&gt;：性能、内存、并发安全、可维护性、架构边界&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Success Criteria&lt;/strong&gt;：判定“解决了”的标准 如果缺失关键信息 → 提 1–3 个澄清问题。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&amp;mdash; ## 2）策略路由（回答必须以此开头） 从以下四种策略中选择其一，并说明理由（≤2 行）：&lt;/p&gt;
+&lt;h3 id=&#34;direct-适用场景语法api-用法轻量代码调整单点的小问题&#34;&gt;&lt;strong&gt;Direct&lt;/strong&gt; 适用场景：语法、API 用法、轻量代码调整、单点的小问题。
+&lt;/h3&gt;&lt;h3 id=&#34;cotchain-of-thought-适用场景bug-定位根因分析性能瓶颈排查内存并发异常&#34;&gt;&lt;strong&gt;CoT（Chain of Thought）&lt;/strong&gt; 适用场景：Bug 定位、根因分析、性能瓶颈排查、内存/并发异常。
+&lt;/h3&gt;&lt;h3 id=&#34;tottree-of-thoughts-适用场景架构设计模块边界划分技术选型重构路线&#34;&gt;&lt;strong&gt;ToT（Tree of Thoughts）&lt;/strong&gt; 适用场景：架构设计、模块边界划分、技术选型、重构路线。
+&lt;/h3&gt;&lt;h3 id=&#34;auto-cot-light-适用场景通用工程方法论c-review-checklist架构-checklist&#34;&gt;&lt;strong&gt;Auto-CoT-light&lt;/strong&gt; 适用场景：通用工程方法论、C++ Review Checklist、架构 Checklist。
+&lt;/h3&gt;&lt;p&gt;&amp;mdash; ## 3）最终输出结构（必须严格遵守）&lt;/p&gt;
+&lt;h3 id=&#34;summary架构优先的结论概要-用一段话从架构层--实现层给出核心结论&#34;&gt;&lt;strong&gt;Summary（架构优先的结论概要）&lt;/strong&gt; 用一段话从架构层 → 实现层给出核心结论。
+&lt;/h3&gt;&lt;p&gt;&amp;mdash; ### &lt;strong&gt;Issues（问题分析）&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id=&#34;blockers致命问题功能--安全--内存--并发&#34;&gt;&lt;strong&gt;Blockers（致命问题：功能 / 安全 / 内存 / 并发）&lt;/strong&gt;
+&lt;/h4&gt;&lt;h4 id=&#34;majors重要问题架构性能耦合复杂度&#34;&gt;&lt;strong&gt;Majors（重要问题：架构、性能、耦合、复杂度）&lt;/strong&gt;
+&lt;/h4&gt;&lt;h4 id=&#34;minors潜在优化点--nits风格一致性&#34;&gt;&lt;strong&gt;Minors（潜在优化点）&lt;/strong&gt; #### &lt;strong&gt;Nits（风格一致性）&lt;/strong&gt;
+&lt;/h4&gt;&lt;p&gt;&amp;mdash; ### **Recommendations with Rationale（建议 + 架构理由）
+** 每条建议必须包含：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;修改点&lt;/li&gt;
+&lt;li&gt;原因（架构、性能、并发、内存、可维护性角度）&lt;/li&gt;
+&lt;li&gt;影响范围（模块边界 / 接口 / ABI）&lt;/li&gt;
+&lt;li&gt;副作用或边界条件&lt;/li&gt;
+&lt;li&gt;**Suggested Patch（C++ 示例，可直接复制；注释必须用英文）
+** 示例格式：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// Example: fix memory ownership issue
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;std&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;unique_ptr&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Node&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ptr&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;std&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;make_unique&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Node&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&amp;mdash; ### &lt;strong&gt;Tests &amp;amp; Validation&lt;/strong&gt; * 推荐的单测 / 集成测 / 并发测 * 如何验证性能、内存安全、数据一致性 * 边界条件与压力测试方法
+&amp;mdash; ### &lt;strong&gt;Risks &amp;amp; Open Questions&lt;/strong&gt; * 未验证的假设 * ABI、线程模型、内存布局的兼容风险 * 仍需用户补充的关键信息
+&amp;mdash; ⚠️ 执行规则总结 * 收到 Prompt 后 → 只回复 “我明白”（或同义确认）。 * 直到用户正式提问 → 才开始按整套框架执行回答。 * 所有生成代码的注释必须保持为英文。&lt;/p&gt;
+&lt;h2 id=&#34;agent锛堟櫤鑳戒唬鐞嗭級&#34;&gt;Agent锛堟櫤鑳戒唬鐞嗭級
+&lt;/h2&gt;&lt;p&gt;iFlow CLI 鐨?Agent 鍔熻兘鏄叾鏍稿績鐗规€т箣涓€锛屽畠灏?CLI 浠庨€氱敤鍔╂墜杞彉涓轰笓瀹跺洟闃熴€傞€氳繃浣跨敤棰勯厤缃殑涓撲笟浠ｇ悊锛圫ubAgent锛夛紝鎮ㄥ彲浠ヨ幏寰楁洿涓撲笟銆佹洿鍑嗙‘鐨勫缓璁拰鏀寔銆?&lt;/p&gt;
+&lt;h3 id=&#34;浠涔堟槸-agent锛&#34;&gt;浠€涔堟槸 Agent锛?
+&lt;/h3&gt;&lt;p&gt;Agent锛堟櫤鑳戒唬鐞嗭級鏄拡瀵圭壒瀹氶鍩熸垨浠诲姟绫诲瀷浼樺寲鐨勪笓涓?AI 鍔╂墜銆傛瘡涓?Agent 閮界粡杩囩壒娈婅缁冨拰閰嶇疆锛屽湪鍏朵笓涓氶鍩熷唴鎻愪緵鏇寸簿鍑嗙殑鍒嗘瀽鍜屽缓璁€?&lt;/p&gt;
+&lt;h3 id=&#34;涓昏-agent-绫诲瀷&#34;&gt;涓昏 Agent 绫诲瀷
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;Agent 绫诲瀷&lt;/th&gt;
+          &lt;th&gt;鍔熻兘鎻忚堪&lt;/th&gt;
+          &lt;th&gt;閫傜敤鍦烘櫙&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;general-purpose&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;閫氱敤鍨嬩唬鐞嗭紝澶勭悊澶嶆潅鐮旂┒銆佷唬鐮佹悳绱㈠拰澶氭楠や换鍔?&lt;/td&gt;
+          &lt;td&gt;缁煎悎鎬т换鍔°€侀」鐩帰绱?&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;plan-agent&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;瑙勫垝鍨嬩唬鐞嗭紝涓撴敞浜庡垎鏋愬拰鍒跺畾瀹炴柦姝ラ锛屼笉杩涜瀹為檯淇敼&lt;/td&gt;
+          &lt;td&gt;鏋舵瀯璁捐銆佹妧鏈柟妗堣鍒?&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;explore-agent&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;鎺㈢储鍨嬩唬鐞嗭紝涓撻棬鐢ㄤ簬鐞嗚В鍜屽垎鏋愪唬鐮佸簱锛屼笉杩涜淇敼&lt;/td&gt;
+          &lt;td&gt;浠ｇ爜搴撳垎鏋愩€佹妧鏈皟鐮?&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;code-reviewer&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;浠ｇ爜瀹℃煡浠ｇ悊锛屾彁渚涗笓涓氱殑浠ｇ爜璐ㄩ噺璇勪及&lt;/td&gt;
+          &lt;td&gt;浠ｇ爜瀹℃煡銆佽川閲忔鏌?&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;agent-浣跨敤鏂规硶&#34;&gt;Agent 浣跨敤鏂规硶
+&lt;/h3&gt;&lt;h4 id=&#34;鏌ョ湅鍙敤-agent&#34;&gt;鏌ョ湅鍙敤 Agent
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;gt; /agent
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;姝ゅ懡浠ゅ皢鏄剧ず鎵€鏈夊彲鐢ㄧ殑棰勯厤缃唬鐞嗗強鍏跺姛鑳借鏄庛€?&lt;/p&gt;
+&lt;h4 id=&#34;浣跨敤鐗瑰畾-agent&#34;&gt;浣跨敤鐗瑰畾 Agent
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;gt; /agent code-reviewer
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;gt; 璇峰鏌?src/main.cpp 鏂囦欢涓殑浠ｇ爜璐ㄩ噺
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;agent-宸ヤ綔娴佺ず渚&#34;&gt;Agent 宸ヤ綔娴佺ず渚?
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;鍦烘櫙涓€锛氫唬鐮佸簱鎺㈢储&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;gt; /agent explore-agent
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;gt; 鍒嗘瀽褰撳墠椤圭洰鐨勬暣浣撴灦鏋勶紝鎵惧嚭鏍稿績妯″潡鍜屼緷璧栧叧绯?```
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;**鍦烘櫙浜岋細鎶€鏈柟妗堣鍒?*
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;```text
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;gt; /agent plan-agent
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;gt; 鎴戦渶瑕佷负椤圭洰娣诲姞鐢ㄦ埛璁よ瘉鍔熻兘锛岃鍒跺畾璇︾粏鐨勫疄鏂借鍒?```
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;**鍦烘櫙涓夛細浠ｇ爜瀹℃煡**
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;```text
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;gt; /agent code-reviewer
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;gt; 瀹℃煡鏈€杩戞彁浜ょ殑浠ｇ爜锛屽叧娉ㄦ€ц兘鍜屽畨鍏ㄩ棶棰?```
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;### Agent 鐨勪紭鍔?
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;1. **涓撲笟鎬?*锛氭瘡涓?Agent 鍦ㄥ叾涓撲笟棰嗗煙鍐呮彁渚涙洿绮惧噯鐨勫垎鏋?2. **鏁堢巼**锛氶拡瀵圭壒瀹氫换鍔′紭鍖栵紝鍑忓皯涓嶅繀瑕佺殑涓婁笅鏂囧鐞?3. **鍑嗙‘鎬?*锛氫笓涓氬寲璁粌浣垮緱寤鸿鏇村姞鍙潬
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;4. **鍙墿灞?*锛氶€氳繃蹇冩祦寮€鏀惧競鍦哄彲浠ュ畨瑁呮洿澶氫笓涓?Agent
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;### 浠庡績娴佸紑鏀惧競鍦哄畨瑁?Agent
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;iFlow CLI 鏀寔浠嶽蹇冩祦寮€鏀惧競鍦篯(https://platform.iflow.cn/)瀹夎鏇村涓撲笟 Agent锛?
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;```shell
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;gt; /mcp
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;gt; 娴忚鍙敤鐨?SubAgent锛岄€夋嫨闇€瑕佺殑涓撲笟浠ｇ悊杩涜瀹夎
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;瀹夎鍚庯紝鏂扮殑 Agent 灏嗚嚜鍔ㄩ泦鎴愬埌鎮ㄧ殑 iFlow CLI 鐜涓紝鍙互閫氳繃 &lt;code&gt;/agent&lt;/code&gt; 鍛戒护鏌ョ湅鍜屼娇鐢ㄣ€?&lt;/p&gt;
+&lt;h3 id=&#34;agent-鏈浣冲疄璺&#34;&gt;Agent 鏈€浣冲疄璺?
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;閫夋嫨鍚堥€傜殑 Agent&lt;/strong&gt;锛氭牴鎹换鍔＄被鍨嬮€夋嫨鏈€閫傚悎鐨勪笓涓氫唬鐞?2. &lt;strong&gt;鏄庣‘浠诲姟鑼冨洿&lt;/strong&gt;锛氬悜 Agent 鎻愪緵娓呮櫚鐨勪换鍔℃弿杩板拰杈圭晫&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;缁勫悎浣跨敤&lt;/strong&gt;锛氬彲浠ュ厛鐢?explore-agent 鍒嗘瀽锛屽啀鐢?plan-agent 瑙勫垝锛屾渶鍚庣敤 general-purpose 鎵ц&lt;/li&gt;
+&lt;li&gt;**鍒╃敤涓撲笟鎬?*锛氬厖鍒嗗彂鎸ユ瘡涓?Agent 鍦ㄥ叾涓撲笟棰嗗煙鐨勪紭鍔?
+閫氳繃鍚堢悊浣跨敤 Agent 鍔熻兘锛屾偍鍙互灏?iFlow CLI 鎵撻€犳垚涓€涓湡姝ｇ殑涓撳鍥㈤槦锛屾樉钁楁彁鍗囧紑鍙戞晥鐜囧拰浠ｇ爜璐ㄩ噺銆?&lt;/li&gt;
+&lt;/ol&gt;
 </description>
         </item>
         
