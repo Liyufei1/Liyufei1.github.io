@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="个人工具文档，针对GodotModules开发。介绍相关头文件的使用和最小使用示例">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="个人工具文档，针对GodotModules开发。介绍相关头文件和最小使用示例">
 <title>【godot】二、Modules开发指南</title>
 
 <link rel='canonical' href='https://Liyufei1.github.io/p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/'>
 
 <link rel="stylesheet" href="/scss/style.min.b0e76e98cdd4f7082d1fc36f7af7e0843a81201db2197c03ca426751dc923735.css"><meta property='og:title' content="【godot】二、Modules开发指南">
-<meta property='og:description' content="个人工具文档，针对GodotModules开发。介绍相关头文件的使用和最小使用示例">
+<meta property='og:description' content="个人工具文档，针对GodotModules开发。介绍相关头文件和最小使用示例">
 <meta property='og:url' content='https://Liyufei1.github.io/p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/'>
 <meta property='og:site_name' content='李宇飞-Liyufei1'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-11-04T16:18:31&#43;08:00'/><meta property='article:modified_time' content='2025-11-04T16:18:31&#43;08:00'/><meta property='og:image' content='https://Liyufei1.github.io/guidao4.jpg' />
 <meta name="twitter:title" content="【godot】二、Modules开发指南">
-<meta name="twitter:description" content="个人工具文档，针对GodotModules开发。介绍相关头文件的使用和最小使用示例"><meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:description" content="个人工具文档，针对GodotModules开发。介绍相关头文件和最小使用示例"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://Liyufei1.github.io/guidao4.jpg' />
     <link rel="shortcut icon" href="/favicon.png" />
 
@@ -286,24 +286,38 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#godot脚本容器">Godot脚本容器</a>
+    <li><a href="#常用功能">常用功能</a>
       <ol>
-        <li><a href="#array"><code>Array</code></a></li>
-        <li><a href="#dictionary"><code>Dictionary</code></a></li>
+        <li><a href="#日志打印">日志打印</a></li>
+        <li><a href="#计时器">计时器</a></li>
+        <li><a href="#自定义项目配置">自定义项目配置</a>
+          <ol>
+            <li><a href="#使用示例">使用示例</a></li>
+          </ol>
+        </li>
       </ol>
     </li>
-    <li><a href="#godot底层容器">Godot底层容器</a>
+    <li><a href="#容器">容器</a>
       <ol>
-        <li><a href="#vectort"><code>Vector&lt;T&gt;</code></a></li>
-        <li><a href="#vmapkv"><code>VMap&lt;K,V&gt;</code></a></li>
-        <li><a href="#listt"><code>List&lt;T&gt;</code></a></li>
-        <li><a href="#vsett"><code>VSet&lt;T&gt;</code></a></li>
-        <li><a href="#hashmapkv"><code>HashMap&lt;K,V&gt;</code></a></li>
-        <li><a href="#rbmap">RBMap</a></li>
-        <li><a href="#rbset">RBSet</a></li>
+        <li><a href="#godot脚本容器">Godot脚本容器</a>
+          <ol>
+            <li><a href="#array"><code>Array</code></a></li>
+            <li><a href="#dictionary"><code>Dictionary</code></a></li>
+          </ol>
+        </li>
+        <li><a href="#godot底层容器">Godot底层容器</a>
+          <ol>
+            <li><a href="#vectort"><code>Vector&lt;T&gt;</code></a></li>
+            <li><a href="#vmapkv"><code>VMap&lt;K,V&gt;</code></a></li>
+            <li><a href="#listt"><code>List&lt;T&gt;</code></a></li>
+            <li><a href="#vsett"><code>VSet&lt;T&gt;</code></a></li>
+            <li><a href="#hashmapkv"><code>HashMap&lt;K,V&gt;</code></a></li>
+            <li><a href="#rbmap">RBMap</a></li>
+            <li><a href="#rbset">RBSet</a></li>
+          </ol>
+        </li>
       </ol>
     </li>
-    <li><a href="#print">print</a></li>
     <li><a href="#class_db">class_db</a></li>
     <li><a href="#os">OS</a></li>
     <li><a href="#callable">callable</a></li>
@@ -335,7 +349,18 @@
         </li>
       </ol>
     </li>
-    <li><a href="#timer">timer</a></li>
+    <li><a href="#thread">Thread</a>
+      <ol>
+        <li><a href="#线程同步工具">线程同步工具</a>
+          <ol>
+            <li><a href="#mutex互斥锁">Mutex（互斥锁）</a></li>
+            <li><a href="#semaphore信号量">Semaphore（信号量）</a></li>
+          </ol>
+        </li>
+        <li><a href="#常见使用场景">常见使用场景</a></li>
+      </ol>
+    </li>
+    <li><a href="#config">Config</a></li>
   </ol>
 </nav>
         </div>
@@ -376,7 +401,7 @@
     
         
         <h3 class="article-subtitle">
-            个人工具文档，针对GodotModules开发。介绍相关头文件的使用和最小使用示例
+            个人工具文档，针对GodotModules开发。介绍相关头文件和最小使用示例
         </h3>
         
     </div>
@@ -412,7 +437,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 10 分钟
+                    阅读时长: 14 分钟
                 </time>
             </div>
         
@@ -428,9 +453,157 @@
     
     
     <h1 id="modules开发指南">Modules开发指南
-</h1><h2 id="godot脚本容器">Godot脚本容器
-</h2><h3 id="array"><code>Array</code>
-</h3><p><strong>✨头文件</strong>:<code>#include &quot;core/variant/array.h&quot;</code><br>
+</h1><p>本文档是针对<code>Godot 4.4</code>引擎的 Modules开发指南，为需要进行底层开发的开发者提供实用的参考。Godot Modules开发允许我们直接在引擎源码层面扩展功能，相比GDExtension具有更强大的能力和更深度的集成。本文涵盖了日志打印、容器类型、GUI组件、线程管理、配置系统等核心模块的常用头文件和最小使用示例，帮助你快速上手 Godot 引擎的 C++ 开发。</p>
+<h2 id="常用功能">常用功能
+</h2><h3 id="日志打印">日志打印
+</h3><p><strong>头文件</strong>：#include &ldquo;core/string/print_string.h&rdquo;</p>
+<p>用于标准日志的输出。在做引擎开发时使用。</p>
+<p>在做GDExtension开发时，使用Utility_function头文件，进行日志打印。</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th style="text-align: left">接口</th>
+          <th style="text-align: center">作用</th>
+          <th style="text-align: left">示例</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">void print_line(const Variant &amp;v）</td>
+          <td style="text-align: center">打印日志</td>
+          <td style="text-align: left">__print_line(&ldquo;AAA&rdquo;,10.0);</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">void print_error(const String &amp;p_string)</td>
+          <td style="text-align: center">打印错误</td>
+          <td style="text-align: left">print_error(&ldquo;BBBB&rdquo;)</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="计时器">计时器
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">//1.通过场景树（mainloop）设置简单的时间回调函数
+</span></span></span><span class="line"><span class="cl">	<span class="c1">// timer to show text for 3 seconds
+</span></span></span><span class="line"><span class="cl">    <span class="k">auto</span> <span class="n">timer</span> <span class="o">=</span> <span class="n">get_scene_tree</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">create_timer</span><span class="p">(</span><span class="n">time</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">timer</span><span class="o">-&gt;</span><span class="n">connect</span><span class="p">(</span><span class="s">&#34;timeout&#34;</span><span class="p">,</span> <span class="n">callable_mp</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="o">&amp;</span><span class="n">CommandTool</span><span class="o">::</span><span class="n">reduce_screen_output_buffer</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//2.c++原生的线程调用也可以实现，但是需要call_deferred来回到主线程
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//3.tween，更加复杂，但是可以链式调用，以及设置缓动
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="自定义项目配置">自定义项目配置
+</h3><p><strong>头文件</strong>：#include &ldquo;core/config/project_settings.h&rdquo;</p>
+<p><code>ProjectSettings</code>是 Godot引擎的核心单例类，负责管理项目的配置和设置。它继承自Object，使用 GDCLASS 宏注册到 Godot 的类型系统中<br>
+核心职责：</p>
+<ul>
+<li>加载和保存项目配置文件（project.godot）
+<ul>
+<li>定义全局设置（带默认值）:<code>GLOBAL_DEF</code></li>
+<li>定义为基础设置（在编辑器中高亮）:<code>GLOBAL_DEF_BASIC</code></li>
+<li>定义全局设置（修改后需要重启）:<code>GLOBAL_DEF_RST</code></li>
+<li>定义为内部设置（不在编辑器显示）:<code>GLOBAL_DEF_INTERNAL</code></li>
+<li>获取配置值: <code>get_setting</code></li>
+<li>设置配置值: <code>set_setting</code></li>
+<li>检查配置值是否存在: <code>has_setting</code></li>
+</ul>
+</li>
+<li>路径转换（res://、user:// 等路径本地化）
+<ul>
+<li>将绝对路径转换为 res:// 路径: <code>localize_path</code></li>
+<li>将 res:// 路径转换为绝对路径: <code>globalize_path</code></li>
+<li>获取项目资源路径（res:// 的实际位置）: <code>get_resource_path</code></li>
+<li>获取项目数据目录路径（res://.godot): <code>get_project_data_path</code></li>
+<li>获取导入文件路径（res://.godot/imported）: <code>get_imported_files_path</code></li>
+</ul>
+</li>
+<li>Autoload 单例管理
+<ul>
+<li>添加自动加载项:<code>add_autoload</code></li>
+<li>移除自动加载项:<code>remove_autoload</code></li>
+<li>检查是否存在:<code>has_autoload</code></li>
+<li>获取自动加载列表:<code>get_autoload_list</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="使用示例">使用示例
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">initialize_command_tool_module</span><span class="p">(</span><span class="n">ModuleInitializationLevel</span> <span class="n">p_level</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">p_level</span> <span class="o">==</span> <span class="n">MODULE_INITIALIZATION_LEVEL_SCENE</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">GLOBAL_DEF</span><span class="p">(</span><span class="s">&#34;MySelfConfig/test111/testBool1&#34;</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="n">GLOBAL_DEF</span><span class="p">(</span><span class="s">&#34;MySelfConfig/test111/testBool2&#34;</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="n">GLOBAL_DEF</span><span class="p">(</span><span class="s">&#34;MySelfConfig/test111/testfloat&#34;</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="n">GLOBAL_DEF</span><span class="p">(</span><span class="s">&#34;MySelfConfig/test111/testString&#34;</span><span class="p">,</span> <span class="s">&#34;this is a string&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="n">GLOBAL_DEF</span><span class="p">(</span><span class="s">&#34;MySelfConfig/test111/test_VECTOR2&#34;</span><span class="p">,</span> <span class="n">Vector2</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">//COLOR
+</span></span></span><span class="line"><span class="cl">		<span class="n">GLOBAL_DEF</span><span class="p">(</span><span class="s">&#34;MySelfConfig/test111/test_Color&#34;</span><span class="p">,</span> <span class="n">Color</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">		<span class="n">GLOBAL_DEF</span><span class="p">(</span><span class="s">&#34;MySelfConfig/test111/test_Array&#34;</span><span class="p">,</span> <span class="n">Array</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">		<span class="n">GLOBAL_DEF</span><span class="p">(</span><span class="s">&#34;MySelfConfig/test111/test_Dictionary&#34;</span><span class="p">,</span> <span class="n">Dictionary</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/image4.png"
+	width="1192"
+	height="562"
+	srcset="/p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/image4_hu_cdf2ec93b4f12a2d.png 480w, /p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/image4_hu_881ba2db33451347.png 1024w"
+	loading="lazy"
+	
+		alt="使用示例"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="212"
+		data-flex-basis="509px"
+	
+></p>
+<p><img src="/p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/image5.png"
+	width="787"
+	height="119"
+	srcset="/p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/image5_hu_be508eab87ce3878.png 480w, /p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/image5_hu_3f3fd244ce0db14a.png 1024w"
+	loading="lazy"
+	
+		alt="使用示例"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="661"
+		data-flex-basis="1587px"
+	
+></p>
+<h2 id="容器">容器
+</h2><h3 id="godot脚本容器">Godot脚本容器
+</h3><h4 id="array"><code>Array</code>
+</h4><p><strong>✨头文件</strong>:<code>#include &quot;core/variant/array.h&quot;</code><br>
 <strong>✨作用</strong>:Array是脚本GDScript中Array类型的C++实现。具有以下特点:</p>
 <ol>
 <li><strong>通用性</strong>：它是一个存储<code>Variant</code>的容器，这意味着同一个数组里可以混合存放整数、字符串、对象引用等。</li>
@@ -531,8 +704,8 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="dictionary"><code>Dictionary</code>
-</h3><p><strong>✨头文件</strong>:<code>#include &quot;core/variant/dictionary.h&quot;</code><br>
+</div><h4 id="dictionary"><code>Dictionary</code>
+</h4><p><strong>✨头文件</strong>:<code>#include &quot;core/variant/dictionary.h&quot;</code><br>
 <strong>✨作用</strong>:键值对均为<code>Variant</code>的字典,具有以下特点:</p>
 <ol>
 <li>基于哈希表</li>
@@ -625,9 +798,9 @@
 </span></span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="godot底层容器">Godot底层容器
-</h2><h3 id="vectort"><code>Vector&lt;T&gt;</code>
-</h3><p><strong>✨头文件</strong>:<code>#include &quot;core/templates/vector.h&quot;</code><br>
+</div><h3 id="godot底层容器">Godot底层容器
+</h3><h4 id="vectort"><code>Vector&lt;T&gt;</code>
+</h4><p><strong>✨头文件</strong>:<code>#include &quot;core/templates/vector.h&quot;</code><br>
 <strong>✨作用</strong>:数组容器,具有以下特点:</p>
 <ol>
 <li>连续内存，类似 std::vector</li>
@@ -698,8 +871,8 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="vmapkv"><code>VMap&lt;K,V&gt;</code>
-</h3><p><strong>✨头文件</strong>:<code>#include &quot;core/templates/vector.h&quot;</code><br>
+</div><h4 id="vmapkv"><code>VMap&lt;K,V&gt;</code>
+</h4><p><strong>✨头文件</strong>:<code>#include &quot;core/templates/vector.h&quot;</code><br>
 <strong>✨作用</strong>:基于Vector实现的关联容器（Map）它内部维护一个按照Key排序的Vector.具有以下特点</p>
 <ol>
 <li>内存连续，缓存友好（Cache Friendly）。</li>
@@ -787,8 +960,8 @@
 </span></span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="listt"><code>List&lt;T&gt;</code>
-</h3><p><strong>✨头文件</strong>:``<br>
+</div><h4 id="listt"><code>List&lt;T&gt;</code>
+</h4><p><strong>✨头文件</strong>:``<br>
 <strong>✨作用</strong>:<br>
 非连续内存： 节点散落在内存中，通过指针连接。
 插入/删除快： 在头部、尾部或任意已知节点处插入/删除元素是 $O(1)$ 操作。
@@ -963,8 +1136,8 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="vsett"><code>VSet&lt;T&gt;</code>
-</h3><p><strong>✨头文件</strong>:<code>#include &quot;core/templates/vset.h&quot;</code><br>
+</div><h4 id="vsett"><code>VSet&lt;T&gt;</code>
+</h4><p><strong>✨头文件</strong>:<code>#include &quot;core/templates/vset.h&quot;</code><br>
 <strong>✨作用</strong>:类似std::set, 内存紧凑，二分查找，不支持重复元素。
 <strong>✨使用示例</strong>:</p>
 <div class="highlight"><div class="chroma">
@@ -1035,8 +1208,8 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="hashmapkv"><code>HashMap&lt;K,V&gt;</code>
-</h3><p><strong>✨头文件</strong>:<code>#include &quot;core/templates/hash_map.h&quot;</code><br>
+</div><h4 id="hashmapkv"><code>HashMap&lt;K,V&gt;</code>
+</h4><p><strong>✨头文件</strong>:<code>#include &quot;core/templates/hash_map.h&quot;</code><br>
 <strong>✨作用</strong>:基于哈希表实现,具有以下特点:</p>
 <ol>
 <li>平均查找、插入、删除时间复杂度为O(1)。</li>
@@ -1112,35 +1285,10 @@
 </span></span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="rbmap">RBMap
-</h3><p>红黑树,有序遍历性能好</p>
-<h3 id="rbset">RBSet
-</h3><h2 id="print">print
-</h2><p><strong>路径</strong>：#include &ldquo;core/string/print_string.h&rdquo;</p>
-<p>用于标准日志的输出。在做引擎开发时使用。</p>
-<p>在做GDExtension开发时，使用Utility_function头文件，进行日志打印。</p>
-<div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th style="text-align: left">接口</th>
-          <th style="text-align: center">作用</th>
-          <th style="text-align: left">示例</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: left">void print_line(const Variant &amp;v）</td>
-          <td style="text-align: center">打印日志</td>
-          <td style="text-align: left">__print_line(&ldquo;AAA&rdquo;,10.0);</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">void print_error(const String &amp;p_string)</td>
-          <td style="text-align: center">打印错误</td>
-          <td style="text-align: left">print_error(&ldquo;BBBB&rdquo;)</td>
-      </tr>
-  </tbody>
-</table></div>
-<h2 id="class_db">class_db
+</div><h4 id="rbmap">RBMap
+</h4><p>红黑树,有序遍历性能好</p>
+<h4 id="rbset">RBSet
+</h4><h2 id="class_db">class_db
 </h2><p><strong>路径</strong>：#include &ldquo;core/object/class_db.h&rdquo;</p>
 <p>在_bind_methods中进行类型和函数注册的时候，使用到的类型注册函数就来自该头文件</p>
 <div class="table-wrapper"><table>
@@ -1473,8 +1621,261 @@ err_dialog_control-&gt;draw_line(Point2(0,0), Point2(100,100),Color(1,0,0));</p>
 </h4><p>头文件路径：<code>#include &quot;scene/gui/dialogs.h&quot;</code><br>
 <code>ConfirmationDialog</code>是Godot中用于确认/取消操作的标准弹窗（Popup），继承自 AcceptDialog。<br>
 相较于<code>AcceptDialog</code>多了一个<code>cancel</code>按钮，用户点击后会发送<code>canceled</code>信号。</p>
-<h2 id="timer">timer
-</h2><div class="highlight"><div class="chroma">
+<h2 id="thread">Thread
+</h2><p><strong>✨头文件</strong>:<code>#include &quot;core/os/thread.h&quot;</code><br>
+<strong>✨作用</strong>:Godot 提供的线程类，用于创建和管理线程。具有以下特点:</p>
+<ol>
+<li><strong>跨平台支持</strong>：在 Windows、Linux、macOS 等平台上统一接口</li>
+<li><strong>轻量级</strong>：适合后台任务、数据处理等场景</li>
+<li><strong>线程安全</strong>：需要配合 Mutex、Semaphore 等同步机制使用</li>
+</ol>
+<p><strong>⚠️ 重要注意事项</strong>:</p>
+<ul>
+<li><strong>不要在子线程中直接操作场景树</strong>：所有 GUI 操作必须在主线程进行</li>
+<li><strong>使用 call_deferred</strong>：如果需要在主线程执行代码，使用 <code>call_deferred</code> 或信号机制</li>
+<li><strong>避免阻塞主线程</strong>：耗时任务放在子线程中执行</li>
+</ul>
+<p><strong>✨使用示例</strong>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span><span class="lnt">88
+</span><span class="lnt">89
+</span><span class="lnt">90
+</span><span class="lnt">91
+</span><span class="lnt">92
+</span><span class="lnt">93
+</span><span class="lnt">94
+</span><span class="lnt">95
+</span><span class="lnt">96
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;core/os/thread.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;core/os/mutex.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;core/os/semaphore.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">ThreadExample</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Node</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">GDCLASS</span><span class="p">(</span><span class="n">ThreadExample</span><span class="p">,</span> <span class="n">Node</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Thread</span> <span class="o">*</span><span class="n">worker_thread</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Mutex</span> <span class="o">*</span><span class="n">mutex</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Semaphore</span> <span class="o">*</span><span class="n">semaphore</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">thread_active</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">shared_data</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ThreadExample</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">worker_thread</span> <span class="o">=</span> <span class="n">memnew</span><span class="p">(</span><span class="n">Thread</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">mutex</span> <span class="o">=</span> <span class="n">memnew</span><span class="p">(</span><span class="n">Mutex</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">semaphore</span> <span class="o">=</span> <span class="n">memnew</span><span class="p">(</span><span class="n">Semaphore</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">thread_active</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="o">~</span><span class="n">ThreadExample</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">thread_active</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">semaphore</span><span class="o">-&gt;</span><span class="n">post</span><span class="p">();</span> <span class="c1">// 唤醒线程使其退出
+</span></span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">worker_thread</span><span class="o">-&gt;</span><span class="n">is_started</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">worker_thread</span><span class="o">-&gt;</span><span class="n">wait_to_finish</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">memdelete</span><span class="p">(</span><span class="n">worker_thread</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">memdelete</span><span class="p">(</span><span class="n">mutex</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">memdelete</span><span class="p">(</span><span class="n">semaphore</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 线程工作函数
+</span></span></span><span class="line"><span class="cl">    <span class="k">static</span> <span class="kt">void</span> <span class="nf">_thread_function</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">p_userdata</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ThreadExample</span> <span class="o">*</span><span class="n">instance</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">ThreadExample</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">p_userdata</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="p">(</span><span class="n">instance</span><span class="o">-&gt;</span><span class="n">thread_active</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 等待信号（等待任务）
+</span></span></span><span class="line"><span class="cl">            <span class="n">instance</span><span class="o">-&gt;</span><span class="n">semaphore</span><span class="o">-&gt;</span><span class="n">wait</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">instance</span><span class="o">-&gt;</span><span class="n">thread_active</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c1">// 执行耗时任务（例如数据处理）
+</span></span></span><span class="line"><span class="cl">            <span class="n">Vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">local_data</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// 加锁访问共享数据
+</span></span></span><span class="line"><span class="cl">                <span class="n">MutexLock</span> <span class="n">lock</span><span class="p">(</span><span class="n">instance</span><span class="o">-&gt;</span><span class="n">mutex</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">local_data</span> <span class="o">=</span> <span class="n">instance</span><span class="o">-&gt;</span><span class="n">shared_data</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c1">// 处理数据（不涉及 GUI 操作）
+</span></span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">local_data</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">local_data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*=</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">// 示例：数据翻倍
+</span></span></span><span class="line"><span class="cl">                <span class="n">OS</span><span class="o">::</span><span class="n">get_singleton</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">delay_usec</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span> <span class="c1">// 模拟耗时操作
+</span></span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c1">// 处理完成后，通知主线程更新
+</span></span></span><span class="line"><span class="cl">            <span class="n">instance</span><span class="o">-&gt;</span><span class="n">call_deferred</span><span class="p">(</span><span class="s">&#34;_on_thread_complete&#34;</span><span class="p">,</span> <span class="n">local_data</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 启动线程
+</span></span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">start_thread</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ERR_FAIL_COND</span><span class="p">(</span><span class="n">worker_thread</span><span class="o">-&gt;</span><span class="n">is_started</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">        <span class="n">worker_thread</span><span class="o">-&gt;</span><span class="n">start</span><span class="p">(</span><span class="n">_thread_function</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 添加任务（从主线程调用）
+</span></span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">add_task</span><span class="p">(</span><span class="k">const</span> <span class="n">Vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">data</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">MutexLock</span> <span class="n">lock</span><span class="p">(</span><span class="n">mutex</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">shared_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">semaphore</span><span class="o">-&gt;</span><span class="n">post</span><span class="p">();</span> <span class="c1">// 唤醒工作线程
+</span></span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 线程完成回调（在主线程执行）
+</span></span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">_on_thread_complete</span><span class="p">(</span><span class="k">const</span> <span class="n">Vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">result</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 可以安全地操作 GUI
+</span></span></span><span class="line"><span class="cl">        <span class="n">print_line</span><span class="p">(</span><span class="s">&#34;Thread completed with &#34;</span> <span class="o">+</span> <span class="n">itos</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="o">+</span> <span class="s">&#34; items&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c1">// 更新 UI 等
+</span></span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">result</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">print_line</span><span class="p">(</span><span class="s">&#34;Result[&#34;</span> <span class="o">+</span> <span class="n">itos</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#34;] = &#34;</span> <span class="o">+</span> <span class="n">itos</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]));</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">protected</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">static</span> <span class="kt">void</span> <span class="n">_bind_methods</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ClassDB</span><span class="o">::</span><span class="n">bind_method</span><span class="p">(</span><span class="n">D_METHOD</span><span class="p">(</span><span class="s">&#34;start_thread&#34;</span><span class="p">),</span> <span class="o">&amp;</span><span class="n">ThreadExample</span><span class="o">::</span><span class="n">start_thread</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ClassDB</span><span class="o">::</span><span class="n">bind_method</span><span class="p">(</span><span class="n">D_METHOD</span><span class="p">(</span><span class="s">&#34;add_task&#34;</span><span class="p">,</span> <span class="s">&#34;data&#34;</span><span class="p">),</span> <span class="o">&amp;</span><span class="n">ThreadExample</span><span class="o">::</span><span class="n">add_task</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ClassDB</span><span class="o">::</span><span class="n">bind_method</span><span class="p">(</span><span class="n">D_METHOD</span><span class="p">(</span><span class="s">&#34;_on_thread_complete&#34;</span><span class="p">,</span> <span class="s">&#34;result&#34;</span><span class="p">),</span> <span class="o">&amp;</span><span class="n">ThreadExample</span><span class="o">::</span><span class="n">_on_thread_complete</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="线程同步工具">线程同步工具
+</h3><h4 id="mutex互斥锁">Mutex（互斥锁）
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;core/os/mutex.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Mutex</span> <span class="o">*</span><span class="n">mutex</span> <span class="o">=</span> <span class="n">memnew</span><span class="p">(</span><span class="n">Mutex</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 加锁
+</span></span></span><span class="line"><span class="cl"><span class="n">mutex</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 访问共享资源
+</span></span></span><span class="line"><span class="cl"><span class="n">critical_section</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 解锁
+</span></span></span><span class="line"><span class="cl"><span class="n">mutex</span><span class="o">-&gt;</span><span class="n">unlock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 使用 RAII 自动管理锁（推荐）
+</span></span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">MutexLock</span> <span class="nf">lock</span><span class="p">(</span><span class="n">mutex</span><span class="p">);</span> <span class="c1">// 构造时自动加锁
+</span></span></span><span class="line"><span class="cl">    <span class="n">critical_section</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c1">// 析构时自动解锁
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="semaphore信号量">Semaphore（信号量）
+</h4><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -1487,18 +1888,98 @@ err_dialog_control-&gt;draw_line(Point2(0,0), Point2(100,100),Color(1,0,0));</p>
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">//1.通过场景树（mainloop）设置简单的时间回调函数
-</span></span></span><span class="line"><span class="cl">	<span class="c1">// timer to show text for 3 seconds
-</span></span></span><span class="line"><span class="cl">    <span class="k">auto</span> <span class="n">timer</span> <span class="o">=</span> <span class="n">get_scene_tree</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">create_timer</span><span class="p">(</span><span class="n">time</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="n">timer</span><span class="o">-&gt;</span><span class="n">connect</span><span class="p">(</span><span class="s">&#34;timeout&#34;</span><span class="p">,</span> <span class="n">callable_mp</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="o">&amp;</span><span class="n">CommandTool</span><span class="o">::</span><span class="n">reduce_screen_output_buffer</span><span class="p">));</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">//2.c++原生的线程调用也可以实现，但是需要call_deferred来回到主线程
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;core/os/semaphore.h&#34;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Semaphore</span> <span class="o">*</span><span class="n">semaphore</span> <span class="o">=</span> <span class="n">memnew</span><span class="p">(</span><span class="n">Semaphore</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">//3.tween，更加复杂，但是可以链式调用，以及设置缓动
-</span></span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="c1">// 等待（阻塞直到有信号）
+</span></span></span><span class="line"><span class="cl"><span class="n">semaphore</span><span class="o">-&gt;</span><span class="n">wait</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 发送信号
+</span></span></span><span class="line"><span class="cl"><span class="n">semaphore</span><span class="o">-&gt;</span><span class="n">post</span><span class="p">();</span>
+</span></span></code></pre></td></tr></table>
 </div>
+</div><h3 id="常见使用场景">常见使用场景
+</h3><ol>
+<li><strong>异步资源加载</strong></li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">load_resources_async</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">worker_thread</span><span class="o">-&gt;</span><span class="n">start</span><span class="p">([](</span><span class="kt">void</span> <span class="o">*</span><span class="n">p_userdata</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 在子线程中加载资源
+</span></span></span><span class="line"><span class="cl">        <span class="n">Ref</span><span class="o">&lt;</span><span class="n">Texture2D</span><span class="o">&gt;</span> <span class="n">texture</span> <span class="o">=</span> <span class="n">ResourceLoader</span><span class="o">::</span><span class="n">load</span><span class="p">(</span><span class="s">&#34;res://texture.png&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c1">// 通过信号通知主线程
+</span></span></span><span class="line"><span class="cl">        <span class="n">Node</span> <span class="o">*</span><span class="n">node</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">Node</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">p_userdata</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">node</span><span class="o">-&gt;</span><span class="n">call_deferred</span><span class="p">(</span><span class="s">&#34;_on_resource_loaded&#34;</span><span class="p">,</span> <span class="n">texture</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span> <span class="k">this</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
+</div><ol start="2">
+<li><strong>后台数据处理</strong></li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">process_background_task</span><span class="p">(</span><span class="k">const</span> <span class="n">Vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">data</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">MutexLock</span> <span class="n">lock</span><span class="p">(</span><span class="n">mutex</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">task_queue</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">semaphore</span><span class="o">-&gt;</span><span class="n">post</span><span class="p">();</span> <span class="c1">// 唤醒工作线程
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li><strong>网络请求</strong></li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">fetch_data_async</span><span class="p">(</span><span class="k">const</span> <span class="n">String</span> <span class="o">&amp;</span><span class="n">url</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">worker_thread</span><span class="o">-&gt;</span><span class="n">start</span><span class="p">([</span><span class="n">url</span><span class="p">](</span><span class="kt">void</span> <span class="o">*</span><span class="n">p_userdata</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 执行网络请求
+</span></span></span><span class="line"><span class="cl">        <span class="n">String</span> <span class="n">result</span> <span class="o">=</span> <span class="n">http_request</span><span class="p">(</span><span class="n">url</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c1">// 返回结果到主线程
+</span></span></span><span class="line"><span class="cl">        <span class="n">Node</span> <span class="o">*</span><span class="n">node</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">Node</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">p_userdata</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">node</span><span class="o">-&gt;</span><span class="n">call_deferred</span><span class="p">(</span><span class="s">&#34;_on_data_received&#34;</span><span class="p">,</span> <span class="n">result</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span> <span class="k">this</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="config">Config
+</h2><p>GLOBAL_DEF(&ldquo;aaa/ccc/bbb111&rdquo;, false);</p>
+
 </section>
 
 
@@ -1675,7 +2156,7 @@ err_dialog_control-&gt;draw_line(Point2(0,0), Point2(100,100),Color(1,0,0));</p>
         
             2020 - 
         
-        2025 李宇飞-Liyufei1
+        2026 李宇飞-Liyufei1
     </section>
     
     <section class="powerby">
