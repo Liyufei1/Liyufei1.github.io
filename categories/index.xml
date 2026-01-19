@@ -7,37 +7,45 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>李宇飞-Liyufei1</copyright>
-        <lastBuildDate>Sat, 20 Dec 2025 09:18:31 +0800</lastBuildDate><atom:link href="https://Liyufei1.github.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 15 Jan 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://Liyufei1.github.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>AI</title>
+        <link>https://Liyufei1.github.io/categories/ai/</link>
+        <pubDate>Thu, 15 Jan 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://Liyufei1.github.io/categories/ai/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Misc</title>
+        <link>https://Liyufei1.github.io/categories/misc/</link>
+        <pubDate>Thu, 15 Jan 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://Liyufei1.github.io/categories/misc/</guid>
+        <description>&lt;img src="https://Liyufei1.github.io/categories/misc/MiscIcon.png" alt="Featured image of post Misc" /&gt;</description>
+        </item>
+        <item>
+        <title>OpenGL</title>
+        <link>https://Liyufei1.github.io/categories/opengl/</link>
+        <pubDate>Mon, 05 Jan 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://Liyufei1.github.io/categories/opengl/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Render</title>
+        <link>https://Liyufei1.github.io/categories/render/</link>
+        <pubDate>Mon, 05 Jan 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://Liyufei1.github.io/categories/render/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>Godot</title>
         <link>https://Liyufei1.github.io/categories/godot/</link>
         <pubDate>Sat, 20 Dec 2025 09:18:31 +0800</pubDate>
         
         <guid>https://Liyufei1.github.io/categories/godot/</guid>
         <description>&lt;img src="https://Liyufei1.github.io/categories/godot/GodotIcon.png" alt="Featured image of post Godot" /&gt;</description>
-        </item>
-        <item>
-        <title>IFlow</title>
-        <link>https://Liyufei1.github.io/categories/iflow/</link>
-        <pubDate>Tue, 09 Dec 2025 10:00:00 +0800</pubDate>
-        
-        <guid>https://Liyufei1.github.io/categories/iflow/</guid>
-        <description></description>
-        </item>
-        <item>
-        <title>工具使用</title>
-        <link>https://Liyufei1.github.io/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/</link>
-        <pubDate>Tue, 09 Dec 2025 10:00:00 +0800</pubDate>
-        
-        <guid>https://Liyufei1.github.io/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/</guid>
-        <description></description>
-        </item>
-        <item>
-        <title>Misc</title>
-        <link>https://Liyufei1.github.io/categories/misc/</link>
-        <pubDate>Mon, 03 Nov 2025 16:08:31 +0800</pubDate>
-        
-        <guid>https://Liyufei1.github.io/categories/misc/</guid>
-        <description>&lt;img src="https://Liyufei1.github.io/categories/misc/MiscIcon.png" alt="Featured image of post Misc" /&gt;</description>
         </item>
         <item>
         <title>Test</title>

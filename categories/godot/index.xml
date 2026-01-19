@@ -7029,7 +7029,38 @@ object中的GDCLASS(m_class, m_inherits)宏中包装了_get_property_listv方法
         <description>&lt;img src="https://Liyufei1.github.io/guidao4.jpg" alt="Featured image of post 【godot】二、Modules开发指南" /&gt;&lt;h1 id=&#34;modules开发指南&#34;&gt;Modules开发指南
 &lt;/h1&gt;&lt;p&gt;本文档是针对&lt;code&gt;Godot 4.4&lt;/code&gt;引擎的 Modules开发指南，为需要进行底层开发的开发者提供实用的参考。Godot Modules开发允许我们直接在引擎源码层面扩展功能，相比GDExtension具有更强大的能力和更深度的集成。本文涵盖了日志打印、容器类型、GUI组件、线程管理、配置系统等核心模块的常用头文件和最小使用示例，帮助你快速上手 Godot 引擎的 C++ 开发。&lt;/p&gt;
 &lt;h2 id=&#34;常用功能&#34;&gt;常用功能
-&lt;/h2&gt;&lt;h3 id=&#34;日志打印&#34;&gt;日志打印
+&lt;/h2&gt;&lt;h3 id=&#34;编译期宏开关&#34;&gt;编译期宏开关
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;名称&lt;/th&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;作用&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;TOOLS_ENABLED&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;只在编辑器/工具链里需要的代码&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;WINDOWS_ENABLED&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;Windows 平台&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;ANDROID_ENABLED&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;Android 平台&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;GLES3_ENABLED&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;GLES3 渲染后端&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;VULKAN_ENABLED&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;Vulkan 渲染后端&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;日志打印&#34;&gt;日志打印
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;头文件&lt;/strong&gt;：#include &amp;ldquo;core/string/print_string.h&amp;rdquo;&lt;/p&gt;
 &lt;p&gt;用于标准日志的输出。在做引擎开发时使用。&lt;/p&gt;
 &lt;p&gt;在做GDExtension开发时，使用Utility_function头文件，进行日志打印。&lt;/p&gt;
@@ -7934,7 +7965,23 @@ object中的GDCLASS(m_class, m_inherits)宏中包装了_get_property_listv方法
 &lt;/h2&gt;&lt;p&gt;&lt;strong&gt;基础路径&lt;/strong&gt;：#include &amp;ldquo;sence/gui/xxx.h&amp;rdquo;&lt;/p&gt;
 &lt;h3 id=&#34;gui基础类&#34;&gt;GUI基础类
 &lt;/h3&gt;&lt;h4 id=&#34;control&#34;&gt;Control
-&lt;/h4&gt;&lt;p&gt;err_dialog_control-&amp;gt;set_custom_minimum_size(Size2(600, 600) * EDSCALE);&lt;br&gt;
+&lt;/h4&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;接口&lt;/th&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;作用&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;右对齐&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;set_mouse_filter&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;设置鼠标/点击行为&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;STOP &lt;br&gt; PASS &lt;br&gt; IGNORE&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;err_dialog_control-&amp;gt;set_custom_minimum_size(Size2(600, 600) * EDSCALE);&lt;br&gt;
 err_dialog_control-&amp;gt;connect(SceneStringName(draw), callable_mp(this, &amp;amp;LyfTestEditor::test_draw));&lt;br&gt;
 err_dialog_control-&amp;gt;draw_line(Point2(0,0), Point2(100,100),Color(1,0,0));&lt;/p&gt;
 &lt;h4 id=&#34;canvasitem&#34;&gt;CanvasItem

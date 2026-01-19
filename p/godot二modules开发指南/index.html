@@ -288,6 +288,7 @@
   <ol>
     <li><a href="#常用功能">常用功能</a>
       <ol>
+        <li><a href="#编译期宏开关">编译期宏开关</a></li>
         <li><a href="#日志打印">日志打印</a></li>
         <li><a href="#计时器">计时器</a></li>
         <li><a href="#自定义项目配置">自定义项目配置</a>
@@ -455,7 +456,38 @@
     <h1 id="modules开发指南">Modules开发指南
 </h1><p>本文档是针对<code>Godot 4.4</code>引擎的 Modules开发指南，为需要进行底层开发的开发者提供实用的参考。Godot Modules开发允许我们直接在引擎源码层面扩展功能，相比GDExtension具有更强大的能力和更深度的集成。本文涵盖了日志打印、容器类型、GUI组件、线程管理、配置系统等核心模块的常用头文件和最小使用示例，帮助你快速上手 Godot 引擎的 C++ 开发。</p>
 <h2 id="常用功能">常用功能
-</h2><h3 id="日志打印">日志打印
+</h2><h3 id="编译期宏开关">编译期宏开关
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th style="text-align: left">名称</th>
+          <th style="text-align: center">作用</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">TOOLS_ENABLED</td>
+          <td style="text-align: center">只在编辑器/工具链里需要的代码</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">WINDOWS_ENABLED</td>
+          <td style="text-align: center">Windows 平台</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">ANDROID_ENABLED</td>
+          <td style="text-align: center">Android 平台</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">GLES3_ENABLED</td>
+          <td style="text-align: center">GLES3 渲染后端</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">VULKAN_ENABLED</td>
+          <td style="text-align: center">Vulkan 渲染后端</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="日志打印">日志打印
 </h3><p><strong>头文件</strong>：#include &ldquo;core/string/print_string.h&rdquo;</p>
 <p>用于标准日志的输出。在做引擎开发时使用。</p>
 <p>在做GDExtension开发时，使用Utility_function头文件，进行日志打印。</p>
@@ -1360,7 +1392,23 @@
 </h2><p><strong>基础路径</strong>：#include &ldquo;sence/gui/xxx.h&rdquo;</p>
 <h3 id="gui基础类">GUI基础类
 </h3><h4 id="control">Control
-</h4><p>err_dialog_control-&gt;set_custom_minimum_size(Size2(600, 600) * EDSCALE);<br>
+</h4><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th style="text-align: left">接口</th>
+          <th style="text-align: center">作用</th>
+          <th style="text-align: left">右对齐</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">set_mouse_filter</td>
+          <td style="text-align: center">设置鼠标/点击行为</td>
+          <td style="text-align: left">STOP <br> PASS <br> IGNORE</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>err_dialog_control-&gt;set_custom_minimum_size(Size2(600, 600) * EDSCALE);<br>
 err_dialog_control-&gt;connect(SceneStringName(draw), callable_mp(this, &amp;LyfTestEditor::test_draw));<br>
 err_dialog_control-&gt;draw_line(Point2(0,0), Point2(100,100),Color(1,0,0));</p>
 <h4 id="canvasitem">CanvasItem
