@@ -13,7 +13,7 @@
         <pubDate>Thu, 12 Feb 2026 00:00:00 +0800</pubDate>
         
         <guid>https://Liyufei1.github.io/p/ai-02-c-%E4%B8%ADapi-key%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
-        <description>&lt;h2 id=&#34;-目录&#34;&gt;📋 目录
+        <description>&lt;img src="https://Liyufei1.github.io/AI.png" alt="Featured image of post AI-02-C&#43;&#43;中API Key的使用" /&gt;&lt;h2 id=&#34;-目录&#34;&gt;📋 目录
 &lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e7%ae%80%e4%bb%8b&#34; &gt;简介&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e6%96%b9%e6%a1%88%e4%b8%80libcurl%e7%9b%b4%e6%8e%a5%e8%b0%83%e7%94%a8&#34; &gt;方案一：libcurl直接调用&lt;/a&gt;&lt;/li&gt;
@@ -1086,7 +1086,7 @@
         <pubDate>Wed, 11 Feb 2026 00:00:00 +0800</pubDate>
         
         <guid>https://Liyufei1.github.io/p/ai-01-ai%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7opencode%E7%AE%80%E4%BB%8B/</guid>
-        <description>&lt;h2 id=&#34;-目录&#34;&gt;📋 目录
+        <description>&lt;img src="https://Liyufei1.github.io/AI.png" alt="Featured image of post AI-01-AI编程工具opencode简介" /&gt;&lt;h2 id=&#34;-目录&#34;&gt;📋 目录
 &lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e7%ae%80%e4%bb%8b&#34; &gt;简介&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e6%a8%a1%e5%9e%8b&#34; &gt;模型&lt;/a&gt;&lt;/li&gt;
@@ -1351,7 +1351,7 @@
         <pubDate>Thu, 15 Jan 2026 00:00:00 +0000</pubDate>
         
         <guid>https://Liyufei1.github.io/p/iflow-in-development/</guid>
-        <description>&lt;img src="https://Liyufei1.github.io/guidao5.jpg" alt="Featured image of post Iflow在开发中的进阶教程" /&gt;&lt;h1 id=&#34;1-创建一个agent工作流&#34;&gt;1. 创建一个agent工作流
+        <description>&lt;img src="https://Liyufei1.github.io/AI.png" alt="Featured image of post Iflow在开发中的进阶教程" /&gt;&lt;h1 id=&#34;1-创建一个agent工作流&#34;&gt;1. 创建一个agent工作流
 &lt;/h1&gt;</description>
         </item>
         <item>
@@ -1360,7 +1360,7 @@
         <pubDate>Mon, 05 Jan 2026 00:00:00 +0000</pubDate>
         
         <guid>https://Liyufei1.github.io/p/opengl-learning-notes/</guid>
-        <description>&lt;img src="https://Liyufei1.github.io/guidao5.jpg" alt="Featured image of post OpenGL学习随笔" /&gt;&lt;h1 id=&#34;环境搭建&#34;&gt;环境搭建
+        <description>&lt;img src="https://Liyufei1.github.io/OpenGL.png" alt="Featured image of post OpenGL学习随笔" /&gt;&lt;h1 id=&#34;环境搭建&#34;&gt;环境搭建
 &lt;/h1&gt;&lt;h2 id=&#34;依赖库&#34;&gt;依赖库
 &lt;/h2&gt;&lt;h3 id=&#34;glfw&#34;&gt;GLFW
 &lt;/h3&gt;&lt;p&gt;GLFW（OpenGL FrameWork）是一个专门为 OpenGL 和 Vulkan 设计的开源、跨平台的窗口和输入库。它提供了一组简单、直观的 API，用于创建窗口、处理输入（键盘、鼠标、游戏手柄）以及管理 OpenGL 上下文。&lt;/p&gt;
@@ -4146,7 +4146,7 @@ image-20250922100232547.png&lt;/li&gt;
         <pubDate>Sat, 20 Dec 2025 09:18:31 +0800</pubDate>
         
         <guid>https://Liyufei1.github.io/p/godot%E4%B8%83godot%E7%9A%84%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0/</guid>
-        <description>&lt;img src="https://Liyufei1.github.io/guidao4.jpg" alt="Featured image of post 【godot】七、godot的启动参数" /&gt;&lt;h1 id=&#34;godot-44-启动参数完整指南&#34;&gt;Godot 4.4 启动参数完整指南
+        <description>&lt;img src="https://Liyufei1.github.io/godot.png" alt="Featured image of post 【godot】七、godot的启动参数" /&gt;&lt;h1 id=&#34;godot-44-启动参数完整指南&#34;&gt;Godot 4.4 启动参数完整指南
 &lt;/h1&gt;&lt;p&gt;Godot 引擎提供了丰富的命令行启动参数，允许开发者在运行时和编辑器中精细控制引擎行为。本文基于 Godot 4.4 源码，全面梳理了所有可用的启动参数，并按功能分类进行详细介绍。&lt;/p&gt;
 &lt;h2 id=&#34;目录&#34;&gt;目录
 &lt;/h2&gt;&lt;ul&gt;
@@ -5872,7 +5872,7 @@ image-20250922100232547.png&lt;/li&gt;
         <pubDate>Tue, 09 Dec 2025 10:00:00 +0800</pubDate>
         
         <guid>https://Liyufei1.github.io/p/iflow-cli-%E4%BD%BF%E7%94%A8%E5%92%8C%E9%83%A8%E7%BD%B2%E5%AE%8C%E6%95%B4%E6%95%99%E7%A8%8B/</guid>
-        <description>&lt;img src="https://Liyufei1.github.io/guidao5.jpg" alt="Featured image of post iFlow CLI 使用和部署完整教程" /&gt;&lt;h1 id=&#34;iflow-cli-使用和部署完整教程&#34;&gt;iFlow CLI 使用和部署完整教程
+        <description>&lt;img src="https://Liyufei1.github.io/AI.png" alt="Featured image of post iFlow CLI 使用和部署完整教程" /&gt;&lt;h1 id=&#34;iflow-cli-使用和部署完整教程&#34;&gt;iFlow CLI 使用和部署完整教程
 &lt;/h1&gt;&lt;h2 id=&#34;iflow初步认识&#34;&gt;iFlow初步认识
 &lt;/h2&gt;&lt;p&gt;iFlow CLI 是一款直接在终端中运行的强大 AI 助手。它能够无缝分析代码仓库、执行编程任务、理解上下文需求，通过自动化处理从简单的文件操作到复杂的工作流程，全面提升您的工作效率。&lt;/p&gt;
 &lt;h3 id=&#34;核心特性&#34;&gt;核心特性
@@ -6139,7 +6139,7 @@ image-20250922100232547.png&lt;/li&gt;
         <pubDate>Thu, 20 Nov 2025 09:18:31 +0800</pubDate>
         
         <guid>https://Liyufei1.github.io/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/</guid>
-        <description>&lt;img src="https://Liyufei1.github.io/guidao4.jpg" alt="Featured image of post 【godot】六、godot中的编辑器插件EditorPlugin" /&gt;&lt;h2 id=&#34;概述&#34;&gt;概述
+        <description>&lt;img src="https://Liyufei1.github.io/godot.png" alt="Featured image of post 【godot】六、godot中的编辑器插件EditorPlugin" /&gt;&lt;h2 id=&#34;概述&#34;&gt;概述
 &lt;/h2&gt;&lt;p&gt;对于追求极客精神的小伙伴而言，对godot编辑器的改造无疑是一件非常酷的事情。它可以为godot编辑器添加一些定制化的操作，用于提升开发效率，加速工程实现。对于泛用的编辑器功能或是自定义功能类的调式补充界面，做成编辑器插件是非常不错的，比如：批量的实体放置、批量的材质复制、曲线的debug绘制等。
 &lt;img src=&#34;https://Liyufei1.github.io/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/image5.jpg&#34;
 	width=&#34;2469&#34;
@@ -6572,7 +6572,7 @@ image-20250922100232547.png&lt;/li&gt;
         <pubDate>Fri, 07 Nov 2025 09:18:31 +0800</pubDate>
         
         <guid>https://Liyufei1.github.io/p/godot%E4%BA%94godot%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9Frtti/</guid>
-        <description>&lt;img src="https://Liyufei1.github.io/guidao4.jpg" alt="Featured image of post 【godot】五、godot中的动态类型信息系统RTTI" /&gt;&lt;h2 id=&#34;概述&#34;&gt;概述
+        <description>&lt;img src="https://Liyufei1.github.io/godot.png" alt="Featured image of post 【godot】五、godot中的动态类型信息系统RTTI" /&gt;&lt;h2 id=&#34;概述&#34;&gt;概述
 &lt;/h2&gt;&lt;p&gt;在游戏开发中，动态性和灵活性是至关重要的特性。python，C#，java等编程语言，从语音层面就是支持反射或动态类型系统的，可以运行时动态地查看对象的类型、成员、方法，甚至动态调用或修改它们。而游戏引擎为了追求运行时的效率，一般会采用Cpp语言进行开发，Cpp语言本身不支持反射，所以各大游戏引擎都各显神通地添加了反射系统，以支持运行时动态类型信息。&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;在虚幻引擎当中，是通过UObject类来收集元信息的。通过UPROPTERTY()等宏标记，用UHT工具，在编译前进行一次头文件的生成，从而生成UPROPERTY()所标记的属性元信息的U类。对于虚幻的反射实现感兴趣的朋友，可以参考大钊在知乎上的文章：&lt;a class=&#34;link&#34; href=&#34;hhttps://zhuanlan.zhihu.com/p/24319968&#34; &gt;虚幻引擎的元信息机制&lt;/a&gt;
@@ -9202,7 +9202,7 @@ object中的GDCLASS(m_class, m_inherits)宏中包装了_get_property_listv方法
         <pubDate>Wed, 05 Nov 2025 09:18:31 +0800</pubDate>
         
         <guid>https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/</guid>
-        <description>&lt;img src="https://Liyufei1.github.io/guidao4.jpg" alt="Featured image of post 【godot】四、性能统计" /&gt;&lt;h2 id=&#34;性能分析相关&#34;&gt;性能分析相关
+        <description>&lt;img src="https://Liyufei1.github.io/godot.png" alt="Featured image of post 【godot】四、性能统计" /&gt;&lt;h2 id=&#34;性能分析相关&#34;&gt;性能分析相关
 &lt;/h2&gt;&lt;p&gt;godot作为相对成熟的游戏引擎，其本身就提供了相对完善的运行时性能监测工具。本文将对常用的运行时性能参数的获取和使用进行一个简易的说明，旨在帮助大家了解获取及理解这些参数。&lt;/p&gt;
 &lt;h3 id=&#34;performance&#34;&gt;Performance
 &lt;/h3&gt;&lt;p&gt;Performance是godot内置的性能数据存储器，它提供对许多与性能相关的不同监视器的访问，例如&lt;strong&gt;贴图内存使用情况&lt;/strong&gt; :RENDER_BUFFER_MEM_USED（在glbufferData的时候，会对申请的size进行累加）、&lt;strong&gt;绘制调用&lt;/strong&gt;:RENDER_TOTAL_DRAW_CALLS_IN_FRAME （gldraw的时候加一）&lt;strong&gt;FPS&lt;/strong&gt;。&lt;/p&gt;
@@ -9644,7 +9644,7 @@ object中的GDCLASS(m_class, m_inherits)宏中包装了_get_property_listv方法
         <pubDate>Tue, 04 Nov 2025 16:38:31 +0800</pubDate>
         
         <guid>https://Liyufei1.github.io/p/godot%E4%B8%89gdextension%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/</guid>
-        <description>&lt;img src="https://Liyufei1.github.io/guidao4.jpg" alt="Featured image of post 【godot】三、GDExtension开发指南" /&gt;&lt;h2 id=&#34;一src编写&#34;&gt;一、SRC编写
+        <description>&lt;img src="https://Liyufei1.github.io/godot.png" alt="Featured image of post 【godot】三、GDExtension开发指南" /&gt;&lt;h2 id=&#34;一src编写&#34;&gt;一、SRC编写
 &lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;Godot中不推荐使用#pragma once，而是推荐使用**#ifndef**的方式，来保证头文件的单次引用，参考下方行1。&lt;/li&gt;
 &lt;li&gt;类内第一行，必须打上Godot的对应宏&lt;strong&gt;GDCLASS(SelfClass,BaseClass)&lt;/strong&gt;，参考下方行12。&lt;/li&gt;
@@ -11426,7 +11426,7 @@ object中的GDCLASS(m_class, m_inherits)宏中包装了_get_property_listv方法
         <pubDate>Tue, 04 Nov 2025 16:18:31 +0800</pubDate>
         
         <guid>https://Liyufei1.github.io/p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/</guid>
-        <description>&lt;img src="https://Liyufei1.github.io/guidao4.jpg" alt="Featured image of post 【godot】二、Modules开发指南" /&gt;&lt;h1 id=&#34;modules开发指南&#34;&gt;Modules开发指南
+        <description>&lt;img src="https://Liyufei1.github.io/godot.png" alt="Featured image of post 【godot】二、Modules开发指南" /&gt;&lt;h1 id=&#34;modules开发指南&#34;&gt;Modules开发指南
 &lt;/h1&gt;&lt;p&gt;本文档是针对&lt;code&gt;Godot 4.4&lt;/code&gt;引擎的 Modules开发指南，为需要进行底层开发的开发者提供实用的参考。Godot Modules开发允许我们直接在引擎源码层面扩展功能，相比GDExtension具有更强大的能力和更深度的集成。本文涵盖了日志打印、容器类型、GUI组件、线程管理、配置系统等核心模块的常用头文件和最小使用示例，帮助你快速上手 Godot 引擎的 C++ 开发。&lt;/p&gt;
 &lt;h2 id=&#34;常用功能&#34;&gt;常用功能
 &lt;/h2&gt;&lt;h3 id=&#34;编译期宏开关&#34;&gt;编译期宏开关
@@ -13008,7 +13008,7 @@ err_dialog_control-&amp;gt;draw_line(Point2(0,0), Point2(100,100),Color(1,0,0));
         <pubDate>Tue, 04 Nov 2025 16:08:31 +0800</pubDate>
         
         <guid>https://Liyufei1.github.io/p/godot%E4%B8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/</guid>
-        <description>&lt;img src="https://Liyufei1.github.io/guidao4.jpg" alt="Featured image of post 【godot】一、开发环境部署及示例" /&gt;&lt;h1 id=&#34;引擎编译&#34;&gt;引擎编译
+        <description>&lt;img src="https://Liyufei1.github.io/godot.png" alt="Featured image of post 【godot】一、开发环境部署及示例" /&gt;&lt;h1 id=&#34;引擎编译&#34;&gt;引擎编译
 &lt;/h1&gt;&lt;p&gt;官方源码仓库：&lt;a class=&#34;link&#34; href=&#34;https://github.com/godotengine/godot.git&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;godot&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;官方godot-cpp仓库：&lt;a class=&#34;link&#34; href=&#34;https://github.com/godotengine/godot-cpp.git&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;

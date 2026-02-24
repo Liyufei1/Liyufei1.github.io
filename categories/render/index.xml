@@ -13,7 +13,7 @@
         <pubDate>Mon, 05 Jan 2026 00:00:00 +0000</pubDate>
         
         <guid>https://Liyufei1.github.io/p/opengl-learning-notes/</guid>
-        <description>&lt;img src="https://Liyufei1.github.io/guidao5.jpg" alt="Featured image of post OpenGL学习随笔" /&gt;&lt;h1 id=&#34;环境搭建&#34;&gt;环境搭建
+        <description>&lt;img src="https://Liyufei1.github.io/OpenGL.png" alt="Featured image of post OpenGL学习随笔" /&gt;&lt;h1 id=&#34;环境搭建&#34;&gt;环境搭建
 &lt;/h1&gt;&lt;h2 id=&#34;依赖库&#34;&gt;依赖库
 &lt;/h2&gt;&lt;h3 id=&#34;glfw&#34;&gt;GLFW
 &lt;/h3&gt;&lt;p&gt;GLFW（OpenGL FrameWork）是一个专门为 OpenGL 和 Vulkan 设计的开源、跨平台的窗口和输入库。它提供了一组简单、直观的 API，用于创建窗口、处理输入（键盘、鼠标、游戏手柄）以及管理 OpenGL 上下文。&lt;/p&gt;
