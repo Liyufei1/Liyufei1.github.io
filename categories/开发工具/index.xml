@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>开发工具 on 李宇飞-Liyufei1</title>
+        <link>https://Liyufei1.github.io/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/</link>
+        <description>Recent content in 开发工具 on 李宇飞-Liyufei1</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>李宇飞-Liyufei1</copyright>
+        <lastBuildDate>Wed, 11 Feb 2026 00:00:00 +0800</lastBuildDate><atom:link href="https://Liyufei1.github.io/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>AI-01-AI编程工具opencode简介</title>
+        <link>https://Liyufei1.github.io/p/ai-01-ai%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7opencode%E7%AE%80%E4%BB%8B/</link>
+        <pubDate>Wed, 11 Feb 2026 00:00:00 +0800</pubDate>
+        
+        <guid>https://Liyufei1.github.io/p/ai-01-ai%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7opencode%E7%AE%80%E4%BB%8B/</guid>
+        <description>&lt;h2 id=&#34;-目录&#34;&gt;📋 目录
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e7%ae%80%e4%bb%8b&#34; &gt;简介&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e6%a8%a1%e5%9e%8b&#34; &gt;模型&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e5%b8%b8%e7%94%a8%e5%8a%9f%e8%83%bd&#34; &gt;常用功能&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#SKILL%e5%92%8cMCP&#34; &gt;SKILL和MCP&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;!-- - [OMO简介](#On my opencode简介) --&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e4%ba%91%e7%ab%af%e7%8e%af%e5%a2%83&#34; &gt;云端环境&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;简介&#34;&gt;简介
+&lt;/h2&gt;&lt;p&gt;&lt;code&gt;OpenCode&lt;/code&gt; 是一个开源的 AI 编程助手，它有以下几种运行方式:  &lt;code&gt;终端命令行&lt;/code&gt; 、&lt;code&gt;IDE插件&lt;/code&gt; 、&lt;code&gt;独立桌面应用&lt;/code&gt; 、 &lt;code&gt;云端环境 &lt;/code&gt; .相较于其他ai编程工具， OpenCode 具备以下几个优点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;多平台支持&lt;/strong&gt;: 支持终端界面、桌面应用和 IDE 扩展&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;灵活的模型支持&lt;/strong&gt;: 支持 75+ 个 LLM 提供商，包括 Claude、GPT、Gemini 等&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;LSP 集成&lt;/strong&gt;: 自动加载适合 LLM 的语言服务器协议&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;多会话&lt;/strong&gt;: 可在同一项目上并行启动多个代理&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;安装&#34;&gt;安装
+&lt;/h3&gt;&lt;p&gt;本文仅介绍最简单的&lt;code&gt;终端命令行&lt;/code&gt;的安装方式，更多安装方式请查看 &lt;a class=&#34;link&#34; href=&#34;https://opencode.ai/docs/zh-cn&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;opencode文档&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;npm:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;npm install -g opencode-ai
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;安装完毕后,在&lt;code&gt;cmd&lt;/code&gt;中执行&lt;code&gt;opencode&lt;/code&gt;即可看到它的运行界面(见下图):&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/ai-01-ai%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7opencode%E7%AE%80%E4%BB%8B/1.png&#34;
+	width=&#34;1030&#34;
+	height=&#34;401&#34;
+	srcset=&#34;https://Liyufei1.github.io/p/ai-01-ai%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7opencode%E7%AE%80%E4%BB%8B/1_hu_b19ae7fd0bc684a4.png 480w, https://Liyufei1.github.io/p/ai-01-ai%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7opencode%E7%AE%80%E4%BB%8B/1_hu_d9fa0e841cc8bdbe.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;运行界面&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;256&#34;
+		data-flex-basis=&#34;616px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;模型&#34;&gt;模型
+&lt;/h2&gt;&lt;p&gt;&lt;code&gt;OpenCode&lt;/code&gt; 支持连接到多种 &lt;code&gt;LLM&lt;/code&gt; 提供商。你可以通过配置 &lt;code&gt;API&lt;/code&gt; 密钥来使用不同的模型。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在 TUI 中运行 &lt;code&gt;/connect&lt;/code&gt; 命令,选择模型供应商，并填写你的&lt;code&gt;API Key&lt;/code&gt;
+&lt;ol&gt;
+&lt;li&gt;(非必须) 一般使用 &lt;code&gt;openrouter.ai&lt;/code&gt; 来对接模型,里面有许多免费模型的API,也有付费的.&lt;/li&gt;
+&lt;li&gt;也可以对接各种官方的模型,如&lt;code&gt;OpenAI&lt;/code&gt;、&lt;code&gt;google&lt;/code&gt;、&lt;code&gt;anthropic&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;在 TUI 中运行 &lt;code&gt;/model&lt;/code&gt; 命令,选择想使用的模型.
+&lt;ol&gt;
+&lt;li&gt;快捷键 &lt;code&gt;F2&lt;/code&gt; 可以快速切换模型，反向切换快捷键 &lt;code&gt;Shift+F2&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;MiniMax-M2.1&lt;/code&gt; : 编程能力较强&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;GLM-4.7&lt;/code&gt;: 编程能力较强&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;对模型的配置，会持久化保存在 &lt;code&gt;C:\Users\YourName\.local\share\opencode\auth.json&lt;/code&gt;当中，因此也可以通过对该文件的编辑，实现手动配置模型。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;常用功能&#34;&gt;常用功能
+&lt;/h2&gt;&lt;h3 id=&#34;基本命令&#34;&gt;基本命令
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;命令&lt;/th&gt;
+          &lt;th&gt;说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;/init&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;初始化项目，创建 AGENTS.md&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;/connect&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;连接模型提供商&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;/model&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;切换使用的模型&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;/undo&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;撤销上次的更改（可多次撤销）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;/redo&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;重做已撤销的更改&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;/compact&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;压缩对话，来释放模型上下文&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;/new&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;新建一个对话，可以并行运行&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;/session&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;查看所有对话&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;/timeline&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;可视化对话时间线，显示会话历史的树状结构，支持导航和分支&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;/share&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;生成分享链接，包含了整个对话记录（复制到剪贴板）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;/unshare&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;取消分享&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;/export&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;将对话记录，导出成文件&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;工作模式主angent&#34;&gt;工作模式（主Angent）
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;Plan 模式（规划模式）&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;按 &lt;strong&gt;Tab&lt;/strong&gt; 键切换到规划模式&lt;/li&gt;
+&lt;li&gt;在此模式下，OpenCode 不会直接修改代码，而是提供实现方案&lt;/li&gt;
+&lt;li&gt;适合在开发前讨论和确认实现思路&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Build 模式（构建模式）&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;再次按 &lt;strong&gt;Tab&lt;/strong&gt; 键切换回构建模式&lt;/li&gt;
+&lt;li&gt;OpenCode 将直接执行代码修改&lt;/li&gt;
+&lt;li&gt;适用于明确的开发任务&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;自定义 Agent 模式&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;按 &lt;strong&gt;Ctrl+Tab&lt;/strong&gt; 键切换到自定义模式&lt;/li&gt;
+&lt;li&gt;在&lt;code&gt;~/.config/opencode/agent/your_agent.md&lt;/code&gt;中定义专属提示词&lt;/li&gt;
+&lt;li&gt;可以为不同场景创建专门的 Agent（如代码审查、数据分析、前端开发等）&lt;/li&gt;
+&lt;li&gt;格式规范请参考&lt;a class=&#34;link&#34; href=&#34;https://opencode.ai/docs/agents&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;官方文档&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;skill和mcp&#34;&gt;SKILL和MCP
+&lt;/h2&gt;&lt;h3 id=&#34;agent-skills智能体技能&#34;&gt;Agent Skills（智能体技能）
+&lt;/h3&gt;&lt;p&gt;Agent Skills 允许你定义可重用的行为，OpenCode 可以通过原生 &lt;code&gt;skill&lt;/code&gt; 工具按需加载这些技能。&lt;/p&gt;
+&lt;h4 id=&#34;创建-skill&#34;&gt;创建 Skill
+&lt;/h4&gt;&lt;p&gt;创建 &lt;code&gt;.opencode/skills/&amp;lt;skill-name&amp;gt;/SKILL.md&lt;/code&gt; 文件：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;---
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;name: git-release
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;description: Create consistent releases and changelogs
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;license: MIT
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;compatibility: opencode
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;---
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;gu&#34;&gt;## What I do
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;-&lt;/span&gt; Draft release notes from merged PRs
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;-&lt;/span&gt; Propose a version bump
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;-&lt;/span&gt; Provide a copy-pasteable &lt;span class=&#34;sb&#34;&gt;`gh release create`&lt;/span&gt; command
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;gu&#34;&gt;## When to use me
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Use this when you are preparing a tagged release.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;skill-存储位置&#34;&gt;Skill 存储位置
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;项目级：&lt;code&gt;.opencode/skills/&amp;lt;name&amp;gt;/SKILL.md&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;全局：&lt;code&gt;~/.config/opencode/skills/&amp;lt;name&amp;gt;/SKILL.md&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Claude 兼容：&lt;code&gt;.claude/skills/&amp;lt;name&amp;gt;/SKILL.md&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Agents 兼容：&lt;code&gt;.agents/skills/&amp;lt;name&amp;gt;/SKILL.md&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;mcp-servers模型上下文协议&#34;&gt;MCP Servers（模型上下文协议）
+&lt;/h3&gt;&lt;p&gt;MCP（Model Context Protocol）是一种让 AI 模型与外部工具和数据源交互的协议。OpenCode 支持 MCP 服务器，可以扩展其功能。&lt;/p&gt;
+&lt;p&gt;通过 MCP，你可以：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;连接数据库进行查询&lt;/li&gt;
+&lt;li&gt;与版本控制系统集成&lt;/li&gt;
+&lt;li&gt;访问外部 API&lt;/li&gt;
+&lt;li&gt;使用自定义工具&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;配置 MCP 服务器在 &lt;code&gt;~/.config/opencode/opencode.json&lt;/code&gt; 的 &lt;code&gt;mcps&lt;/code&gt; 部分。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;云端环境&#34;&gt;云端环境
+&lt;/h2&gt;&lt;h3 id=&#34;opencode-云服务&#34;&gt;OpenCode 云服务
+&lt;/h3&gt;&lt;p&gt;OpenCode 提供了云端环境支持，让你可以在远程服务器上使用 OpenCode。&lt;/p&gt;
+&lt;h3 id=&#34;主要特性&#34;&gt;主要特性
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;远程开发&lt;/strong&gt;：在远程服务器上运行 OpenCode&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;协作功能&lt;/strong&gt;：与团队成员共享会话&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;共享链接&lt;/strong&gt;：生成可分享的对话链接&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;生成分享链接&#34;&gt;生成分享链接
+&lt;/h3&gt;&lt;p&gt;在任意会话中运行：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/share
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这会将当前对话的链接复制到你的剪贴板。你可以将此链接分享给团队成员，以便：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;代码审查&lt;/li&gt;
+&lt;li&gt;问题调试&lt;/li&gt;
+&lt;li&gt;知识共享&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;注意：对话默认不公开分享，只有你主动分享后他人才可访问。&lt;/p&gt;
+&lt;h3 id=&#34;隐私与安全&#34;&gt;隐私与安全
+&lt;/h3&gt;&lt;p&gt;OpenCode 采用隐私优先的设计：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;不存储你的代码或上下文数据&lt;/li&gt;
+&lt;li&gt;所有数据处理在本地完成&lt;/li&gt;
+&lt;li&gt;适合在隐私敏感的环境中使用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如需了解更多隐私政策，请访问 &lt;a class=&#34;link&#34; href=&#34;https://opencode.ai/docs/enterprise/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;opencode.ai/docs/enterprise&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;总结&#34;&gt;总结
+&lt;/h2&gt;&lt;p&gt;OpenCode 是一个功能强大、灵活且隐私友好的 AI 编程助手。无论你是个人开发者还是团队成员，它都能显著提升你的开发效率。&lt;/p&gt;
+&lt;h3 id=&#34;快速开始建议&#34;&gt;快速开始建议
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;安装 OpenCode：&lt;code&gt;curl -fsSL https://opencode.ai/install | bash&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;配置你的 API 密钥&lt;/li&gt;
+&lt;li&gt;在项目目录运行 &lt;code&gt;opencode&lt;/code&gt; 并执行 &lt;code&gt;/init&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;开始与 AI 对话，探索代码库&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;学习资源&#34;&gt;学习资源
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;官方文档：https://opencode.ai/docs&lt;/li&gt;
+&lt;li&gt;GitHub：https://github.com/anomalyco/opencode&lt;/li&gt;
+&lt;li&gt;Discord 社区：https://opencode.ai/discord&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;祝编码愉快！🚀&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>
