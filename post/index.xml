@@ -7,7 +7,146 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>李宇飞-Liyufei1</copyright>
-        <lastBuildDate>Wed, 11 Mar 2026 00:00:00 +0800</lastBuildDate><atom:link href="https://Liyufei1.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 08 May 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://Liyufei1.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>cpp-csapp学习笔记</title>
+        <link>https://Liyufei1.github.io/p/cpp-csapp-notes/</link>
+        <pubDate>Fri, 08 May 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://Liyufei1.github.io/p/cpp-csapp-notes/</guid>
+        <description>&lt;img src="https://Liyufei1.github.io/csapp.png" alt="Featured image of post cpp-csapp学习笔记" /&gt;&lt;h2 id=&#34;目录&#34;&gt;目录
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e7%9b%ae%e5%bd%95&#34; &gt;目录&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e7%ac%ac1%e7%ab%a0-%e8%ae%a1%e7%ae%97%e6%9c%ba%e7%b3%bb%e7%bb%9f%e6%bc%ab%e6%b8%b8&#34; &gt;第1章 计算机系统漫游&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#11-%e7%bc%96%e8%af%91%e7%b3%bb%e7%bb%9f&#34; &gt;1.1 编译系统&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#12-%e8%ae%a1%e7%ae%97%e6%9c%ba%e7%a1%ac%e4%bb%b6%e7%bb%84%e6%88%90&#34; &gt;1.2 计算机硬件组成&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#13-%e6%93%8d%e4%bd%9c%e7%b3%bb%e7%bb%9f%e7%a1%ac%e4%bb%b6%e7%ae%a1%e7%90%86&#34; &gt;1.3 操作系统硬件管理&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;第1章-计算机系统漫游&#34;&gt;第1章 计算机系统漫游
+&lt;/h2&gt;&lt;h3 id=&#34;11-编译系统&#34;&gt;1.1 编译系统
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/1/image1-1.png&#34;
+	width=&#34;1575&#34;
+	height=&#34;705&#34;
+	srcset=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/1/image1-1_hu_5cda5a6c2e0a68f2.png 480w, https://Liyufei1.github.io/p/cpp-csapp-notes/image/1/image1-1_hu_9b3ecc6a48ea142f.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;1-1&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;223&#34;
+		data-flex-basis=&#34;536px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;一个 C 程序从源文件到最终的可执行文件，通常会经历以下四个阶段：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;预处理：处理源代码中的宏展开、头文件包含和条件编译等指令，删除注释后生成预处理文件。&lt;/li&gt;
+&lt;li&gt;编译：对预处理后的代码进行词法分析、语法分析和语义分析，并生成对应的汇编代码。&lt;/li&gt;
+&lt;li&gt;汇编：将汇编代码翻译为机器指令，生成目标文件。&lt;/li&gt;
+&lt;li&gt;链接：将多个目标文件以及所需的库文件链接在一起，解析符号引用，最终生成可执行文件。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;可以把这一过程理解为：先“整理”源代码，再“翻译”为汇编，再“转换”为机器指令，最后把程序运行所需的各个部分“拼装”起来。&lt;/p&gt;
+&lt;h3 id=&#34;12-计算机硬件组成&#34;&gt;1.2 计算机硬件组成
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/1/image1-2-1.png&#34;
+	width=&#34;1463&#34;
+	height=&#34;818&#34;
+	srcset=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/1/image1-2-1_hu_76a094c3c9e14696.png 480w, https://Liyufei1.github.io/p/cpp-csapp-notes/image/1/image1-2-1_hu_d5f2b7c2b961f468.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;1-2-1&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;178&#34;
+		data-flex-basis=&#34;429px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;一个典型的计算机系统通常由以下几个核心部分组成：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;CPU（Central Processing Unit，中央处理器）
+&lt;ol&gt;
+&lt;li&gt;PC（Program Counter，程序计数器）：本质是一个大小为一个字的存储单元(32bit/64bit)，保存下一条将要执行的指令地址。&lt;/li&gt;
+&lt;li&gt;Register（寄存器）：CPU 内部用于暂存数据和中间结果的高速存储单元。&lt;/li&gt;
+&lt;li&gt;ALU（Arithmetic Logic Unit，算术逻辑单元）：负责执行加、减、与、或等算术和逻辑运算。&lt;/li&gt;
+&lt;li&gt;Bus（总线）：负责在 CPU 内部以及 CPU 与其他部件之间传输数据、地址和控制信号。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;Main Memory（主存，也就是内存）：保存程序运行时的指令和数据。可以把它看成一个按字节编址的大数组，每个字节都有唯一的地址。&lt;/li&gt;
+&lt;li&gt;I/O Bridge（输入输出桥接器）：负责连接处理器、内存与外部 I/O 设备，协调不同部件之间的数据交换。&lt;/li&gt;
+&lt;li&gt;I/O Bus（输入输出总线）：为磁盘、键盘、显示器、网络设备等外设提供数据传输通道。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;从功能上看，CPU 负责“运算”，主存负责“存储”，而 I/O 系统则负责“与外界交互”，三者共同构成了一个完整的计算机系统。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/1/image1-2-2.png&#34;
+	width=&#34;1433&#34;
+	height=&#34;750&#34;
+	srcset=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/1/image1-2-2_hu_fd77c32248669b4c.png 480w, https://Liyufei1.github.io/p/cpp-csapp-notes/image/1/image1-2-2_hu_527279d29208f59e.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;1-2-2&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;191&#34;
+		data-flex-basis=&#34;458px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;在存储层次结构中，越靠上的存储设备速度越快，但容量越小、成本也越高；越靠下的存储设备容量越大，但访问速度越慢。&lt;/p&gt;
+&lt;p&gt;可以把这一结构理解为一个“存储金字塔”：上层存储通常作为下层存储的高速缓冲，从而在容量、成本和速度之间取得平衡。&lt;br&gt;
+因此，程序之所以能够高效运行，很大程度上依赖于这种分层存储设计。&lt;/p&gt;
+&lt;h3 id=&#34;13-操作系统硬件管理&#34;&gt;1.3 操作系统硬件管理
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/1/image1-3-1.png&#34;
+	width=&#34;1395&#34;
+	height=&#34;701&#34;
+	srcset=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/1/image1-3-1_hu_8ec342689e845b84.png 480w, https://Liyufei1.github.io/p/cpp-csapp-notes/image/1/image1-3-1_hu_8090b997fe86107d.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;1-3-1&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;199&#34;
+		data-flex-basis=&#34;477px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;应用程序通常不能直接操作底层硬件，而是要通过操作系统提供的接口来完成。&lt;br&gt;
+操作系统位于应用程序与硬件之间，负责对底层资源进行统一管理，并向上层提供更简单、更安全的抽象。&lt;/p&gt;
+&lt;p&gt;从 CSAPP 的视角来看，操作系统主要通过以下三种抽象来管理硬件资源：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Process（进程）：对处理器、内存和 I/O 设备的抽象。进程为程序提供了“独占使用计算机”的假象，使程序能够在相互隔离的环境中运行。&lt;/li&gt;
+&lt;li&gt;Virtual Memory（虚拟内存）：对主存和磁盘空间的抽象。每个进程都认为自己拥有一块连续、私有的地址空间，而无需直接感知物理内存的实际布局。&lt;/li&gt;
+&lt;li&gt;File（文件）：对 I/O 设备的抽象。无论是磁盘、键盘、显示器，还是网络设备，操作系统都尽量用统一的文件式接口来组织和访问数据。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这三种抽象降低了应用程序直接操作硬件的复杂度，也让系统在安全性、可移植性和并发执行方面更容易实现。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/1/image1-3-2.png&#34;
+	width=&#34;1313&#34;
+	height=&#34;768&#34;
+	srcset=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/1/image1-3-2_hu_3a47d63be8e27dc1.png 480w, https://Liyufei1.github.io/p/cpp-csapp-notes/image/1/image1-3-2_hu_7e2f5dec39a310e3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;1-3-2&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;170&#34;
+		data-flex-basis=&#34;410px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;以一个进程的虚拟地址空间为例，通常可以划分为以下几个区域：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;代码区：保存程序的机器指令，通常是只读的。&lt;/li&gt;
+&lt;li&gt;数据区：保存全局变量和静态变量等数据。&lt;/li&gt;
+&lt;li&gt;堆区：用于程序运行时的动态内存分配，例如 &lt;code&gt;malloc&lt;/code&gt; 申请的空间通常位于堆中。&lt;/li&gt;
+&lt;li&gt;共享库映射区：用于加载动态链接库以及其他内存映射区域。&lt;/li&gt;
+&lt;li&gt;栈区：用于保存函数调用过程中的局部变量、返回地址和参数等信息。&lt;/li&gt;
+&lt;li&gt;内核空间：由操作系统内核保留，用户程序不能直接访问。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;其中，堆通常向高地址方向增长，栈通常向低地址方向增长。&lt;br&gt;
+这种布局方式使进程能够较高效地管理动态分配和函数调用所需的内存空间。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Py-01-随笔</title>
         <link>https://Liyufei1.github.io/p/py-01-%E9%9A%8F%E7%AC%94/</link>
         <pubDate>Wed, 11 Mar 2026 00:00:00 +0800</pubDate>
