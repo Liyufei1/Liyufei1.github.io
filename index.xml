@@ -23,6 +23,14 @@
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#13-%e6%93%8d%e4%bd%9c%e7%b3%bb%e7%bb%9f%e7%a1%ac%e4%bb%b6%e7%ae%a1%e7%90%86&#34; &gt;1.3 操作系统硬件管理&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e7%ac%ac2%e7%ab%a0-%e4%bf%a1%e6%81%af%e7%9a%84%e8%a1%a8%e7%a4%ba%e5%92%8c%e5%a4%84%e7%90%86&#34; &gt;第2章 信息的表示和处理&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#21-%e4%bf%a1%e6%81%af%e5%ad%98%e5%82%a8&#34; &gt;2.1 信息存储&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#22-%e6%95%b4%e6%95%b0%e8%a1%a8%e7%a4%ba&#34; &gt;2.2 整数表示&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#23-%e6%95%b4%e6%95%b0%e8%bf%90%e7%ae%97&#34; &gt;2.3 整数运算&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#23-%e6%b5%ae%e7%82%b9%e6%95%b0&#34; &gt;2.3 浮点数&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;第1章-计算机系统漫游&#34;&gt;第1章 计算机系统漫游
 &lt;/h2&gt;&lt;h3 id=&#34;11-编译系统&#34;&gt;1.1 编译系统
@@ -144,7 +152,12 @@
 &lt;/ul&gt;
 &lt;p&gt;其中，堆通常向高地址方向增长，栈通常向低地址方向增长。&lt;br&gt;
 这种布局方式使进程能够较高效地管理动态分配和函数调用所需的内存空间。&lt;/p&gt;
-</description>
+&lt;h2 id=&#34;第2章-信息的表示和处理&#34;&gt;第2章 信息的表示和处理
+&lt;/h2&gt;&lt;h3 id=&#34;21-信息存储&#34;&gt;2.1 信息存储
+&lt;/h3&gt;&lt;h3 id=&#34;22-整数表示&#34;&gt;2.2 整数表示
+&lt;/h3&gt;&lt;h3 id=&#34;23-整数运算&#34;&gt;2.3 整数运算
+&lt;/h3&gt;&lt;h3 id=&#34;23-浮点数&#34;&gt;2.3 浮点数
+&lt;/h3&gt;</description>
         </item>
         <item>
         <title>Py-01-随笔</title>
