@@ -299,7 +299,7 @@
         <li><a href="#21-信息存储">2.1 信息存储</a></li>
         <li><a href="#22-整数表示">2.2 整数表示</a></li>
         <li><a href="#23-整数运算">2.3 整数运算</a></li>
-        <li><a href="#23-浮点数">2.3 浮点数</a></li>
+        <li><a href="#24-浮点数">2.4 浮点数</a></li>
       </ol>
     </li>
   </ol>
@@ -378,7 +378,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 5 分钟
+                    阅读时长: 7 分钟
                 </time>
             </div>
         
@@ -408,7 +408,7 @@
 <li><a class="link" href="#21-%e4%bf%a1%e6%81%af%e5%ad%98%e5%82%a8" >2.1 信息存储</a></li>
 <li><a class="link" href="#22-%e6%95%b4%e6%95%b0%e8%a1%a8%e7%a4%ba" >2.2 整数表示</a></li>
 <li><a class="link" href="#23-%e6%95%b4%e6%95%b0%e8%bf%90%e7%ae%97" >2.3 整数运算</a></li>
-<li><a class="link" href="#23-%e6%b5%ae%e7%82%b9%e6%95%b0" >2.3 浮点数</a></li>
+<li><a class="link" href="#24-%e6%b5%ae%e7%82%b9%e6%95%b0" >2.4 浮点数</a></li>
 </ul>
 </li>
 </ul>
@@ -638,8 +638,93 @@
 </ul>
 <hr>
 <h3 id="23-整数运算">2.3 整数运算
-</h3><h3 id="23-浮点数">2.3 浮点数
-</h3>
+</h3><p><strong>整数的加减法</strong></p>
+<p>对于无符号数，整数相加等于二进制位的直接相加。当结果超过表示范围时，会发生溢出，溢出的位会被丢弃。</p>
+<p>对于有符号数，由于采用补码表示，加法运算可以同样通过二进制位直接完成——CPU 不区分有符号和无符号，统一按二进制运算。但需要注意的是，有符号数的溢出行为是未定义的，编译器不会对此进行任何检查或提醒。</p>
+<p><strong>整数的乘法</strong></p>
+<p>整数乘法可以拆分成左移运算和相加运算。以 $x \times 13$ 为例：
+</p>
+$$x \times 13 = x \times (2^3 + 2^2 + 2^0) = (x \ll 3) + (x \ll 2) + x$$<p>在硬件层面，ALU 通过移位和加法的组合来实现乘法，因此乘法指令的周期数通常远大于加法和移位。</p>
+<p>无符号乘法与有符号乘法在二进制层面的运算相同，区别仅在于最高位的解释方式。</p>
+<p><strong>整数的除法</strong></p>
+<p>整数除法同样可以借助移位来实现，但需要注意截断规则：</p>
+<ul>
+<li><strong>无符号数除以 $2^k$</strong>：右移 $k$ 位，低位直接丢弃。</li>
+<li><strong>有符号数除以 $2^k$</strong>：右移 $k$ 位，但负数的截断方式不同，<strong>向上取整</strong>（向 0 的方向取整）。</li>
+</ul>
+<p>有符号数右移时采用<strong>算术右移</strong>，即高位补符号位（0 表示正，1 表示负）。这意味着负数右移后结果会向 0 的方向取整，而不是向下取整。</p>
+<p><strong>示例</strong>：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>表达式</th>
+          <th>结果</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>-7 / 2</code></td>
+          <td><code>-3</code></td>
+          <td>向 0 取整</td>
+      </tr>
+      <tr>
+          <td><code>(-7) &gt;&gt; 1</code></td>
+          <td><code>-4</code></td>
+          <td>算术右移，向下取整</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>如果需要向下取整，可以使用如下技巧：
+</p>
+$$ \lfloor x / 2^k \rfloor = (x + 2^k - 1) \gg k \quad (x \ge 0) $$<p>
+</p>
+$$ \lfloor x / 2^k \rfloor = (x + 2^k - 1) \mid \sim(2^k - 1) \gg k \quad (x < 0) $$<hr>
+<h3 id="24-浮点数">2.4 浮点数
+</h3><p><img src="/p/cpp-csapp-notes/image/2/image2-4-1.png"
+	width="1477"
+	height="752"
+	srcset="/p/cpp-csapp-notes/image/2/image2-4-1_hu_e209a1052bbe291e.png 480w, /p/cpp-csapp-notes/image/2/image2-4-1_hu_6b8fdec258a77f5a.png 1024w"
+	loading="lazy"
+	
+		alt="2-4-1"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="196"
+		data-flex-basis="471px"
+	
+></p>
+<p>浮点数由三个部分组成：</p>
+<ul>
+<li>符号位，float占用1位，double占用1位，用于表示当前浮点数的正负</li>
+<li>指数位，
+<ul>
+<li>float占用8位，底数是2，偏移量是-127，取值范围是[-126,127]</li>
+<li>double占用11位，底数是2，偏移量是-1023，取值范围是[-1023,1024]</li>
+</ul>
+</li>
+<li>小数位，float占用23位，double占用52位，表示小数数值 M = 1.f(B)。</li>
+</ul>
+<p>float单精度浮点数，取值范围是：，小数的精度为
+double双精度浮点数，取值范围是：，小数的精度为</p>
+<p><img src="/p/cpp-csapp-notes/image/2/image2-4-2.png"
+	width="1522"
+	height="755"
+	srcset="/p/cpp-csapp-notes/image/2/image2-4-2_hu_ec0188c79bc6f944.png 480w, /p/cpp-csapp-notes/image/2/image2-4-2_hu_6ed58b799526db2b.png 1024w"
+	loading="lazy"
+	
+		alt="2-4-2"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="201"
+		data-flex-basis="483px"
+	
+><br>
+同时浮点数还能表示特殊值
++0 \ -0 \ +∞ \ -∞ \ NaN</p>
+
 </section>
 
 
@@ -700,34 +785,6 @@
     
 
     
-
-<aside class="related-content--wrapper">
-    <h2 class="section-title">相关文章</h2>
-    <div class="related-content">
-        <div class="flex article-list--tile">
-            
-                
-<article class="has-image">
-    <a href="/p/cpp-csapp-notes/">
-        
-        
-            <div class="article-image">
-                
-                    <img src="/csapp.png" loading="lazy" data-key="cpp-csapp-notes" data-hash="/csapp.png"/>
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">cpp-csapp学习笔记</h2>
-        </div>
-    </a>
-</article>
-
-            
-        </div>
-    </div>
-</aside>
 
      
     
