@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="使用 GLFW 创建 OpenGL 窗口、处理输入并完成基础渲染循环">
+<title>OpenGL学习随笔-GLFW</title>
+
+<link rel='canonical' href='https://Liyufei1.github.io/p/opengl-glfw-notes/'>
+
+<link rel="stylesheet" href="/scss/style.min.b0e76e98cdd4f7082d1fc36f7af7e0843a81201db2197c03ca426751dc923735.css"><meta property='og:title' content="OpenGL学习随笔-GLFW">
+<meta property='og:description' content="使用 GLFW 创建 OpenGL 窗口、处理输入并完成基础渲染循环">
+<meta property='og:url' content='https://Liyufei1.github.io/p/opengl-glfw-notes/'>
+<meta property='og:site_name' content='李宇飞-Liyufei1'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-01-06T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-01-06T00:00:00&#43;00:00'/><meta property='og:image' content='https://Liyufei1.github.io/OpenGL.png' />
+<meta name="twitter:title" content="OpenGL学习随笔-GLFW">
+<meta name="twitter:description" content="使用 GLFW 创建 OpenGL 窗口、处理输入并完成基础渲染循环"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://Liyufei1.github.io/OpenGL.png' />
+    <link rel="shortcut icon" href="/favicon.png" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/guidao1Icon_hu_4c95e88ebc9c8e46.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🤣</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">李宇飞-Liyufei1</a></h1>
+            <h2 class="site-description">存放学习随笔的个人博客,主要有:Godot、Unreal、Blog、Cpp.
+ 下方是个人的b站、gitbug链接:</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://space.bilibili.com/7531504?spm_id_from=333.1007.0.0'
+                        target="_blank"
+                        title="Bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/Liyufei1'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友情链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://Liyufei1.github.io/en/" >English</option>
+                                
+                                    <option value="https://Liyufei1.github.io/" selected>中文</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#目录">目录</a></li>
+    <li><a href="#主要特性">主要特性</a></li>
+    <li><a href="#基本使用流程">基本使用流程</a></li>
+    <li><a href="#常用函数">常用函数</a></li>
+    <li><a href="#补充说明">补充说明</a></li>
+    <li><a href="#小结">小结</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/opengl-glfw-notes/">
+                
+                    <img src="/OpenGL.png" loading="lazy" alt="Featured image of post OpenGL学习随笔-GLFW" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/opengl/" >
+                OpenGL
+            </a>
+        
+            <a href="/categories/render/" >
+                Render
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/opengl-glfw-notes/">OpenGL学习随笔-GLFW</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            使用 GLFW 创建 OpenGL 窗口、处理输入并完成基础渲染循环
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published" datetime='2026-01-06T00:00:00Z'>2026-01-06</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 5 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="glfw">GLFW
+</h1><p>GLFW 是一个轻量、跨平台的窗口与输入库，常用于 OpenGL 项目中创建窗口、管理上下文和处理输入。它本身不负责渲染，而是为 OpenGL 提供运行环境。</p>
+<p>在实际开发中，<code>GLFW</code> 负责窗口与输入，<code>GLAD</code> 负责加载 OpenGL 函数指针。简单来说，GLFW 解决的是与操作系统交互的问题，OpenGL 解决的是图形绘制的问题。</p>
+<h2 id="目录">目录
+</h2><ul>
+<li><a class="link" href="#glfw" >GLFW</a>
+<ul>
+<li><a class="link" href="#%e7%9b%ae%e5%bd%95" >目录</a></li>
+<li><a class="link" href="#%e4%b8%bb%e8%a6%81%e7%89%b9%e6%80%a7" >主要特性</a></li>
+<li><a class="link" href="#%e5%9f%ba%e6%9c%ac%e4%bd%bf%e7%94%a8%e6%b5%81%e7%a8%8b" >基本使用流程</a></li>
+<li><a class="link" href="#%e5%b8%b8%e7%94%a8%e5%87%bd%e6%95%b0" >常用函数</a></li>
+<li><a class="link" href="#%e8%a1%a5%e5%85%85%e8%af%b4%e6%98%8e" >补充说明</a></li>
+<li><a class="link" href="#%e5%b0%8f%e7%bb%93" >小结</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="主要特性">主要特性
+</h2><ul>
+<li><strong>跨平台</strong>：支持 Windows、macOS、Linux 等平台</li>
+<li><strong>专注图形开发</strong>：面向 OpenGL / Vulkan 场景设计，功能聚焦</li>
+<li><strong>窗口管理简单</strong>：可以快速完成窗口创建、销毁、尺寸调整等操作</li>
+<li><strong>输入接口统一</strong>：键盘、鼠标、滚轮、手柄等输入处理方式一致</li>
+<li><strong>事件回调机制清晰</strong>：窗口变化、鼠标移动、滚轮滚动等都可以通过回调处理</li>
+<li><strong>适合学习 OpenGL</strong>：API 设计直观，适合作为入门阶段的窗口库</li>
+</ul>
+<p>和 GLUT 相比，GLFW 更现代、可控性更高；和 SDL 相比，GLFW 更轻量，也更聚焦于图形上下文与输入管理。</p>
+<hr>
+<h2 id="基本使用流程">基本使用流程
+</h2><p>通常可以把 GLFW 的使用流程概括为下面几步：</p>
+<ol>
+<li>初始化 GLFW</li>
+<li>指定 OpenGL 版本与上下文配置</li>
+<li>创建窗口</li>
+<li>绑定当前上下文</li>
+<li>初始化 GLAD</li>
+<li>设置视口与回调函数</li>
+<li>进入渲染循环</li>
+<li>退出前释放资源</li>
+</ol>
+<p>这个流程非常重要，因为顺序一般不能随意打乱。比如：</p>
+<ul>
+<li>没有先创建上下文，就无法正确初始化 GLAD</li>
+<li>没有设置当前上下文，后续 OpenGL 调用可能无效</li>
+<li>没有在循环中调用 <code>glfwPollEvents()</code>，窗口输入和系统事件就不会及时更新</li>
+</ul>
+<p>** 窗口搭建 **
+下方是使用GLFW创建窗口的最简示例代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;glad/glad.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;GLFW/glfw3.h&gt;</span><span class="cp">	
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//初始化GLFW
+</span></span></span><span class="line"><span class="cl"><span class="n">glfwInit</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//设置主要和次要版本,本文档使用3.3版本OpenGL的核心模式
+</span></span></span><span class="line"><span class="cl"><span class="n">glfwWindowHint</span><span class="p">(</span><span class="n">GLFW_CONTEXT_VERSION_MAJOR</span><span class="p">,</span><span class="mi">3</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">glfwWindowHint</span><span class="p">(</span><span class="n">GLFW_CONTEXT_VERSION_MINOR</span><span class="p">,</span><span class="mi">3</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">glfwWindowHint</span><span class="p">(</span><span class="n">GLFW_OPENGL_PROFILE</span><span class="p">,</span><span class="n">GLFW_OPENGL_CORE_PROFILE</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//新建一个窗口
+</span></span></span><span class="line"><span class="cl"><span class="n">GLFWwindow</span> <span class="o">*</span> <span class="n">MyWindows</span> <span class="o">=</span> <span class="n">glfwCreateWindow</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span><span class="mi">600</span><span class="p">,</span><span class="s">&#34;Title&#34;</span><span class="p">,</span><span class="nb">NULL</span><span class="p">,</span><span class="nb">NULL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">MyWindows</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Create Windows Failed!&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">glfwTerminate</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//创建上下文关联
+</span></span></span><span class="line"><span class="cl"><span class="n">glfwMakeContextCurrent</span><span class="p">(</span><span class="n">MyWindows</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//初始化GLAD，用于管理OpenGL的函数指针
+</span></span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">gladLoadGLLoader</span><span class="p">((</span><span class="n">GLADloadproc</span><span class="p">)</span><span class="n">glfwGetProcAddress</span><span class="p">)){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Failed to initiallize GLAD &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//设置视口,左下角位置为(0,0),宽800，高600
+</span></span></span><span class="line"><span class="cl"><span class="n">glViewport</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">800</span><span class="p">,</span><span class="mi">600</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">glEnable</span><span class="p">(</span><span class="n">GL_PROGRAM_POINT_SIZE</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//注册监听
+</span></span></span><span class="line"><span class="cl"><span class="n">glfwSetFramebufferSizeCallback</span><span class="p">(</span><span class="n">MyWindows</span><span class="p">,</span><span class="n">FrameBufferSizeCallback</span><span class="p">);</span><span class="c1">//监听函数（1）定义在下方
+</span></span></span><span class="line"><span class="cl">    <span class="c1">//渲染循环
+</span></span></span><span class="line"><span class="cl"><span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">glfwWindowShouldClose</span><span class="p">(</span><span class="n">MyWindows</span><span class="p">)){</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//~Input Begin
+</span></span></span><span class="line"><span class="cl">    <span class="n">ProcessInput</span><span class="p">(</span><span class="n">MyWindows</span><span class="p">);</span><span class="c1">//输入函数（2）
+</span></span></span><span class="line"><span class="cl">    <span class="c1">//~Input End
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">//~Render command Begin
+</span></span></span><span class="line"><span class="cl">    <span class="n">glClearColor</span><span class="p">(</span><span class="mf">0.4f</span><span class="p">,</span><span class="mf">0.9f</span><span class="p">,</span><span class="mf">0.8f</span><span class="p">,</span><span class="mf">1.0f</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">glClear</span><span class="p">(</span><span class="n">GL_COLOR_BUFFER_BIT</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//~Render command End
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">//检查并调用事件，交换缓冲
+</span></span></span><span class="line"><span class="cl">    <span class="n">glfwSwapBuffers</span><span class="p">(</span><span class="n">MyWindows</span><span class="p">);</span><span class="c1">//采用双缓存机制，保证帧与帧之间不会闪烁
+</span></span></span><span class="line"><span class="cl">    <span class="n">glfwPollEvents</span><span class="p">();</span><span class="c1">//检测事件输入：键盘输入、鼠标点击、Window缩放等,并更新Window
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">glfwTerminate</span><span class="p">();</span><span class="c1">//释放/删除 分配的资源
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>监听函数</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/** When the user changes the size of GlfwWindow , it will change the size of Viewport*/</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">FrameBufferSizeCallback</span><span class="p">(</span><span class="n">GLFWwindow</span> <span class="o">*</span><span class="n">Window</span><span class="p">,</span> <span class="kt">int</span> <span class="n">Width</span><span class="p">,</span> <span class="kt">int</span> <span class="n">Height</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">glViewport</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">Width</span><span class="p">,</span><span class="n">Height</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>输入函数</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="cm">/** When the user press the &#34;ESC&#34; ,quit the Window */</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">ProcessInput</span><span class="p">(</span><span class="n">GLFWwindow</span><span class="o">*</span> <span class="n">Window</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">glfwGetKey</span><span class="p">(</span><span class="n">Window</span><span class="p">,</span><span class="n">GLFW_KEY_ESCAPE</span><span class="p">)</span> <span class="o">==</span> <span class="n">GLFW_PRESS</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">glfwSetWindowShouldClose</span><span class="p">(</span><span class="n">Window</span><span class="p">,</span><span class="nb">true</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="常用函数">常用函数
+</h2><p>下面列出学习阶段最常见的一组 GLFW 接口。</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>函数</th>
+          <th>作用</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>glfwInit()</code></td>
+          <td>初始化 GLFW。几乎所有 GLFW 调用都要在它之后进行</td>
+      </tr>
+      <tr>
+          <td><code>glfwWindowHint()</code></td>
+          <td>设置窗口属性或上下文版本，例如指定 OpenGL 3.3 Core Profile</td>
+      </tr>
+      <tr>
+          <td><code>glfwCreateWindow()</code></td>
+          <td>创建窗口和对应的 OpenGL 上下文</td>
+      </tr>
+      <tr>
+          <td><code>glfwMakeContextCurrent()</code></td>
+          <td>将某个窗口的上下文设为当前上下文</td>
+      </tr>
+      <tr>
+          <td><code>glfwSetFramebufferSizeCallback()</code></td>
+          <td>注册帧缓冲大小变化回调，窗口尺寸变化时通常要更新视口</td>
+      </tr>
+      <tr>
+          <td><code>glfwWindowShouldClose()</code></td>
+          <td>判断窗口是否需要关闭，常用于主循环退出条件</td>
+      </tr>
+      <tr>
+          <td><code>glfwSetWindowShouldClose()</code></td>
+          <td>主动设置窗口关闭状态</td>
+      </tr>
+      <tr>
+          <td><code>glfwGetKey()</code></td>
+          <td>读取键盘按键状态</td>
+      </tr>
+      <tr>
+          <td><code>glfwPollEvents()</code></td>
+          <td>处理当前帧积累的输入和窗口事件</td>
+      </tr>
+      <tr>
+          <td><code>glfwSwapBuffers()</code></td>
+          <td>交换前后缓冲区，把当前渲染结果显示出来</td>
+      </tr>
+      <tr>
+          <td><code>glfwTerminate()</code></td>
+          <td>释放 GLFW 相关资源，程序退出前调用</td>
+      </tr>
+      <tr>
+          <td><code>glfwGetTime()</code></td>
+          <td>获取时间，适合做动画、计时和帧间隔计算</td>
+      </tr>
+  </tbody>
+</table></div>
+<hr>
+<h2 id="补充说明">补充说明
+</h2><ol>
+<li>glfwWindowHint() 的作用</li>
+</ol>
+<p>这组接口用于在创建窗口前告诉 GLFW：你希望得到一个什么样的 OpenGL 环境。比如下面这三行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">glfwWindowHint</span><span class="p">(</span><span class="n">GLFW_CONTEXT_VERSION_MAJOR</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">glfwWindowHint</span><span class="p">(</span><span class="n">GLFW_CONTEXT_VERSION_MINOR</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">glfwWindowHint</span><span class="p">(</span><span class="n">GLFW_OPENGL_PROFILE</span><span class="p">,</span> <span class="n">GLFW_OPENGL_CORE_PROFILE</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>它们表示：</p>
+<ul>
+<li>使用 OpenGL <code>3.3</code></li>
+<li>使用 <code>Core Profile</code></li>
+<li>只启用现代 OpenGL 的核心功能</li>
+</ul>
+<p>如果你学习的是 <code>LearnOpenGL</code> 一类教程，这样的配置非常常见。</p>
+<ol start="2">
+<li>为什么要设置视口回调</li>
+</ol>
+<p>窗口大小变化后，OpenGL 默认不会自动帮你更新视口范围，因此通常需要注册：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">glfwSetFramebufferSizeCallback</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="n">framebufferSizeCallback</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>对应的回调函数里重新调用：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">glViewport</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这样窗口尺寸变化后，绘制区域才能和新的窗口大小保持一致。</p>
+<ol start="3">
+<li>glfwSwapBuffers() 和 glfwPollEvents()</li>
+</ol>
+<p>渲染循环里最常见的两行就是：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">glfwSwapBuffers</span><span class="p">(</span><span class="n">window</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">glfwPollEvents</span><span class="p">();</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>它们的职责分别是：</p>
+<ul>
+<li><code>glfwSwapBuffers(window)</code>：把当前帧的结果显示到屏幕上</li>
+<li><code>glfwPollEvents()</code>：处理键盘、鼠标、窗口消息等事件</li>
+</ul>
+<p>如果少了前者，画面不会正常更新；如果少了后者，窗口就可能出现“无响应”现象。</p>
+<ol start="4">
+<li>一个常见搭配：GLFW + GLAD</li>
+</ol>
+<p>很多初学者会把 GLFW 和 GLAD 的职责混在一起。实际上两者分工非常明确：</p>
+<ul>
+<li>GLFW 负责“创建环境”</li>
+<li>GLAD 负责“加载 OpenGL 函数”</li>
+</ul>
+<p>只有窗口和上下文准备完成后，GLAD 才能拿到正确的 OpenGL 函数地址。因此一般顺序一定是：</p>
+<ol>
+<li><code>glfwCreateWindow()</code></li>
+<li><code>glfwMakeContextCurrent()</code></li>
+<li><code>gladLoadGLLoader(...)</code></li>
+</ol>
+<h2 id="小结">小结
+</h2><p>GLFW 本身并不复杂，但它在 OpenGL 项目里承担的是非常基础的一层：窗口、上下文、输入和事件循环几乎都离不开它。学习阶段只要先掌握下面这几个点，后续就能比较顺利地进入顶点、着色器、纹理和坐标变换等内容：</p>
+<ul>
+<li>会创建一个基本窗口</li>
+<li>理解上下文与 GLAD 初始化顺序</li>
+<li>能处理窗口缩放回调</li>
+<li>能在主循环里处理输入和交换缓冲</li>
+</ul>
+<p>后面如果继续写 OpenGL 笔记，这篇内容可以作为“窗口初始化”部分的基础参考。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under <a class="link" href="https://github.com/Liyufei1"  target="_blank" rel="noopener"
+    >Liyufei1</a></span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        const elementsToRender = [".main-article", ".widget--toc"];
+
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/opengl-graphics-notes/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/OpenGL.png" loading="lazy" data-key="opengl-graphics-notes" data-hash="/OpenGL.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">OpenGL学习随笔-Graphics</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/opengl-glsl-notes/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/OpenGL.png" loading="lazy" data-key="opengl-glsl-notes" data-hash="/OpenGL.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">OpenGL学习随笔-GLSL</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/opengl-learning-notes/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/OpenGL.png" loading="lazy" data-key="opengl-learning-notes" data-hash="/OpenGL.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">OpenGL学习随笔-LearnOpenGL</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2026 李宇飞-Liyufei1
+    </section>
+    
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.32.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

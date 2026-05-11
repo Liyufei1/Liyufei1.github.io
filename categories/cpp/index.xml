@@ -261,6 +261,260 @@
 &lt;/h3&gt;&lt;h3 id=&#34;23-浮点数&#34;&gt;2.3 浮点数
 &lt;/h3&gt;</description>
         </item>
+        <item>
+        <title>cpp-csapp学习笔记</title>
+        <link>https://Liyufei1.github.io/p/cpp-csapp-notes/</link>
+        <pubDate>Fri, 08 May 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://Liyufei1.github.io/p/cpp-csapp-notes/</guid>
+        <description>&lt;img src="https://Liyufei1.github.io/csapp.png" alt="Featured image of post cpp-csapp学习笔记" /&gt;&lt;h2 id=&#34;目录&#34;&gt;目录
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e7%9b%ae%e5%bd%95&#34; &gt;目录&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e7%ac%ac1%e7%ab%a0-%e8%ae%a1%e7%ae%97%e6%9c%ba%e7%b3%bb%e7%bb%9f%e6%bc%ab%e6%b8%b8&#34; &gt;第1章 计算机系统漫游&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#11-%e7%bc%96%e8%af%91%e7%b3%bb%e7%bb%9f&#34; &gt;1.1 编译系统&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#12-%e8%ae%a1%e7%ae%97%e6%9c%ba%e7%a1%ac%e4%bb%b6%e7%bb%84%e6%88%90&#34; &gt;1.2 计算机硬件组成&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#13-%e6%93%8d%e4%bd%9c%e7%b3%bb%e7%bb%9f%e7%a1%ac%e4%bb%b6%e7%ae%a1%e7%90%86&#34; &gt;1.3 操作系统硬件管理&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e7%ac%ac2%e7%ab%a0-%e4%bf%a1%e6%81%af%e7%9a%84%e8%a1%a8%e7%a4%ba%e5%92%8c%e5%a4%84%e7%90%86&#34; &gt;第2章 信息的表示和处理&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#21-%e4%bf%a1%e6%81%af%e5%ad%98%e5%82%a8&#34; &gt;2.1 信息存储&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#22-%e6%95%b4%e6%95%b0%e8%a1%a8%e7%a4%ba&#34; &gt;2.2 整数表示&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#23-%e6%95%b4%e6%95%b0%e8%bf%90%e7%ae%97&#34; &gt;2.3 整数运算&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#23-%e6%b5%ae%e7%82%b9%e6%95%b0&#34; &gt;2.3 浮点数&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;第1章-计算机系统漫游&#34;&gt;第1章 计算机系统漫游
+&lt;/h2&gt;&lt;h3 id=&#34;11-编译系统&#34;&gt;1.1 编译系统
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/1/image1-1.png&#34;
+	width=&#34;1575&#34;
+	height=&#34;705&#34;
+	srcset=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/1/image1-1_hu_5cda5a6c2e0a68f2.png 480w, https://Liyufei1.github.io/p/cpp-csapp-notes/image/1/image1-1_hu_9b3ecc6a48ea142f.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;1-1&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;223&#34;
+		data-flex-basis=&#34;536px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;一个 C 程序从源文件到最终的可执行文件，通常会经历以下四个阶段：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;预处理：处理源代码中的宏展开、头文件包含和条件编译等指令，删除注释后生成预处理文件。&lt;/li&gt;
+&lt;li&gt;编译：对预处理后的代码进行词法分析、语法分析和语义分析，并生成对应的汇编代码。&lt;/li&gt;
+&lt;li&gt;汇编：将汇编代码翻译为机器指令，生成目标文件。&lt;/li&gt;
+&lt;li&gt;链接：将多个目标文件以及所需的库文件链接在一起，解析符号引用，最终生成可执行文件。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;可以把这一过程理解为：先“整理”源代码，再“翻译”为汇编，再“转换”为机器指令，最后把程序运行所需的各个部分“拼装”起来。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;12-计算机硬件组成&#34;&gt;1.2 计算机硬件组成
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/1/image1-2-1.png&#34;
+	width=&#34;1463&#34;
+	height=&#34;818&#34;
+	srcset=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/1/image1-2-1_hu_76a094c3c9e14696.png 480w, https://Liyufei1.github.io/p/cpp-csapp-notes/image/1/image1-2-1_hu_d5f2b7c2b961f468.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;1-2-1&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;178&#34;
+		data-flex-basis=&#34;429px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;一个典型的计算机系统通常由以下几个核心部分组成：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;CPU（Central Processing Unit，中央处理器）
+&lt;ol&gt;
+&lt;li&gt;PC（Program Counter，程序计数器）：本质是一个大小为一个字的存储单元(32bit/64bit)，保存下一条将要执行的指令地址。&lt;/li&gt;
+&lt;li&gt;Register（寄存器）：CPU 内部用于暂存数据和中间结果的高速存储单元。&lt;/li&gt;
+&lt;li&gt;ALU（Arithmetic Logic Unit，算术逻辑单元）：负责执行加、减、与、或等算术和逻辑运算。&lt;/li&gt;
+&lt;li&gt;Bus（总线）：负责在 CPU 内部以及 CPU 与其他部件之间传输数据、地址和控制信号。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;Main Memory（主存，也就是内存）：保存程序运行时的指令和数据。可以把它看成一个按字节编址的大数组，每个字节都有唯一的地址。&lt;/li&gt;
+&lt;li&gt;I/O Bridge（输入输出桥接器）：负责连接处理器、内存与外部 I/O 设备，协调不同部件之间的数据交换。&lt;/li&gt;
+&lt;li&gt;I/O Bus（输入输出总线）：为磁盘、键盘、显示器、网络设备等外设提供数据传输通道。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;从功能上看，CPU 负责“运算”，主存负责“存储”，而 I/O 系统则负责“与外界交互”，三者共同构成了一个完整的计算机系统。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/1/image1-2-2.png&#34;
+	width=&#34;1433&#34;
+	height=&#34;750&#34;
+	srcset=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/1/image1-2-2_hu_fd77c32248669b4c.png 480w, https://Liyufei1.github.io/p/cpp-csapp-notes/image/1/image1-2-2_hu_527279d29208f59e.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;1-2-2&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;191&#34;
+		data-flex-basis=&#34;458px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;在存储层次结构中，越靠上的存储设备速度越快，但容量越小、成本也越高；越靠下的存储设备容量越大，但访问速度越慢。&lt;/p&gt;
+&lt;p&gt;可以把这一结构理解为一个“存储金字塔”：上层存储通常作为下层存储的高速缓冲，从而在容量、成本和速度之间取得平衡。&lt;br&gt;
+因此，程序之所以能够高效运行，很大程度上依赖于这种分层存储设计。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;13-操作系统硬件管理&#34;&gt;1.3 操作系统硬件管理
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/1/image1-3-1.png&#34;
+	width=&#34;1395&#34;
+	height=&#34;701&#34;
+	srcset=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/1/image1-3-1_hu_8ec342689e845b84.png 480w, https://Liyufei1.github.io/p/cpp-csapp-notes/image/1/image1-3-1_hu_8090b997fe86107d.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;1-3-1&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;199&#34;
+		data-flex-basis=&#34;477px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;应用程序通常不能直接操作底层硬件，而是要通过操作系统提供的接口来完成。&lt;br&gt;
+操作系统位于应用程序与硬件之间，负责对底层资源进行统一管理，并向上层提供更简单、更安全的抽象。&lt;/p&gt;
+&lt;p&gt;从 CSAPP 的视角来看，操作系统主要通过以下三种抽象来管理硬件资源：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Process（进程）：对处理器、内存和 I/O 设备的抽象。进程为程序提供了“独占使用计算机”的假象，使程序能够在相互隔离的环境中运行。&lt;/li&gt;
+&lt;li&gt;Virtual Memory（虚拟内存）：对主存和磁盘空间的抽象。每个进程都认为自己拥有一块连续、私有的地址空间，而无需直接感知物理内存的实际布局。&lt;/li&gt;
+&lt;li&gt;File（文件）：对 I/O 设备的抽象。无论是磁盘、键盘、显示器，还是网络设备，操作系统都尽量用统一的文件式接口来组织和访问数据。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这三种抽象降低了应用程序直接操作硬件的复杂度，也让系统在安全性、可移植性和并发执行方面更容易实现。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/1/image1-3-2.png&#34;
+	width=&#34;1313&#34;
+	height=&#34;768&#34;
+	srcset=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/1/image1-3-2_hu_3a47d63be8e27dc1.png 480w, https://Liyufei1.github.io/p/cpp-csapp-notes/image/1/image1-3-2_hu_7e2f5dec39a310e3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;1-3-2&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;170&#34;
+		data-flex-basis=&#34;410px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;以一个进程的虚拟地址空间为例，通常可以划分为以下几个区域：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;代码区：保存程序的机器指令，通常是只读的。&lt;/li&gt;
+&lt;li&gt;数据区：保存全局变量和静态变量等数据。&lt;/li&gt;
+&lt;li&gt;堆区：用于程序运行时的动态内存分配，例如 &lt;code&gt;malloc&lt;/code&gt; 申请的空间通常位于堆中。&lt;/li&gt;
+&lt;li&gt;共享库映射区：用于加载动态链接库以及其他内存映射区域。&lt;/li&gt;
+&lt;li&gt;栈区：用于保存函数调用过程中的局部变量、返回地址和参数等信息。&lt;/li&gt;
+&lt;li&gt;内核空间：由操作系统内核保留，用户程序不能直接访问。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;其中，堆通常向高地址方向增长，栈通常向低地址方向增长。&lt;br&gt;
+这种布局方式使进程能够较高效地管理动态分配和函数调用所需的内存空间。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;第2章-信息的表示和处理&#34;&gt;第2章 信息的表示和处理
+&lt;/h2&gt;&lt;h3 id=&#34;21-信息存储&#34;&gt;2.1 信息存储
+&lt;/h3&gt;&lt;p&gt;计算机中的信息最终都是以二进制形式存储的，而这些二进制数据通常按字节组织。&lt;br&gt;
+不同机器的字长可能不同，例如常见的有 32 位和 64 位，这会影响指针、整数等数据类型所占用的字节数。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/2/image2-1-1.png&#34;
+	width=&#34;932&#34;
+	height=&#34;490&#34;
+	srcset=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/2/image2-1-1_hu_a8ecaac01b3e4c6d.png 480w, https://Liyufei1.github.io/p/cpp-csapp-notes/image/2/image2-1-1_hu_ab8ced6069fbfbf1.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;2-1-1&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;190&#34;
+		data-flex-basis=&#34;456px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;从图中可以看出：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在 32 位机器上，指针通常占 4 个字节，&lt;code&gt;long&lt;/code&gt; 通常也占 4 个字节。&lt;/li&gt;
+&lt;li&gt;在 64 位机器上，指针通常占 8 个字节，&lt;code&gt;long&lt;/code&gt; 在很多 64 位系统上也占 8 个字节。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;需要注意的是，数据类型的实际大小不仅与机器字长有关，也与编译器实现和平台约定有关。因此在编写底层代码时，不能只凭经验判断类型大小，最好结合具体平台确认。&lt;/p&gt;
+&lt;p&gt;除了“占多少字节”之外，数据在内存中“如何排列字节”也非常重要，这就是字节序问题。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/2/image2-1-2.png&#34;
+	width=&#34;775&#34;
+	height=&#34;417&#34;
+	srcset=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/2/image2-1-2_hu_7b86c5558cb5a3f8.png 480w, https://Liyufei1.github.io/p/cpp-csapp-notes/image/2/image2-1-2_hu_af71a73582080c9c.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;2-1-2&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;185&#34;
+		data-flex-basis=&#34;446px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;常见的字节序有两种：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;大端序（Big-Endian）：最高有效字节存放在低地址处。&lt;/li&gt;
+&lt;li&gt;小端序（Little-Endian）：最低有效字节存放在低地址处。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;目前常见的 PC 和大多数 Android 设备通常都采用小端序。&lt;br&gt;
+理解字节序对于分析内存布局、网络传输协议、二进制文件格式以及调试程序都很重要。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;22-整数表示&#34;&gt;2.2 整数表示
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;无符号整数（Unsigned）：所有位都用于表示数值本身，因此只能表示非负数。
+&lt;ul&gt;
+&lt;li&gt;最小值：&lt;code&gt;0&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;最大值：&lt;code&gt;2^w - 1&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;有符号整数（Signed）：通常使用补码表示，这样既可以表示正数，也可以表示负数。
+&lt;ul&gt;
+&lt;li&gt;最小值：&lt;code&gt;-2^(w-1)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;最大值：&lt;code&gt;2^(w-1) - 1&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/2/image2-2-1.png&#34;
+	width=&#34;1679&#34;
+	height=&#34;478&#34;
+	srcset=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/2/image2-2-1_hu_556dcf2009f2a3b7.png 480w, https://Liyufei1.github.io/p/cpp-csapp-notes/image/2/image2-2-1_hu_d9bcd8397de91dbc.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;2-2-1&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;351&#34;
+		data-flex-basis=&#34;843px&#34;
+	
+&gt;&lt;br&gt;
+从二进制转换到十进制时：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;对于无符号数，可以直接按每一位的权重求和。&lt;/li&gt;
+&lt;li&gt;对于补码表示的有符号数，如果最高位为 &lt;code&gt;0&lt;/code&gt;，表示非负数，转换方式与无符号数类似；如果最高位为 &lt;code&gt;1&lt;/code&gt;，则表示负数，需要按补码规则解释其值。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/2/image2-2-2.png&#34;
+	width=&#34;1410&#34;
+	height=&#34;719&#34;
+	srcset=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/2/image2-2-2_hu_3b1dacda7c3350c1.png 480w, https://Liyufei1.github.io/p/cpp-csapp-notes/image/2/image2-2-2_hu_2f642a7830071bd2.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;2-2-2&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;196&#34;
+		data-flex-basis=&#34;470px&#34;
+	
+&gt;&lt;br&gt;
+由于补码规则的存在，在进行强制类型转换时，会出现直接预期之外的结果。&lt;br&gt;
+上方结果是由于int被隐式类型转换为unsigned int导致的。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;大类型转换为小类型时，会直接截断并丢失精度。&lt;/li&gt;
+&lt;li&gt;小类型转换为大类型时，会进行扩展，并保留精度。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;23-整数运算&#34;&gt;2.3 整数运算
+&lt;/h3&gt;&lt;h3 id=&#34;23-浮点数&#34;&gt;2.3 浮点数
+&lt;/h3&gt;</description>
+        </item>
         
     </channel>
 </rss>
