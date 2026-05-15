@@ -302,6 +302,22 @@
         <li><a href="#24-浮点数">2.4 浮点数</a></li>
       </ol>
     </li>
+    <li><a href="#第3章-程序的机器级表示">第3章 程序的机器级表示</a>
+      <ol>
+        <li><a href="#31-汇编基础与寄存器">3.1 汇编基础与寄存器</a>
+          <ol>
+            <li><a href="#调用者保存寄存器与被调用者保存寄存器">调用者保存寄存器与被调用者保存寄存器</a></li>
+            <li><a href="#汇编指令后缀与操作数大小">汇编指令后缀与操作数大小</a></li>
+          </ol>
+        </li>
+        <li><a href="#32-寄存器和数据传输指令">3.2 寄存器和数据传输指令</a></li>
+        <li><a href="#33-栈与函数调用">3.3 栈与函数调用</a></li>
+        <li><a href="#34-算术与逻辑运算符">3.4 算术与逻辑运算符</a></li>
+        <li><a href="#35-分支与循环">3.5 分支与循环</a></li>
+        <li><a href="#36-数组与指针运算">3.6 数组与指针运算</a></li>
+        <li><a href="#37-缓冲区溢出">3.7 缓冲区溢出</a></li>
+      </ol>
+    </li>
   </ol>
 </nav>
         </div>
@@ -378,7 +394,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 7 分钟
+                    阅读时长: 12 分钟
                 </time>
             </div>
         
@@ -409,6 +425,14 @@
 <li><a class="link" href="#22-%e6%95%b4%e6%95%b0%e8%a1%a8%e7%a4%ba" >2.2 整数表示</a></li>
 <li><a class="link" href="#23-%e6%95%b4%e6%95%b0%e8%bf%90%e7%ae%97" >2.3 整数运算</a></li>
 <li><a class="link" href="#24-%e6%b5%ae%e7%82%b9%e6%95%b0" >2.4 浮点数</a></li>
+</ul>
+</li>
+<li><a class="link" href="#%e7%ac%ac3%e7%ab%a0-%e7%a8%8b%e5%ba%8f%e7%9a%84%e6%9c%ba%e5%99%a8%e7%ba%a7%e8%a1%a8%e7%a4%ba" >第3章 程序的机器级表示</a>
+<ul>
+<li><a class="link" href="#%e8%b0%83%e7%94%a8%e8%80%85%e8%a2%ab%e8%b0%83%e7%94%a8%e8%80%85-%e4%bf%9d%e5%ad%98%e5%af%84%e5%ad%98%e5%99%a8" >调用者/被调用者 保存寄存器</a></li>
+<li><a class="link" href="#32-%e5%af%84%e5%ad%98%e5%99%a8%e5%92%8c%e6%95%b0%e6%8d%ae%e4%bc%a0%e8%be%93%e6%8c%87%e4%bb%a4" >3.2 寄存器和数据传输指令</a></li>
+<li><a class="link" href="#33-%e6%a0%88%e4%b8%8e%e6%95%b0%e6%8d%ae%e4%bc%a0%e8%be%93%e6%8c%87%e4%bb%a4" >3.3 栈与数据传输指令</a></li>
+<li><a class="link" href="#34-%e7%ae%97%e6%9c%af%e4%b8%8e%e9%80%bb%e8%be%91%e8%bf%90%e7%ae%97%e7%ac%a6" >3.4 算术与逻辑运算符</a></li>
 </ul>
 </li>
 </ul>
@@ -694,8 +718,8 @@ $$ \lfloor x / 2^k \rfloor = (x + 2^k - 1) \mid \sim(2^k - 1) \gg k \quad (x < 0
 		data-flex-grow="196"
 		data-flex-basis="471px"
 	
-></p>
-<p>浮点数由三个部分组成：</p>
+><br>
+浮点数由三个部分组成：</p>
 <ul>
 <li>符号位，float占用1位，double占用1位，用于表示当前浮点数的正负</li>
 <li>指数位，
@@ -724,6 +748,377 @@ double双精度浮点数，取值范围是：，小数的精度为</p>
 ><br>
 同时浮点数还能表示特殊值
 +0 \ -0 \ +∞ \ -∞ \ NaN</p>
+<p><img src="/p/cpp-csapp-notes/image/2/image2-4-3.png"
+	width="827"
+	height="485"
+	srcset="/p/cpp-csapp-notes/image/2/image2-4-3_hu_5d4741b98999a257.png 480w, /p/cpp-csapp-notes/image/2/image2-4-3_hu_4836a292c22b437d.png 1024w"
+	loading="lazy"
+	
+		alt="2-4-3"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="170"
+		data-flex-basis="409px"
+	
+><br>
+由于浮点数精度有限，它会自动舍入，因此容易因为精度丢失，出现意料之外的情况，如上图。</p>
+<h2 id="第3章-程序的机器级表示">第3章 程序的机器级表示
+</h2><h3 id="31-汇编基础与寄存器">3.1 汇编基础与寄存器
+</h3><p>程序的机器级表示，是理解计算机执行机制的核心。与高级语言屏蔽底层细节不同，汇编语言直接反映了 CPU 的运行逻辑——指令如何读写寄存器、如何访问内存、如何跳转。</p>
+<h4 id="调用者保存寄存器与被调用者保存寄存器">调用者保存寄存器与被调用者保存寄存器
+</h4><p>在 x86-64 架构中，寄存器一共 16 个：<code>rax, rbx, rcx, rdx, rsi, rdi, rbp, rsp, r8~r15</code>。其中有 8 个通用寄存器，它们的使用在函数调用时有明确约定。</p>
+<p><img src="/p/cpp-csapp-notes/image/3/image3-1-2.png"
+	width="1387"
+	height="605"
+	srcset="/p/cpp-csapp-notes/image/3/image3-1-2_hu_8c38b41f1b42ce69.png 480w, /p/cpp-csapp-notes/image/3/image3-1-2_hu_3321a79d4cdd19ee.png 1024w"
+	loading="lazy"
+	
+		alt="3-1-2"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="229"
+		data-flex-basis="550px"
+	
+></p>
+<p><strong>调用者保存寄存器</strong>（Caller-saved，也叫 Caller-clobbered）：
+<code>rax, rcx, rdx, rsi, rdi, r8, r9, r10, r11</code></p>
+<p>调用者保存的含义是：若一个寄存器在调用子函数前有值，调用者需要自己负责保存（压栈或转移到其他寄存器），因为被调用函数可能会修改它们。子函数可以自由使用这些寄存器而无需保留它们的值。</p>
+<p><strong>被调用者保存寄存器</strong>（Callee-saved）：
+<code>rbx, rbp, r12, r13, r14, r15, rsp</code></p>
+<p>被调用者保存的含义是：若子函数要使用这些寄存器，必须先将原始值压栈保存，在返回前恢复原值。<code>rsp</code> 特殊一些，它指向栈顶，恢复后才能正确返回。</p>
+<p>这种划分本质上是一种<strong>调用约定</strong>（Calling Convention），让调用者和被调用者就寄存器的使用规则达成一致。编译器正是依据这套规则生成机器码的。</p>
+<h4 id="汇编指令后缀与操作数大小">汇编指令后缀与操作数大小
+</h4><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>后缀</th>
+          <th>大小</th>
+          <th>典型用途</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>b</code></td>
+          <td>1 字节</td>
+          <td><code>movb</code>, <code>addb</code></td>
+      </tr>
+      <tr>
+          <td><code>w</code></td>
+          <td>2 字节</td>
+          <td><code>movw</code>, <code>addw</code></td>
+      </tr>
+      <tr>
+          <td><code>l</code></td>
+          <td>4 字节</td>
+          <td><code>movl</code>, <code>addl</code>（32位）</td>
+      </tr>
+      <tr>
+          <td><code>q</code></td>
+          <td>8 字节</td>
+          <td><code>movq</code>, <code>addq</code>（64位）</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><code>mov</code> 系列指令是出现频率最高的指令之一，格式为 <code>movx source, dest</code>，将 source 的值复制到 dest。</p>
+<hr>
+<h3 id="32-寄存器和数据传输指令">3.2 寄存器和数据传输指令
+</h3><p>x86-64 各寄存器的用途有一定约定，虽然部分可以混用，但遵循约定能让代码更易读。</p>
+<p><img src="/p/cpp-csapp-notes/image/3/image3-2-0.png"
+	width="1540"
+	height="755"
+	srcset="/p/cpp-csapp-notes/image/3/image3-2-0_hu_f4f6436415c2d630.png 480w, /p/cpp-csapp-notes/image/3/image3-2-0_hu_66340fe30f0a2316.png 1024w"
+	loading="lazy"
+	
+		alt="3-2-0"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="203"
+		data-flex-basis="489px"
+	
+></p>
+<p>常见用途：</p>
+<ul>
+<li><code>rax</code> —— 返回值寄存器，也用于做累加器</li>
+<li><code>rdi</code> —— 第一个参数</li>
+<li><code>rsi</code> —— 第二个参数</li>
+<li><code>rdx</code> —— 第三个参数</li>
+<li><code>rcx</code> —— 第四个参数</li>
+<li><code>r8~r9</code> —— 第五、六个参数</li>
+<li><code>rsp</code> —— 栈指针，指向栈顶</li>
+<li><code>rbp</code> —— 基址指针，常用于栈帧定位</li>
+</ul>
+<p><img src="/p/cpp-csapp-notes/image/3/image3-2-1.png"
+	width="1578"
+	height="769"
+	srcset="/p/cpp-csapp-notes/image/3/image3-2-1_hu_203b085ac49eba8f.png 480w, /p/cpp-csapp-notes/image/3/image3-2-1_hu_266f06e0657512a8.png 1024w"
+	loading="lazy"
+	
+		alt="3-2-1"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="205"
+		data-flex-basis="492px"
+	
+></p>
+<p>常见数据传输指令：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-asm" data-lang="asm"><span class="line"><span class="cl"><span class="nf">mov</span> <span class="no">rax</span><span class="p">,</span> <span class="no">rbx</span>      <span class="c1">; 将 rbx 的值复制到 rax
+</span></span></span><span class="line"><span class="cl"><span class="nf">mov</span> <span class="no">rax</span><span class="p">,</span> <span class="p">[</span><span class="no">rbx</span><span class="p">]</span>    <span class="c1">; 从 rbx 指向的内存地址读取值到 rax（内存→寄存器）
+</span></span></span><span class="line"><span class="cl"><span class="nf">mov</span> <span class="p">[</span><span class="no">rax</span><span class="p">],</span> <span class="no">rbx</span>    <span class="c1">; 将 rbx 的值写入 rax 指向的内存地址（寄存器→内存）
+</span></span></span><span class="line"><span class="cl"><span class="nf">lea</span> <span class="no">rax</span><span class="p">,</span> <span class="p">[</span><span class="no">rbx</span><span class="err">+</span><span class="mi">8</span><span class="p">]</span>  <span class="c1">; 计算 rbx+8 的地址，载入 rax（注意：不是读取该地址的值）
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>mov</code> 禁止内存到内存的直接传输，必须经过寄存器中转。<code>lea</code> 是取地址指令，常用于计算表达式结果而不访问内存。</p>
+<hr>
+<h3 id="33-栈与函数调用">3.3 栈与函数调用
+</h3><p>栈是程序运行时最重要的内存区域之一，用于函数调用、局部变量存储和寄存器保存。</p>
+<p><img src="/p/cpp-csapp-notes/image/3/image3-3-1.png"
+	width="1562"
+	height="640"
+	srcset="/p/cpp-csapp-notes/image/3/image3-3-1_hu_c0e7dc38bcf1318e.png 480w, /p/cpp-csapp-notes/image/3/image3-3-1_hu_bc7af67bfeb98751.png 1024w"
+	loading="lazy"
+	
+		alt="3-3-1"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="244"
+		data-flex-basis="585px"
+	
+></p>
+<p><strong>栈的生长方向</strong>：栈向下生长——每 push 一个值，<code>rsp</code> 减小；每 pop 一个值，<code>rsp</code> 增大。</p>
+<p><strong>函数调用三部曲</strong>：</p>
+<ol>
+<li><strong>调用前</strong>：将参数放入 <code>rdi, rsi, rdx, rcx, r8, r9</code>（多余参数压栈）</li>
+<li><strong>调用时</strong>：<code>call</code> 指令将返回地址压栈，跳转到被调用函数</li>
+<li><strong>返回时</strong>：<code>ret</code> 从栈中弹出返回地址，跳回调用者</li>
+</ol>
+<p><strong>典型函数 prologue（开篇）</strong>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-asm" data-lang="asm"><span class="line"><span class="cl"><span class="nf">push</span> <span class="no">rbp</span>           <span class="c1">; 保存调用者的基址指针
+</span></span></span><span class="line"><span class="cl"><span class="nf">mov</span> <span class="no">rbp</span><span class="p">,</span> <span class="no">rsp</span>       <span class="c1">; 建立新的栈帧基址
+</span></span></span><span class="line"><span class="cl"><span class="nf">sub</span> <span class="no">rsp</span><span class="p">,</span> <span class="mi">32</span>        <span class="c1">; 分配 32 字节本地变量空间
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>典型函数 epilogue（收尾）</strong>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-asm" data-lang="asm"><span class="line"><span class="cl"><span class="nf">add</span> <span class="no">rsp</span><span class="p">,</span> <span class="mi">32</span>        <span class="c1">; 释放本地变量空间
+</span></span></span><span class="line"><span class="cl"><span class="nf">pop</span> <span class="no">rbp</span>            <span class="c1">; 恢复调用者的基址指针
+</span></span></span><span class="line"><span class="cl"><span class="nf">ret</span>                <span class="c1">; 返回
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>也可以用 <code>leave</code> 代替 <code>pop rbp; mov rsp, rbp</code>，<code>leave</code> 相当于同时完成这两步。</p>
+<p><strong>为什么要用基址指针 <code>rbp</code></strong>：有了 <code>rbp</code>，无论栈上分配了多少本地变量，都能通过固定偏移量访问它们，因为 <code>rbp</code> 在整个函数执行期间指向栈帧的固定位置。</p>
+<hr>
+<h3 id="34-算术与逻辑运算符">3.4 算术与逻辑运算符
+</h3><p>x86-64 提供了一组丰富的算术指令，大多是二操作数形式 <code>op src, dest</code>，等价于 <code>dest = dest op src</code>。</p>
+<p><strong>算术指令</strong>：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>指令</th>
+          <th>操作</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>add</code></td>
+          <td>加法</td>
+          <td><code>add rax, rbx</code> → <code>rax += rbx</code></td>
+      </tr>
+      <tr>
+          <td><code>sub</code></td>
+          <td>减法</td>
+          <td><code>sub rax, rbx</code> → <code>rax -= rbx</code></td>
+      </tr>
+      <tr>
+          <td><code>imul</code></td>
+          <td>有符号乘法</td>
+          <td>结果存于 <code>rdx:rax</code>（128位）</td>
+      </tr>
+      <tr>
+          <td><code>mul</code></td>
+          <td>无符号乘法</td>
+          <td>同上</td>
+      </tr>
+      <tr>
+          <td><code>idiv</code></td>
+          <td>有符号除法</td>
+          <td><code>rdx:rax</code> ÷ <code>rdi</code>，商→<code>rax</code>，余→<code>rdx</code></td>
+      </tr>
+      <tr>
+          <td><code>div</code></td>
+          <td>无符号除法</td>
+          <td>同上</td>
+      </tr>
+      <tr>
+          <td><code>inc</code></td>
+          <td>加 1</td>
+          <td><code>inc rax</code> → <code>rax++</code></td>
+      </tr>
+      <tr>
+          <td><code>dec</code></td>
+          <td>减 1</td>
+          <td><code>dec rax</code> → <code>rax--</code></td>
+      </tr>
+      <tr>
+          <td><code>neg</code></td>
+          <td>取负</td>
+          <td><code>neg rax</code> → <code>rax = -rax</code></td>
+      </tr>
+  </tbody>
+</table></div>
+<p><strong>移位指令</strong>：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>指令</th>
+          <th>操作</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>sal</code> / <code>shl</code></td>
+          <td>算术左移 / 逻辑左移（效果相同）</td>
+      </tr>
+      <tr>
+          <td><code>sar</code></td>
+          <td>算术右移（高位补符号位）</td>
+      </tr>
+      <tr>
+          <td><code>shr</code></td>
+          <td>逻辑右移（高位补 0）</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>移位量可以是立即数或 <code>cl</code> 寄存器（只取低 5 位，所以最大移位量为 31，适用于 32/64 位）。</p>
+<p><strong>逻辑指令</strong>：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>指令</th>
+          <th>操作</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>and</code></td>
+          <td>按位与</td>
+      </tr>
+      <tr>
+          <td><code>or</code></td>
+          <td>按位或</td>
+      </tr>
+      <tr>
+          <td><code>xor</code></td>
+          <td>按位异或</td>
+      </tr>
+      <tr>
+          <td><code>not</code></td>
+          <td>按位取反</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><code>xor rax, rax</code> 是将 <code>rax</code> 置零的经典写法，比 <code>mov rax, 0</code> 更短且同样高效。</p>
+<p><strong>条件码（Condition Codes）</strong>：</p>
+<p>大多数算术指令会隐式设置四个标志位：</p>
+<ul>
+<li><code>CF</code> —— 进位标志（无符号溢出）</li>
+<li><code>ZF</code> —— 零标志（结果为 0）</li>
+<li><code>SF</code> —— 符号标志（结果为负）</li>
+<li><code>OF</code> —— 有符号溢出标志</li>
+</ul>
+<p><code>cmp</code> 和 <code>test</code> 指令专门用来设置条件码而不改变目标操作数：</p>
+<ul>
+<li><code>cmp b, a</code> 相当于计算 <code>a - b</code>，根据结果设置标志位</li>
+<li><code>test b, a</code> 相当于计算 <code>a &amp; b</code>，根据结果设置标志位</li>
+</ul>
+<p><code>jmp</code>、<code>je</code>、<code>jne</code>、<code>jl</code>、<code>jle</code>、<code>jg</code>、<code>jge</code> 等条件跳转指令依赖这些标志位决定是否跳转，这正是 <code>if</code>、<code>while</code>、<code>for</code> 等控制结构的底层实现。</p>
+<hr>
+<h3 id="35-分支与循环">3.5 分支与循环
+</h3><p>高级语言中的 <code>if-else</code>、<code>while</code>、<code>for</code> 在汇编层主要靠条件跳转实现。</p>
+<p><strong>分支结构</strong>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="n">y</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// then branch
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// else branch
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>汇编思路：先用 <code>cmp</code> 比较，设置条件码，再根据条件码 <code>jge</code>（大于等于跳转）跳过 then 分支，或直接用 <code>jl</code> 进入 then 分支。</p>
+<p><strong>循环结构</strong>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">while</span> <span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// body
+</span></span></span><span class="line"><span class="cl">    <span class="n">x</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>汇编思路：先跳转到条件判断处，比较后 <code>jle</code>（小于等于跳转）跳出循环，<code>jmp</code> 无条件跳转回条件判断处，形成循环。</p>
+<p>循环的本质是<strong>条件跳转 + 无条件跳转</strong>的组合。</p>
+<hr>
+<h3 id="36-数组与指针运算">3.6 数组与指针运算
+</h3><p>数组在内存中是连续排列的。对数组元素 <code>a[i]</code> 的访问，编译后通常等价于：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">address = base + i * element_size
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>lea</code> 指令特别适合做这种地址计算：<code>lea rax, [rdi + rsi*8]</code> 即可一次性完成 <code>base + i*8</code> 的地址计算。</p>
+<p>C 语言中 <code>a[i]</code> 和 <code>*(a+i)</code> 完全等价，指针运算本质上就是地址运算。理解了这一层，就能看清数组越界访问的实质——访问了相邻内存区域。</p>
+<hr>
+<h3 id="37-缓冲区溢出">3.7 缓冲区溢出
+</h3><p>理解机器级表示的另一个重要意义是了解安全漏洞。缓冲区溢出（Buffer Overflow）是最经典的底层安全问题的根源。</p>
+<p>当程序向一个固定大小的缓冲区写入超过其容量的数据时，超出部分会覆盖相邻的栈帧区域。如果攻击者精心构造输入，可以：</p>
+<ul>
+<li>覆盖函数返回地址，使 <code>ret</code> 时跳转到任意代码</li>
+<li>覆写被调用者保存寄存器，破坏调用者的数据</li>
+<li>写入可执行代码并让返回地址指向它（代码注入）</li>
+</ul>
+<p>现代系统通过 <strong>栈保护金丝雀</strong>（Stack Canary）和 ** NX / DEP**（禁止栈上执行代码）等机制大幅缓解了这类攻击，但仍有很多漏洞以更隐蔽的方式存在。理解底层，是安全研究的基础。</p>
 
 </section>
 
