@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://Liyufei1.github.io/p/cpp-csapp-notes/'>
 
-<link rel="stylesheet" href="/scss/style.min.b0e76e98cdd4f7082d1fc36f7af7e0843a81201db2197c03ca426751dc923735.css"><meta property='og:title' content="cpp-csapp学习笔记">
+<link rel="stylesheet" href="/scss/style.min.6ba8b9ea95cedbd14d34969a3a28210289d3a74cba725c37699a1455f78e7135.css"><meta property='og:title' content="cpp-csapp学习笔记">
 <meta property='og:description' content="深入理解计算机系统一书的学习笔记">
 <meta property='og:url' content='https://Liyufei1.github.io/p/cpp-csapp-notes/'>
 <meta property='og:site_name' content='李宇飞-Liyufei1'>
@@ -679,25 +679,25 @@ $$x \times 13 = x \times (2^3 + 2^2 + 2^0) = (x \ll 3) + (x \ll 2) + x$$<p>在�
 <p>有符号数右移时采用<strong>算术右移</strong>，即高位补符号位（0 表示正，1 表示负）。这意味着负数右移后结果会向 0 的方向取整，而不是向下取整。</p>
 <p><strong>示例</strong>：</p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>表达式</th>
-          <th>结果</th>
-          <th>说明</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>-7 / 2</code></td>
-          <td><code>-3</code></td>
-          <td>向 0 取整</td>
-      </tr>
-      <tr>
-          <td><code>(-7) &gt;&gt; 1</code></td>
-          <td><code>-4</code></td>
-          <td>算术右移，向下取整</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>表达式</th>
+					<th>结果</th>
+					<th>说明</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>-7 / 2</code></td>
+					<td><code>-3</code></td>
+					<td>向 0 取整</td>
+			</tr>
+			<tr>
+					<td><code>(-7) &gt;&gt; 1</code></td>
+					<td><code>-4</code></td>
+					<td>算术右移，向下取整</td>
+			</tr>
+	</tbody>
 </table></div>
 <p>如果需要向下取整，可以使用如下技巧：
 </p>
@@ -791,35 +791,35 @@ double双精度浮点数，取值范围是：，小数的精度为</p>
 <p>这种划分本质上是一种<strong>调用约定</strong>（Calling Convention），让调用者和被调用者就寄存器的使用规则达成一致。编译器正是依据这套规则生成机器码的。</p>
 <h4 id="汇编指令后缀与操作数大小">汇编指令后缀与操作数大小
 </h4><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>后缀</th>
-          <th>大小</th>
-          <th>典型用途</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>b</code></td>
-          <td>1 字节</td>
-          <td><code>movb</code>, <code>addb</code></td>
-      </tr>
-      <tr>
-          <td><code>w</code></td>
-          <td>2 字节</td>
-          <td><code>movw</code>, <code>addw</code></td>
-      </tr>
-      <tr>
-          <td><code>l</code></td>
-          <td>4 字节</td>
-          <td><code>movl</code>, <code>addl</code>（32位）</td>
-      </tr>
-      <tr>
-          <td><code>q</code></td>
-          <td>8 字节</td>
-          <td><code>movq</code>, <code>addq</code>（64位）</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>后缀</th>
+					<th>大小</th>
+					<th>典型用途</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>b</code></td>
+					<td>1 字节</td>
+					<td><code>movb</code>, <code>addb</code></td>
+			</tr>
+			<tr>
+					<td><code>w</code></td>
+					<td>2 字节</td>
+					<td><code>movw</code>, <code>addw</code></td>
+			</tr>
+			<tr>
+					<td><code>l</code></td>
+					<td>4 字节</td>
+					<td><code>movl</code>, <code>addl</code>（32位）</td>
+			</tr>
+			<tr>
+					<td><code>q</code></td>
+					<td>8 字节</td>
+					<td><code>movq</code>, <code>addq</code>（64位）</td>
+			</tr>
+	</tbody>
 </table></div>
 <p><code>mov</code> 系列指令是出现频率最高的指令之一，格式为 <code>movx source, dest</code>，将 source 的值复制到 dest。</p>
 <hr>
@@ -937,111 +937,111 @@ double双精度浮点数，取值范围是：，小数的精度为</p>
 </h3><p>x86-64 提供了一组丰富的算术指令，大多是二操作数形式 <code>op src, dest</code>，等价于 <code>dest = dest op src</code>。</p>
 <p><strong>算术指令</strong>：</p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>指令</th>
-          <th>操作</th>
-          <th>说明</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>add</code></td>
-          <td>加法</td>
-          <td><code>add rax, rbx</code> → <code>rax += rbx</code></td>
-      </tr>
-      <tr>
-          <td><code>sub</code></td>
-          <td>减法</td>
-          <td><code>sub rax, rbx</code> → <code>rax -= rbx</code></td>
-      </tr>
-      <tr>
-          <td><code>imul</code></td>
-          <td>有符号乘法</td>
-          <td>结果存于 <code>rdx:rax</code>（128位）</td>
-      </tr>
-      <tr>
-          <td><code>mul</code></td>
-          <td>无符号乘法</td>
-          <td>同上</td>
-      </tr>
-      <tr>
-          <td><code>idiv</code></td>
-          <td>有符号除法</td>
-          <td><code>rdx:rax</code> ÷ <code>rdi</code>，商→<code>rax</code>，余→<code>rdx</code></td>
-      </tr>
-      <tr>
-          <td><code>div</code></td>
-          <td>无符号除法</td>
-          <td>同上</td>
-      </tr>
-      <tr>
-          <td><code>inc</code></td>
-          <td>加 1</td>
-          <td><code>inc rax</code> → <code>rax++</code></td>
-      </tr>
-      <tr>
-          <td><code>dec</code></td>
-          <td>减 1</td>
-          <td><code>dec rax</code> → <code>rax--</code></td>
-      </tr>
-      <tr>
-          <td><code>neg</code></td>
-          <td>取负</td>
-          <td><code>neg rax</code> → <code>rax = -rax</code></td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>指令</th>
+					<th>操作</th>
+					<th>说明</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>add</code></td>
+					<td>加法</td>
+					<td><code>add rax, rbx</code> → <code>rax += rbx</code></td>
+			</tr>
+			<tr>
+					<td><code>sub</code></td>
+					<td>减法</td>
+					<td><code>sub rax, rbx</code> → <code>rax -= rbx</code></td>
+			</tr>
+			<tr>
+					<td><code>imul</code></td>
+					<td>有符号乘法</td>
+					<td>结果存于 <code>rdx:rax</code>（128位）</td>
+			</tr>
+			<tr>
+					<td><code>mul</code></td>
+					<td>无符号乘法</td>
+					<td>同上</td>
+			</tr>
+			<tr>
+					<td><code>idiv</code></td>
+					<td>有符号除法</td>
+					<td><code>rdx:rax</code> ÷ <code>rdi</code>，商→<code>rax</code>，余→<code>rdx</code></td>
+			</tr>
+			<tr>
+					<td><code>div</code></td>
+					<td>无符号除法</td>
+					<td>同上</td>
+			</tr>
+			<tr>
+					<td><code>inc</code></td>
+					<td>加 1</td>
+					<td><code>inc rax</code> → <code>rax++</code></td>
+			</tr>
+			<tr>
+					<td><code>dec</code></td>
+					<td>减 1</td>
+					<td><code>dec rax</code> → <code>rax--</code></td>
+			</tr>
+			<tr>
+					<td><code>neg</code></td>
+					<td>取负</td>
+					<td><code>neg rax</code> → <code>rax = -rax</code></td>
+			</tr>
+	</tbody>
 </table></div>
 <p><strong>移位指令</strong>：</p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>指令</th>
-          <th>操作</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>sal</code> / <code>shl</code></td>
-          <td>算术左移 / 逻辑左移（效果相同）</td>
-      </tr>
-      <tr>
-          <td><code>sar</code></td>
-          <td>算术右移（高位补符号位）</td>
-      </tr>
-      <tr>
-          <td><code>shr</code></td>
-          <td>逻辑右移（高位补 0）</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>指令</th>
+					<th>操作</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>sal</code> / <code>shl</code></td>
+					<td>算术左移 / 逻辑左移（效果相同）</td>
+			</tr>
+			<tr>
+					<td><code>sar</code></td>
+					<td>算术右移（高位补符号位）</td>
+			</tr>
+			<tr>
+					<td><code>shr</code></td>
+					<td>逻辑右移（高位补 0）</td>
+			</tr>
+	</tbody>
 </table></div>
 <p>移位量可以是立即数或 <code>cl</code> 寄存器（只取低 5 位，所以最大移位量为 31，适用于 32/64 位）。</p>
 <p><strong>逻辑指令</strong>：</p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>指令</th>
-          <th>操作</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>and</code></td>
-          <td>按位与</td>
-      </tr>
-      <tr>
-          <td><code>or</code></td>
-          <td>按位或</td>
-      </tr>
-      <tr>
-          <td><code>xor</code></td>
-          <td>按位异或</td>
-      </tr>
-      <tr>
-          <td><code>not</code></td>
-          <td>按位取反</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>指令</th>
+					<th>操作</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>and</code></td>
+					<td>按位与</td>
+			</tr>
+			<tr>
+					<td><code>or</code></td>
+					<td>按位或</td>
+			</tr>
+			<tr>
+					<td><code>xor</code></td>
+					<td>按位异或</td>
+			</tr>
+			<tr>
+					<td><code>not</code></td>
+					<td>按位取反</td>
+			</tr>
+	</tbody>
 </table></div>
 <p><code>xor rax, rax</code> 是将 <code>rax</code> 置零的经典写法，比 <code>mov rax, 0</code> 更短且同样高效。</p>
 <p><strong>条件码（Condition Codes）</strong>：</p>
@@ -1180,6 +1180,79 @@ double双精度浮点数，取值范围是：，小数的精度为</p>
     
 
     
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/vulkan%E5%88%9D%E5%AD%A6%E9%9A%8F%E7%AC%94/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/OpenGL.png" loading="lazy" data-key="" data-hash="/OpenGL.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Vulkan初学随笔</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/cpp-boost-graph-notes/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Boost.Graph 学习笔记</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/ue-%E5%BC%95%E5%85%A5%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/UE5.png" loading="lazy" data-key="" data-hash="/UE5.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">UE 引入第三方库的几种方式</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/uecpp%E7%9A%84%E4%B8%AA%E4%BA%BA%E4%BD%BF%E7%94%A8%E5%B0%8F%E6%8A%80%E5%B7%A7/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">UECpp的个人使用小技巧</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
 
      
     

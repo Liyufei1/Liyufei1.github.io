@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://Liyufei1.github.io/p/opengl-graphics-notes/'>
 
-<link rel="stylesheet" href="/scss/style.min.b0e76e98cdd4f7082d1fc36f7af7e0843a81201db2197c03ca426751dc923735.css"><meta property='og:title' content="OpenGL学习随笔-Graphics">
+<link rel="stylesheet" href="/scss/style.min.6ba8b9ea95cedbd14d34969a3a28210289d3a74cba725c37699a1455f78e7135.css"><meta property='og:title' content="OpenGL学习随笔-Graphics">
 <meta property='og:description' content="图形学基础笔记，包含坐标空间、MVP 变换、摄像机、光照与材质的核心概念">
 <meta property='og:url' content='https://Liyufei1.github.io/p/opengl-graphics-notes/'>
 <meta property='og:site_name' content='李宇飞-Liyufei1'>
@@ -287,6 +287,12 @@
             <nav id="TableOfContents">
   <ol>
     <li><a href="#目录">目录</a></li>
+    <li><a href="#渲染管线">渲染管线</a>
+      <ol>
+        <li><a href="#光栅化渲染管线">光栅化渲染管线</a></li>
+        <li><a href="#光线追踪渲染管线">光线追踪渲染管线</a></li>
+      </ol>
+    </li>
     <li><a href="#坐标空间">坐标空间</a></li>
     <li><a href="#glm-中的常见矩阵操作">GLM 中的常见矩阵操作</a>
       <ol>
@@ -394,7 +400,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 7 分钟
+                    阅读时长: 8 分钟
                 </time>
             </div>
         
@@ -447,7 +453,19 @@
 </ul>
 </li>
 </ul>
-<h2 id="坐标空间">坐标空间
+<h2 id="渲染管线">渲染管线
+</h2><h3 id="光栅化渲染管线">光栅化渲染管线
+</h3><p>![[Pasted image 20260730174426.png]]
+<em>输入汇编器</em> 从您指定的缓冲区中收集原始顶点数据，并且还可以使用索引缓冲区来重复某些元素，而无需复制顶点数据本身。</p>
+<p><em>顶点着色器</em> 为每个顶点运行，通常应用变换将顶点位置从模型空间转换为屏幕空间。它还将每个顶点的数据传递到管线下方。</p>
+<p><em>细分着色器</em> 允许您根据某些规则细分几何体，以提高网格质量。这通常用于使砖墙和楼梯等表面在靠近时看起来不那么平坦。</p>
+<p><em>几何着色器</em> 在每个图元（三角形、线、点）上运行，并且可以丢弃它或输出比输入更多的图元。这与细分着色器类似，但更加灵活。但是，它在当今的应用程序中使用不多，因为在大多数显卡上性能不是很好，除了英特尔的集成 GPU。</p>
+<p><em>光栅化</em> 阶段将图元离散化为_片段_。这些是它们在帧缓冲上填充的像素元素。任何落在屏幕外的片段都将被丢弃，并且顶点着色器输出的属性将在片段之间进行插值，如图所示。通常，由于深度测试，位于其他图元片段后面的片段也会在此处被丢弃。</p>
+<p><em>片段着色器</em> 对每个幸存的片段调用，并确定片段写入哪个帧缓冲，以及使用哪个颜色和深度值。它可以利用来自顶点着色器的插值数据来做到这一点，这些数据可以包括纹理坐标和用于光照的法线等。</p>
+<p><em>颜色混合</em> 阶段应用操作来混合映射到帧缓冲中同一像素的不同片段。片段可以简单地相互覆盖、累加或基于透明度进行混合。</p>
+<p>带有绿色的阶段被称为_固定功能_ 阶段。这些阶段允许您使用参数调整其操作，但它们的工作方式是预定义的。</p>
+<h3 id="光线追踪渲染管线">光线追踪渲染管线
+</h3><h2 id="坐标空间">坐标空间
 </h2><p>在渲染管线中，一个顶点通常不会直接从“模型坐标”一步变成“屏幕坐标”，而是会依次经过多个坐标空间。这样分阶段处理的好处是：每一步的数学意义更明确，很多运算也更容易进行。</p>
 <p>OpenGL 学习中最常见的 5 个坐标空间如下：</p>
 <ul>
@@ -1056,6 +1074,25 @@ $$<p>其中：</p>
 
         <div class="article-details">
             <h2 class="article-title">OpenGL学习随笔-LearnOpenGL</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/vulkan%E5%88%9D%E5%AD%A6%E9%9A%8F%E7%AC%94/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/OpenGL.png" loading="lazy" data-key="" data-hash="/OpenGL.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Vulkan初学随笔</h2>
         </div>
     </a>
 </article>

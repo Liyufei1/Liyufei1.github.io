@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://Liyufei1.github.io/</loc>
-    <lastmod>2026-05-08T00:00:00+00:00</lastmod>
+    <lastmod>2026-07-28T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -16,7 +16,7 @@
                 />
   </url><url>
     <loc>https://Liyufei1.github.io/categories/</loc>
-    <lastmod>2026-05-08T00:00:00+00:00</lastmod>
+    <lastmod>2026-07-28T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -29,12 +29,46 @@
                 />
   </url><url>
     <loc>https://Liyufei1.github.io/categories/cpp/</loc>
-    <lastmod>2026-05-08T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://Liyufei1.github.io/p/cpp-csapp-notes/</loc>
-    <lastmod>2026-05-08T00:00:00+00:00</lastmod>
+    <lastmod>2026-07-28T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://Liyufei1.github.io/post/</loc>
+    <lastmod>2026-07-28T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Liyufei1.github.io/categories/render/</loc>
+    <lastmod>2026-07-28T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Liyufei1.github.io/tags/render/</loc>
+    <lastmod>2026-07-28T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Liyufei1.github.io/tags/</loc>
+    <lastmod>2026-07-28T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://Liyufei1.github.io/en/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-us"
+                href="https://Liyufei1.github.io/tags/"
+                />
+  </url><url>
+    <loc>https://Liyufei1.github.io/p/vulkan%E5%88%9D%E5%AD%A6%E9%9A%8F%E7%AC%94/</loc>
+    <lastmod>2026-07-28T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Liyufei1.github.io/p/cpp-boost-graph-notes/</loc>
+    <lastmod>2026-07-02T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Liyufei1.github.io/categories/ue/</loc>
+    <lastmod>2026-07-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Liyufei1.github.io/tags/ue/</loc>
+    <lastmod>2026-07-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Liyufei1.github.io/p/ue-%E5%BC%95%E5%85%A5%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/</loc>
+    <lastmod>2026-07-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Liyufei1.github.io/p/cpp-csapp-notes/</loc>
     <lastmod>2026-05-08T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://Liyufei1.github.io/categories/ai/</loc>
@@ -68,9 +102,6 @@
     <lastmod>2026-01-08T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://Liyufei1.github.io/p/opengl-graphics-notes/</loc>
-    <lastmod>2026-01-08T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://Liyufei1.github.io/categories/render/</loc>
     <lastmod>2026-01-08T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://Liyufei1.github.io/p/opengl-glsl-notes/</loc>
@@ -124,19 +155,11 @@
     <loc>https://Liyufei1.github.io/p/math-typesetting/</loc>
     <lastmod>2019-03-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://Liyufei1.github.io/tags/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://Liyufei1.github.io/en/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-us"
-                href="https://Liyufei1.github.io/tags/"
-                />
-  </url><url>
     <loc>https://Liyufei1.github.io/categories/test/</loc>
+  </url><url>
+    <loc>https://Liyufei1.github.io/p/uecpp%E7%9A%84%E4%B8%AA%E4%BA%BA%E4%BD%BF%E7%94%A8%E5%B0%8F%E6%8A%80%E5%B7%A7/</loc>
+  </url><url>
+    <loc>https://Liyufei1.github.io/p/vibe-coding%E6%95%99%E7%A8%8B/</loc>
   </url><url>
     <loc>https://Liyufei1.github.io/%E5%85%B3%E4%BA%8E/</loc>
   </url><url>

@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://Liyufei1.github.io/p/opengl-glfw-notes/'>
 
-<link rel="stylesheet" href="/scss/style.min.b0e76e98cdd4f7082d1fc36f7af7e0843a81201db2197c03ca426751dc923735.css"><meta property='og:title' content="OpenGL学习随笔-GLFW">
+<link rel="stylesheet" href="/scss/style.min.6ba8b9ea95cedbd14d34969a3a28210289d3a74cba725c37699a1455f78e7135.css"><meta property='og:title' content="OpenGL学习随笔-GLFW">
 <meta property='og:description' content="使用 GLFW 创建 OpenGL 窗口、处理输入并完成基础渲染循环">
 <meta property='og:url' content='https://Liyufei1.github.io/p/opengl-glfw-notes/'>
 <meta property='og:site_name' content='李宇飞-Liyufei1'>
@@ -591,62 +591,62 @@
 <h2 id="常用函数">常用函数
 </h2><p>下面列出学习阶段最常见的一组 GLFW 接口。</p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>函数</th>
-          <th>作用</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>glfwInit()</code></td>
-          <td>初始化 GLFW。几乎所有 GLFW 调用都要在它之后进行</td>
-      </tr>
-      <tr>
-          <td><code>glfwWindowHint()</code></td>
-          <td>设置窗口属性或上下文版本，例如指定 OpenGL 3.3 Core Profile</td>
-      </tr>
-      <tr>
-          <td><code>glfwCreateWindow()</code></td>
-          <td>创建窗口和对应的 OpenGL 上下文</td>
-      </tr>
-      <tr>
-          <td><code>glfwMakeContextCurrent()</code></td>
-          <td>将某个窗口的上下文设为当前上下文</td>
-      </tr>
-      <tr>
-          <td><code>glfwSetFramebufferSizeCallback()</code></td>
-          <td>注册帧缓冲大小变化回调，窗口尺寸变化时通常要更新视口</td>
-      </tr>
-      <tr>
-          <td><code>glfwWindowShouldClose()</code></td>
-          <td>判断窗口是否需要关闭，常用于主循环退出条件</td>
-      </tr>
-      <tr>
-          <td><code>glfwSetWindowShouldClose()</code></td>
-          <td>主动设置窗口关闭状态</td>
-      </tr>
-      <tr>
-          <td><code>glfwGetKey()</code></td>
-          <td>读取键盘按键状态</td>
-      </tr>
-      <tr>
-          <td><code>glfwPollEvents()</code></td>
-          <td>处理当前帧积累的输入和窗口事件</td>
-      </tr>
-      <tr>
-          <td><code>glfwSwapBuffers()</code></td>
-          <td>交换前后缓冲区，把当前渲染结果显示出来</td>
-      </tr>
-      <tr>
-          <td><code>glfwTerminate()</code></td>
-          <td>释放 GLFW 相关资源，程序退出前调用</td>
-      </tr>
-      <tr>
-          <td><code>glfwGetTime()</code></td>
-          <td>获取时间，适合做动画、计时和帧间隔计算</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>函数</th>
+					<th>作用</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>glfwInit()</code></td>
+					<td>初始化 GLFW。几乎所有 GLFW 调用都要在它之后进行</td>
+			</tr>
+			<tr>
+					<td><code>glfwWindowHint()</code></td>
+					<td>设置窗口属性或上下文版本，例如指定 OpenGL 3.3 Core Profile</td>
+			</tr>
+			<tr>
+					<td><code>glfwCreateWindow()</code></td>
+					<td>创建窗口和对应的 OpenGL 上下文</td>
+			</tr>
+			<tr>
+					<td><code>glfwMakeContextCurrent()</code></td>
+					<td>将某个窗口的上下文设为当前上下文</td>
+			</tr>
+			<tr>
+					<td><code>glfwSetFramebufferSizeCallback()</code></td>
+					<td>注册帧缓冲大小变化回调，窗口尺寸变化时通常要更新视口</td>
+			</tr>
+			<tr>
+					<td><code>glfwWindowShouldClose()</code></td>
+					<td>判断窗口是否需要关闭，常用于主循环退出条件</td>
+			</tr>
+			<tr>
+					<td><code>glfwSetWindowShouldClose()</code></td>
+					<td>主动设置窗口关闭状态</td>
+			</tr>
+			<tr>
+					<td><code>glfwGetKey()</code></td>
+					<td>读取键盘按键状态</td>
+			</tr>
+			<tr>
+					<td><code>glfwPollEvents()</code></td>
+					<td>处理当前帧积累的输入和窗口事件</td>
+			</tr>
+			<tr>
+					<td><code>glfwSwapBuffers()</code></td>
+					<td>交换前后缓冲区，把当前渲染结果显示出来</td>
+			</tr>
+			<tr>
+					<td><code>glfwTerminate()</code></td>
+					<td>释放 GLFW 相关资源，程序退出前调用</td>
+			</tr>
+			<tr>
+					<td><code>glfwGetTime()</code></td>
+					<td>获取时间，适合做动画、计时和帧间隔计算</td>
+			</tr>
+	</tbody>
 </table></div>
 <hr>
 <h2 id="补充说明">补充说明
@@ -857,6 +857,25 @@
 
         <div class="article-details">
             <h2 class="article-title">OpenGL学习随笔-LearnOpenGL</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/vulkan%E5%88%9D%E5%AD%A6%E9%9A%8F%E7%AC%94/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/OpenGL.png" loading="lazy" data-key="" data-hash="/OpenGL.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Vulkan初学随笔</h2>
         </div>
     </a>
 </article>

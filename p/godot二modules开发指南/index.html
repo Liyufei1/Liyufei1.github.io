@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://Liyufei1.github.io/p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/'>
 
-<link rel="stylesheet" href="/scss/style.min.b0e76e98cdd4f7082d1fc36f7af7e0843a81201db2197c03ca426751dc923735.css"><meta property='og:title' content="【godot】二、Modules开发指南">
+<link rel="stylesheet" href="/scss/style.min.6ba8b9ea95cedbd14d34969a3a28210289d3a74cba725c37699a1455f78e7135.css"><meta property='og:title' content="【godot】二、Modules开发指南">
 <meta property='og:description' content="个人工具文档，针对GodotModules开发。介绍相关头文件和最小使用示例">
 <meta property='og:url' content='https://Liyufei1.github.io/p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/'>
 <meta property='og:site_name' content='李宇飞-Liyufei1'>
@@ -467,59 +467,59 @@
 <h2 id="常用功能">常用功能
 </h2><h3 id="编译期宏开关">编译期宏开关
 </h3><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th style="text-align: left">名称</th>
-          <th style="text-align: center">作用</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: left">TOOLS_ENABLED</td>
-          <td style="text-align: center">只在编辑器/工具链里需要的代码</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">WINDOWS_ENABLED</td>
-          <td style="text-align: center">Windows 平台</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">ANDROID_ENABLED</td>
-          <td style="text-align: center">Android 平台</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">GLES3_ENABLED</td>
-          <td style="text-align: center">GLES3 渲染后端</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">VULKAN_ENABLED</td>
-          <td style="text-align: center">Vulkan 渲染后端</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th style="text-align: left">名称</th>
+					<th style="text-align: center">作用</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: left">TOOLS_ENABLED</td>
+					<td style="text-align: center">只在编辑器/工具链里需要的代码</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">WINDOWS_ENABLED</td>
+					<td style="text-align: center">Windows 平台</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">ANDROID_ENABLED</td>
+					<td style="text-align: center">Android 平台</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">GLES3_ENABLED</td>
+					<td style="text-align: center">GLES3 渲染后端</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">VULKAN_ENABLED</td>
+					<td style="text-align: center">Vulkan 渲染后端</td>
+			</tr>
+	</tbody>
 </table></div>
 <h3 id="日志打印">日志打印
 </h3><p><strong>头文件</strong>：#include &ldquo;core/string/print_string.h&rdquo;</p>
 <p>用于标准日志的输出。在做引擎开发时使用。</p>
 <p>在做GDExtension开发时，使用Utility_function头文件，进行日志打印。</p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th style="text-align: left">接口</th>
-          <th style="text-align: center">作用</th>
-          <th style="text-align: left">示例</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: left">void print_line(const Variant &amp;v）</td>
-          <td style="text-align: center">打印日志</td>
-          <td style="text-align: left">__print_line(&ldquo;AAA&rdquo;,10.0);</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">void print_error(const String &amp;p_string)</td>
-          <td style="text-align: center">打印错误</td>
-          <td style="text-align: left">print_error(&ldquo;BBBB&rdquo;)</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th style="text-align: left">接口</th>
+					<th style="text-align: center">作用</th>
+					<th style="text-align: left">示例</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: left">void print_line(const Variant &amp;v）</td>
+					<td style="text-align: center">打印日志</td>
+					<td style="text-align: left">__print_line(&ldquo;AAA&rdquo;,10.0);</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">void print_error(const String &amp;p_string)</td>
+					<td style="text-align: center">打印错误</td>
+					<td style="text-align: left">print_error(&ldquo;BBBB&rdquo;)</td>
+			</tr>
+	</tbody>
 </table></div>
 <h3 id="计时器">计时器
 </h3><div class="highlight"><div class="chroma">
@@ -1333,49 +1333,49 @@
 </h2><p><strong>路径</strong>：#include &ldquo;core/object/class_db.h&rdquo;</p>
 <p>在_bind_methods中进行类型和函数注册的时候，使用到的类型注册函数就来自该头文件</p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>接口</th>
-          <th>作用</th>
-          <th>示例</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>ClassDB::bind_method</td>
-          <td>注册函数到脚本</td>
-          <td>ClassDB::bind_method(D_METHOD(&ldquo;test_print&rdquo;), &amp;CommandTool::test_print);</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>接口</th>
+					<th>作用</th>
+					<th>示例</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>ClassDB::bind_method</td>
+					<td>注册函数到脚本</td>
+					<td>ClassDB::bind_method(D_METHOD(&ldquo;test_print&rdquo;), &amp;CommandTool::test_print);</td>
+			</tr>
+	</tbody>
 </table></div>
 <h2 id="os">OS
 </h2><p><strong>路径</strong>：#include &ldquo;sence/gui/xxx.h&rdquo;</p>
 <p>提供了一系列操作系统层级的API，比如打印日、获取引擎运行时长等。</p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>接口</th>
-          <th>作用</th>
-          <th>示例</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>get_ticks_usec</td>
-          <td>获取引擎运行时长，单位为微秒</td>
-          <td></td>
-      </tr>
-      <tr>
-          <td>get_ticks_msec</td>
-          <td>获取引擎运行时长，单位为毫秒</td>
-          <td></td>
-      </tr>
-      <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>接口</th>
+					<th>作用</th>
+					<th>示例</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>get_ticks_usec</td>
+					<td>获取引擎运行时长，单位为微秒</td>
+					<td></td>
+			</tr>
+			<tr>
+					<td>get_ticks_msec</td>
+					<td>获取引擎运行时长，单位为毫秒</td>
+					<td></td>
+			</tr>
+			<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+			</tr>
+	</tbody>
 </table></div>
 <h2 id="callable">callable
 </h2><p><strong>路径</strong>：#include &ldquo;core/variant/callable.h&rdquo;</p>
@@ -1402,20 +1402,20 @@
 <h3 id="gui基础类">GUI基础类
 </h3><h4 id="control">Control
 </h4><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th style="text-align: left">接口</th>
-          <th style="text-align: center">作用</th>
-          <th style="text-align: left">右对齐</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: left">set_mouse_filter</td>
-          <td style="text-align: center">设置鼠标/点击行为</td>
-          <td style="text-align: left">STOP <br> PASS <br> IGNORE</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th style="text-align: left">接口</th>
+					<th style="text-align: center">作用</th>
+					<th style="text-align: left">右对齐</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: left">set_mouse_filter</td>
+					<td style="text-align: center">设置鼠标/点击行为</td>
+					<td style="text-align: left">STOP <br> PASS <br> IGNORE</td>
+			</tr>
+	</tbody>
 </table></div>
 <p>err_dialog_control-&gt;set_custom_minimum_size(Size2(600, 600) * EDSCALE);<br>
 err_dialog_control-&gt;connect(SceneStringName(draw), callable_mp(this, &amp;LyfTestEditor::test_draw));<br>

@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://Liyufei1.github.io/p/godot%E4%BA%94godot%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9Frtti/'>
 
-<link rel="stylesheet" href="/scss/style.min.b0e76e98cdd4f7082d1fc36f7af7e0843a81201db2197c03ca426751dc923735.css"><meta property='og:title' content="【godot】五、godot中的动态类型信息系统RTTI">
+<link rel="stylesheet" href="/scss/style.min.6ba8b9ea95cedbd14d34969a3a28210289d3a74cba725c37699a1455f78e7135.css"><meta property='og:title' content="【godot】五、godot中的动态类型信息系统RTTI">
 <meta property='og:description' content="基于godot4.4版本，学习随笔，浅读、尝试godot中的类型系统">
 <meta property='og:url' content='https://Liyufei1.github.io/p/godot%E4%BA%94godot%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9Frtti/'>
 <meta property='og:site_name' content='李宇飞-Liyufei1'>
@@ -535,74 +535,74 @@
 </div><h3 id="类的查询接口">类的查询接口
 </h3><p>在理解ClassDB中的静态成员变量<code>static HashMap&lt;StringName, ClassInfo&gt; classes;</code>存储了所有的类信息后，下方两个查询的接口，就非常好理解了。</p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th style="text-align: left">接口</th>
-          <th style="text-align: left">作用</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: left"></td>
-          <td style="text-align: left"></td>
-      </tr>
-      <tr>
-          <td style="text-align: left"><strong>一般接口</strong></td>
-          <td></td>
-      </tr>
-      <tr>
-          <td style="text-align: left">get_class_list</td>
-          <td style="text-align: left">查询所有类名称</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">class_exists</td>
-          <td style="text-align: left">查询类是否存在</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">instantiate</td>
-          <td style="text-align: left">调用实例化函数，并发送通知</td>
-      </tr>
-      <tr>
-          <td style="text-align: left"></td>
-          <td style="text-align: left"></td>
-      </tr>
-      <tr>
-          <td style="text-align: left"><strong>向下查询</strong></td>
-          <td></td>
-      </tr>
-      <tr>
-          <td style="text-align: left">get_inheriters_from_class</td>
-          <td style="text-align: left">查询所有继承类</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">get_direct_inheriters_from_class</td>
-          <td style="text-align: left">查询所有继承类(不包含自身)</td>
-      </tr>
-      <tr>
-          <td style="text-align: left"></td>
-          <td style="text-align: left"></td>
-      </tr>
-      <tr>
-          <td style="text-align: left"><strong>向上查询</strong></td>
-          <td></td>
-      </tr>
-      <tr>
-          <td style="text-align: left">get_parent_class</td>
-          <td style="text-align: left">查询父类</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">get_parent_class_nocheck</td>
-          <td style="text-align: left">查询父类名称，不做报错</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">get_inheritance_chain_nocheck</td>
-          <td style="text-align: left">查询继承链</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">is_parent_class</td>
-          <td style="text-align: left">查询A是否继承自B(包括同一类)</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th style="text-align: left">接口</th>
+					<th style="text-align: left">作用</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: left"></td>
+					<td style="text-align: left"></td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><strong>一般接口</strong></td>
+					<td></td>
+			</tr>
+			<tr>
+					<td style="text-align: left">get_class_list</td>
+					<td style="text-align: left">查询所有类名称</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">class_exists</td>
+					<td style="text-align: left">查询类是否存在</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">instantiate</td>
+					<td style="text-align: left">调用实例化函数，并发送通知</td>
+			</tr>
+			<tr>
+					<td style="text-align: left"></td>
+					<td style="text-align: left"></td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><strong>向下查询</strong></td>
+					<td></td>
+			</tr>
+			<tr>
+					<td style="text-align: left">get_inheriters_from_class</td>
+					<td style="text-align: left">查询所有继承类</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">get_direct_inheriters_from_class</td>
+					<td style="text-align: left">查询所有继承类(不包含自身)</td>
+			</tr>
+			<tr>
+					<td style="text-align: left"></td>
+					<td style="text-align: left"></td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><strong>向上查询</strong></td>
+					<td></td>
+			</tr>
+			<tr>
+					<td style="text-align: left">get_parent_class</td>
+					<td style="text-align: left">查询父类</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">get_parent_class_nocheck</td>
+					<td style="text-align: left">查询父类名称，不做报错</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">get_inheritance_chain_nocheck</td>
+					<td style="text-align: left">查询继承链</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">is_parent_class</td>
+					<td style="text-align: left">查询A是否继承自B(包括同一类)</td>
+			</tr>
+	</tbody>
 </table></div>
 <h4 id="一般接口">一般接口
 </h4><ol>
@@ -861,30 +861,30 @@
 </div><h3 id="信号接口">信号接口
 </h3><p>信号相关的信息，存储在<code>ClassInfo</code>的<code>signal_map</code>当中</p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th style="text-align: left">接口</th>
-          <th style="text-align: left">作用</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: left"><a class="link" href="#add_signal" >add_signal</a></td>
-          <td style="text-align: left">为某个类添加一个 信号，普遍使用它的宏ADD_SIGNAL版本</td>
-      </tr>
-      <tr>
-          <td style="text-align: left"><a class="link" href="#has_signal" >has_signal</a></td>
-          <td style="text-align: left">检查类是否（含父类）定义了某个信号</td>
-      </tr>
-      <tr>
-          <td style="text-align: left"><a class="link" href="#get_signal" >get_signal</a></td>
-          <td style="text-align: left">返回 class 或其祖先的信号数据。</td>
-      </tr>
-      <tr>
-          <td style="text-align: left"><a class="link" href="#get_signal_list" >get_signal_list</a></td>
-          <td style="text-align: left">获取所有信号（可包括父类）</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th style="text-align: left">接口</th>
+					<th style="text-align: left">作用</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: left"><a class="link" href="#add_signal" >add_signal</a></td>
+					<td style="text-align: left">为某个类添加一个 信号，普遍使用它的宏ADD_SIGNAL版本</td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><a class="link" href="#has_signal" >has_signal</a></td>
+					<td style="text-align: left">检查类是否（含父类）定义了某个信号</td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><a class="link" href="#get_signal" >get_signal</a></td>
+					<td style="text-align: left">返回 class 或其祖先的信号数据。</td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><a class="link" href="#get_signal_list" >get_signal_list</a></td>
+					<td style="text-align: left">获取所有信号（可包括父类）</td>
+			</tr>
+	</tbody>
 </table></div>
 <h4 id="基本使用示例">基本使用示例：
 </h4><p>godot中的signal类似于ue中的动态多播代理。它可以将一个信号（可以带参数）发送到所有监听函数。</p>
@@ -1325,74 +1325,74 @@
 </div><h3 id="属性接口">属性接口
 </h3><p>属性相关的信息，存储在<code>ClassInfo</code>的<code>property_list</code>、<code>property_map</code>和<code>property_setget</code>当中</p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th style="text-align: left">接口</th>
-          <th style="text-align: left">作用</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: left"><a class="link" href="#add_property" >add_property</a></td>
-          <td style="text-align: left">给某个类注册一个“属性”，并把这个属性和对应的 setter/getter 方法绑定起来</td>
-      </tr>
-      <tr>
-          <td style="text-align: left"><a class="link" href="#add_property_array" >add_property_array</a></td>
-          <td style="text-align: left">为 Inspector 生成“数组式属性组”的辅助函数，本身不创建实际的属性</td>
-      </tr>
-      <tr>
-          <td style="text-align: left"><a class="link" href="#add_property_array_count" >add_property_array_count</a></td>
-          <td style="text-align: left">给一个类注册数组属性</td>
-      </tr>
-      <tr>
-          <td style="text-align: left"><a class="link" href="#add_property_group" >add_property_group</a></td>
-          <td style="text-align: left">为 Inspector中显示的属性分组</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">add_property_subgroup</td>
-          <td style="text-align: left">创建 缩进更深一级的子分组</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">add_linked_property</td>
-          <td style="text-align: left">链接属性，将子属下关联到父属性</td>
-      </tr>
-      <tr>
-          <td style="text-align: left"><a class="link" href="#get_property_list" >get_property_list</a></td>
-          <td style="text-align: left">获取某个类的所有属性列表</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">get_property_info</td>
-          <td style="text-align: left">获取某个类的某个属性，注意由于是通过ClassInfo：：property_map来进行查询的，因此占位的属性信息会返回false</td>
-      </tr>
-      <tr>
-          <td style="text-align: left"><a class="link" href="#get_property" >get_property</a></td>
-          <td style="text-align: left">获取某个实例的属性值，信息存放在ClassInfo::PropertySetGet中</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">set_property</td>
-          <td style="text-align: left">设置某个实例的属性值，信息存放在ClassInfo::PropertySetGet中</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">has_property</td>
-          <td style="text-align: left">查询某个类是否定义过某个属性，信息存放在ClassInfo::PropertySetGet中</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">get_property_index</td>
-          <td style="text-align: left">查询属性索引，信息存放在ClassInfo::PropertySetGet中</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">get_property_type</td>
-          <td style="text-align: left">获取属性类型，信息存放在ClassInfo::PropertySetGet中</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">get_property_setter</td>
-          <td style="text-align: left">获取属性setter方法名，信息存放在ClassInfo::PropertySetGet中</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">get_property_getter</td>
-          <td style="text-align: left">获取属性getter方法名，信息存放在ClassInfo::PropertySetGet中</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th style="text-align: left">接口</th>
+					<th style="text-align: left">作用</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: left"><a class="link" href="#add_property" >add_property</a></td>
+					<td style="text-align: left">给某个类注册一个“属性”，并把这个属性和对应的 setter/getter 方法绑定起来</td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><a class="link" href="#add_property_array" >add_property_array</a></td>
+					<td style="text-align: left">为 Inspector 生成“数组式属性组”的辅助函数，本身不创建实际的属性</td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><a class="link" href="#add_property_array_count" >add_property_array_count</a></td>
+					<td style="text-align: left">给一个类注册数组属性</td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><a class="link" href="#add_property_group" >add_property_group</a></td>
+					<td style="text-align: left">为 Inspector中显示的属性分组</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">add_property_subgroup</td>
+					<td style="text-align: left">创建 缩进更深一级的子分组</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">add_linked_property</td>
+					<td style="text-align: left">链接属性，将子属下关联到父属性</td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><a class="link" href="#get_property_list" >get_property_list</a></td>
+					<td style="text-align: left">获取某个类的所有属性列表</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">get_property_info</td>
+					<td style="text-align: left">获取某个类的某个属性，注意由于是通过ClassInfo：：property_map来进行查询的，因此占位的属性信息会返回false</td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><a class="link" href="#get_property" >get_property</a></td>
+					<td style="text-align: left">获取某个实例的属性值，信息存放在ClassInfo::PropertySetGet中</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">set_property</td>
+					<td style="text-align: left">设置某个实例的属性值，信息存放在ClassInfo::PropertySetGet中</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">has_property</td>
+					<td style="text-align: left">查询某个类是否定义过某个属性，信息存放在ClassInfo::PropertySetGet中</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">get_property_index</td>
+					<td style="text-align: left">查询属性索引，信息存放在ClassInfo::PropertySetGet中</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">get_property_type</td>
+					<td style="text-align: left">获取属性类型，信息存放在ClassInfo::PropertySetGet中</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">get_property_setter</td>
+					<td style="text-align: left">获取属性setter方法名，信息存放在ClassInfo::PropertySetGet中</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">get_property_getter</td>
+					<td style="text-align: left">获取属性getter方法名，信息存放在ClassInfo::PropertySetGet中</td>
+			</tr>
+	</tbody>
 </table></div>
 <h4 id="add_property"><code>add_property</code>
 </h4><p><code>add_property</code>给某个类注册一个“属性”，并把这个属性和对应的 setter/getter 方法绑定起来。<br>
@@ -2350,26 +2350,26 @@ object中的GDCLASS(m_class, m_inherits)宏中包装了_get_property_listv方法
 <li><code>HashMap&lt;StringName, LocalVector&lt;MethodBind *&gt;&gt; method_map_compatibility;</code></li>
 </ul>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th style="text-align: left">接口</th>
-          <th style="text-align: left">作用</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: left"><a class="link" href="#bind_method" >bind_method</a></td>
-          <td style="text-align: left">类型注册时的函数绑定方法，用的非常广泛</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">has_method</td>
-          <td style="text-align: left">查询是类否包含某个函数，通过classinfo的method_map来查询</td>
-      </tr>
-      <tr>
-          <td style="text-align: left"><a class="link" href="#get_method_list" >get_method_list</a></td>
-          <td style="text-align: left">查询某个类的所有函数信息MethodInfo,通过classinfo的method_map来查询</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th style="text-align: left">接口</th>
+					<th style="text-align: left">作用</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: left"><a class="link" href="#bind_method" >bind_method</a></td>
+					<td style="text-align: left">类型注册时的函数绑定方法，用的非常广泛</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">has_method</td>
+					<td style="text-align: left">查询是类否包含某个函数，通过classinfo的method_map来查询</td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><a class="link" href="#get_method_list" >get_method_list</a></td>
+					<td style="text-align: left">查询某个类的所有函数信息MethodInfo,通过classinfo的method_map来查询</td>
+			</tr>
+	</tbody>
 </table></div>
 <h4 id="bind_method">bind_method
 </h4><p><code>bind_method</code>的主要作用是把一个C++成员函数，封装成一个<code>MethodBind</code>，然后再注册进ClassDB的类型信息中，路径为：<code>classdb::classes-&gt;ClassInfo::method_map</code></p>

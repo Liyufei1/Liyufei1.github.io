@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://Liyufei1.github.io/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/'>
 
-<link rel="stylesheet" href="/scss/style.min.b0e76e98cdd4f7082d1fc36f7af7e0843a81201db2197c03ca426751dc923735.css"><meta property='og:title' content="【godot】六、godot中的编辑器插件EditorPlugin">
+<link rel="stylesheet" href="/scss/style.min.6ba8b9ea95cedbd14d34969a3a28210289d3a74cba725c37699a1455f78e7135.css"><meta property='og:title' content="【godot】六、godot中的编辑器插件EditorPlugin">
 <meta property='og:description' content="基于godot4.4版本，学习随笔，尝试创建一个编辑器插件，会介绍各个接口">
 <meta property='og:url' content='https://Liyufei1.github.io/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/'>
 <meta property='og:site_name' content='李宇飞-Liyufei1'>
@@ -456,30 +456,30 @@
 </h3><p>我们可以可以添加工具面板、菜单按钮、自定义检查器、操作2D/3D编辑器(Node3DEditor/CanvasItemEditor)等。<br>
 <code>EditorPlugin</code>UI拓展的实现,依赖实际的工作类，比如：<code>Node3DEditor</code>、<code>CanvasItemEditor</code>、<code>EditorDockManager</code>。它只是对工作类的接口进行封装。</p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th style="text-align: left">接口</th>
-          <th style="text-align: left">作用</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: left"><a class="link" href="#add_control_to_container" >add_control_to_container</a></td>
-          <td style="text-align: left">添加控件到指定位置</td>
-      </tr>
-      <tr>
-          <td style="text-align: left"><a class="link" href="#add_control_to_bottom_panel" >add_control_to_bottom_panel</a></td>
-          <td style="text-align: left">编辑器底部面板添加一个新的工具选项卡</td>
-      </tr>
-      <tr>
-          <td style="text-align: left"><a class="link" href="#add_control_to_dock" >add_control_to_dock</a></td>
-          <td style="text-align: left">编辑器添加一个可停靠的自定义面板</td>
-      </tr>
-      <tr>
-          <td style="text-align: left"><a class="link" href="#add_tool_menu_item" >add_tool_menu_item</a></td>
-          <td style="text-align: left">在工具栏添加一个菜单项</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th style="text-align: left">接口</th>
+					<th style="text-align: left">作用</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: left"><a class="link" href="#add_control_to_container" >add_control_to_container</a></td>
+					<td style="text-align: left">添加控件到指定位置</td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><a class="link" href="#add_control_to_bottom_panel" >add_control_to_bottom_panel</a></td>
+					<td style="text-align: left">编辑器底部面板添加一个新的工具选项卡</td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><a class="link" href="#add_control_to_dock" >add_control_to_dock</a></td>
+					<td style="text-align: left">编辑器添加一个可停靠的自定义面板</td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><a class="link" href="#add_tool_menu_item" >add_tool_menu_item</a></td>
+					<td style="text-align: left">在工具栏添加一个菜单项</td>
+			</tr>
+	</tbody>
 </table></div>
 <h4 id="add_control_to_container">add_control_to_container
 </h4><p><code>add_control_to_container</code>存在多个停靠位置:</p>
@@ -691,30 +691,30 @@
 </div>
 </div><h3 id="ui扩展往3d界面编辑器的上下左右添加控件">✔️UI扩展：往3D界面编辑器的上下左右添加控件
 </h3><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th style="text-align: left">接口</th>
-          <th style="text-align: left">作用</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: left">add_control_to_menu_panel</td>
-          <td style="text-align: left">在上方菜单栏添加控件</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">add_control_to_left_panel</td>
-          <td style="text-align: left">在视口左侧添加控件</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">add_control_to_right_panel</td>
-          <td style="text-align: left">在视口右侧添加控件</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">get_shader_split</td>
-          <td style="text-align: left">获取视口底部的容器盒</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th style="text-align: left">接口</th>
+					<th style="text-align: left">作用</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: left">add_control_to_menu_panel</td>
+					<td style="text-align: left">在上方菜单栏添加控件</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">add_control_to_left_panel</td>
+					<td style="text-align: left">在视口左侧添加控件</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">add_control_to_right_panel</td>
+					<td style="text-align: left">在视口右侧添加控件</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">get_shader_split</td>
+					<td style="text-align: left">获取视口底部的容器盒</td>
+			</tr>
+	</tbody>
 </table></div>
 <p><img src="/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/image.png"
 	width="1639"
@@ -765,30 +765,30 @@
 </h2><p>CanvasItemEditor是Godot内置2D编辑器的核心插件，它是2D场景的编辑界面的主体。</p>
 <h3 id="ui扩展往2d界面编辑器的上下左右添加控件">UI扩展：往2D界面编辑器的上下左右添加控件
 </h3><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th style="text-align: left">接口</th>
-          <th style="text-align: left">作用</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: left">add_control_to_menu_panel</td>
-          <td style="text-align: left">在上方菜单栏添加控件</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">add_control_to_left_panel</td>
-          <td style="text-align: left">在视口左侧添加控件</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">add_control_to_right_panel</td>
-          <td style="text-align: left">在视口右侧添加控件</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">get_bottom_split</td>
-          <td style="text-align: left">获取视口底部的容器盒</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th style="text-align: left">接口</th>
+					<th style="text-align: left">作用</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: left">add_control_to_menu_panel</td>
+					<td style="text-align: left">在上方菜单栏添加控件</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">add_control_to_left_panel</td>
+					<td style="text-align: left">在视口左侧添加控件</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">add_control_to_right_panel</td>
+					<td style="text-align: left">在视口右侧添加控件</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">get_bottom_split</td>
+					<td style="text-align: left">获取视口底部的容器盒</td>
+			</tr>
+	</tbody>
 </table></div>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">

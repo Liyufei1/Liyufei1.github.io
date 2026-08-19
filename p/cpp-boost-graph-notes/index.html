@@ -1,0 +1,1623 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Boost Graph Library (BGL) 核心概念与使用指南">
+<title>Boost.Graph 学习笔记</title>
+
+<link rel='canonical' href='https://Liyufei1.github.io/p/cpp-boost-graph-notes/'>
+
+<link rel="stylesheet" href="/scss/style.min.6ba8b9ea95cedbd14d34969a3a28210289d3a74cba725c37699a1455f78e7135.css"><meta property='og:title' content="Boost.Graph 学习笔记">
+<meta property='og:description' content="Boost Graph Library (BGL) 核心概念与使用指南">
+<meta property='og:url' content='https://Liyufei1.github.io/p/cpp-boost-graph-notes/'>
+<meta property='og:site_name' content='李宇飞-Liyufei1'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-07-02T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-07-02T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="Boost.Graph 学习笔记">
+<meta name="twitter:description" content="Boost Graph Library (BGL) 核心概念与使用指南">
+    <link rel="shortcut icon" href="/favicon.png" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/guidao1Icon_hu_4c95e88ebc9c8e46.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🤣</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">李宇飞-Liyufei1</a></h1>
+            <h2 class="site-description">存放学习随笔的个人博客,主要有:Godot、Unreal、Blog、Cpp.
+ 下方是个人的b站、gitbug链接:</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://space.bilibili.com/7531504?spm_id_from=333.1007.0.0'
+                        target="_blank"
+                        title="Bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/Liyufei1'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友情链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://Liyufei1.github.io/en/" >English</option>
+                                
+                                    <option value="https://Liyufei1.github.io/" selected>中文</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#graph">Graph</a>
+      <ol>
+        <li><a href="#1-核心概念graph_traits">1. 核心概念：graph_traits</a></li>
+        <li><a href="#2-adjacency_list--最常用的图类">2. adjacency_list —— 最常用的图类</a>
+          <ol>
+            <li><a href="#21-容器选择器">2.1 容器选择器</a></li>
+            <li><a href="#22-方向选择器">2.2 方向选择器</a></li>
+            <li><a href="#23-内部属性">2.3 内部属性</a></li>
+          </ol>
+        </li>
+        <li><a href="#3-构造图">3. 构造图</a>
+          <ol>
+            <li><a href="#31-逐个添加边">3.1 逐个添加边</a></li>
+            <li><a href="#32-迭代器批量构造更高效">3.2 迭代器批量构造（更高效）</a></li>
+            <li><a href="#33-带边权重的批量构造">3.3 带边权重的批量构造</a></li>
+          </ol>
+        </li>
+        <li><a href="#4-遍历图">4. 遍历图</a>
+          <ol>
+            <li><a href="#41-遍历所有顶点">4.1 遍历所有顶点</a></li>
+            <li><a href="#42-遍历所有边">4.2 遍历所有边</a></li>
+            <li><a href="#43-遍历某个顶点的出边">4.3 遍历某个顶点的出边</a></li>
+            <li><a href="#44-遍历某个顶点的入边需要-bidirectionals">4.4 遍历某个顶点的入边（需要 <code>bidirectionalS</code>）</a></li>
+            <li><a href="#45-遍历邻接顶点更简洁的出边遍历">4.5 遍历邻接顶点（更简洁的出边遍历）</a></li>
+          </ol>
+        </li>
+        <li><a href="#5-property-map--属性映射">5. Property Map —— 属性映射</a>
+          <ol>
+            <li><a href="#51-内部属性">5.1 内部属性</a></li>
+            <li><a href="#52-外部属性">5.2 外部属性</a></li>
+            <li><a href="#53-常用的-property-map-适配器">5.3 常用的 Property Map 适配器</a></li>
+          </ol>
+        </li>
+        <li><a href="#6-核心算法">6. 核心算法</a>
+          <ol>
+            <li><a href="#61-bfs--广度优先搜索">6.1 BFS — 广度优先搜索</a></li>
+            <li><a href="#62-dfs--深度优先搜索">6.2 DFS — 深度优先搜索</a></li>
+            <li><a href="#63-dijkstra-最短路径">6.3 Dijkstra 最短路径</a></li>
+            <li><a href="#64-拓扑排序">6.4 拓扑排序</a></li>
+            <li><a href="#65-最小生成树--kruskal">6.5 最小生成树 — Kruskal</a></li>
+            <li><a href="#66-连通分量">6.6 连通分量</a></li>
+            <li><a href="#67-强连通分量-scc--tarjan-算法">6.7 强连通分量 (SCC) — Tarjan 算法</a></li>
+            <li><a href="#算法概览表">算法概览表</a></li>
+          </ol>
+        </li>
+        <li><a href="#7-visitor--算法事件注入">7. Visitor —— 算法事件注入</a></li>
+        <li><a href="#8-常用头文件速查">8. 常用头文件速查</a></li>
+        <li><a href="#9-小结">9. 小结</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/cpp/" >
+                Cpp
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/cpp-boost-graph-notes/">Boost.Graph 学习笔记</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            Boost Graph Library (BGL) 核心概念与使用指南
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published" datetime='2026-07-02T00:00:00Z'>2026-07-02</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 7 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="graph">Graph
+</h2><p>Boost Graph Library (BGL) 是 Boost 库中用于图数据结构和算法的泛型库。它的设计思想与 STL 一脉相承：通过<strong>概念 (Concepts)</strong> 分离接口与实现，使得同一套算法可以作用于不同的图数据结构。</p>
+<h3 id="1-核心概念graph_traits">1. 核心概念：graph_traits
+</h3><p>BGL 不依赖具体的图类型，而是通过 <code>graph_traits</code> 萃取图的相关类型。这与 STL 中 <code>iterator_traits</code> 的设计完全一致。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;boost/graph/adjacency_list.hpp&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;boost/graph/graph_traits.hpp&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">typedef</span> <span class="n">boost</span><span class="o">::</span><span class="n">adjacency_list</span><span class="o">&lt;</span><span class="n">boost</span><span class="o">::</span><span class="n">vecS</span><span class="p">,</span> <span class="n">boost</span><span class="o">::</span><span class="n">vecS</span><span class="p">,</span> <span class="n">boost</span><span class="o">::</span><span class="n">directedS</span><span class="o">&gt;</span> <span class="n">Graph</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 通过 graph_traits 获取图的各个关联类型
+</span></span></span><span class="line"><span class="cl"><span class="k">typedef</span> <span class="n">boost</span><span class="o">::</span><span class="n">graph_traits</span><span class="o">&lt;</span><span class="n">Graph</span><span class="o">&gt;::</span><span class="n">vertex_descriptor</span>   <span class="n">Vertex</span><span class="p">;</span>       <span class="c1">// 顶点描述符
+</span></span></span><span class="line"><span class="cl"><span class="k">typedef</span> <span class="n">boost</span><span class="o">::</span><span class="n">graph_traits</span><span class="o">&lt;</span><span class="n">Graph</span><span class="o">&gt;::</span><span class="n">edge_descriptor</span>     <span class="n">Edge</span><span class="p">;</span>         <span class="c1">// 边描述符
+</span></span></span><span class="line"><span class="cl"><span class="k">typedef</span> <span class="n">boost</span><span class="o">::</span><span class="n">graph_traits</span><span class="o">&lt;</span><span class="n">Graph</span><span class="o">&gt;::</span><span class="n">vertex_iterator</span>     <span class="n">VertexIter</span><span class="p">;</span>   <span class="c1">// 顶点迭代器
+</span></span></span><span class="line"><span class="cl"><span class="k">typedef</span> <span class="n">boost</span><span class="o">::</span><span class="n">graph_traits</span><span class="o">&lt;</span><span class="n">Graph</span><span class="o">&gt;::</span><span class="n">edge_iterator</span>       <span class="n">EdgeIter</span><span class="p">;</span>     <span class="c1">// 边迭代器
+</span></span></span><span class="line"><span class="cl"><span class="k">typedef</span> <span class="n">boost</span><span class="o">::</span><span class="n">graph_traits</span><span class="o">&lt;</span><span class="n">Graph</span><span class="o">&gt;::</span><span class="n">out_edge_iterator</span>   <span class="n">OutEdgeIter</span><span class="p">;</span>  <span class="c1">// 出边迭代器
+</span></span></span><span class="line"><span class="cl"><span class="k">typedef</span> <span class="n">boost</span><span class="o">::</span><span class="n">graph_traits</span><span class="o">&lt;</span><span class="n">Graph</span><span class="o">&gt;::</span><span class="n">in_edge_iterator</span>    <span class="n">InEdgeIter</span><span class="p">;</span>   <span class="c1">// 入边迭代器
+</span></span></span><span class="line"><span class="cl"><span class="k">typedef</span> <span class="n">boost</span><span class="o">::</span><span class="n">graph_traits</span><span class="o">&lt;</span><span class="n">Graph</span><span class="o">&gt;::</span><span class="n">adjacency_iterator</span>  <span class="n">AdjIter</span><span class="p">;</span>      <span class="c1">// 邻接顶点迭代器
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>描述符 (descriptor)</strong> 是 BGL 中的核心抽象：它类似于 STL 中的迭代器，用于指向图中的某个顶点或某条边。对于 <code>vecS</code> 作为顶点容器的图，<code>vertex_descriptor</code> 本质上就是一个整数索引。</p>
+<p>BGL 定义了一套图概念层级，每个概念规定了图必须支持的接口：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>概念</th>
+					<th>提供的操作</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>Graph</code></td>
+					<td>基础的图类型，不含任何遍历能力</td>
+			</tr>
+			<tr>
+					<td><code>IncidenceGraph</code></td>
+					<td><code>out_edges(v, g)</code>, <code>source(e, g)</code>, <code>target(e, g)</code></td>
+			</tr>
+			<tr>
+					<td><code>BidirectionalGraph</code></td>
+					<td><code>in_edges(v, g)</code>, <code>degree(v, g)</code></td>
+			</tr>
+			<tr>
+					<td><code>AdjacencyGraph</code></td>
+					<td><code>adjacent_vertices(v, g)</code></td>
+			</tr>
+			<tr>
+					<td><code>VertexListGraph</code></td>
+					<td><code>vertices(g)</code> — 遍历所有顶点</td>
+			</tr>
+			<tr>
+					<td><code>EdgeListGraph</code></td>
+					<td><code>edges(g)</code> — 遍历所有边</td>
+			</tr>
+			<tr>
+					<td><code>MutableGraph</code></td>
+					<td><code>add_vertex()</code>, <code>remove_vertex()</code>, <code>add_edge()</code>, <code>remove_edge()</code></td>
+			</tr>
+	</tbody>
+</table></div>
+<p>算法通过概念约束图类型：例如 Dijkstra 最短路径需要 <code>VertexListGraph</code> + <code>IncidenceGraph</code>，而拓扑排序还需要 <code>BidirectionalGraph</code>（或等效的出/入度信息）。</p>
+<hr>
+<h3 id="2-adjacency_list--最常用的图类">2. adjacency_list —— 最常用的图类
+</h3><p><code>adjacency_list</code> 是 BGL 中使用最广泛的图类，它有 6 个模板参数，通常只需显式指定前 2~3 个：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">template</span> <span class="o">&lt;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">typename</span> <span class="n">OutEdgeList</span>   <span class="o">=</span> <span class="n">vecS</span><span class="p">,</span>     <span class="c1">// 出边容器
+</span></span></span><span class="line"><span class="cl">    <span class="k">typename</span> <span class="n">VertexList</span>    <span class="o">=</span> <span class="n">vecS</span><span class="p">,</span>     <span class="c1">// 顶点容器
+</span></span></span><span class="line"><span class="cl">    <span class="k">typename</span> <span class="n">Directed</span>      <span class="o">=</span> <span class="n">directedS</span><span class="p">,</span><span class="c1">// 方向性
+</span></span></span><span class="line"><span class="cl">    <span class="k">typename</span> <span class="n">VertexProperties</span>   <span class="o">=</span> <span class="n">no_property</span><span class="p">,</span>  <span class="c1">// 顶点属性
+</span></span></span><span class="line"><span class="cl">    <span class="k">typename</span> <span class="n">EdgeProperties</span>     <span class="o">=</span> <span class="n">no_property</span><span class="p">,</span>  <span class="c1">// 边属性
+</span></span></span><span class="line"><span class="cl">    <span class="k">typename</span> <span class="n">GraphProperties</span>    <span class="o">=</span> <span class="n">no_property</span>   <span class="c1">// 图属性
+</span></span></span><span class="line"><span class="cl"><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">adjacency_list</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="21-容器选择器">2.1 容器选择器
+</h4><div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>选择器</th>
+					<th>底层容器</th>
+					<th>特点</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>vecS</code></td>
+					<td><code>std::vector</code></td>
+					<td>随机访问快，删除会导致迭代器失效；顶点自动获得 <code>[0, n)</code> 的索引</td>
+			</tr>
+			<tr>
+					<td><code>listS</code></td>
+					<td><code>std::list</code></td>
+					<td>删除不失效迭代器，但没有自动顶点索引</td>
+			</tr>
+			<tr>
+					<td><code>setS</code></td>
+					<td><code>std::set</code></td>
+					<td>自动去重，适合需要检查平行边的场景</td>
+			</tr>
+	</tbody>
+</table></div>
+<p><code>vecS</code> 是最常用的选择——速度快，且自动提供 <code>vertex_index</code> 属性，这是大多数算法正常运行的前提。</p>
+<h4 id="22-方向选择器">2.2 方向选择器
+</h4><div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>选择器</th>
+					<th>含义</th>
+					<th>内存开销</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>directedS</code></td>
+					<td>有向图，只存储出边</td>
+					<td>低</td>
+			</tr>
+			<tr>
+					<td><code>undirectedS</code></td>
+					<td>无向图，每条边双向可达</td>
+					<td>低</td>
+			</tr>
+			<tr>
+					<td><code>bidirectionalS</code></td>
+					<td>有向图，同时存储出边和入边</td>
+					<td>高（约为 <code>directedS</code> 的两倍）</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>选择 <code>bidirectionalS</code> 的唯一理由是需要 <code>in_edges(v, g)</code> 操作。如果算法不需要访问入边，直接用 <code>directedS</code> 即可。</p>
+<h4 id="23-内部属性">2.3 内部属性
+</h4><p>BGL 支持在图内部直接绑定属性，无需额外的外部容器：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 定义带边权重的有向图
+</span></span></span><span class="line"><span class="cl"><span class="k">typedef</span> <span class="n">boost</span><span class="o">::</span><span class="n">adjacency_list</span><span class="o">&lt;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">boost</span><span class="o">::</span><span class="n">vecS</span><span class="p">,</span>            <span class="c1">// OutEdgeList
+</span></span></span><span class="line"><span class="cl">    <span class="n">boost</span><span class="o">::</span><span class="n">vecS</span><span class="p">,</span>            <span class="c1">// VertexList
+</span></span></span><span class="line"><span class="cl">    <span class="n">boost</span><span class="o">::</span><span class="n">directedS</span><span class="p">,</span>       <span class="c1">// Directed
+</span></span></span><span class="line"><span class="cl">    <span class="n">boost</span><span class="o">::</span><span class="n">no_property</span><span class="p">,</span>     <span class="c1">// 顶点无属性
+</span></span></span><span class="line"><span class="cl">    <span class="n">boost</span><span class="o">::</span><span class="n">property</span><span class="o">&lt;</span><span class="n">boost</span><span class="o">::</span><span class="n">edge_weight_t</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span>  <span class="c1">// 边属性：权重，类型 int
+</span></span></span><span class="line"><span class="cl"><span class="o">&gt;</span> <span class="n">WeightedGraph</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 定义同时带顶点名和边权重的图
+</span></span></span><span class="line"><span class="cl"><span class="k">typedef</span> <span class="n">boost</span><span class="o">::</span><span class="n">adjacency_list</span><span class="o">&lt;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">boost</span><span class="o">::</span><span class="n">vecS</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">boost</span><span class="o">::</span><span class="n">vecS</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">boost</span><span class="o">::</span><span class="n">undirectedS</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">boost</span><span class="o">::</span><span class="n">property</span><span class="o">&lt;</span><span class="n">boost</span><span class="o">::</span><span class="n">vertex_name_t</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">,</span>   <span class="c1">// 顶点名
+</span></span></span><span class="line"><span class="cl">    <span class="n">boost</span><span class="o">::</span><span class="n">property</span><span class="o">&lt;</span><span class="n">boost</span><span class="o">::</span><span class="n">edge_weight_t</span><span class="p">,</span> <span class="kt">double</span><span class="o">&gt;</span>          <span class="c1">// 边权重
+</span></span></span><span class="line"><span class="cl"><span class="o">&gt;</span> <span class="n">CityGraph</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>常用预定义属性标签：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>属性标签</th>
+					<th>用途</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>vertex_index_t</code></td>
+					<td>顶点索引（<code>vecS</code> 自动提供）</td>
+			</tr>
+			<tr>
+					<td><code>vertex_name_t</code></td>
+					<td>顶点名称</td>
+			</tr>
+			<tr>
+					<td><code>vertex_color_t</code></td>
+					<td>顶点颜色（BFS/DFS 遍历时使用）</td>
+			</tr>
+			<tr>
+					<td><code>vertex_distance_t</code></td>
+					<td>顶点距离</td>
+			</tr>
+			<tr>
+					<td><code>edge_weight_t</code></td>
+					<td>边权重</td>
+			</tr>
+			<tr>
+					<td><code>edge_capacity_t</code></td>
+					<td>边容量（网络流算法）</td>
+			</tr>
+			<tr>
+					<td><code>edge_index_t</code></td>
+					<td>边索引</td>
+			</tr>
+	</tbody>
+</table></div>
+<hr>
+<h3 id="3-构造图">3. 构造图
+</h3><h4 id="31-逐个添加边">3.1 逐个添加边
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">typedef</span> <span class="n">boost</span><span class="o">::</span><span class="n">adjacency_list</span><span class="o">&lt;</span><span class="n">boost</span><span class="o">::</span><span class="n">vecS</span><span class="p">,</span> <span class="n">boost</span><span class="o">::</span><span class="n">vecS</span><span class="p">,</span> <span class="n">boost</span><span class="o">::</span><span class="n">directedS</span><span class="o">&gt;</span> <span class="n">Graph</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">Graph</span> <span class="nf">g</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>  <span class="c1">// 创建含 5 个顶点的图，顶点编号为 0~4
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">add_edge</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">g</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">add_edge</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">g</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">add_edge</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">g</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">add_edge</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">g</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">add_edge</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">g</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">add_edge</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">g</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="32-迭代器批量构造更高效">3.2 迭代器批量构造（更高效）
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">Edge</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">Edge</span> <span class="n">edges</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">},</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">},</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">},</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">},</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">},</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">num_edges</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">edges</span><span class="p">)</span> <span class="o">/</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 通过边数组的首尾迭代器构造
+</span></span></span><span class="line"><span class="cl"><span class="n">Graph</span> <span class="nf">g</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span> <span class="n">edges</span> <span class="o">+</span> <span class="n">num_edges</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="33-带边权重的批量构造">3.3 带边权重的批量构造
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">weights</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="n">WeightedGraph</span> <span class="nf">g</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span> <span class="n">edges</span> <span class="o">+</span> <span class="n">num_edges</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 访问边权重
+</span></span></span><span class="line"><span class="cl"><span class="n">boost</span><span class="o">::</span><span class="n">property_map</span><span class="o">&lt;</span><span class="n">WeightedGraph</span><span class="p">,</span> <span class="n">boost</span><span class="o">::</span><span class="n">edge_weight_t</span><span class="o">&gt;::</span><span class="n">type</span>
+</span></span><span class="line"><span class="cl">    <span class="n">weight_map</span> <span class="o">=</span> <span class="n">get</span><span class="p">(</span><span class="n">boost</span><span class="o">::</span><span class="n">edge_weight</span><span class="p">,</span> <span class="n">g</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h3 id="4-遍历图">4. 遍历图
+</h3><h4 id="41-遍历所有顶点">4.1 遍历所有顶点
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">VertexIter</span><span class="p">,</span> <span class="n">VertexIter</span><span class="o">&gt;</span> <span class="n">vp</span> <span class="o">=</span> <span class="n">vertices</span><span class="p">(</span><span class="n">g</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="n">VertexIter</span> <span class="n">vi</span> <span class="o">=</span> <span class="n">vp</span><span class="p">.</span><span class="n">first</span><span class="p">;</span> <span class="n">vi</span> <span class="o">!=</span> <span class="n">vp</span><span class="p">.</span><span class="n">second</span><span class="p">;</span> <span class="o">++</span><span class="n">vi</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;vertex: &#34;</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">vi</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 对于 vecS 顶点容器，*vi 就是整数索引
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="42-遍历所有边">4.2 遍历所有边
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">EdgeIter</span> <span class="n">ei</span><span class="p">,</span> <span class="n">ei_end</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="n">boost</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">ei</span><span class="p">,</span> <span class="n">ei_end</span><span class="p">)</span> <span class="o">=</span> <span class="n">edges</span><span class="p">(</span><span class="n">g</span><span class="p">);</span> <span class="n">ei</span> <span class="o">!=</span> <span class="n">ei_end</span><span class="p">;</span> <span class="o">++</span><span class="n">ei</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">source</span><span class="p">(</span><span class="o">*</span><span class="n">ei</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; -&gt; &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">target</span><span class="p">(</span><span class="o">*</span><span class="n">ei</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="43-遍历某个顶点的出边">4.3 遍历某个顶点的出边
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">Vertex</span> <span class="n">u</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>  <span class="c1">// 顶点 0
+</span></span></span><span class="line"><span class="cl"><span class="n">OutEdgeIter</span> <span class="n">out_i</span><span class="p">,</span> <span class="n">out_end</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="n">boost</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">out_i</span><span class="p">,</span> <span class="n">out_end</span><span class="p">)</span> <span class="o">=</span> <span class="n">out_edges</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">g</span><span class="p">);</span> <span class="n">out_i</span> <span class="o">!=</span> <span class="n">out_end</span><span class="p">;</span> <span class="o">++</span><span class="n">out_i</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Vertex</span> <span class="n">v</span> <span class="o">=</span> <span class="n">target</span><span class="p">(</span><span class="o">*</span><span class="n">out_i</span><span class="p">,</span> <span class="n">g</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">u</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; -&gt; &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">v</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="44-遍历某个顶点的入边需要-bidirectionals">4.4 遍历某个顶点的入边（需要 <code>bidirectionalS</code>）
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">Vertex</span> <span class="n">v</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">InEdgeIter</span> <span class="n">in_i</span><span class="p">,</span> <span class="n">in_end</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="n">boost</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">in_i</span><span class="p">,</span> <span class="n">in_end</span><span class="p">)</span> <span class="o">=</span> <span class="n">in_edges</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">g</span><span class="p">);</span> <span class="n">in_i</span> <span class="o">!=</span> <span class="n">in_end</span><span class="p">;</span> <span class="o">++</span><span class="n">in_i</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Vertex</span> <span class="n">u</span> <span class="o">=</span> <span class="n">source</span><span class="p">(</span><span class="o">*</span><span class="n">in_i</span><span class="p">,</span> <span class="n">g</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">u</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; -&gt; &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">v</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="45-遍历邻接顶点更简洁的出边遍历">4.5 遍历邻接顶点（更简洁的出边遍历）
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">Vertex</span> <span class="n">u</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">AdjIter</span> <span class="n">ai</span><span class="p">,</span> <span class="n">ai_end</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="n">boost</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">ai</span><span class="p">,</span> <span class="n">ai_end</span><span class="p">)</span> <span class="o">=</span> <span class="n">adjacent_vertices</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">g</span><span class="p">);</span> <span class="n">ai</span> <span class="o">!=</span> <span class="n">ai_end</span><span class="p">;</span> <span class="o">++</span><span class="n">ai</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">u</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; -&gt; &#34;</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">ai</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">;</span>  <span class="c1">// *ai 直接就是目标顶点
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h3 id="5-property-map--属性映射">5. Property Map —— 属性映射
+</h3><p>Property Map 是 BGL 中最关键的设计之一。它提供了一种<strong>统一接口</strong>来访问图的内外部属性，使得算法无需关心数据实际存储在哪里。</p>
+<h4 id="51-内部属性">5.1 内部属性
+</h4><p>当图通过模板参数绑定了内部属性时，通过 <code>get()</code> 获取 property map：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 用 property 嵌套来组合多个顶点属性
+</span></span></span><span class="line"><span class="cl"><span class="k">typedef</span> <span class="n">boost</span><span class="o">::</span><span class="n">adjacency_list</span><span class="o">&lt;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">boost</span><span class="o">::</span><span class="n">vecS</span><span class="p">,</span> <span class="n">boost</span><span class="o">::</span><span class="n">vecS</span><span class="p">,</span> <span class="n">boost</span><span class="o">::</span><span class="n">directedS</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">boost</span><span class="o">::</span><span class="n">property</span><span class="o">&lt;</span><span class="n">boost</span><span class="o">::</span><span class="n">vertex_distance_t</span><span class="p">,</span> <span class="kt">int</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">boost</span><span class="o">::</span><span class="n">property</span><span class="o">&lt;</span><span class="n">boost</span><span class="o">::</span><span class="n">vertex_name_t</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;</span> <span class="n">MyGraph</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">MyGraph</span> <span class="n">g</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 获取内建的顶点索引（vecS 自动提供）
+</span></span></span><span class="line"><span class="cl"><span class="k">auto</span> <span class="n">index_map</span> <span class="o">=</span> <span class="n">get</span><span class="p">(</span><span class="n">boost</span><span class="o">::</span><span class="n">vertex_index</span><span class="p">,</span> <span class="n">g</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 获取自定义的顶点距离属性
+</span></span></span><span class="line"><span class="cl"><span class="k">auto</span> <span class="n">dist_map</span> <span class="o">=</span> <span class="n">get</span><span class="p">(</span><span class="n">boost</span><span class="o">::</span><span class="n">vertex_distance</span><span class="p">,</span> <span class="n">g</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 写入属性
+</span></span></span><span class="line"><span class="cl"><span class="n">put</span><span class="p">(</span><span class="n">dist_map</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>    <span class="c1">// 顶点 0 的距离设为 100
+</span></span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">d</span> <span class="o">=</span> <span class="n">dist_map</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>      <span class="c1">// 读取顶点 0 的距离
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 或使用 free function 写法：
+</span></span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">d2</span> <span class="o">=</span> <span class="n">get</span><span class="p">(</span><span class="n">dist_map</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="52-外部属性">5.2 外部属性
+</h4><p>更常见的做法是将属性存储在外部容器中（如 <code>std::vector</code>），然后包装为 property map 传递给算法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">num_v</span> <span class="o">=</span> <span class="n">num_vertices</span><span class="p">(</span><span class="n">g</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span>    <span class="n">distances</span><span class="p">(</span><span class="n">num_v</span><span class="p">);</span>       <span class="c1">// 外部存储距离
+</span></span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Vertex</span><span class="o">&gt;</span> <span class="n">predecessors</span><span class="p">(</span><span class="n">num_v</span><span class="p">);</span>    <span class="c1">// 外部存储前驱
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 直接传递 vector 的首地址——BGL 会将其视为 property map
+</span></span></span><span class="line"><span class="cl"><span class="n">dijkstra_shortest_paths</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">start_vertex</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">boost</span><span class="o">::</span><span class="n">distance_map</span><span class="p">(</span><span class="o">&amp;</span><span class="n">distances</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">predecessor_map</span><span class="p">(</span><span class="o">&amp;</span><span class="n">predecessors</span><span class="p">[</span><span class="mi">0</span><span class="p">]));</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这种外部属性的方式<strong>不需要修改图类型定义</strong>，更加灵活。<code>&amp;vec[0]</code> 之所以可以直接作为 property map 使用，是因为 BGL 为指针类型提供了 property map 的特化：顶点描述符（整数索引）作为 key，直接索引数组元素。</p>
+<h4 id="53-常用的-property-map-适配器">5.3 常用的 Property Map 适配器
+</h4><div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>适配器</th>
+					<th>用途</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>iterator_property_map</code></td>
+					<td>将迭代器包装为 property map，支持任意 key 类型</td>
+			</tr>
+			<tr>
+					<td><code>make_iterator_property_map</code></td>
+					<td>便捷工厂函数</td>
+			</tr>
+			<tr>
+					<td><code>ref_property_map</code></td>
+					<td>包装单个值</td>
+			</tr>
+			<tr>
+					<td><code>compose_property_map</code></td>
+					<td>组合两个 property map</td>
+			</tr>
+			<tr>
+					<td><code>function_property_map</code></td>
+					<td>用函数/ lambda 动态计算属性值</td>
+			</tr>
+	</tbody>
+</table></div>
+<hr>
+<h3 id="6-核心算法">6. 核心算法
+</h3><p>BGL 提供了丰富的图算法，所有算法都是泛型的，作用于满足概念的图类型。</p>
+<h4 id="61-bfs--广度优先搜索">6.1 BFS — 广度优先搜索
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;boost/graph/breadth_first_search.hpp&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">dist</span><span class="p">(</span><span class="n">num_vertices</span><span class="p">(</span><span class="n">g</span><span class="p">));</span>  <span class="c1">// 存储每个顶点到起点的距离
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// BFS：从顶点 0 开始，将距离记录到 dist 中
+</span></span></span><span class="line"><span class="cl"><span class="n">breadth_first_search</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">boost</span><span class="o">::</span><span class="n">visitor</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">boost</span><span class="o">::</span><span class="n">make_bfs_visitor</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">boost</span><span class="o">::</span><span class="n">record_distances</span><span class="p">(</span><span class="o">&amp;</span><span class="n">dist</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">boost</span><span class="o">::</span><span class="n">on_tree_edge</span><span class="p">{})</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 更简洁的简写版本（不记录距离）：
+</span></span></span><span class="line"><span class="cl"><span class="n">breadth_first_search</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">boost</span><span class="o">::</span><span class="n">visitor</span><span class="p">(</span><span class="n">boost</span><span class="o">::</span><span class="n">default_bfs_visitor</span><span class="p">()));</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="62-dfs--深度优先搜索">6.2 DFS — 深度优先搜索
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;boost/graph/depth_first_search.hpp&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// DFS 默认会为每个顶点记录发现时间和完成时间
+</span></span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">boost</span><span class="o">::</span><span class="n">default_color_type</span><span class="o">&gt;</span> <span class="n">color_map</span><span class="p">(</span><span class="n">num_vertices</span><span class="p">(</span><span class="n">g</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="n">depth_first_search</span><span class="p">(</span><span class="n">g</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">boost</span><span class="o">::</span><span class="n">visitor</span><span class="p">(</span><span class="n">boost</span><span class="o">::</span><span class="n">default_dfs_visitor</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">color_map</span><span class="p">(</span><span class="o">&amp;</span><span class="n">color_map</span><span class="p">[</span><span class="mi">0</span><span class="p">]));</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="63-dijkstra-最短路径">6.3 Dijkstra 最短路径
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;boost/graph/dijkstra_shortest_paths.hpp&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span>    <span class="n">dist</span><span class="p">(</span><span class="n">num_vertices</span><span class="p">(</span><span class="n">g</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Vertex</span><span class="o">&gt;</span> <span class="n">pred</span><span class="p">(</span><span class="n">num_vertices</span><span class="p">(</span><span class="n">g</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Vertex</span> <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">dijkstra_shortest_paths</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">boost</span><span class="o">::</span><span class="n">distance_map</span><span class="p">(</span><span class="o">&amp;</span><span class="n">dist</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">predecessor_map</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pred</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">weight_map</span><span class="p">(</span><span class="n">get</span><span class="p">(</span><span class="n">boost</span><span class="o">::</span><span class="n">edge_weight</span><span class="p">,</span> <span class="n">g</span><span class="p">)));</span>  <span class="c1">// 带权图需要指定 weight_map
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 还原最短路径：
+</span></span></span><span class="line"><span class="cl"><span class="n">Vertex</span> <span class="n">target</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Vertex</span><span class="o">&gt;</span> <span class="n">path</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="n">Vertex</span> <span class="n">v</span> <span class="o">=</span> <span class="n">target</span><span class="p">;</span> <span class="n">v</span> <span class="o">!=</span> <span class="n">start</span><span class="p">;</span> <span class="n">v</span> <span class="o">=</span> <span class="n">pred</span><span class="p">[</span><span class="n">v</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="n">path</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">v</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">path</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">start</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">reverse</span><span class="p">(</span><span class="n">path</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">path</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// path 现在是从 start 到 target 的最短路径顶点序列
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="64-拓扑排序">6.4 拓扑排序
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;boost/graph/topological_sort.hpp&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Vertex</span><span class="o">&gt;</span> <span class="n">topo_order</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">topological_sort</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">back_inserter</span><span class="p">(</span><span class="n">topo_order</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// topo_order 按拓扑序排列（前驱在前）
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 注意：如果图中有环，topological_sort 的行为是未定义的
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 实际应用中应先检测环再排序
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="65-最小生成树--kruskal">6.5 最小生成树 — Kruskal
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;boost/graph/kruskal_min_spanning_tree.hpp&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Edge</span><span class="o">&gt;</span> <span class="n">mst_edges</span><span class="p">;</span>  <span class="c1">// 存储 MST 的边
+</span></span></span><span class="line"><span class="cl"><span class="n">kruskal_minimum_spanning_tree</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">back_inserter</span><span class="p">(</span><span class="n">mst_edges</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="n">boost</span><span class="o">::</span><span class="n">weight_map</span><span class="p">(</span><span class="n">get</span><span class="p">(</span><span class="n">boost</span><span class="o">::</span><span class="n">edge_weight</span><span class="p">,</span> <span class="n">g</span><span class="p">)));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">total_weight</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">e</span> <span class="p">:</span> <span class="n">mst_edges</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">total_weight</span> <span class="o">+=</span> <span class="n">get</span><span class="p">(</span><span class="n">boost</span><span class="o">::</span><span class="n">edge_weight</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">e</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">source</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; -- &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">target</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="66-连通分量">6.6 连通分量
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;boost/graph/connected_components.hpp&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">component</span><span class="p">(</span><span class="n">num_vertices</span><span class="p">(</span><span class="n">g</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">num_components</span> <span class="o">=</span> <span class="n">connected_components</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">component</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// component[v] 是顶点 v 所属的连通分量编号 (0 ~ num_components-1)
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="67-强连通分量-scc--tarjan-算法">6.7 强连通分量 (SCC) — Tarjan 算法
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;boost/graph/strong_components.hpp&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">scc_map</span><span class="p">(</span><span class="n">num_vertices</span><span class="p">(</span><span class="n">g</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">num_scc</span> <span class="o">=</span> <span class="n">strong_components</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">scc_map</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 顶点同属一个 SCC 当且仅当 scc_map 值相同
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="算法概览表">算法概览表
+</h4><div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>算法</th>
+					<th>头文件</th>
+					<th>时间复杂度</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>BFS</td>
+					<td><code>&lt;boost/graph/breadth_first_search.hpp&gt;</code></td>
+					<td>O(V + E)</td>
+			</tr>
+			<tr>
+					<td>DFS</td>
+					<td><code>&lt;boost/graph/depth_first_search.hpp&gt;</code></td>
+					<td>O(V + E)</td>
+			</tr>
+			<tr>
+					<td>Dijkstra</td>
+					<td><code>&lt;boost/graph/dijkstra_shortest_paths.hpp&gt;</code></td>
+					<td>O((V + E) log V)</td>
+			</tr>
+			<tr>
+					<td>Bellman-Ford</td>
+					<td><code>&lt;boost/graph/bellman_ford_shortest_paths.hpp&gt;</code></td>
+					<td>O(V·E)</td>
+			</tr>
+			<tr>
+					<td>Topological Sort</td>
+					<td><code>&lt;boost/graph/topological_sort.hpp&gt;</code></td>
+					<td>O(V + E)</td>
+			</tr>
+			<tr>
+					<td>Kruskal MST</td>
+					<td><code>&lt;boost/graph/kruskal_min_spanning_tree.hpp&gt;</code></td>
+					<td>O(E log E)</td>
+			</tr>
+			<tr>
+					<td>Prim MST</td>
+					<td><code>&lt;boost/graph/prim_minimum_spanning_tree.hpp&gt;</code></td>
+					<td>O(E log V)</td>
+			</tr>
+			<tr>
+					<td>Connected Components</td>
+					<td><code>&lt;boost/graph/connected_components.hpp&gt;</code></td>
+					<td>O(V + E)</td>
+			</tr>
+			<tr>
+					<td>Strong Components</td>
+					<td><code>&lt;boost/graph/strong_components.hpp&gt;</code></td>
+					<td>O(V + E)</td>
+			</tr>
+			<tr>
+					<td>Max Flow (Edmonds-Karp)</td>
+					<td><code>&lt;boost/graph/edmunds_karp_max_flow.hpp&gt;</code></td>
+					<td>O(V·E²)</td>
+			</tr>
+	</tbody>
+</table></div>
+<hr>
+<h3 id="7-visitor--算法事件注入">7. Visitor —— 算法事件注入
+</h3><p>Visitor 是 BGL 中扩展算法的核心机制。每个算法在执行过程中会在特定时机触发&quot;事件&quot;，Visitor 可以在这些事件点注入自定义逻辑。</p>
+<p>以 Dijkstra 算法为例，它定义了以下事件：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>事件</th>
+					<th>触发时机</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>initialize_vertex</code></td>
+					<td>算法开始时，每个顶点初始化</td>
+			</tr>
+			<tr>
+					<td><code>discover_vertex</code></td>
+					<td>顶点首次被发现</td>
+			</tr>
+			<tr>
+					<td><code>examine_vertex</code></td>
+					<td>顶点从优先队列中取出，准备处理</td>
+			</tr>
+			<tr>
+					<td><code>examine_edge</code></td>
+					<td>检查某条边是否放松</td>
+			</tr>
+			<tr>
+					<td><code>edge_relaxed</code></td>
+					<td>边放松成功，目标的距离被更新</td>
+			</tr>
+			<tr>
+					<td><code>edge_not_relaxed</code></td>
+					<td>边放松失败（距离未更新）</td>
+			</tr>
+			<tr>
+					<td><code>finish_vertex</code></td>
+					<td>顶点的所有出边都处理完毕</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>自定义 Visitor 示例——记录最短路径的前驱：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">PredecessorMap</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">record_predecessors</span> <span class="o">:</span> <span class="k">public</span> <span class="n">boost</span><span class="o">::</span><span class="n">dijkstra_visitor</span><span class="o">&lt;&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">PredecessorMap</span> <span class="n">m_pred</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">record_predecessors</span><span class="p">(</span><span class="n">PredecessorMap</span> <span class="n">p</span><span class="p">)</span> <span class="o">:</span> <span class="n">m_pred</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Edge</span><span class="p">,</span> <span class="k">typename</span> <span class="n">Graph</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="n">edge_relaxed</span><span class="p">(</span><span class="n">Edge</span> <span class="n">e</span><span class="p">,</span> <span class="k">const</span> <span class="n">Graph</span><span class="o">&amp;</span> <span class="n">g</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 当边松驰成功时，target 的前驱就是 source
+</span></span></span><span class="line"><span class="cl">        <span class="n">put</span><span class="p">(</span><span class="n">m_pred</span><span class="p">,</span> <span class="n">target</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">g</span><span class="p">),</span> <span class="n">source</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">g</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 使用自定义 visitor 的便捷工厂：
+</span></span></span><span class="line"><span class="cl"><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">PredecessorMap</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="n">record_predecessors</span><span class="o">&lt;</span><span class="n">PredecessorMap</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="n">make_record_predecessors</span><span class="p">(</span><span class="n">PredecessorMap</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">record_predecessors</span><span class="o">&lt;</span><span class="n">PredecessorMap</span><span class="o">&gt;</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>实际调用时，通过 <code>boost::visitor()</code> 将多个 visitor 组合起来：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">dijkstra_shortest_paths</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">boost</span><span class="o">::</span><span class="n">visitor</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">boost</span><span class="o">::</span><span class="n">make_dijkstra_visitor</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">std</span><span class="o">::</span><span class="n">make_pair</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="n">boost</span><span class="o">::</span><span class="n">record_distances</span><span class="p">(</span><span class="o">&amp;</span><span class="n">dist</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">boost</span><span class="o">::</span><span class="n">on_edge_relaxed</span><span class="p">{}),</span>
+</span></span><span class="line"><span class="cl">                <span class="n">make_record_predecessors</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pred</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">            <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">));</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Visitor 设计体现了 BGL 的核心理念：<strong>算法提供框架，用户通过 Visitor 注入行为</strong>，而无需修改算法本身。</p>
+<hr>
+<h3 id="8-常用头文件速查">8. 常用头文件速查
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 图结构
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;boost/graph/adjacency_list.hpp&gt;</span><span class="cp">       </span><span class="c1">// 邻接表图类
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;boost/graph/graph_traits.hpp&gt;</span><span class="cp">          </span><span class="c1">// 图萃取
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;boost/graph/properties.hpp&gt;</span><span class="cp">            </span><span class="c1">// 属性定义
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 遍历
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;boost/graph/breadth_first_search.hpp&gt;</span><span class="cp">  </span><span class="c1">// BFS
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;boost/graph/depth_first_search.hpp&gt;</span><span class="cp">    </span><span class="c1">// DFS
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 最短路径
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;boost/graph/dijkstra_shortest_paths.hpp&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;boost/graph/bellman_ford_shortest_paths.hpp&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 生成树
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;boost/graph/kruskal_min_spanning_tree.hpp&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;boost/graph/prim_minimum_spanning_tree.hpp&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 连通性
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;boost/graph/connected_components.hpp&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;boost/graph/strong_components.hpp&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 拓扑排序
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;boost/graph/topological_sort.hpp&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 网络流
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;boost/graph/edmunds_karp_max_flow.hpp&gt;</span><span class="cp">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h3 id="9-小结">9. 小结
+</h3><p>BGL 的设计可以总结为三条主线：</p>
+<ol>
+<li><strong>泛型图抽象</strong> —— <code>graph_traits</code> + 概念体系让算法与具体图数据结构解耦，同一套算法可以作用于 <code>adjacency_list</code>、自定义邻接矩阵，甚至外部图库的数据结构。</li>
+<li><strong>Property Map</strong> —— 统一的内/外部属性访问接口，将&quot;数据存储在哪&quot;与&quot;算法如何使用数据&quot;分开。</li>
+<li><strong>Visitor</strong> —— 事件驱动的行为注入机制，在算法框架的关键节点挂载自定义逻辑。</li>
+</ol>
+<p>理解这三条主线，就能理解 BGL 的全部设计。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under <a class="link" href="https://github.com/Liyufei1"  target="_blank" rel="noopener"
+    >Liyufei1</a></span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        const elementsToRender = [".main-article", ".widget--toc"];
+
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/vulkan%E5%88%9D%E5%AD%A6%E9%9A%8F%E7%AC%94/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/OpenGL.png" loading="lazy" data-key="" data-hash="/OpenGL.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Vulkan初学随笔</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/ue-%E5%BC%95%E5%85%A5%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/UE5.png" loading="lazy" data-key="" data-hash="/UE5.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">UE 引入第三方库的几种方式</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/cpp-csapp-notes/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/csapp.png" loading="lazy" data-key="cpp-csapp-notes" data-hash="/csapp.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">cpp-csapp学习笔记</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/uecpp%E7%9A%84%E4%B8%AA%E4%BA%BA%E4%BD%BF%E7%94%A8%E5%B0%8F%E6%8A%80%E5%B7%A7/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">UECpp的个人使用小技巧</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2026 李宇飞-Liyufei1
+    </section>
+    
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.32.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
