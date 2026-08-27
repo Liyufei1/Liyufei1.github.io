@@ -1,0 +1,1567 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="从零到交换链的 Vulkan 初始化学习随笔——讲清实例、验证层、表面、物理设备、队列族、逻辑设备与交换链每个概念背后的为什么">
+<title>Vulkan初学随笔：从零到交换链</title>
+
+<link rel='canonical' href='https://Liyufei1.github.io/p/vulkan%E5%88%9D%E5%AD%A6%E9%9A%8F%E7%AC%94%E4%BB%8E%E9%9B%B6%E5%88%B0%E4%BA%A4%E6%8D%A2%E9%93%BE/'>
+
+<link rel="stylesheet" href="/scss/style.min.6ba8b9ea95cedbd14d34969a3a28210289d3a74cba725c37699a1455f78e7135.css"><meta property='og:title' content="Vulkan初学随笔：从零到交换链">
+<meta property='og:description' content="从零到交换链的 Vulkan 初始化学习随笔——讲清实例、验证层、表面、物理设备、队列族、逻辑设备与交换链每个概念背后的为什么">
+<meta property='og:url' content='https://Liyufei1.github.io/p/vulkan%E5%88%9D%E5%AD%A6%E9%9A%8F%E7%AC%94%E4%BB%8E%E9%9B%B6%E5%88%B0%E4%BA%A4%E6%8D%A2%E9%93%BE/'>
+<meta property='og:site_name' content='李宇飞-Liyufei1'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Render' /><meta property='article:published_time' content='2026-07-28T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-07-28T00:00:00&#43;00:00'/><meta property='og:image' content='https://Liyufei1.github.io/OpenGL.png' />
+<meta name="twitter:title" content="Vulkan初学随笔：从零到交换链">
+<meta name="twitter:description" content="从零到交换链的 Vulkan 初始化学习随笔——讲清实例、验证层、表面、物理设备、队列族、逻辑设备与交换链每个概念背后的为什么"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://Liyufei1.github.io/OpenGL.png' />
+    <link rel="shortcut icon" href="/favicon.png" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/guidao1Icon_hu_4c95e88ebc9c8e46.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🤣</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">李宇飞-Liyufei1</a></h1>
+            <h2 class="site-description">存放学习随笔的个人博客,主要有:Godot、Unreal、Blog、Cpp.
+ 下方是个人的b站、gitbug链接:</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://space.bilibili.com/7531504?spm_id_from=333.1007.0.0'
+                        target="_blank"
+                        title="Bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/Liyufei1'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友情链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://Liyufei1.github.io/en/" >English</option>
+                                
+                                    <option value="https://Liyufei1.github.io/" selected>中文</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#第-0-章-为什么是-vulkan一份和驱动的明文合同">第 0 章 为什么是 Vulkan：一份和驱动的明文合同</a></li>
+    <li><a href="#第-1-章-实例和驱动握手-2412">第 1 章 实例：和驱动握手 [2–4/12]</a></li>
+    <li><a href="#第-2-章-验证层把崩溃变报错-3412">第 2 章 验证层：把崩溃变报错 [3–4/12]</a></li>
+    <li><a href="#第-3-章-窗口与表面把画面接到屏幕-1512">第 3 章 窗口与表面：把画面接到屏幕 [1、5/12]</a></li>
+    <li><a href="#第-4-章-物理设备面试你的显卡-612">第 4 章 物理设备：面试你的显卡 [6/12]</a></li>
+    <li><a href="#第-5-章-队列族gpu-的多条流水线-712">第 5 章 队列族：GPU 的多条流水线 [7/12]</a></li>
+    <li><a href="#第-6-章-逻辑设备签一份能力合同-8912">第 6 章 逻辑设备：签一份能力合同 [8–9/12]</a></li>
+    <li><a href="#第-7-章-交换链三要素谈判-101212">第 7 章 交换链：三要素谈判 [10–12/12]</a></li>
+    <li><a href="#第-8-章-第一帧获取-提交-呈现循环-1212">第 8 章 第一帧：获取-提交-呈现循环 [12/12]</a></li>
+    <li><a href="#第-9-章-小结与下一步">第 9 章 小结与下一步</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/vulkan%E5%88%9D%E5%AD%A6%E9%9A%8F%E7%AC%94%E4%BB%8E%E9%9B%B6%E5%88%B0%E4%BA%A4%E6%8D%A2%E9%93%BE/">
+                
+                    <img src="/OpenGL.png" loading="lazy" alt="Featured image of post Vulkan初学随笔：从零到交换链" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/cpp/" >
+                Cpp
+            </a>
+        
+            <a href="/categories/render/" >
+                Render
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/vulkan%E5%88%9D%E5%AD%A6%E9%9A%8F%E7%AC%94%E4%BB%8E%E9%9B%B6%E5%88%B0%E4%BA%A4%E6%8D%A2%E9%93%BE/">Vulkan初学随笔：从零到交换链</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            从零到交换链的 Vulkan 初始化学习随笔——讲清实例、验证层、表面、物理设备、队列族、逻辑设备与交换链每个概念背后的为什么
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published" datetime='2026-07-28T00:00:00Z'>2026-07-28</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 22 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <blockquote>
+<p>本文是学习随笔而非教程搬运：主线是&quot;从零到交换链&quot;，讲清每个概念的<strong>为什么</strong>，而不只是怎么调 API。环境约定 Windows 10/11 + GLFW + C++17，平台差异点随文标注。文中所有初始化代码建议放进同一个程序里渐进演化（像 vulkan-tutorial.com 那样一个 main.cpp 从空文件开始逐步生长，按章拼接即得可运行程序），随笔的叙事顺序就是依赖顺序。术语约定：中文术语首次出现附英文原文，此后统一用中文；API 函数名、枚举与宏一律使用完整规范符号名。</p>
+</blockquote>
+<h2 id="第-0-章-为什么是-vulkan一份和驱动的明文合同">第 0 章 为什么是 Vulkan：一份和驱动的明文合同
+</h2><p>如果你写过或只是看过 OpenGL 的代码，一定熟悉那种体验：你说&quot;画个三角形&quot;，驱动在幕后替你决定状态怎么存、内存怎么分、同步怎么做。这套隐式魔法让入门变得容易，代价也有两个：同一份代码在不同驱动上行为可能不一致；多线程时代，驱动只能靠内部大锁去猜你的意图。</p>
+<p>Vulkan 把这份默契换成了一份<strong>明文合同</strong>：内存你自己分配、同步你自己声明、状态你自己记录。代价是画一个三角形前要先写几百行初始化；回报是每一行&quot;啰嗦&quot;都在替驱动省掉一次隐式决策——你少猜一次，驱动就少猜一次。这是全文唯一的主线：<strong>显式控制不是繁琐，是把决策权从驱动手里拿回来。</strong></p>
+<p>本文走完&quot;从零到交换链&quot;这一段：窗口建好、显卡选好、拿到一沓可以轮流上屏的图像，并跑通第一帧的获取与呈现循环。渲染管线留给下一篇。</p>
+<p>初始化全程共十二步。先给一张&quot;到第一个三角形&quot;的全景路线图：实线十二步是本文范围，只画不展开；虚线灰显部分属于下篇。后面每章开头都会标注自己所处的步骤（如&quot;[7/12] 队列族&quot;），迷路时回来对号入座：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">[1]  GLFW 初始化 + GLFW_NO_API 提示 + 创建窗口
+</span></span><span class="line"><span class="cl">[2]  VkApplicationInfo         —— 应用元信息
+</span></span><span class="line"><span class="cl">[3]  收集实例级扩展与层          —— GLFW 要求的 + 调试用
+</span></span><span class="line"><span class="cl">[4]  vkCreateInstance           —— 拿到 VkInstance，可选挂调试回调
+</span></span><span class="line"><span class="cl">[5]  创建 VkSurfaceKHR          —— 把画面接到屏幕的桥（先于选卡！）
+</span></span><span class="line"><span class="cl">[6]  vkEnumeratePhysicalDevices —— 枚举显卡并挑选
+</span></span><span class="line"><span class="cl">[7]  查询队列族                  —— 图形族 / 呈现族
+</span></span><span class="line"><span class="cl">[8]  查询设备扩展                —— 必须含 VK_KHR_swapchain
+</span></span><span class="line"><span class="cl">[9]  vkCreateDevice             —— 签下能力合同，取回 VkQueue
+</span></span><span class="line"><span class="cl">[10] 协商交换链三要素             —— 格式 / 呈现模式 / 尺寸范围
+</span></span><span class="line"><span class="cl">[11] vkCreateSwapchainKHR       —— 拿到 N 张可呈现图像
+</span></span><span class="line"><span class="cl">[12] 每张图建 VkImageView → framebuffer → 进入主循环
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      ┄┄ 下篇（虚线灰显，本文不展开）┄┄
+</span></span><span class="line"><span class="cl">[13]  图形管线 / 渲染通道        —— 让第一个三角形真正出现
+</span></span><span class="line"><span class="cl">[14]  frames-in-flight 多帧并发  —— 同步原语全家桶
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>三条因果链贯穿全程，值得提前记住：表面为什么在选卡之前（呈现支持是设备×表面的组合属性）；实例扩展和设备扩展为什么要各声明一遍（前者管发现 GPU 与窗口系统，后者管解锁这块 GPU 的具体能力）；队列族为什么在逻辑设备之前（创建之后族索引不可改）。</p>
+<h2 id="第-1-章-实例和驱动握手-2412">第 1 章 实例：和驱动握手 [2–4/12]
+</h2><p><strong>解决什么问题。</strong> 程序要用 GPU，总得先和驱动建立联系。实例（instance）就是应用与 Vulkan 驱动之间的会话句柄、全局状态的入口：后续一切对象——物理设备、表面、逻辑设备——都从这里派生。注意方向性：是应用向驱动申请会话，应用本身并不拥有任何 GPU。</p>
+<p><strong>API 长什么样。</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 本章起点：程序尚无一物，从驱动的会话句柄开始
+</span></span></span><span class="line"><span class="cl"><span class="n">VkApplicationInfo</span> <span class="n">appInfo</span><span class="p">{};</span>
+</span></span><span class="line"><span class="cl"><span class="n">appInfo</span><span class="p">.</span><span class="n">sType</span> <span class="o">=</span> <span class="n">VK_STRUCTURE_TYPE_APPLICATION_INFO</span><span class="p">;</span> <span class="c1">// 结构体自报类型，Vulkan 靠它做校验与扩展
+</span></span></span><span class="line"><span class="cl"><span class="n">appInfo</span><span class="p">.</span><span class="n">pApplicationName</span> <span class="o">=</span> <span class="s">&#34;Hello Vulkan&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">appInfo</span><span class="p">.</span><span class="n">applicationVersion</span> <span class="o">=</span> <span class="n">VK_MAKE_VERSION</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">appInfo</span><span class="p">.</span><span class="n">pEngineName</span> <span class="o">=</span> <span class="s">&#34;No Engine&#34;</span><span class="p">;</span>               <span class="c1">// 引擎名，自填即可
+</span></span></span><span class="line"><span class="cl"><span class="n">appInfo</span><span class="p">.</span><span class="n">engineVersion</span> <span class="o">=</span> <span class="n">VK_MAKE_VERSION</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">appInfo</span><span class="p">.</span><span class="n">apiVersion</span> <span class="o">=</span> <span class="n">VK_API_VERSION_1_3</span><span class="p">;</span>         <span class="c1">// 展开即 VK_MAKE_API_VERSION(0,1,3,0)
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">VkInstanceCreateInfo</span> <span class="n">createInfo</span><span class="p">{};</span>
+</span></span><span class="line"><span class="cl"><span class="n">createInfo</span><span class="p">.</span><span class="n">sType</span> <span class="o">=</span> <span class="n">VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">createInfo</span><span class="p">.</span><span class="n">pApplicationInfo</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">appInfo</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 还有两件事：启用哪些扩展（extension）、开哪些层（layer），见下文
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>VkApplicationInfo 是给驱动和工具看的<strong>元信息，不是能力开关</strong>：apiVersion 声明打算使用的最高版本，pEngineName 随便填也没人来查。版本号永远用宏拼装，别手写十六进制。apiVersion 也别虚高——老版本加载器（loader）会直接拒绝创建实例，新加载器虽已放宽，仍建议按实际用到的特性填写。</p>
+<p><strong>坑位提示：先查询、再启用。</strong> 扩展和层都必须先用 vkEnumerateInstanceExtensionProperties / vkEnumerateInstanceLayerProperties 枚举确认存在，再写进 createInfo。启用不存在的名字不会被静默忽略，而是返回 VK_ERROR_EXTENSION_NOT_PRESENT（扩展不存在）或 VK_ERROR_LAYER_NOT_PRESENT（层不存在），实例创建失败。&ldquo;枚举 → 检查 → 启用&quot;这个三拍子全文会出现五次以上，它是 Vulkan 安全感的一半来源。</p>
+<p>最后一个伏笔：把调试回调的创建信息通过 pNext 挂进 VkInstanceCreateInfo，连实例创建/销毁本身出的错都能被捕获——细节下一章展开。</p>
+<h2 id="第-2-章-验证层把崩溃变报错-3412">第 2 章 验证层：把崩溃变报错 [3–4/12]
+</h2><p><strong>解决什么问题。</strong> 出于性能考虑，Vulkan 规范把绝大多数误用定义为未定义行为（undefined behavior）：句柄用错、资源忘绑、同步没做——驱动不检查，直接崩给你看，而且往往崩得毫无线索。验证层（validation layer）就是救场用的注入式检查代码，可以理解为<strong>把编译器的警告和 sanitizer 搬进了运行时</strong>——只是检查对象从语言误用换成了 API 误用：参数校验、句柄生命周期、对象绑定丢失，新版本还内置同步验证（sync validation）。</p>
+<p><strong>代价与取舍。</strong> 天下没有免费的保护：每次 API 调用都要过一层拦截检查，帧率可能显著下降且时序改变；发布用户的机器上通常根本没装层。所以结论只有一条：<strong>验证层只进 Debug 构建。</strong> 官方层只有 VK_LAYER_KHRONOS_validation 一个；网上旧教程里的 LUNARG_standard_validation 是已废弃别名，别再用。</p>
+<p>这里有个设计决策值得停下来想：Debug 构建查不到层怎么办？warn-and-continue 还是硬失败？我的选择是后者——开发环境坏了要尽早暴露，静默降级只会把痛苦推迟到更难查的地方。于是用条件编译分流：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 承接第1章 createInfo：层的查询与启用（结果填入其 enabledLayerCount 两字段）
+</span></span></span><span class="line"><span class="cl"><span class="cp">#ifdef NDEBUG
+</span></span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="kt">bool</span> <span class="n">enableValidation</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>   <span class="c1">// Release 构建：根本不请求层
+</span></span></span><span class="line"><span class="cl"><span class="cp">#else
+</span></span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="kt">bool</span> <span class="n">enableValidation</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>    <span class="c1">// Debug 构建：必须成功启用，否则直接退出
+</span></span></span><span class="line"><span class="cl"><span class="cp">#endif
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="nf">checkValidationLayerSupport</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint32_t</span> <span class="n">count</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vkEnumerateInstanceLayerProperties</span><span class="p">(</span><span class="o">&amp;</span><span class="n">count</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">);</span>            <span class="c1">// 第一次：拿数量
+</span></span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">VkLayerProperties</span><span class="o">&gt;</span> <span class="n">available</span><span class="p">(</span><span class="n">count</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vkEnumerateInstanceLayerProperties</span><span class="p">(</span><span class="o">&amp;</span><span class="n">count</span><span class="p">,</span> <span class="n">available</span><span class="p">.</span><span class="n">data</span><span class="p">());</span>   <span class="c1">// 第二次：填内容
+</span></span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">layer</span> <span class="p">:</span> <span class="n">available</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">strcmp</span><span class="p">(</span><span class="n">layer</span><span class="p">.</span><span class="n">layerName</span><span class="p">,</span> <span class="s">&#34;VK_LAYER_KHRONOS_validation&#34;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>回调长什么样。</strong> 报错要通过回调送到你手上，这需要 VK_EXT_debug_utils 扩展配合 vkCreateDebugUtilsMessengerEXT。麻烦在于后者不在静态导入库里，链接器直接找不到它，必须运行时用 vkGetInstanceProcAddr 动态取址：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 承接本章上文：实例创建成功后挂调试回调（依赖 enableValidation 与 debugCallback）
+</span></span></span><span class="line"><span class="cl"><span class="n">VKAPI_ATTR</span> <span class="n">VkBool32</span> <span class="n">VKAPI_CALL</span> <span class="nf">debugCallback</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">VkDebugUtilsMessageSeverityFlagBitsEXT</span> <span class="n">severity</span><span class="p">,</span>     <span class="c1">// VERBOSE / INFO / WARNING / ERROR
+</span></span></span><span class="line"><span class="cl">    <span class="n">VkDebugUtilsMessageTypeFlagsEXT</span> <span class="n">type</span><span class="p">,</span>                <span class="c1">// GENERAL / VALIDATION / PERFORMANCE
+</span></span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">VkDebugUtilsMessengerCallbackDataEXT</span><span class="o">*</span> <span class="n">pData</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span><span class="o">*</span> <span class="cm">/*pUserData*/</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;[validation] &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">pData</span><span class="o">-&gt;</span><span class="n">pMessage</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">VK_FALSE</span><span class="p">;</span>                                     <span class="c1">// 不中断触发调用的 API
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">auto</span> <span class="n">create</span> <span class="o">=</span> <span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="n">PFN_vkCreateDebugUtilsMessengerEXT</span><span class="o">&gt;</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vkGetInstanceProcAddr</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="s">&#34;vkCreateDebugUtilsMessengerEXT&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">enableValidation</span> <span class="o">&amp;&amp;</span> <span class="n">create</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">VkDebugUtilsMessengerCreateInfoEXT</span> <span class="n">cbInfo</span><span class="p">{};</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cbInfo</span><span class="p">.</span><span class="n">sType</span> <span class="o">=</span> <span class="n">VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cbInfo</span><span class="p">.</span><span class="n">messageSeverity</span> <span class="o">=</span> <span class="n">VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT</span>
+</span></span><span class="line"><span class="cl">                           <span class="o">|</span> <span class="n">VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cbInfo</span><span class="p">.</span><span class="n">messageType</span> <span class="o">=</span> <span class="n">VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT</span>
+</span></span><span class="line"><span class="cl">                       <span class="o">|</span> <span class="n">VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT</span>
+</span></span><span class="line"><span class="cl">                       <span class="o">|</span> <span class="n">VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cbInfo</span><span class="p">.</span><span class="n">pfnUserCallback</span> <span class="o">=</span> <span class="n">debugCallback</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">create</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">cbInfo</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">debugMessenger</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>两处细节：其一，函数指针的异型转换 static_cast 编不过，必须 reinterpret_cast——很多人的第一块绊脚石就在这；其二，message type 枚举以所用 SDK 头文件为准，较新的头文件另有 VK_DEBUG_UTILS_MESSAGE_TYPE_DEVICE_ADDRESS_BINDING_BIT_EXT 一类的新位。想让实例创建期的错误也进回调，就把同一份 cbInfo 通过 pNext 挂进 VkInstanceCreateInfo；销毁时用同样动态取址拿到的 vkDestroyDebugUtilsMessengerEXT，且要在 vkDestroyInstance 之前。</p>
+<p><strong>坑位提示。</strong> 别在 Release 里请求验证层：用户机器没装层，vkCreateInstance 直接报错，程序当场起不来——上面的 #ifdef NDEBUG 分流正是为此。默认掩码只开 WARNING|ERROR 是为了输出清爽；想看 INFO 甚至 VERBOSE，往 cbInfo.messageSeverity 里再加一位即可——初学阶段值得开一阵子。</p>
+<h2 id="第-3-章-窗口与表面把画面接到屏幕-1512">第 3 章 窗口与表面：把画面接到屏幕 [1、5/12]
+</h2><p><strong>解决什么问题。</strong> Vulkan 本身没有&quot;窗口&quot;的概念——它只管 GPU 计算，窗口系统是各平台的私事。于是分层解决：VK_KHR_surface 提供抽象接口，VK_KHR_win32_surface（Linux 上是 xcb/wayland 变体）提供平台实现，而跨平台窗口创建干脆交给 GLFW 这类库。我们要做的只是在两者之间架桥：表面（surface）。</p>
+<p>三步依次发生。<strong>第一步，创建一个&quot;不属于 OpenGL&quot;的窗口</strong>——没有 GLFW_CLIENT_API 这行 hint，GLFW 会按默认值创建 OpenGL 上下文占住原生窗口，等后面建表面时报出 VK_ERROR_NATIVE_WINDOW_IN_USE_KHR（原生窗口已被占用），错误离案发现场隔着一整章；同理，此后也不要调用 glfwMakeContextCurrent，那是 OpenGL 的概念，Vulkan 没有&quot;当前上下文&quot;一说。<strong>第二步，问 GLFW 要实例扩展清单</strong>——平台需要哪些扩展它最清楚。<strong>第三步，建桥</strong>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 承接第0章步骤[1][5]：创建窗口 → 合并扩展入第1章 createInfo → 架桥
+</span></span></span><span class="line"><span class="cl"><span class="n">glfwInit</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">glfwWindowHint</span><span class="p">(</span><span class="n">GLFW_CLIENT_API</span><span class="p">,</span> <span class="n">GLFW_NO_API</span><span class="p">);</span>   <span class="c1">// ★ 必写：别让 GLFW 建 GL 上下文
+</span></span></span><span class="line"><span class="cl"><span class="n">GLFWwindow</span><span class="o">*</span> <span class="n">window</span> <span class="o">=</span> <span class="n">glfwCreateWindow</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span> <span class="mi">600</span><span class="p">,</span> <span class="s">&#34;Vulkan&#34;</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 平台所需实例扩展由 GLFW 给出：Windows 上为 VK_KHR_surface + VK_KHR_win32_surface
+</span></span></span><span class="line"><span class="cl"><span class="kt">uint32_t</span> <span class="n">glfwExtCount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">char</span><span class="o">**</span> <span class="n">glfwExtensions</span> <span class="o">=</span> <span class="n">glfwGetRequiredInstanceExtensions</span><span class="p">(</span><span class="o">&amp;</span><span class="n">glfwExtCount</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">createInfo</span><span class="p">.</span><span class="n">enabledExtensionCount</span> <span class="o">=</span> <span class="n">glfwExtCount</span><span class="p">;</span>              <span class="c1">// 合入第 1 章的 createInfo
+</span></span></span><span class="line"><span class="cl"><span class="n">createInfo</span><span class="p">.</span><span class="n">ppEnabledExtensionNames</span> <span class="o">=</span> <span class="n">glfwExtensions</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 若开了验证层，再追加 VK_EXT_debug_utils 一个名字
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 万事俱备：创建实例——第 1 章的 createInfo 在此兑现为真正的对象
+</span></span></span><span class="line"><span class="cl"><span class="n">VkInstance</span> <span class="n">instance</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">vkCreateInstance</span><span class="p">(</span><span class="o">&amp;</span><span class="n">createInfo</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">instance</span><span class="p">)</span> <span class="o">!=</span> <span class="n">VK_SUCCESS</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&#34;failed to create instance!&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 在窗口与 Vulkan 之间架桥（封装了手动路径 vkCreateWin32SurfaceKHR：
+</span></span></span><span class="line"><span class="cl"><span class="c1">// hwnd/HINSTANCE 由 glfwGetWin32Window 等取来）
+</span></span></span><span class="line"><span class="cl"><span class="n">VkSurfaceKHR</span> <span class="n">surface</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">glfwCreateWindowSurface</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">surface</span><span class="p">)</span> <span class="o">!=</span> <span class="n">VK_SUCCESS</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&#34;failed to create window surface&#34;</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>Vulkan 怎么建模。</strong> 记住一件事：表面是<strong>实例级</strong>对象，挂在实例下面而不是任何 GPU 下面。为什么选卡之前就要先把表面建好？因为&quot;这块卡能不能往这个窗口呈现&quot;是设备×表面的组合属性——下一章面试显卡时要拿它当考题。伏笔至此，下章兑现。</p>
+<p><strong>坑位提示：错误延迟爆炸。</strong> 本章最大的坑其实是第 1 章埋下的：如果当初忘了合入 GLFW 要求的实例扩展，一切看似正常，直到创建表面甚至更后面的交换链才爆炸，报错离根因极远。遇到莫名其妙的 WSI 报错，第一反应是回头数一遍实例扩展清单。</p>
+<h2 id="第-4-章-物理设备面试你的显卡-612">第 4 章 物理设备：面试你的显卡 [6/12]
+</h2><p><strong>Vulkan 怎么建模。</strong> 物理设备（physical device）是驱动递给你的&quot;这块 GPU 能力说明书&rdquo;：只读句柄，不能由你创建，只能枚举。（顺带纠偏：别把 vkFreeMemory 错用来释放枚举结果这类宿主端数组——那是释放显存对象 VkDeviceMemory 的接口；C++ 里交给 std::vector，RAII 从根上免掉手工释放。）</p>
+<p><strong>面试清单。</strong> 存在合法设备 ≠ 默认第 0 个合适——双显卡笔记本上第 0 个常是核显。逐项过堂：</p>
+<ul>
+<li>支持图形队列族（第 5 章细讲）；</li>
+<li>能向我们的表面呈现；</li>
+<li>支持 VK_KHR_swapchain 设备扩展；</li>
+<li>该扩展之下格式与呈现模式列表非空（第 7 章细讲）；</li>
+<li>打分排序：离散显卡加分，limits.maxImageDimension2D 之类可作粗糙的能力参考。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 承接第1章 instance 与第3章 surface：枚举候选卡并打分
+</span></span></span><span class="line"><span class="cl"><span class="kt">uint32_t</span> <span class="n">deviceCount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">vkEnumeratePhysicalDevices</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">deviceCount</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">VkPhysicalDevice</span><span class="o">&gt;</span> <span class="n">devices</span><span class="p">(</span><span class="n">deviceCount</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">vkEnumeratePhysicalDevices</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">deviceCount</span><span class="p">,</span> <span class="n">devices</span><span class="p">.</span><span class="n">data</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">scoreDevice</span><span class="p">(</span><span class="n">VkPhysicalDevice</span> <span class="n">device</span><span class="p">,</span> <span class="n">VkSurfaceKHR</span> <span class="n">surface</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">VkPhysicalDeviceProperties</span> <span class="n">props</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vkGetPhysicalDeviceProperties</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">props</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">score</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">props</span><span class="p">.</span><span class="n">deviceType</span> <span class="o">==</span> <span class="n">VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU</span><span class="p">)</span> <span class="n">score</span> <span class="o">+=</span> <span class="mi">1000</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">score</span> <span class="o">+=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">props</span><span class="p">.</span><span class="n">limits</span><span class="p">.</span><span class="n">maxImageDimension2D</span><span class="p">);</span>   <span class="c1">// 粗糙但够用
+</span></span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">isDeviceSuitable</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">surface</span><span class="p">)</span> <span class="o">?</span> <span class="nl">score</span> <span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>         <span class="c1">// 不合格直接出局
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>isDeviceSuitable 就是上面清单的前四条；其中两条的工具要在接下来几章才凑齐——这也是流程把它们排成这个顺序的原因。</p>
+<h2 id="第-5-章-队列族gpu-的多条流水线-712">第 5 章 队列族：GPU 的多条流水线 [7/12]
+</h2><p><strong>解决什么问题。</strong> 你提交给 GPU 的一切工作——绘制、计算、拷贝——最终都排进队列（queue）执行。Vulkan 不给一条万能队列，而是按能力把队列分成若干<strong>队列族（queue family）</strong>：同族共享能力位，如 GRAPHICS、COMPUTE、TRANSFER（个别还有 SPARSE）。驱动借此把不同性质的活调度到硬件的不同引擎上。</p>
+<p><strong>图形 ≠ 呈现（graphics vs present）。</strong> 这是本章最重要的认知纠偏：&ldquo;能画&quot;和&quot;能把结果送上屏幕&quot;是两种能力。打个比方：会画画的员工，不一定会把画挂到你这面墙上——绘制能力长在 GPU 身上，呈现能力却要对着具体的表面逐族确认。呈现是针对特定表面的属性，要用三元组（物理设备 × 表面 × 族索引）查询。多数显卡上图形族恰好也能承担呈现，两个族索引经常相同，但<strong>不可假设</strong>。顺带认识 transfer 专用族（只有 TRANSFER 位）：它能与图形队列并行做上传拷贝，是日后异步资源上传优化的入口，入门阶段知道它&quot;为什么存在&quot;即可。</p>
+<p><strong>API 与最小代码。</strong> 用 std::optional 表达&quot;找到与否&rdquo;，比哨兵值干净得多；注意族索引类型是 uint32_t，用 int 存迟早吃亏：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 承接第3章 surface：对每张通过初筛的卡执行本函数
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 呈现支持的完整签名：三元组缺一不可
+</span></span></span><span class="line"><span class="cl"><span class="n">VkBool32</span> <span class="n">supported</span> <span class="o">=</span> <span class="n">VK_FALSE</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">vkGetPhysicalDeviceSurfaceSupportKHR</span><span class="p">(</span><span class="n">physicalDevice</span><span class="p">,</span> <span class="n">familyIndex</span><span class="p">,</span> <span class="n">surface</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">supported</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">QueueFamilyIndices</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">optional</span><span class="o">&lt;</span><span class="kt">uint32_t</span><span class="o">&gt;</span> <span class="n">graphicsFamily</span><span class="p">;</span>   <span class="c1">// 具备图形能力的族索引
+</span></span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">optional</span><span class="o">&lt;</span><span class="kt">uint32_t</span><span class="o">&gt;</span> <span class="n">presentFamily</span><span class="p">;</span>    <span class="c1">// 可向表面呈现的族索引
+</span></span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="nf">isComplete</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">graphicsFamily</span><span class="p">.</span><span class="n">has_value</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">presentFamily</span><span class="p">.</span><span class="n">has_value</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">QueueFamilyIndices</span> <span class="nf">findQueueFamilies</span><span class="p">(</span><span class="n">VkPhysicalDevice</span> <span class="n">device</span><span class="p">,</span> <span class="n">VkSurfaceKHR</span> <span class="n">surface</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">QueueFamilyIndices</span> <span class="n">indices</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint32_t</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vkGetPhysicalDeviceQueueFamilyProperties</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">count</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">VkQueueFamilyProperties</span><span class="o">&gt;</span> <span class="n">families</span><span class="p">(</span><span class="n">count</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vkGetPhysicalDeviceQueueFamilyProperties</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">count</span><span class="p">,</span> <span class="n">families</span><span class="p">.</span><span class="n">data</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">uint32_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">count</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">families</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">queueFlags</span> <span class="o">&amp;</span> <span class="n">VK_QUEUE_GRAPHICS_BIT</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">indices</span><span class="p">.</span><span class="n">graphicsFamily</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">VkBool32</span> <span class="n">present</span> <span class="o">=</span> <span class="n">VK_FALSE</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vkGetPhysicalDeviceSurfaceSupportKHR</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">surface</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">present</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">present</span><span class="p">)</span> <span class="n">indices</span><span class="p">.</span><span class="n">presentFamily</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">indices</span><span class="p">.</span><span class="n">isComplete</span><span class="p">())</span> <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">indices</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="第-6-章-逻辑设备签一份能力合同-8912">第 6 章 逻辑设备：签一份能力合同 [8–9/12]
+</h2><p><strong>解决什么问题。</strong> 物理设备的说明书太全，你的程序只用其中一角。逻辑设备（logical device，类型名就叫 VkDevice）是对物理设备的<strong>程序视角切片</strong>：你声明要用哪些队列、哪些特性、哪些扩展，驱动据此分配资源。这份&quot;先声明、后使用&quot;的合同，是显式哲学最典型的一次亮相。</p>
+<p>合同有三个必答条款。</p>
+<p><strong>其一，队列。</strong> 要哪个族的几条队列？注意 VkDeviceQueueCreateInfo 必须携带 queuePriorities 浮点数组（0.0~1.0，同族多队列时的调度权重）——哪怕只要一条队列，也得传长度为 1 的数组。没有默认值的字段就不该有默认值，很 Vulkan。另外同一族只能出现一次，重复放两个 createInfo 会被验证层点名。</p>
+<p><strong>其二，设备扩展。</strong> 明明实例级写过一遍，设备级为什么还要重申 VK_KHR_swapchain？因为作用域不同。打个比方：**实例扩展像驾照，证明你能开车上路——找到系统里的 GPU 和窗口系统；设备扩展像某辆车的改装许可——允许你动这台具体机器的特定功能。两本证各管各的路。**加载器依据两层声明决定暴露哪些入口点——不声明交换链扩展，vkAcquireNextImageKHR、vkQueuePresentKHR 这些函数可能根本取不到。所以创建前先用 vkEnumerateDeviceExtensionProperties 核验一遍（又是先查询再启用），防一手 VK_ERROR_EXTENSION_NOT_PRESENT（声明了不存在的扩展）。</p>
+<p><strong>其三，特性。</strong> VkPhysicalDeviceFeatures 是一整版布尔开关（samplerAnisotropy、tessellationShader……），需要什么开什么，其余留 false——开关开得越多，驱动预留的资源越多。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 承接第5章 QueueFamilyIndices：族索引去重 → 签合同 → 取回队列
+</span></span></span><span class="line"><span class="cl"><span class="kt">float</span> <span class="n">priority</span> <span class="o">=</span> <span class="mf">1.0f</span><span class="p">;</span>                              <span class="c1">// 调度权重：0.0~1.0
+</span></span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">set</span><span class="o">&lt;</span><span class="kt">uint32_t</span><span class="o">&gt;</span> <span class="n">uniqueFamilies</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span> <span class="n">indices</span><span class="p">.</span><span class="n">graphicsFamily</span><span class="p">.</span><span class="n">value</span><span class="p">(),</span> <span class="n">indices</span><span class="p">.</span><span class="n">presentFamily</span><span class="p">.</span><span class="n">value</span><span class="p">()</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">VkDeviceQueueCreateInfo</span><span class="o">&gt;</span> <span class="n">queueInfos</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="kt">uint32_t</span> <span class="nl">family</span> <span class="p">:</span> <span class="n">uniqueFamilies</span><span class="p">)</span> <span class="p">{</span>            <span class="c1">// set 天然去重：同族只能出现一次
+</span></span></span><span class="line"><span class="cl">    <span class="n">VkDeviceQueueCreateInfo</span> <span class="n">qi</span><span class="p">{};</span>
+</span></span><span class="line"><span class="cl">    <span class="n">qi</span><span class="p">.</span><span class="n">sType</span> <span class="o">=</span> <span class="n">VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">qi</span><span class="p">.</span><span class="n">queueFamilyIndex</span> <span class="o">=</span> <span class="n">family</span><span class="p">;</span>                   <span class="c1">// 要哪个族
+</span></span></span><span class="line"><span class="cl">    <span class="n">qi</span><span class="p">.</span><span class="n">queueCount</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>                              <span class="c1">// 要几条
+</span></span></span><span class="line"><span class="cl">    <span class="n">qi</span><span class="p">.</span><span class="n">pQueuePriorities</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">priority</span><span class="p">;</span>                <span class="c1">// 长度为 1 的数组也必须给
+</span></span></span><span class="line"><span class="cl">    <span class="n">queueInfos</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">qi</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">VkPhysicalDeviceFeatures</span> <span class="n">features</span><span class="p">{};</span>                <span class="c1">// 特性开关：按需开启
+</span></span></span><span class="line"><span class="cl"><span class="n">features</span><span class="p">.</span><span class="n">samplerAnisotropy</span> <span class="o">=</span> <span class="n">VK_TRUE</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">VkDeviceCreateInfo</span> <span class="n">ci</span><span class="p">{};</span>
+</span></span><span class="line"><span class="cl"><span class="n">ci</span><span class="p">.</span><span class="n">sType</span> <span class="o">=</span> <span class="n">VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">ci</span><span class="p">.</span><span class="n">queueCreateInfoCount</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">uint32_t</span><span class="o">&gt;</span><span class="p">(</span><span class="n">queueInfos</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl"><span class="n">ci</span><span class="p">.</span><span class="n">pQueueCreateInfos</span> <span class="o">=</span> <span class="n">queueInfos</span><span class="p">.</span><span class="n">data</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">ci</span><span class="p">.</span><span class="n">enabledExtensionCount</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">ci</span><span class="p">.</span><span class="n">ppEnabledExtensionNames</span> <span class="o">=</span> <span class="n">deviceExtensions</span><span class="p">.</span><span class="n">data</span><span class="p">();</span>   <span class="c1">// { VK_KHR_swapchain }
+</span></span></span><span class="line"><span class="cl"><span class="n">ci</span><span class="p">.</span><span class="n">pEnabledFeatures</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">features</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">VkDevice</span> <span class="n">device</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">vkCreateDevice</span><span class="p">(</span><span class="n">physicalDevice</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ci</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">device</span><span class="p">)</span> <span class="o">!=</span> <span class="n">VK_SUCCESS</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&#34;failed to create logical device&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">VkQueue</span> <span class="n">graphicsQueue</span><span class="p">,</span> <span class="n">presentQueue</span><span class="p">;</span>                <span class="c1">// 队列句柄创建后才能取回
+</span></span></span><span class="line"><span class="cl"><span class="n">vkGetDeviceQueue</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">indices</span><span class="p">.</span><span class="n">graphicsFamily</span><span class="p">.</span><span class="n">value</span><span class="p">(),</span> <span class="mi">0</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">graphicsQueue</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">vkGetDeviceQueue</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">indices</span><span class="p">.</span><span class="n">presentFamily</span><span class="p">.</span><span class="n">value</span><span class="p">(),</span>  <span class="mi">0</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">presentQueue</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>族索引在创建那一刻就焊死了、此后不可更改——这正是流程图把队列族排在逻辑设备之前的原因。另外若两族恰好同索引，graphicsQueue 与 presentQueue 实为同一队列句柄——分成两个变量只为表达两种用途。</p>
+<h2 id="第-7-章-交换链三要素谈判-101212">第 7 章 交换链：三要素谈判 [10–12/12]
+</h2><p><strong>解决什么问题。</strong> 屏幕那头是显示引擎，永不停歇地扫描显存里的图像往外送；你这头是不停生成新一帧的程序。双方速度不一致、节奏不合拍，就需要一组&quot;轮流上岗&quot;的图像来仲裁——这就是交换链（swapchain）：一沓由呈现引擎管理的可呈现图像，你画一张交出去，再领一张回来画。它不是 Vulkan 核心的东西而是 WSI 扩展提供的，前面一整串铺垫正是为了拿到签约资格。</p>
+<p><strong>先谈判，后签约。</strong> 记住这个比喻：<strong>显示器是甲方，你只能从它给的菜单里点菜</strong>——格式、模式、尺寸全部先查后选，点了还得夹进甲方规定的上下限里，绝不硬编码。谈判工具箱一段拿走：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 承接第3章 surface：查询甲方菜单，先完成格式与呈现模式两选
+</span></span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">SwapchainSupportDetails</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">VkSurfaceCapabilitiesKHR</span> <span class="n">capabilities</span><span class="p">;</span>       <span class="c1">// 能力上限：张数范围、尺寸范围、变换等
+</span></span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">VkSurfaceFormatKHR</span><span class="o">&gt;</span> <span class="n">formats</span><span class="p">;</span>     <span class="c1">// 支持的&#34;格式×色彩空间&#34;菜单
+</span></span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">VkPresentModeKHR</span><span class="o">&gt;</span> <span class="n">presentModes</span><span class="p">;</span>  <span class="c1">// 支持的呈现模式菜单
+</span></span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">SwapchainSupportDetails</span> <span class="nf">querySwapchainSupport</span><span class="p">(</span><span class="n">VkPhysicalDevice</span> <span class="n">device</span><span class="p">,</span> <span class="n">VkSurfaceKHR</span> <span class="n">surface</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">SwapchainSupportDetails</span> <span class="n">d</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vkGetPhysicalDeviceSurfaceCapabilitiesKHR</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">surface</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">d</span><span class="p">.</span><span class="n">capabilities</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint32_t</span> <span class="n">count</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vkGetPhysicalDeviceSurfaceFormatsKHR</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">surface</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">count</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">d</span><span class="p">.</span><span class="n">formats</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">count</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vkGetPhysicalDeviceSurfaceFormatsKHR</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">surface</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">count</span><span class="p">,</span> <span class="n">d</span><span class="p">.</span><span class="n">formats</span><span class="p">.</span><span class="n">data</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vkGetPhysicalDeviceSurfacePresentModesKHR</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">surface</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">count</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">d</span><span class="p">.</span><span class="n">presentModes</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">count</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vkGetPhysicalDeviceSurfacePresentModesKHR</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">surface</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">count</span><span class="p">,</span> <span class="n">d</span><span class="p">.</span><span class="n">presentModes</span><span class="p">.</span><span class="n">data</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">d</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">VkSurfaceFormatKHR</span> <span class="nf">chooseFormat</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">VkSurfaceFormatKHR</span><span class="o">&gt;&amp;</span> <span class="n">formats</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">f</span> <span class="p">:</span> <span class="n">formats</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="n">format</span> <span class="o">==</span> <span class="n">VK_FORMAT_B8G8R8A8_SRGB</span> <span class="o">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">f</span><span class="p">.</span><span class="n">colorSpace</span> <span class="o">==</span> <span class="n">VK_COLOR_SPACE_SRGB_NONLINEAR_KHR</span><span class="p">)</span> <span class="k">return</span> <span class="n">f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">formats</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">format</span> <span class="o">==</span> <span class="n">VK_FORMAT_UNDEFINED</span><span class="p">)</span>      <span class="c1">// 老驱动边角案例：菜单只给&#34;随你挑&#34;
+</span></span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">{</span> <span class="n">VK_FORMAT_B8G8R8A8_SRGB</span><span class="p">,</span> <span class="n">formats</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">colorSpace</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">formats</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>                           <span class="c1">// 没得挑就认第一个
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">VkPresentModeKHR</span> <span class="nf">choosePresentMode</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">VkPresentModeKHR</span><span class="o">&gt;&amp;</span> <span class="n">modes</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">m</span> <span class="p">:</span> <span class="n">modes</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">m</span> <span class="o">==</span> <span class="n">VK_PRESENT_MODE_MAILBOX_KHR</span><span class="p">)</span> <span class="k">return</span> <span class="n">m</span><span class="p">;</span>   <span class="c1">// 示例取低延迟；在意续航/风扇就删掉本行退回 FIFO——谈判的意义所在
+</span></span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">VK_PRESENT_MODE_FIFO_KHR</span><span class="p">;</span>             <span class="c1">// 保底：规范保证唯一必支持
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>要素一：格式（format）。</strong> 每张图的像素布局与色彩空间，优先 VK_FORMAT_B8G8R8A8_SRGB 或 VK_FORMAT_R8G8B8A8_SRGB 配 VK_COLOR_SPACE_SRGB_NONLINEAR_KHR——SRGB 格式让硬件写入时自动做伽马校正，人眼看着才&quot;正常&quot;，原理一句话带过、值得另立一文。列表若给出 VK_FORMAT_UNDEFINED，意为&quot;随你挑&quot;，那就回到首选。</p>
+<p><strong>要素二：呈现模式（present mode）。</strong> 决定图像何时被送去显示，四种模式一张表看懂：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>枚举</th>
+					<th>语义</th>
+					<th>直观感受</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>VK_PRESENT_MODE_FIFO_KHR</td>
+					<td>垂直同步队列排队，错过节拍等下一拍</td>
+					<td>经典 vsync；<strong>规范保证唯一必支持</strong></td>
+			</tr>
+			<tr>
+					<td>VK_PRESENT_MODE_FIFO_RELAXED_KHR</td>
+					<td>大体 FIFO，但晚到了就立即呈现</td>
+					<td>低负载延迟更低，代价是可能撕裂</td>
+			</tr>
+			<tr>
+					<td>VK_PRESENT_MODE_MAILBOX_KHR</td>
+					<td>单槽队列，新帧替换旧帧</td>
+					<td>近似三重缓冲，低延迟可丢帧；功耗发热代价</td>
+			</tr>
+			<tr>
+					<td>VK_PRESENT_MODE_IMMEDIATE_KHR</td>
+					<td>立即呈现</td>
+					<td>延迟最低，允许撕裂</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>选型提醒：&ldquo;MAILBOX 一定最好&quot;是想当然——笔记本上徒增功耗与发热；FIFO 是唯一保底，菜单里挑不到更好的就用它。</p>
+<p><strong>要素三：范围（extent）。</strong> 图像的像素尺寸。capabilities.currentExtent.width == UINT32_MAX 是特殊值，意为&quot;尺寸由你定&rdquo;——但即便如此也必须夹进 [minImageExtent, maxImageExtent]。尺寸基准要用像素而不是屏幕坐标：glfwGetFramebufferSize 返回像素，glfwGetWindowSize 返回屏幕坐标，HiDPI 下两者不同，永远取前者再 clamp。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 承接上方 caps/format/presentMode 与第5章 indices：尺寸选择 → 签约 → 包装
+</span></span></span><span class="line"><span class="cl"><span class="n">VkExtent2D</span> <span class="nf">chooseExtent</span><span class="p">(</span><span class="k">const</span> <span class="n">VkSurfaceCapabilitiesKHR</span><span class="o">&amp;</span> <span class="n">caps</span><span class="p">,</span> <span class="n">GLFWwindow</span><span class="o">*</span> <span class="n">w</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">caps</span><span class="p">.</span><span class="n">currentExtent</span><span class="p">.</span><span class="n">width</span> <span class="o">!=</span> <span class="n">UINT32_MAX</span><span class="p">)</span> <span class="k">return</span> <span class="n">caps</span><span class="p">.</span><span class="n">currentExtent</span><span class="p">;</span> <span class="c1">// 甲方已定
+</span></span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">pw</span><span class="p">,</span> <span class="n">ph</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">glfwGetFramebufferSize</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">pw</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ph</span><span class="p">);</span>         <span class="c1">// 像素！不是屏幕坐标
+</span></span></span><span class="line"><span class="cl">    <span class="n">VkExtent2D</span> <span class="n">e</span><span class="p">{</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">uint32_t</span><span class="o">&gt;</span><span class="p">(</span><span class="n">pw</span><span class="p">),</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">uint32_t</span><span class="o">&gt;</span><span class="p">(</span><span class="n">ph</span><span class="p">)</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="n">e</span><span class="p">.</span><span class="n">width</span>  <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">clamp</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">width</span><span class="p">,</span>  <span class="n">caps</span><span class="p">.</span><span class="n">minImageExtent</span><span class="p">.</span><span class="n">width</span><span class="p">,</span>  <span class="n">caps</span><span class="p">.</span><span class="n">maxImageExtent</span><span class="p">.</span><span class="n">width</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">e</span><span class="p">.</span><span class="n">height</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">clamp</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">height</span><span class="p">,</span> <span class="n">caps</span><span class="p">.</span><span class="n">minImageExtent</span><span class="p">.</span><span class="n">height</span><span class="p">,</span> <span class="n">caps</span><span class="p">.</span><span class="n">maxImageExtent</span><span class="p">.</span><span class="n">height</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">e</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// ---- 签约：承接本章 choose* 三件套与第 6 章 device ----
+</span></span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="k">auto</span> <span class="n">caps</span> <span class="o">=</span> <span class="n">querySwapchainSupport</span><span class="p">(</span><span class="n">physicalDevice</span><span class="p">,</span> <span class="n">surface</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">uint32_t</span> <span class="n">imageCount</span> <span class="o">=</span> <span class="n">caps</span><span class="p">.</span><span class="n">capabilities</span><span class="p">.</span><span class="n">minImageCount</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>      <span class="c1">// 多一张更顺畅
+</span></span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">caps</span><span class="p">.</span><span class="n">capabilities</span><span class="p">.</span><span class="n">maxImageCount</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">imageCount</span> <span class="o">&gt;</span> <span class="n">caps</span><span class="p">.</span><span class="n">capabilities</span><span class="p">.</span><span class="n">maxImageCount</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">imageCount</span> <span class="o">=</span> <span class="n">caps</span><span class="p">.</span><span class="n">capabilities</span><span class="p">.</span><span class="n">maxImageCount</span><span class="p">;</span>               <span class="c1">// 为 0 表示无上限
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">VkSwapchainCreateInfoKHR</span> <span class="n">sci</span><span class="p">{};</span>
+</span></span><span class="line"><span class="cl"><span class="n">sci</span><span class="p">.</span><span class="n">sType</span> <span class="o">=</span> <span class="n">VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">sci</span><span class="p">.</span><span class="n">surface</span>        <span class="o">=</span> <span class="n">surface</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">sci</span><span class="p">.</span><span class="n">minImageCount</span>  <span class="o">=</span> <span class="n">imageCount</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">sci</span><span class="p">.</span><span class="n">imageFormat</span>    <span class="o">=</span> <span class="n">format</span><span class="p">.</span><span class="n">format</span><span class="p">;</span>                 <span class="c1">// 三要素谈判的结果
+</span></span></span><span class="line"><span class="cl"><span class="n">sci</span><span class="p">.</span><span class="n">imageColorSpace</span><span class="o">=</span> <span class="n">format</span><span class="p">.</span><span class="n">colorSpace</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">sci</span><span class="p">.</span><span class="n">imageExtent</span>    <span class="o">=</span> <span class="n">extent</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">sci</span><span class="p">.</span><span class="n">imageArrayLayers</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">sci</span><span class="p">.</span><span class="n">imageUsage</span>     <span class="o">=</span> <span class="n">VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">sci</span><span class="p">.</span><span class="n">imageSharingMode</span> <span class="o">=</span> <span class="n">VK_SHARING_MODE_EXCLUSIVE</span><span class="p">;</span>   <span class="c1">// CONCURRENT 需≥2个不同族索引才合法，
+</span></span></span><span class="line"><span class="cl">                                                    <span class="c1">// 同族常见情形下根本不可用，故固定独占
+</span></span></span><span class="line"><span class="cl"><span class="n">sci</span><span class="p">.</span><span class="n">preTransform</span>   <span class="o">=</span> <span class="n">caps</span><span class="p">.</span><span class="n">capabilities</span><span class="p">.</span><span class="n">currentTransform</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">sci</span><span class="p">.</span><span class="n">compositeAlpha</span> <span class="o">=</span> <span class="n">VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">sci</span><span class="p">.</span><span class="n">presentMode</span>    <span class="o">=</span> <span class="n">presentMode</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">sci</span><span class="p">.</span><span class="n">clipped</span>        <span class="o">=</span> <span class="n">VK_TRUE</span><span class="p">;</span>                       <span class="c1">// 被遮住的像素可以丢弃
+</span></span></span><span class="line"><span class="cl"><span class="n">sci</span><span class="p">.</span><span class="n">oldSwapchain</span>   <span class="o">=</span> <span class="n">VK_NULL_HANDLE</span><span class="p">;</span>                <span class="c1">// 重建时可传旧链平滑交接，进阶注脚
+</span></span></span><span class="line"><span class="cl"><span class="n">vkCreateSwapchainKHR</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">sci</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">swapchain</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">uint32_t</span> <span class="n">actual</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>                                <span class="c1">// 取回实际图像（数量可能多于 minImageCount）
+</span></span></span><span class="line"><span class="cl"><span class="n">vkGetSwapchainImagesKHR</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">swapchain</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">actual</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">swapchainImages</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">actual</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">vkGetSwapchainImagesKHR</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">swapchain</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">actual</span><span class="p">,</span> <span class="n">swapchainImages</span><span class="p">.</span><span class="n">data</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// ---- 包装：图像视图 ----
+</span></span></span><span class="line"><span class="cl"><span class="n">VkImageViewCreateInfo</span> <span class="n">vi</span><span class="p">{};</span>
+</span></span><span class="line"><span class="cl"><span class="n">vi</span><span class="p">.</span><span class="n">sType</span>    <span class="o">=</span> <span class="n">VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">vi</span><span class="p">.</span><span class="n">image</span>    <span class="o">=</span> <span class="n">swapchainImages</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="n">vi</span><span class="p">.</span><span class="n">viewType</span> <span class="o">=</span> <span class="n">VK_IMAGE_VIEW_TYPE_2D</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">vi</span><span class="p">.</span><span class="n">format</span>   <span class="o">=</span> <span class="n">swapchainImageFormat</span><span class="p">;</span>                 <span class="c1">// 怎么解读这段数据
+</span></span></span><span class="line"><span class="cl"><span class="n">vi</span><span class="p">.</span><span class="n">subresourceRange</span><span class="p">.</span><span class="n">aspectMask</span>  <span class="o">=</span> <span class="n">VK_IMAGE_ASPECT_COLOR_BIT</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">vi</span><span class="p">.</span><span class="n">subresourceRange</span><span class="p">.</span><span class="n">levelCount</span>  <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">vi</span><span class="p">.</span><span class="n">subresourceRange</span><span class="p">.</span><span class="n">layerCount</span>  <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">vkCreateImageView</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">vi</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">swapchainImageViews</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>关于共享方式多说一句：本文固定 VK_SHARING_MODE_EXCLUSIVE。原因有二：其一，VK_SHARING_MODE_CONCURRENT 要求 pQueueFamilyIndices 列出至少两个不同的族索引才合法——图形族与呈现族同族的常见情形下它根本用不上；其二，即便异族可用，也要多传一份族索引数组。单族独占没有额外成本，是最省心的合法选项。另外注意，这些图像的所有权在呈现引擎手里：用可以随便用，销毁却轮不到你——回收它们的方式只有一个，销毁整个交换链。</p>
+<p>图像视图的概念一句话：图像只是裸数据，渲染前还要告诉管线&quot;怎么解读这段数据&quot;——格式、层级、维度。image 是数据，view 是视角。</p>
+<p>至此 N 张图在手。它们如何轮流上岗？窗口拉伸后尺寸失效怎么办？这正是下一章的内容，也是 VK_ERROR_OUT_OF_DATE_KHR（交换链已过期）与 VK_SUBOPTIMAL_KHR（次优、仍可用）两个著名错误码登场的舞台。</p>
+<h2 id="第-8-章-第一帧获取-提交-呈现循环-1212">第 8 章 第一帧：获取-提交-呈现循环 [12/12]
+</h2><p><strong>Vulkan 怎么建模。</strong> 主循环三拍子：vkAcquireNextImageKHR 从交换链<strong>领取</strong>一张可用图（必要时等显示引擎回收）；把这一帧画进去后 <strong>vkQueueSubmit</strong> 提交；vkQueuePresentKHR 把图<strong>交还</strong>给显示引擎上屏。三拍子横跨 GPU 内部与 CPU↔GPU 两种边界，各配一对信号量（semaphore）：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>信号量</th>
+					<th>发出方（signal）</th>
+					<th>等待方（wait）</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>imageAvailable</td>
+					<td>vkAcquireNextImageKHR（图真的可用了）</td>
+					<td>vkQueueSubmit（等到图再开始往里画）</td>
+			</tr>
+			<tr>
+					<td>renderFinished</td>
+					<td>vkQueueSubmit（画完了）</td>
+					<td>vkQueuePresentKHR（等到画完再上屏）</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>信号量管 GPU 内部的先后顺序，二值、一次性：signal 一次、wait 一次，然后回收复用。但还有第三种节奏它管不了：CPU 录制命令缓冲（command buffer）的速度远快于 GPU 执行，若无约束，CPU 会在命令缓冲还在 GPU 上执行时就覆写它——这是未定义行为。管 CPU↔GPU 完成通知的是另一种原语：栅栏（fence），CPU 可以用它阻塞等待 GPU 真正完成。配合顺序是&quot;等旧帧 → 领新图 → 确认这一帧真的要画了，才复位栅栏&quot;。复位时机是个隐蔽陷阱：若先复位后领取，而领取恰逢交换链过期失败，本帧便不再提交，被复位的栅栏永远等不到下一次 signal——程序从第二轮起彻底冻结。谁先谁后必须写明，这是显式哲学的又一次亮相；创建栅栏时还要记得加 SIGNALED 位，否则第一帧之前没有&quot;上一帧&quot;，首轮等待就会永久阻塞：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 本章新增对象一次创建齐（同步原语与命令缓冲）；
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 同步原语的创建参数皆是空配置——语义全在用法里，不在创建参数里
+</span></span></span><span class="line"><span class="cl"><span class="n">VkSemaphoreCreateInfo</span> <span class="n">semaphoreInfo</span><span class="p">{};</span>
+</span></span><span class="line"><span class="cl"><span class="n">semaphoreInfo</span><span class="p">.</span><span class="n">sType</span> <span class="o">=</span> <span class="n">VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">vkCreateSemaphore</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">semaphoreInfo</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">imageAvailableSemaphore</span><span class="p">);</span>  <span class="c1">// 发出&#34;图可用&#34;
+</span></span></span><span class="line"><span class="cl"><span class="n">vkCreateSemaphore</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">semaphoreInfo</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">renderFinishedSemaphore</span><span class="p">);</span>  <span class="c1">// 发出&#34;画完了&#34;
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 栅栏：SIGNALED 位让第一轮 vkWaitForFences 直接放行
+</span></span></span><span class="line"><span class="cl"><span class="n">VkFenceCreateInfo</span> <span class="n">fi</span><span class="p">{};</span>
+</span></span><span class="line"><span class="cl"><span class="n">fi</span><span class="p">.</span><span class="n">sType</span> <span class="o">=</span> <span class="n">VK_STRUCTURE_TYPE_FENCE_CREATE_INFO</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">fi</span><span class="p">.</span><span class="n">flags</span> <span class="o">=</span> <span class="n">VK_FENCE_CREATE_SIGNALED_BIT</span><span class="p">;</span>   <span class="c1">// ★ 初值即已signal：第一帧之前没有&#34;上一帧&#34;可等
+</span></span></span><span class="line"><span class="cl"><span class="n">vkCreateFence</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">fi</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">inFlightFence</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 命令缓冲：先建池子，再从池里分配缓冲——录指令的&#34;草稿纸&#34;
+</span></span></span><span class="line"><span class="cl"><span class="n">VkCommandPoolCreateInfo</span> <span class="n">poolInfo</span><span class="p">{};</span>
+</span></span><span class="line"><span class="cl"><span class="n">poolInfo</span><span class="p">.</span><span class="n">sType</span> <span class="o">=</span> <span class="n">VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">poolInfo</span><span class="p">.</span><span class="n">queueFamilyIndex</span> <span class="o">=</span> <span class="n">indices</span><span class="p">.</span><span class="n">graphicsFamily</span><span class="p">.</span><span class="n">value</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">vkCreateCommandPool</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">poolInfo</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">commandPool</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">VkCommandBufferAllocateInfo</span> <span class="n">allocInfo</span><span class="p">{};</span>
+</span></span><span class="line"><span class="cl"><span class="n">allocInfo</span><span class="p">.</span><span class="n">sType</span> <span class="o">=</span> <span class="n">VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">allocInfo</span><span class="p">.</span><span class="n">commandPool</span> <span class="o">=</span> <span class="n">commandPool</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">allocInfo</span><span class="p">.</span><span class="n">level</span> <span class="o">=</span> <span class="n">VK_COMMAND_BUFFER_LEVEL_PRIMARY</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">allocInfo</span><span class="p">.</span><span class="n">commandBufferCount</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">vkAllocateCommandBuffers</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">allocInfo</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">commandBuffer</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 最小记录器：Begin/End 之间暂无一笔——空记录合法，但屏幕内容此刻未定义，
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 让图像真正变色是下一篇渲染管线的事
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">recordCommandBuffer</span><span class="p">(</span><span class="n">VkCommandBuffer</span> <span class="n">cmd</span><span class="p">,</span> <span class="kt">uint32_t</span> <span class="cm">/*imageIndex*/</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">VkCommandBufferBeginInfo</span> <span class="n">beginInfo</span><span class="p">{};</span>
+</span></span><span class="line"><span class="cl">    <span class="n">beginInfo</span><span class="p">.</span><span class="n">sType</span> <span class="o">=</span> <span class="n">VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vkBeginCommandBuffer</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">beginInfo</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vkEndCommandBuffer</span><span class="p">(</span><span class="n">cmd</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 承接第6章 device/graphicsQueue/presentQueue、第7章 swapchain 与本章同步对象、命令缓冲
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">drawFrame</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vkWaitForFences</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">inFlightFence</span><span class="p">,</span> <span class="n">VK_TRUE</span><span class="p">,</span> <span class="n">UINT64_MAX</span><span class="p">);</span>  <span class="c1">// 等 GPU 干完上一帧
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kt">uint32_t</span> <span class="n">imageIndex</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">VkResult</span> <span class="n">result</span> <span class="o">=</span> <span class="n">vkAcquireNextImageKHR</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">device</span><span class="p">,</span> <span class="n">swapchain</span><span class="p">,</span> <span class="n">UINT64_MAX</span><span class="p">,</span> <span class="n">imageAvailableSemaphore</span><span class="p">,</span> <span class="n">VK_NULL_HANDLE</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">imageIndex</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">result</span> <span class="o">==</span> <span class="n">VK_ERROR_OUT_OF_DATE_KHR</span><span class="p">)</span> <span class="p">{</span>      <span class="c1">// 图没领到：当场重建，重来
+</span></span></span><span class="line"><span class="cl">        <span class="n">recreateSwapchain</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span><span class="p">;</span>                                <span class="c1">// ★ 栅栏未复位仍为已signal态，下轮等待照常放行
+</span></span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// VK_SUBOPTIMAL_KHR：图到手了，本帧照常渲染，脏标记留给循环统一处理
+</span></span></span><span class="line"><span class="cl">    <span class="n">vkResetFences</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">inFlightFence</span><span class="p">);</span>      <span class="c1">// ★ 确认领到图才复位：此路径必然走到提交
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">recordCommandBuffer</span><span class="p">(</span><span class="n">commandBuffer</span><span class="p">,</span> <span class="n">imageIndex</span><span class="p">);</span> <span class="c1">// 真正的绘制指令属于下一篇管线
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">VkPipelineStageFlags</span> <span class="n">waitStage</span> <span class="o">=</span> <span class="n">VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">VkSubmitInfo</span> <span class="n">si</span><span class="p">{};</span>
+</span></span><span class="line"><span class="cl">    <span class="n">si</span><span class="p">.</span><span class="n">sType</span> <span class="o">=</span> <span class="n">VK_STRUCTURE_TYPE_SUBMIT_INFO</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">si</span><span class="p">.</span><span class="n">waitSemaphoreCount</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">si</span><span class="p">.</span><span class="n">pWaitSemaphores</span>   <span class="o">=</span> <span class="o">&amp;</span><span class="n">imageAvailableSemaphore</span><span class="p">;</span>   <span class="c1">// 等&#34;图可用&#34;
+</span></span></span><span class="line"><span class="cl">    <span class="n">si</span><span class="p">.</span><span class="n">pWaitDstStageMask</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">waitStage</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">si</span><span class="p">.</span><span class="n">commandBufferCount</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">si</span><span class="p">.</span><span class="n">pCommandBuffers</span>   <span class="o">=</span> <span class="o">&amp;</span><span class="n">commandBuffer</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">si</span><span class="p">.</span><span class="n">signalSemaphoreCount</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">si</span><span class="p">.</span><span class="n">pSignalSemaphores</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">renderFinishedSemaphore</span><span class="p">;</span>   <span class="c1">// 发出&#34;我画完了&#34;
+</span></span></span><span class="line"><span class="cl">    <span class="n">vkQueueSubmit</span><span class="p">(</span><span class="n">graphicsQueue</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">si</span><span class="p">,</span> <span class="n">inFlightFence</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">VkPresentInfoKHR</span> <span class="n">pi</span><span class="p">{};</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pi</span><span class="p">.</span><span class="n">sType</span> <span class="o">=</span> <span class="n">VK_STRUCTURE_TYPE_PRESENT_INFO_KHR</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pi</span><span class="p">.</span><span class="n">waitSemaphoreCount</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pi</span><span class="p">.</span><span class="n">pWaitSemaphores</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">renderFinishedSemaphore</span><span class="p">;</span>     <span class="c1">// 等&#34;画完了&#34;
+</span></span></span><span class="line"><span class="cl">    <span class="n">pi</span><span class="p">.</span><span class="n">swapchainCount</span>  <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pi</span><span class="p">.</span><span class="n">pSwapchains</span>     <span class="o">=</span> <span class="o">&amp;</span><span class="n">swapchain</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pi</span><span class="p">.</span><span class="n">pImageIndices</span>   <span class="o">=</span> <span class="o">&amp;</span><span class="n">imageIndex</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">result</span> <span class="o">=</span> <span class="n">vkQueuePresentKHR</span><span class="p">(</span><span class="n">presentQueue</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">pi</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">result</span> <span class="o">==</span> <span class="n">VK_ERROR_OUT_OF_DATE_KHR</span> <span class="o">||</span> <span class="n">result</span> <span class="o">==</span> <span class="n">VK_SUBOPTIMAL_KHR</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">frameResized</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>                           <span class="c1">// 只置脏标记，下一轮循环开头重建
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>顺带一句提交信息里的 pWaitDstStageMask：本文固定 VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT，直觉是&quot;等到可以开始写颜色的时机&quot;再放行图像信号量（信号量正是在这个阶段点被消费，随手填 TOP_OF_PIPE 既白等又语义不配）——这个掩码不能随意填，深究留给续篇同步篇。</p>
+<p>注意 VK_ERROR_OUT_OF_DATE_KHR 与 VK_SUBOPTIMAL_KHR 在<strong>获取与呈现两个调用点语义不同</strong>：vkAcquireNextImageKHR 返回前者，意味着图根本没领到，必须当场重建重领；vkQueuePresentKHR 返回其中之一时，则不必纠结这一帧是否已经上屏——置脏标记，下一轮循环开头统一重建。只在其中一处处理、或干脆忽略返回值，症状都是窗口一拉伸就黑屏甚至崩溃。</p>
+<p>边界声明：<strong>本文循环一次只有一帧在飞</strong>。多帧并发（frames-in-flight）节流、栅栏数组与信号量的安全复用策略都留作续篇——届时只需把单个栅栏扩成数组，循环骨架不变。</p>
+<p>重建触发源除了这两个返回码，还有窗口事件本身——用 glfwSetFramebufferSizeCallback 注册回调置个脏标记就够了，<strong>不要在回调里直接重建</strong>（回调触发时机可能在主循环中途）。重建时最小化窗口要特判：宽高为 0 就挂起等事件，否则得到的范围不合法。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 承接本章 drawFrame 的重建触发：整链逆序拆除再重建
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">recreateSwapchain</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">w</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">glfwGetFramebufferSize</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">w</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">h</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="n">w</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">h</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>                 <span class="c1">// 最小化：挂起直到窗口恢复
+</span></span></span><span class="line"><span class="cl">        <span class="n">glfwWaitEvents</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">glfwGetFramebufferSize</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">w</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">h</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vkDeviceWaitIdle</span><span class="p">(</span><span class="n">device</span><span class="p">);</span>                  <span class="c1">// 等 GPU 把手头的活干完
+</span></span></span><span class="line"><span class="cl">    <span class="n">cleanupSwapchain</span><span class="p">();</span>                        <span class="c1">// views → swapchain，逆序拆除
+</span></span></span><span class="line"><span class="cl">    <span class="n">createSwapchain</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">createImageViews</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// createFramebuffers()：下一篇引入帧缓冲后，重建链条同样要带上它
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>重建范围是一条完整链条：交换链 → 图像视图 → 帧缓冲（framebuffer）一整条，漏掉中间任何一层都会拿到悬空引用（帧缓冲属下一篇内容，届时记得把它纳入同一条链）。oldSwapchain 参数可以让新旧链平滑交接，入门阶段整体销毁重建完全够用。另外栅栏和信号量不在重建之列——它们的生命周期与交换链无关。</p>
+<p><strong>坑位提示。</strong> 信号量配对错乱（获取阶段发出的信号量没人等待、复用了还没等完的二值信号量）、或者无栅栏保护就重录执行中的命令缓冲——这些验证层都能抓到，报错里会指认失约的是哪一对。学会读它的指认，比背规则有用得多。</p>
+<h2 id="第-9-章-小结与下一步">第 9 章 小结与下一步
+</h2><p>回头看，十二步初始化其实是在连续回答驱动的四个问题：你是谁（实例）；画在哪（表面）；用哪块卡、怎么用（物理设备 → 队列族 → 逻辑设备）；图怎么轮转（交换链 → 图像视图 → 帧缓冲）。每一步的啰嗦都是在替驱动省掉一次隐式决策——把决策权拿回手里的感觉，就是 Vulkan 的入门体验。</p>
+<p>依赖链一句话串起：实例 → 表面 → 物理设备 → 队列族 → 逻辑设备 → 交换链 → 图像视图 → 帧缓冲 → 主循环。顺序不能换，因为后一步的参数就是前一步的产物。</p>
+<p>下一篇让图像真正变色：图形管线（graphics pipeline）、渲染通道（render pass）、描述符（descriptor），以及多帧并发与同步原语全家桶。</p>
+<p>实验收尾的清理顺序照录一行：vkDestroySwapchainKHR（连同图像视图与帧缓冲）→ vkDestroyDevice → vkDestroySurfaceKHR（或先 glfwDestroyWindow）→ vkDestroyInstance——后建先拆；表面与调试回调都挂在实例之下，必须赶在 vkDestroyInstance 之前销毁（回调部分第 2 章已讲），实验收尾才不会崩。</p>
+<p><strong>参考锚点</strong></p>
+<ul>
+<li>vulkan-tutorial.com — &ldquo;Drawing a triangle&rdquo; 大章，结构与本文路线最接近；</li>
+<li>Khronos Vulkan Specification § WSI（窗口系统集成）— 呈现模式与返回码语义的权威定义；</li>
+<li>Khronos Wiki: Validation Layers 与 LunarG SDK 文档 — VK_LAYER_KHRONOS_validation 的官方说明；</li>
+<li>GLFW Window Guide — window hint 与 framebuffer size 语义。</li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/render/">Render</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under <a class="link" href="https://github.com/Liyufei1"  target="_blank" rel="noopener"
+    >Liyufei1</a></span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        const elementsToRender = [".main-article", ".widget--toc"];
+
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/cpp-boost-graph-notes/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Boost.Graph 学习笔记</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/ue-%E5%BC%95%E5%85%A5%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/UE5.png" loading="lazy" data-key="" data-hash="/UE5.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">UE 引入第三方库的几种方式</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/cpp-csapp-notes/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/csapp.png" loading="lazy" data-key="cpp-csapp-notes" data-hash="/csapp.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">cpp-csapp学习笔记</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/opengl-graphics-notes/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/OpenGL.png" loading="lazy" data-key="opengl-graphics-notes" data-hash="/OpenGL.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">OpenGL学习随笔-Graphics</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/opengl-glsl-notes/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/OpenGL.png" loading="lazy" data-key="opengl-glsl-notes" data-hash="/OpenGL.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">OpenGL学习随笔-GLSL</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2026 李宇飞-Liyufei1
+    </section>
+    
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.32.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
