@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>VibeCoding on 李宇飞-Liyufei1</title>
+        <link>https://Liyufei1.github.io/tags/vibecoding/</link>
+        <description>Recent content in VibeCoding on 李宇飞-Liyufei1</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <copyright>李宇飞-Liyufei1</copyright><atom:link href="https://Liyufei1.github.io/tags/vibecoding/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Vibe Coding教程</title>
+        <link>https://Liyufei1.github.io/p/vibe-coding%E6%95%99%E7%A8%8B/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>https://Liyufei1.github.io/p/vibe-coding%E6%95%99%E7%A8%8B/</guid>
+        <description>&lt;h2 id=&#34;mattpocock&#34;&gt;MattPocock
+&lt;/h2&gt;&lt;p&gt;仓库地址：&lt;a class=&#34;link&#34; href=&#34;https://github.com/mattpocock/skills&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;mattpocock/skills: Skills for Real Engineers. Straight from my .agents directory.&lt;/a&gt;
+简介：一套vibe coding技能包，帮你解决沟通错位、上下文冗长、代码质量不稳、架构腐化等问题。&lt;/p&gt;
+&lt;h3 id=&#34;初始化&#34;&gt;初始化
+&lt;/h3&gt;&lt;h4 id=&#34;1-setup-matt-pocock-skills&#34;&gt;1. setup-matt-pocock-skills
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;一次性初始化配置技能&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在使用 Matt Pocock 系列工程技能之前，为当前仓库搭建好这些技能所依赖的基础配置。具体包括三个方面：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;议题追踪器（Issue Tracker）&lt;/strong&gt; — 确定当前项目的 issue 存放在哪里（GitHub Issues、GitLab Issues、本地 Markdown 文件如 &lt;code&gt;.scratch/&lt;/code&gt;，或其他如 Jira/Linear），技能会自动探测并让用户确认。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;分类标签词汇表（Triage Labels）&lt;/strong&gt; — 如果安装了 &lt;a class=&#34;link&#34; href=&#34;vscode-file://vscode-app/c:/Tool/IDE/Microsoft%20VS%20Code/e4c7e7b1d6/resources/app/out/vs/code/electron-browser/workbench/workbench.html&#34; &gt;triage&lt;/a&gt; 技能，则配置五个标准 triage 标签（&lt;code&gt;needs-triage&lt;/code&gt;、&lt;code&gt;needs-info&lt;/code&gt;、&lt;code&gt;ready-for-agent&lt;/code&gt;、&lt;code&gt;ready-for-human&lt;/code&gt;、&lt;code&gt;wontfix&lt;/code&gt;），或让用户自定义已有标签名的映射。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;领域文档布局（Domain Docs）&lt;/strong&gt; — 确定 &lt;code&gt;CONTEXT.md&lt;/code&gt; 和 ADR（架构决策记录）的存放位置。默认是&lt;strong&gt;单上下文&lt;/strong&gt;（根目录放一份 &lt;code&gt;CONTEXT.md&lt;/code&gt; + &lt;code&gt;docs/adr/&lt;/code&gt;），仅在检测到 monorepo 信号时才提供多上下文选项。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;最终产物是三个配置文件（放在 &lt;code&gt;docs/agents/&lt;/code&gt; 下）以及在 &lt;a class=&#34;link&#34; href=&#34;vscode-file://vscode-app/c:/Tool/IDE/Microsoft%20VS%20Code/e4c7e7b1d6/resources/app/out/vs/code/electron-browser/workbench/workbench.html&#34; &gt;CLAUDE.md&lt;/a&gt; 或 &lt;code&gt;AGENTS.md&lt;/code&gt; 中添加一个 &lt;code&gt;## Agent skills&lt;/code&gt; 区块，供 &lt;a class=&#34;link&#34; href=&#34;vscode-file://vscode-app/c:/Tool/IDE/Microsoft%20VS%20Code/e4c7e7b1d6/resources/app/out/vs/code/electron-browser/workbench/workbench.html&#34; &gt;to-tickets&lt;/a&gt;、&lt;a class=&#34;link&#34; href=&#34;vscode-file://vscode-app/c:/Tool/IDE/Microsoft%20VS%20Code/e4c7e7b1d6/resources/app/out/vs/code/electron-browser/workbench/workbench.html&#34; &gt;triage&lt;/a&gt;、&lt;a class=&#34;link&#34; href=&#34;vscode-file://vscode-app/c:/Tool/IDE/Microsoft%20VS%20Code/e4c7e7b1d6/resources/app/out/vs/code/electron-browser/workbench/workbench.html&#34; &gt;to-spec&lt;/a&gt; 等其他技能读取使用。&lt;/p&gt;
+&lt;h4 id=&#34;2-aks-matt&#34;&gt;2. aks-matt
+&lt;/h4&gt;&lt;p&gt;Matt Pocock 系列技能包的索引总结，当你不知道该用哪个技能时，可以问问它&lt;/p&gt;
+&lt;h3 id=&#34;开发流程&#34;&gt;开发流程
+&lt;/h3&gt;&lt;h3 id=&#34;代码维护&#34;&gt;代码维护
+&lt;/h3&gt;&lt;h2 id=&#34;相关笔记&#34;&gt;相关笔记
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;[[opencode简介]]&lt;/li&gt;
+&lt;li&gt;[[openclow]]&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

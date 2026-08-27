@@ -901,6 +901,12 @@
 &lt;li&gt;Khronos Wiki: Validation Layers 与 LunarG SDK 文档 — VK_LAYER_KHRONOS_validation 的官方说明；&lt;/li&gt;
 &lt;li&gt;GLFW Window Guide — window hint 与 framebuffer size 语义。&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h2 id=&#34;相关笔记&#34;&gt;相关笔记
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;[[glfw]]&lt;/li&gt;
+&lt;li&gt;[[LearnOpengl]]&lt;/li&gt;
+&lt;li&gt;[[graphics]]&lt;/li&gt;
+&lt;/ul&gt;
 </description>
         </item>
         <item>
@@ -949,7 +955,16 @@
 &lt;/ul&gt;
 &lt;h2 id=&#34;渲染管线&#34;&gt;渲染管线
 &lt;/h2&gt;&lt;h3 id=&#34;光栅化渲染管线&#34;&gt;光栅化渲染管线
-&lt;/h3&gt;&lt;p&gt;![[Pasted image 20260730174426.png]]
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/Render/ImageTemp/Pasted%20image%2020260730174426.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;图片&#34;
+	
+	
+&gt;
 &lt;em&gt;输入汇编器&lt;/em&gt; 从您指定的缓冲区中收集原始顶点数据，并且还可以使用索引缓冲区来重复某些元素，而无需复制顶点数据本身。&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;顶点着色器&lt;/em&gt; 为每个顶点运行，通常应用变换将顶点位置从模型空间转换为屏幕空间。它还将每个顶点的数据传递到管线下方。&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;细分着色器&lt;/em&gt; 允许您根据某些规则细分几何体，以提高网格质量。这通常用于使砖墙和楼梯等表面在靠近时看起来不那么平坦。&lt;/p&gt;
@@ -1449,6 +1464,12 @@ $$&lt;p&gt;其中：&lt;/p&gt;
 &lt;li&gt;材质与光源参数共同决定最终视觉结果&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;如果继续往下写，可以很自然地延伸到：纹理、法线贴图、多个光源、阴影映射、PBR 等内容。&lt;/p&gt;
+&lt;h2 id=&#34;相关笔记&#34;&gt;相关笔记
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;[[LearnOpengl]]&lt;/li&gt;
+&lt;li&gt;[[glsl]]&lt;/li&gt;
+&lt;li&gt;[[Vulkan初学]]&lt;/li&gt;
+&lt;/ul&gt;
 </description>
         </item>
         <item>
@@ -1810,6 +1831,11 @@ $$&lt;p&gt;其中：&lt;/p&gt;
 &lt;li&gt;学会阅读和编写最基础的着色器代码&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;后续继续学习光照、材质、阴影、后处理时，GLSL 会反复出现。越早熟悉它的语法和数据流，后面的 OpenGL 内容就越容易理解。&lt;/p&gt;
+&lt;h2 id=&#34;相关笔记&#34;&gt;相关笔记
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;[[LearnOpengl]]&lt;/li&gt;
+&lt;li&gt;[[graphics]]&lt;/li&gt;
+&lt;/ul&gt;
 </description>
         </item>
         <item>
@@ -2169,6 +2195,11 @@ $$&lt;p&gt;其中：&lt;/p&gt;
 &lt;li&gt;能在主循环里处理输入和交换缓冲&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;后面如果继续写 OpenGL 笔记，这篇内容可以作为“窗口初始化”部分的基础参考。&lt;/p&gt;
+&lt;h2 id=&#34;相关笔记&#34;&gt;相关笔记
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;[[LearnOpengl]]&lt;/li&gt;
+&lt;li&gt;[[Vulkan初学]]&lt;/li&gt;
+&lt;/ul&gt;
 </description>
         </item>
         <item>
@@ -2955,6 +2986,13 @@ $$&lt;p&gt;其中：&lt;/p&gt;
 &lt;li&gt;用纹理把图像数据引入到着色器计算中&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;如果把这些部分连起来，你就已经拥有了一个最基础的现代 OpenGL 渲染流程。&lt;/p&gt;
+&lt;h2 id=&#34;相关笔记&#34;&gt;相关笔记
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;[[glfw]]&lt;/li&gt;
+&lt;li&gt;[[glsl]]&lt;/li&gt;
+&lt;li&gt;[[graphics]]&lt;/li&gt;
+&lt;li&gt;[[Vulkan初学]]&lt;/li&gt;
+&lt;/ul&gt;
 </description>
         </item>
         

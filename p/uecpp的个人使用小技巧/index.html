@@ -10,9 +10,10 @@
 <meta property='og:description' content="日志 使用自定义日志类别 默认的 UE_LOG(LogTemp, ...) 所有人的日志混在一个类别里，既不方便筛选，也无法单独控制 Verbosity。建议每个模块都定义自己的日志类别。\n1. 声明自定义 Log Category 在头文件中用 DECLARE_LOG_CATEGORY_EXTERN 声明：\n">
 <meta property='og:url' content='https://Liyufei1.github.io/p/uecpp%E7%9A%84%E4%B8%AA%E4%BA%BA%E4%BD%BF%E7%94%A8%E5%B0%8F%E6%8A%80%E5%B7%A7/'>
 <meta property='og:site_name' content='李宇飞-Liyufei1'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='UE' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='UE' /><meta property='article:tag' content='Unreal' /><meta property='og:image' content='https://Liyufei1.github.io/UE5.png' />
 <meta name="twitter:title" content="UECpp的个人使用小技巧">
-<meta name="twitter:description" content="日志 使用自定义日志类别 默认的 UE_LOG(LogTemp, ...) 所有人的日志混在一个类别里，既不方便筛选，也无法单独控制 Verbosity。建议每个模块都定义自己的日志类别。\n1. 声明自定义 Log Category 在头文件中用 DECLARE_LOG_CATEGORY_EXTERN 声明：\n">
+<meta name="twitter:description" content="日志 使用自定义日志类别 默认的 UE_LOG(LogTemp, ...) 所有人的日志混在一个类别里，既不方便筛选，也无法单独控制 Verbosity。建议每个模块都定义自己的日志类别。\n1. 声明自定义 Log Category 在头文件中用 DECLARE_LOG_CATEGORY_EXTERN 声明：\n"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://Liyufei1.github.io/UE5.png' />
     <link rel="shortcut icon" href="/favicon.png" />
 
     </head>
@@ -299,6 +300,7 @@
         </li>
       </ol>
     </li>
+    <li><a href="#相关笔记">相关笔记</a></li>
   </ol>
 </nav>
         </div>
@@ -310,16 +312,20 @@
 
 
             <main class="main full-width">
-    <article class="main-article">
+    <article class="has-image main-article">
     <header class="article-header">
+        <div class="article-image">
+            <a href="/p/uecpp%E7%9A%84%E4%B8%AA%E4%BA%BA%E4%BD%BF%E7%94%A8%E5%B0%8F%E6%8A%80%E5%B7%A7/">
+                
+                    <img src="/UE5.png" loading="lazy" alt="Featured image of post UECpp的个人使用小技巧" />
+                
+            </a>
+        </div>
+    
 
     <div class="article-details">
     
     <header class="article-category">
-        
-            <a href="/categories/cpp/" >
-                Cpp
-            </a>
         
             <a href="/categories/ue/" >
                 UE
@@ -521,6 +527,10 @@
 <li><strong>Shipping 包体优化</strong>：将第三个参数设为 <code>Warning</code>，所有 <code>Verbose</code>/<code>Log</code> 级别的日志在编译期被剥离，零运行时开销。</li>
 <li><strong>带上上下文信息</strong>：<code>UE_LOG</code> 支持格式化字符串，建议始终带上关键变量值，比 <code>GEngine-&gt;AddOnScreenDebugMessage</code> 更灵活。</li>
 </ol>
+<h2 id="相关笔记">相关笔记
+</h2><ul>
+<li>[[UE三方库接入]]</li>
+</ul>
 
 </section>
 
@@ -530,6 +540,8 @@
     <section class="article-tags">
         
             <a href="/tags/ue/">UE</a>
+        
+            <a href="/tags/unreal/">Unreal</a>
         
     </section>
 
@@ -608,57 +620,6 @@
 
         <div class="article-details">
             <h2 class="article-title">UE 引入第三方库的几种方式</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/p/vulkan%E5%88%9D%E5%AD%A6%E9%9A%8F%E7%AC%94%E4%BB%8E%E9%9B%B6%E5%88%B0%E4%BA%A4%E6%8D%A2%E9%93%BE/">
-        
-        
-            <div class="article-image">
-                
-                    <img src="/OpenGL.png" loading="lazy" data-key="" data-hash="/OpenGL.png"/>
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">Vulkan初学随笔：从零到交换链</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/p/cpp-boost-graph-notes/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">Boost.Graph 学习笔记</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/p/cpp-csapp-notes/">
-        
-        
-            <div class="article-image">
-                
-                    <img src="/csapp.png" loading="lazy" data-key="cpp-csapp-notes" data-hash="/csapp.png"/>
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">cpp-csapp学习笔记</h2>
         </div>
     </a>
 </article>

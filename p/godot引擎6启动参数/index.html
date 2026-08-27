@@ -1,0 +1,2547 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="基于godot4.4版本，学习随笔">
+<title>【godot】七、godot的启动参数</title>
+
+<link rel='canonical' href='https://Liyufei1.github.io/p/godot%E5%BC%95%E6%93%8E6%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0/'>
+
+<link rel="stylesheet" href="/scss/style.min.6ba8b9ea95cedbd14d34969a3a28210289d3a74cba725c37699a1455f78e7135.css"><meta property='og:title' content="【godot】七、godot的启动参数">
+<meta property='og:description' content="基于godot4.4版本，学习随笔">
+<meta property='og:url' content='https://Liyufei1.github.io/p/godot%E5%BC%95%E6%93%8E6%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0/'>
+<meta property='og:site_name' content='李宇飞-Liyufei1'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Godot' /><meta property='article:tag' content='启动参数' /><meta property='article:tag' content='CLI' /><meta property='article:published_time' content='2025-12-20T09:18:31&#43;08:00'/><meta property='article:modified_time' content='2025-12-20T09:18:31&#43;08:00'/><meta property='og:image' content='https://Liyufei1.github.io/godot.png' />
+<meta name="twitter:title" content="【godot】七、godot的启动参数">
+<meta name="twitter:description" content="基于godot4.4版本，学习随笔"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://Liyufei1.github.io/godot.png' />
+    <link rel="shortcut icon" href="/favicon.png" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/guidao1Icon_hu_4c95e88ebc9c8e46.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🤣</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">李宇飞-Liyufei1</a></h1>
+            <h2 class="site-description">存放学习随笔的个人博客,主要有:Godot、Unreal、Blog、Cpp.
+ 下方是个人的b站、gitbug链接:</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://space.bilibili.com/7531504?spm_id_from=333.1007.0.0'
+                        target="_blank"
+                        title="Bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/Liyufei1'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友情链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://Liyufei1.github.io/en/" >English</option>
+                                
+                                    <option value="https://Liyufei1.github.io/" selected>中文</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#目录">目录</a></li>
+    <li><a href="#基本参数">基本参数</a>
+      <ol>
+        <li><a href="#-h---help-"><code>-h, --help, /?</code></a></li>
+        <li><a href="#--version"><code>--version</code></a></li>
+        <li><a href="#-v---verbose"><code>-v, --verbose</code></a></li>
+        <li><a href="#-q---quiet"><code>-q, --quiet</code></a></li>
+        <li><a href="#--no-header"><code>--no-header</code></a></li>
+      </ol>
+    </li>
+    <li><a href="#运行时参数">运行时参数</a>
+      <ol>
+        <li><a href="#--path-path"><code>--path &lt;path&gt;</code></a></li>
+        <li><a href="#-u---upwards"><code>-u, --upwards</code></a></li>
+        <li><a href="#--main-pack-path"><code>--main-pack &lt;path&gt;</code></a></li>
+        <li><a href="#--quit"><code>--quit</code></a></li>
+        <li><a href="#--quit-after-n"><code>--quit-after &lt;n&gt;</code></a></li>
+        <li><a href="#--max-fps-n"><code>--max-fps &lt;n&gt;</code></a></li>
+        <li><a href="#--fixed-fps-n"><code>--fixed-fps &lt;n&gt;</code></a></li>
+        <li><a href="#--frame-delay-ms"><code>--frame-delay &lt;ms&gt;</code></a></li>
+        <li><a href="#--time-scale-scale"><code>--time-scale &lt;scale&gt;</code></a></li>
+        <li><a href="#--delta-smoothing-mode"><code>--delta-smoothing &lt;mode&gt;</code></a></li>
+      </ol>
+    </li>
+    <li><a href="#编辑器参数">编辑器参数</a>
+      <ol>
+        <li><a href="#-e---editor"><code>-e, --editor</code></a></li>
+        <li><a href="#-p---project-manager"><code>-p, --project-manager</code></a></li>
+        <li><a href="#--recovery-mode"><code>--recovery-mode</code></a></li>
+        <li><a href="#--single-window"><code>--single-window</code></a></li>
+        <li><a href="#--build-solutions"><code>--build-solutions</code></a></li>
+        <li><a href="#--import"><code>--import</code></a></li>
+        <li><a href="#--export-release-preset-path"><code>--export-release &lt;preset&gt; &lt;path&gt;</code></a></li>
+        <li><a href="#--export-debug-preset-path"><code>--export-debug &lt;preset&gt; &lt;path&gt;</code></a></li>
+        <li><a href="#--export-pack-preset-path"><code>--export-pack &lt;preset&gt; &lt;path&gt;</code></a></li>
+        <li><a href="#--export-patch-preset-path"><code>--export-patch &lt;preset&gt; &lt;path&gt;</code></a></li>
+      </ol>
+    </li>
+    <li><a href="#显示与渲染参数">显示与渲染参数</a>
+      <ol>
+        <li><a href="#-f---fullscreen"><code>-f, --fullscreen</code></a></li>
+        <li><a href="#-m---maximized"><code>-m, --maximized</code></a></li>
+        <li><a href="#-w---windowed"><code>-w, --windowed</code></a></li>
+        <li><a href="#--resolution-wxh"><code>--resolution &lt;WxH&gt;</code></a></li>
+        <li><a href="#--position-xy"><code>--position &lt;X,Y&gt;</code></a></li>
+        <li><a href="#--screen-n"><code>--screen &lt;n&gt;</code></a></li>
+        <li><a href="#-t---always-on-top"><code>-t, --always-on-top</code></a></li>
+        <li><a href="#--display-driver-driver"><code>--display-driver &lt;driver&gt;</code></a></li>
+        <li><a href="#--rendering-method-method"><code>--rendering-method &lt;method&gt;</code></a></li>
+        <li><a href="#--rendering-driver-driver"><code>--rendering-driver &lt;driver&gt;</code></a></li>
+        <li><a href="#--gpu-index-n"><code>--gpu-index &lt;n&gt;</code></a></li>
+        <li><a href="#--gpu-validation"><code>--gpu-validation</code></a></li>
+        <li><a href="#--disable-vsync"><code>--disable-vsync</code></a></li>
+        <li><a href="#--headless"><code>--headless</code></a></li>
+        <li><a href="#--render-thread-mode"><code>--render-thread &lt;mode&gt;</code></a></li>
+        <li><a href="#--xr-mode-mode"><code>--xr-mode &lt;mode&gt;</code></a></li>
+      </ol>
+    </li>
+    <li><a href="#音频参数">音频参数</a>
+      <ol>
+        <li><a href="#--audio-driver-driver"><code>--audio-driver &lt;driver&gt;</code></a></li>
+        <li><a href="#--audio-output-latency-ms"><code>--audio-output-latency &lt;ms&gt;</code></a></li>
+      </ol>
+    </li>
+    <li><a href="#调试参数">调试参数</a>
+      <ol>
+        <li><a href="#-d---debug"><code>-d, --debug</code></a></li>
+        <li><a href="#--debug-collisions"><code>--debug-collisions</code></a></li>
+        <li><a href="#--debug-paths"><code>--debug-paths</code></a></li>
+        <li><a href="#--debug-navigation"><code>--debug-navigation</code></a></li>
+        <li><a href="#--debug-avoidance"><code>--debug-avoidance</code></a></li>
+        <li><a href="#--debug-canvas-item-redraw"><code>--debug-canvas-item-redraw</code></a></li>
+        <li><a href="#--debug-stringnames"><code>--debug-stringnames</code></a></li>
+        <li><a href="#--remote-debug-uri"><code>--remote-debug &lt;uri&gt;</code></a></li>
+        <li><a href="#--profiling"><code>--profiling</code></a></li>
+        <li><a href="#--profile-gpu"><code>--profile-gpu</code></a></li>
+        <li><a href="#--print-fps"><code>--print-fps</code></a></li>
+        <li><a href="#-b---breakpoints-list"><code>-b, --breakpoints &lt;list&gt;</code></a></li>
+        <li><a href="#--skip-breakpoints"><code>--skip-breakpoints</code></a></li>
+      </ol>
+    </li>
+    <li><a href="#网络与文件系统参数">网络与文件系统参数</a>
+      <ol>
+        <li><a href="#--remote-fs-hostport"><code>--remote-fs &lt;host:port&gt;</code></a></li>
+        <li><a href="#--remote-fs-password-password"><code>--remote-fs-password &lt;password&gt;</code></a></li>
+        <li><a href="#--log-file-path"><code>--log-file &lt;path&gt;</code></a></li>
+      </ol>
+    </li>
+    <li><a href="#平台特定参数">平台特定参数</a>
+      <ol>
+        <li><a href="#--tablet-driver-driver"><code>--tablet-driver &lt;driver&gt;</code></a></li>
+        <li><a href="#--wid-window_id"><code>--wid &lt;window_id&gt;</code></a></li>
+        <li><a href="#--lsp-port-port"><code>--lsp-port &lt;port&gt;</code></a></li>
+        <li><a href="#--dap-port-port"><code>--dap-port &lt;port&gt;</code></a></li>
+      </ol>
+    </li>
+    <li><a href="#其他工具参数">其他工具参数</a>
+      <ol>
+        <li><a href="#--doctool"><code>--doctool</code></a></li>
+        <li><a href="#--gdscript-docs-path"><code>--gdscript-docs &lt;path&gt;</code></a></li>
+        <li><a href="#--dump-gdextension-interface"><code>--dump-gdextension-interface</code></a></li>
+        <li><a href="#--dump-extension-api"><code>--dump-extension-api</code></a></li>
+        <li><a href="#--dump-extension-api-with-docs"><code>--dump-extension-api-with-docs</code></a></li>
+        <li><a href="#--validate-extension-api-file"><code>--validate-extension-api &lt;file&gt;</code></a></li>
+        <li><a href="#--test-rd-support"><code>--test-rd-support</code></a></li>
+        <li><a href="#--test-rd-creation"><code>--test-rd-creation</code></a></li>
+        <li><a href="#--write-movie-path"><code>--write-movie &lt;path&gt;</code></a></li>
+        <li><a href="#--benchmark"><code>--benchmark</code></a></li>
+        <li><a href="#--benchmark-file-path"><code>--benchmark-file &lt;path&gt;</code></a></li>
+        <li><a href="#--disable-crash-handler"><code>--disable-crash-handler</code></a></li>
+        <li><a href="#--single-threaded-scene"><code>--single-threaded-scene</code></a></li>
+        <li><a href="#--disable-render-loop"><code>--disable-render-loop</code></a></li>
+        <li><a href="#--text-driver-driver"><code>--text-driver &lt;driver&gt;</code></a></li>
+        <li><a href="#--editor-pid-pid"><code>--editor-pid &lt;pid&gt;</code></a></li>
+        <li><a href="#--editor-pseudolocalization"><code>--editor-pseudolocalization</code></a></li>
+        <li><a href="#--generate-spirv-debug-info"><code>--generate-spirv-debug-info</code></a></li>
+        <li><a href="#--extra-gpu-memory-tracking"><code>--extra-gpu-memory-tracking</code></a></li>
+        <li><a href="#--accurate-breadcrumbs"><code>--accurate-breadcrumbs</code></a></li>
+        <li><a href="#--gpu-abort"><code>--gpu-abort</code></a></li>
+        <li><a href="#--debug-server-uri"><code>--debug-server &lt;uri&gt;</code></a></li>
+        <li><a href="#--patches-list"><code>--patches &lt;list&gt;</code></a></li>
+        <li><a href="#--language-locale"><code>--language &lt;locale&gt;</code></a></li>
+        <li><a href="#--"><code>--</code></a></li>
+        <li><a href="#heading"><code>++</code></a></li>
+      </ol>
+    </li>
+    <li><a href="#常用组合示例">常用组合示例</a>
+      <ol>
+        <li><a href="#1-开发调试">1. 开发调试</a></li>
+        <li><a href="#2-游戏测试">2. 游戏测试</a></li>
+        <li><a href="#3-性能分析">3. 性能分析</a></li>
+        <li><a href="#4-无头服务器">4. 无头服务器</a></li>
+        <li><a href="#5-自动导出">5. 自动导出</a></li>
+        <li><a href="#6-视频录制">6. 视频录制</a></li>
+        <li><a href="#7-基准测试">7. 基准测试</a></li>
+        <li><a href="#8-cicd-完整构建流水线">8. CI/CD 完整构建流水线</a></li>
+      </ol>
+    </li>
+    <li><a href="#注意事项">注意事项</a>
+      <ol>
+        <li><a href="#参数使用原则">参数使用原则</a></li>
+        <li><a href="#性能考虑">性能考虑</a></li>
+        <li><a href="#安全考虑">安全考虑</a></li>
+        <li><a href="#常见问题和解决方案">常见问题和解决方案</a></li>
+        <li><a href="#最佳实践总结">最佳实践总结</a></li>
+      </ol>
+    </li>
+    <li><a href="#源码解析">源码解析</a></li>
+    <li><a href="#总结">总结</a></li>
+    <li><a href="#相关笔记">相关笔记</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/godot%E5%BC%95%E6%93%8E6%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0/">
+                
+                    <img src="/godot.png" loading="lazy" alt="Featured image of post 【godot】七、godot的启动参数" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/godot/" style="background-color: #3121c0ff; color: #e9e5e5ff;">
+                Godot
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/godot%E5%BC%95%E6%93%8E6%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0/">【godot】七、godot的启动参数</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            基于godot4.4版本，学习随笔
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published" datetime='2025-12-20T09:18:31&#43;08:00'>2025-12-20</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 12 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="godot-44-启动参数完整指南">Godot 4.4 启动参数完整指南
+</h1><p>Godot 引擎提供了丰富的命令行启动参数，允许开发者在运行时和编辑器中精细控制引擎行为。本文基于 Godot 4.4 源码，全面梳理了所有可用的启动参数，并按功能分类进行详细介绍。</p>
+<h2 id="目录">目录
+</h2><ul>
+<li><a class="link" href="#%e5%9f%ba%e6%9c%ac%e5%8f%82%e6%95%b0" >基本参数</a></li>
+<li><a class="link" href="#%e8%bf%90%e8%a1%8c%e6%97%b6%e5%8f%82%e6%95%b0" >运行时参数</a></li>
+<li><a class="link" href="#%e7%bc%96%e8%be%91%e5%99%a8%e5%8f%82%e6%95%b0" >编辑器参数</a></li>
+<li><a class="link" href="#%e6%98%be%e7%a4%ba%e4%b8%8e%e6%b8%b2%e6%9f%93%e5%8f%82%e6%95%b0" >显示与渲染参数</a></li>
+<li><a class="link" href="#%e9%9f%b3%e9%a2%91%e5%8f%82%e6%95%b0" >音频参数</a></li>
+<li><a class="link" href="#%e8%b0%83%e8%af%95%e5%8f%82%e6%95%b0" >调试参数</a></li>
+<li><a class="link" href="#%e7%bd%91%e7%bb%9c%e4%b8%8e%e6%96%87%e4%bb%b6%e7%b3%bb%e7%bb%9f%e5%8f%82%e6%95%b0" >网络与文件系统参数</a></li>
+<li><a class="link" href="#%e5%b9%b3%e5%8f%b0%e7%89%b9%e5%ae%9a%e5%8f%82%e6%95%b0" >平台特定参数</a></li>
+<li><a class="link" href="#%e5%85%b6%e4%bb%96%e5%b7%a5%e5%85%b7%e5%8f%82%e6%95%b0" >其他工具参数</a></li>
+<li><a class="link" href="#%e5%b8%b8%e7%94%a8%e7%bb%84%e5%90%88%e7%a4%ba%e4%be%8b" >常用组合示例</a></li>
+<li><a class="link" href="#%e6%b3%a8%e6%84%8f%e4%ba%8b%e9%a1%b9" >注意事项</a></li>
+</ul>
+<h2 id="基本参数">基本参数
+</h2><h3 id="-h---help-"><code>-h, --help, /?</code>
+</h3><p>显示帮助信息并退出。这是获取所有可用命令行参数的最快方法。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --help
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>使用场景</strong>：</p>
+<ul>
+<li>初次使用 Godot 时了解可用参数</li>
+<li>忘记具体参数名称时快速查阅</li>
+<li>检查当前 Godot 版本支持的参数列表</li>
+</ul>
+<h3 id="--version"><code>--version</code>
+</h3><p>显示 Godot 版本信息并退出。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --version
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>使用场景</strong>：</p>
+<ul>
+<li>确认当前使用的 Godot 版本</li>
+<li>在 CI/CD 环境中验证引擎版本</li>
+<li>报告问题时提供版本信息</li>
+</ul>
+<h3 id="-v---verbose"><code>-v, --verbose</code>
+</h3><p>启用详细输出模式，打印更多信息到控制台。包括引擎初始化、资源加载、错误详情等。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --verbose
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>使用场景</strong>：</p>
+<ul>
+<li>调试启动问题</li>
+<li>查看资源加载过程</li>
+<li>分析引擎初始化流程</li>
+<li>开发和测试环境中获取更多信息</li>
+</ul>
+<h3 id="-q---quiet"><code>-q, --quiet</code>
+</h3><p>启用安静模式，减少控制台输出。仅显示错误信息，适用于自动化脚本。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --quiet
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>使用场景</strong>：</p>
+<ul>
+<li>CI/CD 环境中减少日志噪音</li>
+<li>自动化构建脚本</li>
+<li>批量处理任务</li>
+<li>生产环境部署</li>
+</ul>
+<h3 id="--no-header"><code>--no-header</code>
+</h3><p>禁用启动时显示的 Godot 标题头信息，使输出更加简洁。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --no-header
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>使用场景</strong>：</p>
+<ul>
+<li>脚本化操作时保持输出整洁</li>
+<li>日志分析时减少无关信息</li>
+<li>自动化测试环境</li>
+</ul>
+<h2 id="运行时参数">运行时参数
+</h2><h3 id="--path-path"><code>--path &lt;path&gt;</code>
+</h3><p>指定项目路径。这是最重要的参数之一，告诉 Godot 在哪里找到项目。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --path /path/to/project
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>使用场景</strong>：</p>
+<ul>
+<li>从任意目录运行 Godot 项目</li>
+<li>在脚本中指定项目位置</li>
+<li>CI/CD 管道中的项目路径配置</li>
+</ul>
+<p><strong>最佳实践</strong>：</p>
+<ul>
+<li>优先使用绝对路径以确保可靠性</li>
+<li>在自动化脚本中总是明确指定项目路径</li>
+<li>路径应包含 <code>project.godot</code> 文件</li>
+</ul>
+<h3 id="-u---upwards"><code>-u, --upwards</code>
+</h3><p>向上扫描文件夹以查找 project.godot 文件。从当前目录开始递归搜索父目录。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --upwards
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>使用场景</strong>：</p>
+<ul>
+<li>在项目子目录中快速运行 Godot</li>
+<li>开发环境中的便捷操作</li>
+<li>不需要记住完整项目路径的快速启动</li>
+</ul>
+<p><strong>最佳实践</strong>：</p>
+<ul>
+<li>适用于开发环境，生产环境建议使用 <code>--path</code></li>
+<li>确保项目目录结构清晰，避免多个 project.godot 文件</li>
+</ul>
+<h3 id="--main-pack-path"><code>--main-pack &lt;path&gt;</code>
+</h3><p>指定主包文件路径。允许从 PCK 文件运行项目，无需源代码。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --main-pack /path/to/main.pck
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>使用场景</strong>：</p>
+<ul>
+<li>运行打包后的游戏</li>
+<li>分发游戏而不暴露源代码</li>
+<li>模块化项目部署</li>
+</ul>
+<p><strong>最佳实践</strong>：</p>
+<ul>
+<li>确保 PCK 文件与引擎版本兼容</li>
+<li>用于最终产品分发，不用于开发</li>
+</ul>
+<h3 id="--quit"><code>--quit</code>
+</h3><p>在第一个主循环迭代后自动退出。用于快速测试和验证。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --quit
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>使用场景</strong>：</p>
+<ul>
+<li>验证项目配置是否正确</li>
+<li>快速检查脚本语法错误</li>
+<li>CI/CD 中的快速验证步骤</li>
+</ul>
+<p><strong>最佳实践</strong>：</p>
+<ul>
+<li>结合 <code>--verbose</code> 使用以获取错误信息</li>
+<li>用于自动化测试的第一步验证</li>
+</ul>
+<h3 id="--quit-after-n"><code>--quit-after &lt;n&gt;</code>
+</h3><p>在指定数量的迭代后退出。允许运行特定帧数后自动退出。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --quit-after <span class="m">100</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>使用场景</strong>：</p>
+<ul>
+<li>性能测试的固定时长</li>
+<li>自动化截图或录制</li>
+<li>有限时长的测试场景</li>
+</ul>
+<p><strong>最佳实践</strong>：</p>
+<ul>
+<li>结合 <code>--fixed-fps</code> 使用以获得精确的时间控制</li>
+<li>用于自动化测试和性能基准测试</li>
+</ul>
+<h3 id="--max-fps-n"><code>--max-fps &lt;n&gt;</code>
+</h3><p>设置最大渲染帧率。0 表示不限制帧率。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --max-fps <span class="m">60</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>使用场景</strong>：</p>
+<ul>
+<li>限制 CPU/GPU 使用率</li>
+<li>移动设备省电</li>
+<li>保持一致的帧率</li>
+<li>性能测试</li>
+</ul>
+<p><strong>最佳实践</strong>：</p>
+<ul>
+<li>移动平台通常设置为 30 或 60 FPS</li>
+<li>桌面平台可以不限制或设置为显示器刷新率</li>
+<li>用于性能优化时，逐步降低帧率测试</li>
+</ul>
+<h3 id="--fixed-fps-n"><code>--fixed-fps &lt;n&gt;</code>
+</h3><p>设置固定帧率模式。禁用实时同步，强制固定时间步长。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --fixed-fps <span class="m">30</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>使用场景</strong>：</p>
+<ul>
+<li>物理模拟需要固定时间步长</li>
+<li>录制游戏视频时确保一致性</li>
+<li>网络同步游戏</li>
+<li>调试时间相关问题</li>
+</ul>
+<p><strong>最佳实践</strong>：</p>
+<ul>
+<li>物理游戏通常使用 60 FPS 的固定帧率</li>
+<li>录制视频时根据目标帧率设置</li>
+<li>不适用于需要实时响应的游戏</li>
+</ul>
+<h3 id="--frame-delay-ms"><code>--frame-delay &lt;ms&gt;</code>
+</h3><p>设置帧延迟（毫秒）。模拟高 CPU 负载情况。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --frame-delay <span class="m">16</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>使用场景</strong>：</p>
+<ul>
+<li>模拟低端设备性能</li>
+<li>测试游戏在慢速环境下的表现</li>
+<li>性能压力测试</li>
+</ul>
+<p><strong>最佳实践</strong>：</p>
+<ul>
+<li>不要用作 FPS 限制器，应使用 <code>--max-fps</code></li>
+<li>用于性能测试和优化验证</li>
+<li>典型值为 16ms（60 FPS）或 33ms（30 FPS）</li>
+</ul>
+<h3 id="--time-scale-scale"><code>--time-scale &lt;scale&gt;</code>
+</h3><p>设置时间缩放因子。1.0 为正常速度，更高值更快，更低值更慢。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --time-scale 0.5
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>使用场景</strong>：</p>
+<ul>
+<li>慢动作效果测试</li>
+<li>快速测试长时间运行的游戏</li>
+<li>调试时间相关的游戏机制</li>
+<li>性能测试中的时间加速</li>
+</ul>
+<p><strong>最佳实践</strong>：</p>
+<ul>
+<li>0.5 用于慢动作调试</li>
+<li>2.0 或更高用于快速测试</li>
+<li>结合 <code>--fixed-fps</code> 获得可重现的结果</li>
+</ul>
+<h3 id="--delta-smoothing-mode"><code>--delta-smoothing &lt;mode&gt;</code>
+</h3><p>设置增量平滑模式（enable/disable）。控制帧时间平滑以减少抖动。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --delta-smoothing <span class="nb">enable</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>使用场景</strong>：</p>
+<ul>
+<li>提高动画和物理的平滑度</li>
+<li>减少帧率波动的影响</li>
+<li>调试时间相关问题</li>
+</ul>
+<p><strong>最佳实践</strong>：</p>
+<ul>
+<li>默认启用以获得更好的游戏体验</li>
+<li>调试时可以禁用以查看原始帧时间</li>
+<li>在固定帧率模式下通常不需要</li>
+</ul>
+<h2 id="编辑器参数">编辑器参数
+</h2><h3 id="-e---editor"><code>-e, --editor</code>
+</h3><p>启动编辑器模式。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --editor
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="-p---project-manager"><code>-p, --project-manager</code>
+</h3><p>启动项目管理器。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --project-manager
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="--recovery-mode"><code>--recovery-mode</code>
+</h3><p>启用恢复模式。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --recovery-mode
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="--single-window"><code>--single-window</code>
+</h3><p>强制单窗口模式。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --single-window
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="--build-solutions"><code>--build-solutions</code>
+</h3><p>构建脚本解决方案（如 C#）。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --build-solutions
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="--import"><code>--import</code>
+</h3><p>导入资源并退出。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --import
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="--export-release-preset-path"><code>--export-release &lt;preset&gt; &lt;path&gt;</code>
+</h3><p>发布模式导出项目。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --export-release <span class="s2">&#34;Windows Desktop&#34;</span> game.exe
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="--export-debug-preset-path"><code>--export-debug &lt;preset&gt; &lt;path&gt;</code>
+</h3><p>调试模式导出项目。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --export-debug <span class="s2">&#34;Windows Desktop&#34;</span> game_debug.exe
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="--export-pack-preset-path"><code>--export-pack &lt;preset&gt; &lt;path&gt;</code>
+</h3><p>导出为 PCK 包。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --export-pack <span class="s2">&#34;Windows Desktop&#34;</span> game.pck
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="--export-patch-preset-path"><code>--export-patch &lt;preset&gt; &lt;path&gt;</code>
+</h3><p>导出为补丁包。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --export-patch <span class="s2">&#34;Windows Desktop&#34;</span> patch.pck
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="显示与渲染参数">显示与渲染参数
+</h2><h3 id="-f---fullscreen"><code>-f, --fullscreen</code>
+</h3><p>强制全屏模式。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --fullscreen
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="-m---maximized"><code>-m, --maximized</code>
+</h3><p>强制最大化窗口。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --maximized
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="-w---windowed"><code>-w, --windowed</code>
+</h3><p>强制窗口模式。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --windowed
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="--resolution-wxh"><code>--resolution &lt;WxH&gt;</code>
+</h3><p>设置窗口分辨率。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --resolution 1920x1080
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="--position-xy"><code>--position &lt;X,Y&gt;</code>
+</h3><p>设置窗口位置。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --position 100,100
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="--screen-n"><code>--screen &lt;n&gt;</code>
+</h3><p>指定显示器编号。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --screen <span class="m">1</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="-t---always-on-top"><code>-t, --always-on-top</code>
+</h3><p>强制窗口置顶。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --always-on-top
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="--display-driver-driver"><code>--display-driver &lt;driver&gt;</code>
+</h3><p>指定显示驱动。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --display-driver vulkan
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="--rendering-method-method"><code>--rendering-method &lt;method&gt;</code>
+</h3><p>指定渲染方法。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --rendering-method forward_plus
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="--rendering-driver-driver"><code>--rendering-driver &lt;driver&gt;</code>
+</h3><p>指定渲染驱动。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --rendering-driver vulkan
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="--gpu-index-n"><code>--gpu-index &lt;n&gt;</code>
+</h3><p>指定 GPU 索引。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --gpu-index <span class="m">0</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="--gpu-validation"><code>--gpu-validation</code>
+</h3><p>启用 GPU 验证层。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --gpu-validation
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="--disable-vsync"><code>--disable-vsync</code>
+</h3><p>禁用垂直同步。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --disable-vsync
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="--headless"><code>--headless</code>
+</h3><p>启用无头模式（无音频、无渲染）。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --headless
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="--render-thread-mode"><code>--render-thread &lt;mode&gt;</code>
+</h3><p>设置渲染线程模式（safe/separate）。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --render-thread safe
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="--xr-mode-mode"><code>--xr-mode &lt;mode&gt;</code>
+</h3><p>设置 XR 模式（default/off/on）。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --xr-mode default
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="音频参数">音频参数
+</h2><h3 id="--audio-driver-driver"><code>--audio-driver &lt;driver&gt;</code>
+</h3><p>指定音频驱动。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --audio-driver ALSA
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="--audio-output-latency-ms"><code>--audio-output-latency &lt;ms&gt;</code>
+</h3><p>设置音频输出延迟。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --audio-output-latency <span class="m">15</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="调试参数">调试参数
+</h2><h3 id="-d---debug"><code>-d, --debug</code>
+</h3><p>启用调试模式。启动本地调试服务器并允许连接调试器。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --debug
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>使用场景</strong>：</p>
+<ul>
+<li>本地调试游戏逻辑</li>
+<li>脚本调试和错误追踪</li>
+<li>开发阶段的实时调试</li>
+</ul>
+<p><strong>最佳实践</strong>：</p>
+<ul>
+<li>开发阶段始终启用</li>
+<li>发布版本中禁用以提高性能</li>
+<li>结合 IDE 的调试功能使用</li>
+</ul>
+<h3 id="--debug-collisions"><code>--debug-collisions</code>
+</h3><p>启用碰撞调试。在游戏中显示所有碰撞形状的可见轮廓。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --debug-collisions
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>使用场景</strong>：</p>
+<ul>
+<li>调试物理碰撞问题</li>
+<li>验证碰撞形状设置</li>
+<li>优化碰撞检测性能</li>
+</ul>
+<p><strong>最佳实践</strong>：</p>
+<ul>
+<li>物理游戏开发中经常使用</li>
+<li>用于调试不可见的碰撞问题</li>
+<li>发布前确保禁用以提高性能</li>
+</ul>
+<h3 id="--debug-paths"><code>--debug-paths</code>
+</h3><p>启用路径调试。显示导航路径和寻路相关的可视化信息。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --debug-paths
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>使用场景</strong>：</p>
+<ul>
+<li>调试 AI 寻路问题</li>
+<li>验证导航网格设置</li>
+<li>优化路径查找算法</li>
+</ul>
+<p><strong>最佳实践</strong>：</p>
+<ul>
+<li>AI 游戏开发必备工具</li>
+<li>用于复杂的导航系统调试</li>
+<li>帮助理解路径查找行为</li>
+</ul>
+<h3 id="--debug-navigation"><code>--debug-navigation</code>
+</h3><p>启用导航调试。显示导航多边形和导航网格的可视化信息。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --debug-navigation
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>使用场景</strong>：</p>
+<ul>
+<li>调试导航网格生成</li>
+<li>验证导航区域设置</li>
+<li>优化导航系统性能</li>
+</ul>
+<p><strong>最佳实践</strong>：</p>
+<ul>
+<li>3D 游戏导航系统开发</li>
+<li>用于调试复杂的导航场景</li>
+<li>帮助识别导航问题</li>
+</ul>
+<h3 id="--debug-avoidance"><code>--debug-avoidance</code>
+</h3><p>启用避障调试。显示避障算法的可视化信息。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --debug-avoidance
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>使用场景</strong>：</p>
+<ul>
+<li>调试 AI 避障行为</li>
+<li>验证避障算法效果</li>
+<li>优化避障系统性能</li>
+</ul>
+<p><strong>最佳实践</strong>：</p>
+<ul>
+<li>复杂 AI 系统开发</li>
+<li>用于调试群体行为</li>
+<li>帮助优化避障参数</li>
+</ul>
+<h3 id="--debug-canvas-item-redraw"><code>--debug-canvas-item-redraw</code>
+</h3><p>启用画布项目重绘调试。每次画布项目请求重绘时显示矩形。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --debug-canvas-item-redraw
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>使用场景</strong>：</p>
+<ul>
+<li>调试 UI 重绘问题</li>
+<li>优化渲染性能</li>
+<li>排查过度重绘问题</li>
+</ul>
+<p><strong>最佳实践</strong>：</p>
+<ul>
+<li>UI 性能优化时使用</li>
+<li>用于调试低处理器模式问题</li>
+<li>帮助识别不必要的重绘</li>
+</ul>
+<h3 id="--debug-stringnames"><code>--debug-stringnames</code>
+</h3><p>启用字符串名称调试。在引擎退出时打印所有 StringName 分配信息。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --debug-stringnames
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>使用场景</strong>：</p>
+<ul>
+<li>内存使用分析</li>
+<li>字符串优化</li>
+<li>调试字符串内存泄漏</li>
+</ul>
+<p><strong>最佳实践</strong>：</p>
+<ul>
+<li>内存优化分析时使用</li>
+<li>用于识别字符串性能问题</li>
+<li>发布版本中禁用</li>
+</ul>
+<h3 id="--remote-debug-uri"><code>--remote-debug &lt;uri&gt;</code>
+</h3><p>设置远程调试地址。允许通过网络连接调试器。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --remote-debug tcp://127.0.0.1:6007
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>使用场景</strong>：</p>
+<ul>
+<li>远程设备调试</li>
+<li>移动设备调试</li>
+<li>CI/CD 环境中的调试</li>
+</ul>
+<p><strong>最佳实践</strong>：</p>
+<ul>
+<li>格式：<code>tcp://&lt;host&gt;:&lt;port&gt;</code></li>
+<li>默认端口：6007</li>
+<li>确保网络连接和防火墙设置</li>
+</ul>
+<h3 id="--profiling"><code>--profiling</code>
+</h3><p>启用性能分析。收集运行时性能数据用于分析。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --profiling
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>使用场景</strong>：</p>
+<ul>
+<li>性能瓶颈分析</li>
+<li>优化游戏性能</li>
+<li>监控资源使用</li>
+</ul>
+<p><strong>最佳实践</strong>：</p>
+<ul>
+<li>性能优化阶段使用</li>
+<li>结合 <code>--verbose</code> 获得详细信息</li>
+<li>定期进行性能分析</li>
+</ul>
+<h3 id="--profile-gpu"><code>--profile-gpu</code>
+</h3><p>启用 GPU 性能分析。收集 GPU 相关的性能数据。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --profile-gpu
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>使用场景</strong>：</p>
+<ul>
+<li>GPU 性能优化</li>
+<li>渲染瓶颈分析</li>
+<li>着色器性能调试</li>
+</ul>
+<p><strong>最佳实践</strong>：</p>
+<ul>
+<li>图形密集型游戏必备</li>
+<li>用于优化渲染性能</li>
+<li>需要支持 GPU 分析的驱动</li>
+</ul>
+<h3 id="--print-fps"><code>--print-fps</code>
+</h3><p>打印帧率信息到标准输出。实时显示当前帧率。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --print-fps
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>使用场景</strong>：</p>
+<ul>
+<li>实时性能监控</li>
+<li>帧率稳定性测试</li>
+<li>性能回归测试</li>
+</ul>
+<p><strong>最佳实践</strong>：</p>
+<ul>
+<li>性能测试时使用</li>
+<li>用于监控帧率波动</li>
+<li>结合 <code>--max-fps</code> 验证限制效果</li>
+</ul>
+<h3 id="-b---breakpoints-list"><code>-b, --breakpoints &lt;list&gt;</code>
+</h3><p>设置断点列表。在指定位置设置调试断点。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --breakpoints res://script.gd:42,res://other.gd:10
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>使用场景</strong>：</p>
+<ul>
+<li>自动化测试中的断点设置</li>
+<li>调试特定代码路径</li>
+<li>验证代码执行流程</li>
+</ul>
+<p><strong>最佳实践</strong>：</p>
+<ul>
+<li>格式：<code>路径:行号</code>，多个断点用逗号分隔</li>
+<li>用于自动化调试流程</li>
+<li>结合远程调试使用</li>
+</ul>
+<h3 id="--skip-breakpoints"><code>--skip-breakpoints</code>
+</h3><p>跳过所有断点。忽略代码中设置的断点。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --skip-breakpoints
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>使用场景</strong>：</p>
+<ul>
+<li>快速运行测试</li>
+<li>忽略调试断点</li>
+<li>生产环境运行</li>
+</ul>
+<p><strong>最佳实践</strong>：</p>
+<ul>
+<li>CI/CD 环境中使用</li>
+<li>用于快速验证功能</li>
+<li>避免意外暂停执行</li>
+</ul>
+<h2 id="网络与文件系统参数">网络与文件系统参数
+</h2><h3 id="--remote-fs-hostport"><code>--remote-fs &lt;host:port&gt;</code>
+</h3><p>设置远程文件系统地址。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --remote-fs 192.168.1.100:6010
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="--remote-fs-password-password"><code>--remote-fs-password &lt;password&gt;</code>
+</h3><p>设置远程文件系统密码。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --remote-fs-password mypassword
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="--log-file-path"><code>--log-file &lt;path&gt;</code>
+</h3><p>指定日志文件路径。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --log-file /path/to/godot.log
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="平台特定参数">平台特定参数
+</h2><h3 id="--tablet-driver-driver"><code>--tablet-driver &lt;driver&gt;</code>
+</h3><p>指定平板驱动。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --tablet-driver wintab
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="--wid-window_id"><code>--wid &lt;window_id&gt;</code>
+</h3><p>嵌入到指定窗口 ID。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --wid <span class="m">123456</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="--lsp-port-port"><code>--lsp-port &lt;port&gt;</code>
+</h3><p>设置 LSP 端口。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --lsp-port <span class="m">8080</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="--dap-port-port"><code>--dap-port &lt;port&gt;</code>
+</h3><p>设置 DAP 端口。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --dap-port <span class="m">8081</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="其他工具参数">其他工具参数
+</h2><h3 id="--doctool"><code>--doctool</code>
+</h3><p>生成文档工具。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --doctool
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="--gdscript-docs-path"><code>--gdscript-docs &lt;path&gt;</code>
+</h3><p>生成 GDScript 文档。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --gdscript-docs /path/to/project
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="--dump-gdextension-interface"><code>--dump-gdextension-interface</code>
+</h3><p>导出 GDExtension 接口头文件。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --dump-gdextension-interface
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="--dump-extension-api"><code>--dump-extension-api</code>
+</h3><p>导出扩展 API。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --dump-extension-api
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="--dump-extension-api-with-docs"><code>--dump-extension-api-with-docs</code>
+</h3><p>导出扩展 API（包含文档）。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --dump-extension-api-with-docs
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="--validate-extension-api-file"><code>--validate-extension-api &lt;file&gt;</code>
+</h3><p>验证扩展 API 文件。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --validate-extension-api extension_api.json
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="--test-rd-support"><code>--test-rd-support</code>
+</h3><p>测试渲染设备支持。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --test-rd-support
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="--test-rd-creation"><code>--test-rd-creation</code>
+</h3><p>测试渲染设备创建。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --test-rd-creation
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="--write-movie-path"><code>--write-movie &lt;path&gt;</code>
+</h3><p>录制电影到指定路径。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --write-movie /path/to/movie.avi
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="--benchmark"><code>--benchmark</code>
+</h3><p>启用基准测试模式。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --benchmark
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="--benchmark-file-path"><code>--benchmark-file &lt;path&gt;</code>
+</h3><p>指定基准测试文件路径。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --benchmark-file /path/to/benchmark.json
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="--disable-crash-handler"><code>--disable-crash-handler</code>
+</h3><p>禁用崩溃处理器。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --disable-crash-handler
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="--single-threaded-scene"><code>--single-threaded-scene</code>
+</h3><p>使用单线程场景处理。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --single-threaded-scene
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="--disable-render-loop"><code>--disable-render-loop</code>
+</h3><p>禁用渲染循环。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --disable-render-loop
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="--text-driver-driver"><code>--text-driver &lt;driver&gt;</code>
+</h3><p>指定文本驱动。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --text-driver &lt;driver_name&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="--editor-pid-pid"><code>--editor-pid &lt;pid&gt;</code>
+</h3><p>指定编辑器进程 ID（内部使用）。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --editor-pid <span class="m">1234</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="--editor-pseudolocalization"><code>--editor-pseudolocalization</code>
+</h3><p>启用编辑器伪本地化。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --editor-pseudolocalization
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="--generate-spirv-debug-info"><code>--generate-spirv-debug-info</code>
+</h3><p>生成 SPIR-V 调试信息。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --generate-spirv-debug-info
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="--extra-gpu-memory-tracking"><code>--extra-gpu-memory-tracking</code>
+</h3><p>启用额外的 GPU 内存跟踪。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --extra-gpu-memory-tracking
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="--accurate-breadcrumbs"><code>--accurate-breadcrumbs</code>
+</h3><p>启用准确的面包屑跟踪。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --accurate-breadcrumbs
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="--gpu-abort"><code>--gpu-abort</code>
+</h3><p>在 GPU 错误时中止。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --gpu-abort
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="--debug-server-uri"><code>--debug-server &lt;uri&gt;</code>
+</h3><p>启动调试服务器。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --debug-server tcp://127.0.0.1:6007
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="--patches-list"><code>--patches &lt;list&gt;</code>
+</h3><p>指定补丁列表。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --patches patch1.pck,patch2.pck
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="--language-locale"><code>--language &lt;locale&gt;</code>
+</h3><p>设置界面语言。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --language zh_CN
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="--"><code>--</code>
+</h3><p>停止解析命令行参数，后续参数将传递给项目。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot -- --custom-arg value
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="heading"><code>++</code>
+</h3><p>停止解析命令行参数，后续参数将作为用户参数传递。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot ++ --user-arg value
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="常用组合示例">常用组合示例
+</h2><h3 id="1-开发调试">1. 开发调试
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --path /path/to/project --editor --verbose
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>说明</strong>：启动编辑器并启用详细输出，适合日常开发工作。</p>
+<p><strong>使用场景</strong>：</p>
+<ul>
+<li>日常游戏开发</li>
+<li>新功能开发</li>
+<li>问题调试和修复</li>
+</ul>
+<p><strong>最佳实践</strong>：</p>
+<ul>
+<li>开发阶段始终使用 <code>--verbose</code> 获取更多信息</li>
+<li>确保项目路径正确</li>
+<li>结合 IDE 的调试功能使用</li>
+</ul>
+<h3 id="2-游戏测试">2. 游戏测试
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --path /path/to/project --debug --remote-debug tcp://127.0.0.1:6007
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>说明</strong>：以调试模式运行游戏并启用远程调试，适合功能测试。</p>
+<p><strong>使用场景</strong>：</p>
+<ul>
+<li>游戏功能测试</li>
+<li>脚本调试</li>
+<li>逻辑验证</li>
+</ul>
+<p><strong>最佳实践</strong>：</p>
+<ul>
+<li>测试前确保调试服务器配置正确</li>
+<li>使用 IDE 连接到调试服务器</li>
+<li>测试完成后及时关闭调试模式</li>
+</ul>
+<h3 id="3-性能分析">3. 性能分析
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --path /path/to/project --profiling --profile-gpu --max-fps <span class="m">60</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>说明</strong>：启用全面的性能分析，包括 CPU 和 GPU 性能数据收集。</p>
+<p><strong>使用场景</strong>：</p>
+<ul>
+<li>性能瓶颈分析</li>
+<li>优化前后的性能对比</li>
+<li>帧率稳定性测试</li>
+</ul>
+<p><strong>最佳实践</strong>：</p>
+<ul>
+<li>在一致的环境中进行性能测试</li>
+<li>记录测试条件以便结果对比</li>
+<li>结合 <code>--quit-after</code> 进行固定时长的测试</li>
+</ul>
+<h3 id="4-无头服务器">4. 无头服务器
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --path /path/to/project --headless --dedicated-server
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>说明</strong>：以无头模式运行专用服务器，适合部署到服务器环境。</p>
+<p><strong>使用场景</strong>：</p>
+<ul>
+<li>多人游戏服务器</li>
+<li>CI/CD 环境中的自动化测试</li>
+<li>云服务器部署</li>
+</ul>
+<p><strong>最佳实践</strong>：</p>
+<ul>
+<li>确保项目配置支持服务器模式</li>
+<li>使用 <code>--log-file</code> 记录服务器日志</li>
+<li>配置适当的资源限制和监控</li>
+</ul>
+<h3 id="5-自动导出">5. 自动导出
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --headless --path /path/to/project --export-release <span class="s2">&#34;Windows Desktop&#34;</span> game.exe
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>说明</strong>：以无头模式导出发布版本，适合 CI/CD 管道中的自动构建。</p>
+<p><strong>使用场景</strong>：</p>
+<ul>
+<li>CI/CD 自动化构建</li>
+<li>批量导出多个平台</li>
+<li>定期构建验证</li>
+</ul>
+<p><strong>最佳实践</strong>：</p>
+<ul>
+<li>始终使用 <code>--headless</code> 避免窗口干扰</li>
+<li>确保导出模板已安装</li>
+<li>验证导出预设名称的正确性</li>
+<li>使用绝对路径避免路径问题</li>
+</ul>
+<h3 id="6-视频录制">6. 视频录制
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --path /path/to/project --write-movie demo.avi --fixed-fps <span class="m">60</span> --quit-after <span class="m">300</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>说明</strong>：录制游戏视频，固定帧率确保视频质量，限制录制时长。</p>
+<p><strong>使用场景</strong>：</p>
+<ul>
+<li>游戏宣传视频制作</li>
+<li>演示视频录制</li>
+<li>Bug 复现视频</li>
+</ul>
+<p><strong>最佳实践</strong>：</p>
+<ul>
+<li>使用 <code>--fixed-fps</code> 确保视频帧率一致</li>
+<li>使用 <code>--quit-after</code> 控制录制时长</li>
+<li>选择适当的视频格式和压缩设置</li>
+<li>确保有足够的磁盘空间</li>
+</ul>
+<h3 id="7-基准测试">7. 基准测试
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">godot --path /path/to/project --benchmark --benchmark-file benchmark.json --max-fps <span class="m">60</span> --quit-after <span class="m">600</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>说明</strong>：进行性能基准测试，结果保存到 JSON 文件便于分析。</p>
+<p><strong>使用场景</strong>：</p>
+<ul>
+<li>性能回归测试</li>
+<li>不同版本的性能对比</li>
+<li>硬件性能评估</li>
+</ul>
+<p><strong>最佳实践</strong>：</p>
+<ul>
+<li>在一致的测试环境中运行</li>
+<li>使用固定帧率确保结果可比性</li>
+<li>保存基准测试结果用于历史对比</li>
+<li>定期运行以监控性能变化</li>
+</ul>
+<h3 id="8-cicd-完整构建流水线">8. CI/CD 完整构建流水线
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 步骤1：验证项目配置</span>
+</span></span><span class="line"><span class="cl">godot --headless --path /path/to/project --quit --verbose
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 步骤2：运行测试</span>
+</span></span><span class="line"><span class="cl">godot --headless --path /path/to/project --script tests/run_tests.gd --quit
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 步骤3：导出多平台版本</span>
+</span></span><span class="line"><span class="cl">godot --headless --path /path/to/project --export-release <span class="s2">&#34;Windows Desktop&#34;</span> builds/game.exe
+</span></span><span class="line"><span class="cl">godot --headless --path /path/to/project --export-release <span class="s2">&#34;Linux/X11&#34;</span> builds/game.x86_64
+</span></span><span class="line"><span class="cl">godot --headless --path /path/to/project --export-release <span class="s2">&#34;macOS&#34;</span> builds/game.zip
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>说明</strong>：完整的 CI/CD 构建流程，包括验证、测试和导出。</p>
+<p><strong>使用场景</strong>：</p>
+<ul>
+<li>自动化构建和部署</li>
+<li>多平台发布</li>
+<li>持续集成验证</li>
+</ul>
+<p><strong>最佳实践</strong>：</p>
+<ul>
+<li>每个步骤独立验证</li>
+<li>使用适当的错误处理</li>
+<li>记录构建日志用于问题排查</li>
+<li>设置构建通知和报告</li>
+</ul>
+<h2 id="注意事项">注意事项
+</h2><h3 id="参数使用原则">参数使用原则
+</h3><ol>
+<li>
+<p><strong>参数顺序</strong>：某些参数的顺序很重要，特别是路径相关参数。</p>
+<ul>
+<li><code>--path</code> 应该在其他需要项目上下文的参数之前</li>
+<li><code>--headless</code> 通常放在前面以避免不必要的初始化</li>
+<li>场景文件路径应该在最后</li>
+</ul>
+</li>
+<li>
+<p><strong>平台差异</strong>：部分参数仅在特定平台上可用。</p>
+<ul>
+<li>macOS 需要使用 <code>.app</code> 包内的可执行文件</li>
+<li>Windows 和 Linux 可以直接运行二进制文件</li>
+<li>移动平台的参数支持有限</li>
+</ul>
+</li>
+<li>
+<p><strong>版本兼容性</strong>：不同版本的 Godot 可能支持不同的参数。</p>
+<ul>
+<li>新版本可能添加新参数或废弃旧参数</li>
+<li>某些参数的行为可能在不同版本间有差异</li>
+<li>建议查看对应版本的官方文档</li>
+</ul>
+</li>
+</ol>
+<h3 id="性能考虑">性能考虑
+</h3><ol start="4">
+<li>
+<p><strong>性能影响</strong>：调试和性能分析参数可能会显著影响运行性能。</p>
+<ul>
+<li><code>--debug</code> 会降低运行性能，仅用于开发阶段</li>
+<li><code>--profiling</code> 和 <code>--profile-gpu</code> 会增加开销</li>
+<li><code>--verbose</code> 会产生大量输出，影响 I/O 性能</li>
+<li>发布版本中禁用所有调试参数</li>
+</ul>
+</li>
+<li>
+<p><strong>资源管理</strong>：某些参数会影响内存和资源使用。</p>
+<ul>
+<li><code>--extra-gpu-memory-tracking</code> 会增加内存使用</li>
+<li><code>--write-movie</code> 需要大量磁盘空间</li>
+<li><code>--profiling</code> 会收集大量数据</li>
+</ul>
+</li>
+</ol>
+<h3 id="安全考虑">安全考虑
+</h3><ol start="6">
+<li><strong>安全考虑</strong>：远程调试和文件系统参数在生产环境中应谨慎使用。
+<ul>
+<li><code>--remote-debug</code> 可能暴露安全漏洞</li>
+<li><code>--remote-fs</code> 涉及网络文件系统访问</li>
+<li>避免在生产环境启用调试功能</li>
+<li>使用防火墙限制调试端口访问</li>
+</ul>
+</li>
+</ol>
+<h3 id="常见问题和解决方案">常见问题和解决方案
+</h3><ol start="7">
+<li>
+<p><strong>路径问题</strong>：</p>
+<ul>
+<li>使用绝对路径避免相对路径问题</li>
+<li>Windows 路径使用反斜杠，Unix 使用正斜杠</li>
+<li>确保路径中不包含特殊字符或空格（或使用引号）</li>
+</ul>
+</li>
+<li>
+<p><strong>权限问题</strong>：</p>
+<ul>
+<li>确保对项目目录有读写权限</li>
+<li>检查日志文件的写入权限</li>
+<li>某些参数可能需要管理员权限</li>
+</ul>
+</li>
+<li>
+<p><strong>兼容性问题</strong>：</p>
+<ul>
+<li>检查 Godot 版本与项目兼容性</li>
+<li>确保导出模板版本匹配</li>
+<li>验证依赖项和插件兼容性</li>
+</ul>
+</li>
+<li>
+<p><strong>环境配置</strong>：</p>
+<ul>
+<li>确保系统环境变量正确设置</li>
+<li>检查图形驱动程序兼容性</li>
+<li>验证音频驱动可用性</li>
+</ul>
+</li>
+</ol>
+<h3 id="最佳实践总结">最佳实践总结
+</h3><ol start="11">
+<li>
+<p><strong>开发环境</strong>：</p>
+<ul>
+<li>使用 <code>--verbose</code> 获取详细信息</li>
+<li>启用适当的调试参数</li>
+<li>使用版本控制管理项目</li>
+</ul>
+</li>
+<li>
+<p><strong>测试环境</strong>：</p>
+<ul>
+<li>模拟目标环境配置</li>
+<li>使用自动化测试脚本</li>
+<li>记录测试结果和性能数据</li>
+</ul>
+</li>
+<li>
+<p><strong>生产环境</strong>：</p>
+<ul>
+<li>禁用所有调试参数</li>
+<li>使用 <code>--quiet</code> 减少日志输出</li>
+<li>配置适当的日志轮转</li>
+</ul>
+</li>
+<li>
+<p><strong>CI/CD 环境</strong>：</p>
+<ul>
+<li>始终使用 <code>--headless</code></li>
+<li>配置适当的超时时间</li>
+<li>使用明确的错误处理</li>
+</ul>
+</li>
+<li>
+<p><strong>性能优化</strong>：</p>
+<ul>
+<li>定期进行性能分析</li>
+<li>监控资源使用情况</li>
+<li>建立性能基准线</li>
+</ul>
+</li>
+</ol>
+<h2 id="源码解析">源码解析
+</h2><p>以下是 Godot 4.4 源码中关键启动参数的处理逻辑精简版：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">Error</span> <span class="n">Main</span><span class="o">::</span><span class="n">setup</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">execpath</span><span class="p">,</span> <span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[],</span> <span class="kt">bool</span> <span class="n">p_second_phase</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// ...
+</span></span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    <span class="c1">// 命令行参数解析循环
+</span></span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="n">I</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;::</span><span class="n">Element</span> <span class="o">*</span><span class="n">N</span> <span class="o">=</span> <span class="n">I</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">const</span> <span class="n">String</span> <span class="o">&amp;</span><span class="n">arg</span> <span class="o">=</span> <span class="n">I</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 1. --help 参数处理
+</span></span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">arg</span> <span class="o">==</span> <span class="s">&#34;-h&#34;</span> <span class="o">||</span> <span class="n">arg</span> <span class="o">==</span> <span class="s">&#34;--help&#34;</span> <span class="o">||</span> <span class="n">arg</span> <span class="o">==</span> <span class="s">&#34;/?&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">show_help</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">exit_err</span> <span class="o">=</span> <span class="n">ERR_HELP</span><span class="p">;</span> <span class="c1">// 强制早期退出，返回成功代码
+</span></span></span><span class="line"><span class="cl">            <span class="k">goto</span> <span class="n">error</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c1">// 2. --remote-debug 参数处理
+</span></span></span><span class="line"><span class="cl">        <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">arg</span> <span class="o">==</span> <span class="s">&#34;--remote-debug&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">debug_uri</span> <span class="o">=</span> <span class="n">N</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">debug_uri</span><span class="p">.</span><span class="n">contains</span><span class="p">(</span><span class="s">&#34;://&#34;</span><span class="p">))</span> <span class="p">{</span> <span class="c1">// 验证地址格式
+</span></span></span><span class="line"><span class="cl">                    <span class="n">OS</span><span class="o">::</span><span class="n">get_singleton</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">print</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                        <span class="s">&#34;Invalid debug host address, it should be of the form &lt;protocol&gt;://&lt;host/IP&gt;:&lt;port&gt;.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">goto</span> <span class="n">error</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="n">N</span> <span class="o">=</span> <span class="n">N</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">OS</span><span class="o">::</span><span class="n">get_singleton</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">print</span><span class="p">(</span><span class="s">&#34;Missing remote debug host address, aborting.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">goto</span> <span class="n">error</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c1">// 3. --max-fps 参数处理
+</span></span></span><span class="line"><span class="cl">        <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">arg</span> <span class="o">==</span> <span class="s">&#34;--max-fps&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">max_fps</span> <span class="o">=</span> <span class="n">N</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">().</span><span class="n">to_int</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="n">N</span> <span class="o">=</span> <span class="n">N</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">OS</span><span class="o">::</span><span class="n">get_singleton</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">print</span><span class="p">(</span><span class="s">&#34;Missing maximum FPS argument, aborting.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">goto</span> <span class="n">error</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c1">// 4. --time-scale 参数处理 以及实现
+</span></span></span><span class="line"><span class="cl">        <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">arg</span> <span class="o">==</span> <span class="s">&#34;--time-scale&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// 设置时间缩放
+</span></span></span><span class="line"><span class="cl">                <span class="n">Engine</span><span class="o">::</span><span class="n">get_singleton</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">set_time_scale</span><span class="p">(</span><span class="n">N</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">().</span><span class="n">to_float</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">                <span class="n">N</span> <span class="o">=</span> <span class="n">N</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">OS</span><span class="o">::</span><span class="n">get_singleton</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">print</span><span class="p">(</span><span class="s">&#34;Missing time scale argument, aborting.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">goto</span> <span class="n">error</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="n">I</span> <span class="o">=</span> <span class="n">N</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">//1. --help 的实现
+</span></span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">show_help</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">print_help</span><span class="p">(</span><span class="n">execpath</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 2. --remote-debug 的实现
+</span></span></span><span class="line"><span class="cl">        <span class="n">EngineDebugger</span><span class="o">::</span><span class="n">initialize</span><span class="p">(</span><span class="n">debug_uri</span><span class="p">,</span> <span class="n">skip_breakpoints</span><span class="p">,</span> <span class="n">breakpoints</span><span class="p">,</span> <span class="p">[]()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">editor_pid</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">DisplayServer</span><span class="o">::</span><span class="n">get_singleton</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">enable_for_stealing_focus</span><span class="p">(</span><span class="n">editor_pid</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">	    <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 3. --max-fps 的实现
+</span></span></span><span class="line"><span class="cl">        <span class="n">Engine</span><span class="o">::</span><span class="n">get_singleton</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">set_max_fps</span><span class="p">(</span><span class="n">GLOBAL_DEF</span><span class="p">(</span><span class="n">PropertyInfo</span><span class="p">(</span><span class="n">Variant</span><span class="o">::</span><span class="n">INT</span><span class="p">,</span> <span class="s">&#34;application/run/max_fps&#34;</span><span class="p">,</span> <span class="n">PROPERTY_HINT_RANGE</span><span class="p">,</span> <span class="s">&#34;0,1000,1&#34;</span><span class="p">),</span> <span class="mi">0</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">max_fps</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Engine</span><span class="o">::</span><span class="n">get_singleton</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">set_max_fps</span><span class="p">(</span><span class="n">max_fps</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="总结">总结
+</h2><p>Godot 4.4 的启动参数提供了对引擎各个方面的精细控制，从基本的运行模式到高级的调试和性能分析功能。合理使用这些参数可以大大提高开发效率和调试能力。在实际开发中，建议根据具体需求选择合适的参数组合，并注意参数之间的相互影响。</p>
+<h2 id="相关笔记">相关笔记
+</h2><ul>
+<li>[[Godot开发环境部署]]</li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/godot/">Godot</a>
+        
+            <a href="/tags/%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0/">启动参数</a>
+        
+            <a href="/tags/cli/">CLI</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under <a class="link" href="https://github.com/Liyufei1"  target="_blank" rel="noopener"
+    >Liyufei1</a></span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        const elementsToRender = [".main-article", ".widget--toc"];
+
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/godot%E5%BC%95%E6%93%8E5%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/godot.png" loading="lazy" data-key="godot引擎5编辑器插件" data-hash="/godot.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【godot】六、godot中的编辑器插件EditorPlugin</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/godot%E5%BC%95%E6%93%8E4%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/godot.png" loading="lazy" data-key="godot引擎4动态类型信息" data-hash="/godot.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【godot】五、godot中的动态类型信息系统RTTI</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/godot%E5%BC%95%E6%93%8E3%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/godot.png" loading="lazy" data-key="godot引擎3性能统计" data-hash="/godot.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【godot】四、性能统计</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/godot%E5%BC%95%E6%93%8E2gdextension%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/godot.png" loading="lazy" data-key="godot引擎2gdextension开发指南" data-hash="/godot.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【godot】三、GDExtension开发指南</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/godot%E5%BC%95%E6%93%8E1modules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/godot.png" loading="lazy" data-key="godot引擎1modules开发指南" data-hash="/godot.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【godot】二、Modules开发指南</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2026 李宇飞-Liyufei1
+    </section>
+    
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.32.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

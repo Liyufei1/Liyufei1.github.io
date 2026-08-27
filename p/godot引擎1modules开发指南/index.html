@@ -1,0 +1,2515 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="个人工具文档，针对GodotModules开发。介绍相关头文件和最小使用示例">
+<title>【godot】二、Modules开发指南</title>
+
+<link rel='canonical' href='https://Liyufei1.github.io/p/godot%E5%BC%95%E6%93%8E1modules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/'>
+
+<link rel="stylesheet" href="/scss/style.min.6ba8b9ea95cedbd14d34969a3a28210289d3a74cba725c37699a1455f78e7135.css"><meta property='og:title' content="【godot】二、Modules开发指南">
+<meta property='og:description' content="个人工具文档，针对GodotModules开发。介绍相关头文件和最小使用示例">
+<meta property='og:url' content='https://Liyufei1.github.io/p/godot%E5%BC%95%E6%93%8E1modules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/'>
+<meta property='og:site_name' content='李宇飞-Liyufei1'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Godot' /><meta property='article:tag' content='Modules' /><meta property='article:tag' content='容器' /><meta property='article:tag' content='GUI' /><meta property='article:published_time' content='2025-11-04T16:18:31&#43;08:00'/><meta property='article:modified_time' content='2025-11-04T16:18:31&#43;08:00'/><meta property='og:image' content='https://Liyufei1.github.io/godot.png' />
+<meta name="twitter:title" content="【godot】二、Modules开发指南">
+<meta name="twitter:description" content="个人工具文档，针对GodotModules开发。介绍相关头文件和最小使用示例"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://Liyufei1.github.io/godot.png' />
+    <link rel="shortcut icon" href="/favicon.png" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/guidao1Icon_hu_4c95e88ebc9c8e46.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🤣</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">李宇飞-Liyufei1</a></h1>
+            <h2 class="site-description">存放学习随笔的个人博客,主要有:Godot、Unreal、Blog、Cpp.
+ 下方是个人的b站、gitbug链接:</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://space.bilibili.com/7531504?spm_id_from=333.1007.0.0'
+                        target="_blank"
+                        title="Bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/Liyufei1'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友情链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://Liyufei1.github.io/en/" >English</option>
+                                
+                                    <option value="https://Liyufei1.github.io/" selected>中文</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#常用功能">常用功能</a>
+      <ol>
+        <li><a href="#编译期宏开关">编译期宏开关</a></li>
+        <li><a href="#日志打印">日志打印</a></li>
+        <li><a href="#计时器">计时器</a></li>
+        <li><a href="#自定义项目配置">自定义项目配置</a>
+          <ol>
+            <li><a href="#使用示例">使用示例</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#容器">容器</a>
+      <ol>
+        <li><a href="#godot脚本容器">Godot脚本容器</a>
+          <ol>
+            <li><a href="#array"><code>Array</code></a></li>
+            <li><a href="#dictionary"><code>Dictionary</code></a></li>
+          </ol>
+        </li>
+        <li><a href="#godot底层容器">Godot底层容器</a>
+          <ol>
+            <li><a href="#vectort"><code>Vector&lt;T&gt;</code></a></li>
+            <li><a href="#vmapkv"><code>VMap&lt;K,V&gt;</code></a></li>
+            <li><a href="#listt"><code>List&lt;T&gt;</code></a></li>
+            <li><a href="#vsett"><code>VSet&lt;T&gt;</code></a></li>
+            <li><a href="#hashmapkv"><code>HashMap&lt;K,V&gt;</code></a></li>
+            <li><a href="#rbmap">RBMap</a></li>
+            <li><a href="#rbset">RBSet</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#class_db">class_db</a></li>
+    <li><a href="#os">OS</a></li>
+    <li><a href="#callable">callable</a></li>
+    <li><a href="#gui">gui</a>
+      <ol>
+        <li><a href="#gui基础类">GUI基础类</a>
+          <ol>
+            <li><a href="#control">Control</a></li>
+            <li><a href="#canvasitem">CanvasItem</a></li>
+          </ol>
+        </li>
+        <li><a href="#文本类">文本类</a>
+          <ol>
+            <li><a href="#label">Label</a></li>
+            <li><a href="#richtextlabel">RichTextLabel</a></li>
+          </ol>
+        </li>
+        <li><a href="#按钮类">按钮类</a>
+          <ol>
+            <li><a href="#optionbutton">OptionButton</a></li>
+            <li><a href="#menubutton">MenuButton</a></li>
+          </ol>
+        </li>
+        <li><a href="#弹窗类">弹窗类</a>
+          <ol>
+            <li><a href="#acceptdialog">AcceptDialog</a></li>
+            <li><a href="#confirmationdialog">ConfirmationDialog</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#thread">Thread</a>
+      <ol>
+        <li><a href="#线程同步工具">线程同步工具</a>
+          <ol>
+            <li><a href="#mutex互斥锁">Mutex（互斥锁）</a></li>
+            <li><a href="#semaphore信号量">Semaphore（信号量）</a></li>
+          </ol>
+        </li>
+        <li><a href="#常见使用场景">常见使用场景</a></li>
+      </ol>
+    </li>
+    <li><a href="#config">Config</a></li>
+    <li><a href="#doc_classes">doc_classes</a>
+      <ol>
+        <li><a href="#1-注册类">1. 注册类</a></li>
+        <li><a href="#2-声明文档导出">2. 声明文档导出</a></li>
+        <li><a href="#3-提供-xml-文档">3. 提供 XML 文档</a></li>
+        <li><a href="#检查清单">检查清单</a></li>
+        <li><a href="#小结">小结</a></li>
+      </ol>
+    </li>
+    <li><a href="#相关笔记">相关笔记</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/godot%E5%BC%95%E6%93%8E1modules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/">
+                
+                    <img src="/godot.png" loading="lazy" alt="Featured image of post 【godot】二、Modules开发指南" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/godot/" style="background-color: #3121c0ff; color: #e9e5e5ff;">
+                Godot
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/godot%E5%BC%95%E6%93%8E1modules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/">【godot】二、Modules开发指南</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            个人工具文档，针对GodotModules开发。介绍相关头文件和最小使用示例
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published" datetime='2025-11-04T16:18:31&#43;08:00'>2025-11-04</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 15 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="modules开发指南">Modules开发指南
+</h1><p>本文档是针对<code>Godot 4.4</code>引擎的 Modules开发指南，为需要进行底层开发的开发者提供实用的参考。Godot Modules开发允许我们直接在引擎源码层面扩展功能，相比GDExtension具有更强大的能力和更深度的集成。本文涵盖了日志打印、容器类型、GUI组件、线程管理、配置系统等核心模块的常用头文件和最小使用示例，帮助你快速上手 Godot 引擎的 C++ 开发。</p>
+<h2 id="常用功能">常用功能
+</h2><h3 id="编译期宏开关">编译期宏开关
+</h3><div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th style="text-align: left">名称</th>
+					<th style="text-align: center">作用</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: left">TOOLS_ENABLED</td>
+					<td style="text-align: center">只在编辑器/工具链里需要的代码</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">WINDOWS_ENABLED</td>
+					<td style="text-align: center">Windows 平台</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">ANDROID_ENABLED</td>
+					<td style="text-align: center">Android 平台</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">GLES3_ENABLED</td>
+					<td style="text-align: center">GLES3 渲染后端</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">VULKAN_ENABLED</td>
+					<td style="text-align: center">Vulkan 渲染后端</td>
+			</tr>
+	</tbody>
+</table></div>
+<h3 id="日志打印">日志打印
+</h3><p><strong>头文件</strong>：#include &ldquo;core/string/print_string.h&rdquo;</p>
+<p>用于标准日志的输出。在做引擎开发时使用。</p>
+<p>在做GDExtension开发时，使用Utility_function头文件，进行日志打印。</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th style="text-align: left">接口</th>
+					<th style="text-align: center">作用</th>
+					<th style="text-align: left">示例</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: left">void print_line(const Variant &amp;v）</td>
+					<td style="text-align: center">打印日志</td>
+					<td style="text-align: left">__print_line(&ldquo;AAA&rdquo;,10.0);</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">void print_error(const String &amp;p_string)</td>
+					<td style="text-align: center">打印错误</td>
+					<td style="text-align: left">print_error(&ldquo;BBBB&rdquo;)</td>
+			</tr>
+	</tbody>
+</table></div>
+<h3 id="计时器">计时器
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">//1.通过场景树（mainloop）设置简单的时间回调函数
+</span></span></span><span class="line"><span class="cl">	<span class="c1">// timer to show text for 3 seconds
+</span></span></span><span class="line"><span class="cl">    <span class="k">auto</span> <span class="n">timer</span> <span class="o">=</span> <span class="n">get_scene_tree</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">create_timer</span><span class="p">(</span><span class="n">time</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">timer</span><span class="o">-&gt;</span><span class="n">connect</span><span class="p">(</span><span class="s">&#34;timeout&#34;</span><span class="p">,</span> <span class="n">callable_mp</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="o">&amp;</span><span class="n">CommandTool</span><span class="o">::</span><span class="n">reduce_screen_output_buffer</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//2.c++原生的线程调用也可以实现，但是需要call_deferred来回到主线程
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//3.tween，更加复杂，但是可以链式调用，以及设置缓动
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="自定义项目配置">自定义项目配置
+</h3><p><strong>头文件</strong>：#include &ldquo;core/config/project_settings.h&rdquo;</p>
+<p><code>ProjectSettings</code>是 Godot引擎的核心单例类，负责管理项目的配置和设置。它继承自Object，使用 GDCLASS 宏注册到 Godot 的类型系统中<br>
+核心职责：</p>
+<ul>
+<li>加载和保存项目配置文件（project.godot）
+<ul>
+<li>定义全局设置（带默认值）:<code>GLOBAL_DEF</code></li>
+<li>定义为基础设置（在编辑器中高亮）:<code>GLOBAL_DEF_BASIC</code></li>
+<li>定义全局设置（修改后需要重启）:<code>GLOBAL_DEF_RST</code></li>
+<li>定义为内部设置（不在编辑器显示）:<code>GLOBAL_DEF_INTERNAL</code></li>
+<li>获取配置值: <code>get_setting</code></li>
+<li>设置配置值: <code>set_setting</code></li>
+<li>检查配置值是否存在: <code>has_setting</code></li>
+</ul>
+</li>
+<li>路径转换（res://、user:// 等路径本地化）
+<ul>
+<li>将绝对路径转换为 res:// 路径: <code>localize_path</code></li>
+<li>将 res:// 路径转换为绝对路径: <code>globalize_path</code></li>
+<li>获取项目资源路径（res:// 的实际位置）: <code>get_resource_path</code></li>
+<li>获取项目数据目录路径（res://.godot): <code>get_project_data_path</code></li>
+<li>获取导入文件路径（res://.godot/imported）: <code>get_imported_files_path</code></li>
+</ul>
+</li>
+<li>Autoload 单例管理
+<ul>
+<li>添加自动加载项:<code>add_autoload</code></li>
+<li>移除自动加载项:<code>remove_autoload</code></li>
+<li>检查是否存在:<code>has_autoload</code></li>
+<li>获取自动加载列表:<code>get_autoload_list</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="使用示例">使用示例
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">initialize_command_tool_module</span><span class="p">(</span><span class="n">ModuleInitializationLevel</span> <span class="n">p_level</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">p_level</span> <span class="o">==</span> <span class="n">MODULE_INITIALIZATION_LEVEL_SCENE</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">GLOBAL_DEF</span><span class="p">(</span><span class="s">&#34;MySelfConfig/test111/testBool1&#34;</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="n">GLOBAL_DEF</span><span class="p">(</span><span class="s">&#34;MySelfConfig/test111/testBool2&#34;</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="n">GLOBAL_DEF</span><span class="p">(</span><span class="s">&#34;MySelfConfig/test111/testfloat&#34;</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="n">GLOBAL_DEF</span><span class="p">(</span><span class="s">&#34;MySelfConfig/test111/testString&#34;</span><span class="p">,</span> <span class="s">&#34;this is a string&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="n">GLOBAL_DEF</span><span class="p">(</span><span class="s">&#34;MySelfConfig/test111/test_VECTOR2&#34;</span><span class="p">,</span> <span class="n">Vector2</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">//COLOR
+</span></span></span><span class="line"><span class="cl">		<span class="n">GLOBAL_DEF</span><span class="p">(</span><span class="s">&#34;MySelfConfig/test111/test_Color&#34;</span><span class="p">,</span> <span class="n">Color</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">		<span class="n">GLOBAL_DEF</span><span class="p">(</span><span class="s">&#34;MySelfConfig/test111/test_Array&#34;</span><span class="p">,</span> <span class="n">Array</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">		<span class="n">GLOBAL_DEF</span><span class="p">(</span><span class="s">&#34;MySelfConfig/test111/test_Dictionary&#34;</span><span class="p">,</span> <span class="n">Dictionary</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/Godot/ImageTemp/image4.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="使用示例"
+	
+	
+></p>
+<p><img src="/Godot/ImageTemp/image5.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="使用示例"
+	
+	
+></p>
+<h2 id="容器">容器
+</h2><h3 id="godot脚本容器">Godot脚本容器
+</h3><h4 id="array"><code>Array</code>
+</h4><p><strong>✨头文件</strong>:<code>#include &quot;core/variant/array.h&quot;</code><br>
+<strong>✨作用</strong>:Array是脚本GDScript中Array类型的C++实现。具有以下特点:</p>
+<ol>
+<li><strong>通用性</strong>：它是一个存储<code>Variant</code>的容器，这意味着同一个数组里可以混合存放整数、字符串、对象引用等。</li>
+</ol>
+<p>类型化数组（Typed Array）： Godot 4.0 引入了类型化数组的概念，C++ 端可以通过 set_typed 等方法限制数组只能存储特定类型。 <br>
+<strong>✨使用示例</strong>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;core/variant/array.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;core/variant/variant.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">demo_array</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// --- 创建 (Create) ---
+</span></span></span><span class="line"><span class="cl">    <span class="n">Array</span> <span class="n">arr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 也可以创建并指定为特定类型的数组（例如只存 int）
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// Array typed_arr;
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// typed_arr.set_typed(Variant::INT, StringName(), Variant());
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// --- 增 (Add) ---
+</span></span></span><span class="line"><span class="cl">    <span class="n">arr</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>          <span class="c1">// 自动封装为 Variant(10)
+</span></span></span><span class="line"><span class="cl">    <span class="n">arr</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#34;Hello&#34;</span><span class="p">);</span>        <span class="c1">// 自动封装为 Variant(&#34;Hello&#34;)
+</span></span></span><span class="line"><span class="cl">    <span class="n">arr</span><span class="p">.</span><span class="n">push_front</span><span class="p">(</span><span class="mf">3.14</span><span class="p">);</span>       <span class="c1">// 插入到头部
+</span></span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 此时数组内容可能为: [3.14, 10, &#34;Hello&#34;]
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// --- 查 (Read) ---
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">arr</span><span class="p">.</span><span class="n">is_empty</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// operator[] 返回的是 Variant &amp;
+</span></span></span><span class="line"><span class="cl">        <span class="n">Variant</span> <span class="n">v</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> 
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c1">// 需要根据类型转换
+</span></span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">v</span><span class="p">.</span><span class="n">get_type</span><span class="p">()</span> <span class="o">==</span> <span class="n">Variant</span><span class="o">::</span><span class="n">FLOAT</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">double</span> <span class="n">d</span> <span class="o">=</span> <span class="n">v</span><span class="p">;</span> <span class="c1">// 自动转型操作符
+</span></span></span><span class="line"><span class="cl">            <span class="n">print_line</span><span class="p">(</span><span class="n">rtos</span><span class="p">(</span><span class="n">d</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 遍历
+</span></span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">arr</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Variant</span> <span class="n">item</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// print_line(item); // Variant 重载了 String 转换
+</span></span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// --- 改 (Update) ---
+</span></span></span><span class="line"><span class="cl">    <span class="n">arr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#34;New Value&#34;</span><span class="p">;</span> <span class="c1">// 将索引 1 的 10 改为字符串
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// --- 删 (Delete) ---
+</span></span></span><span class="line"><span class="cl">    <span class="n">arr</span><span class="p">.</span><span class="n">remove_at</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span> <span class="c1">// 移除第一个元素
+</span></span></span><span class="line"><span class="cl">    <span class="n">arr</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="s">&#34;New Value&#34;</span><span class="p">);</span> <span class="c1">// 移除匹配值的元素（线性查找）
+</span></span></span><span class="line"><span class="cl">    <span class="n">arr</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="dictionary"><code>Dictionary</code>
+</h4><p><strong>✨头文件</strong>:<code>#include &quot;core/variant/dictionary.h&quot;</code><br>
+<strong>✨作用</strong>:键值对均为<code>Variant</code>的字典,具有以下特点:</p>
+<ol>
+<li>基于哈希表</li>
+<li>插入顺序保留</li>
+</ol>
+<p><strong>✨使用示例</strong>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;core/variant/dictionary.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;core/variant/variant.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">demo_dictionary</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// --- 创建 (Create) ---
+</span></span></span><span class="line"><span class="cl">    <span class="n">Dictionary</span> <span class="n">dict</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// --- 增 (Add) / 改 (Update) ---
+</span></span></span><span class="line"><span class="cl">    <span class="n">dict</span><span class="p">[</span><span class="s">&#34;name&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#34;Godot&#34;</span><span class="p">;</span>      <span class="c1">// 键是 String, 值是 String
+</span></span></span><span class="line"><span class="cl">    <span class="n">dict</span><span class="p">[</span><span class="mi">100</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#34;One Hundred&#34;</span><span class="p">;</span>   <span class="c1">// 键是 int, 值是 String
+</span></span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 也可以作为左值修改
+</span></span></span><span class="line"><span class="cl">    <span class="n">dict</span><span class="p">[</span><span class="s">&#34;name&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#34;Godot Engine&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// --- 查 (Read) ---
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// 检查键是否存在
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">dict</span><span class="p">.</span><span class="n">has</span><span class="p">(</span><span class="s">&#34;name&#34;</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Variant</span> <span class="n">v</span> <span class="o">=</span> <span class="n">dict</span><span class="p">[</span><span class="s">&#34;name&#34;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">String</span> <span class="n">s</span> <span class="o">=</span> <span class="n">v</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl">        <span class="n">print_line</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 安全获取（带默认值）
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// 如果 &#34;score&#34; 不存在，返回 0
+</span></span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">score</span> <span class="o">=</span> <span class="n">dict</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#34;score&#34;</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 遍历
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// 注意：遍历字典通常遍历的是 Key
+</span></span></span><span class="line"><span class="cl">    <span class="n">List</span><span class="o">&lt;</span><span class="n">Variant</span><span class="o">&gt;</span> <span class="n">keys</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">dict</span><span class="p">.</span><span class="n">get_key_list</span><span class="p">(</span><span class="o">&amp;</span><span class="n">keys</span><span class="p">);</span> <span class="c1">// 获取所有 key 到一个 List 中
+</span></span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="n">Variant</span> <span class="o">&amp;</span><span class="nl">key</span> <span class="p">:</span> <span class="n">keys</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Variant</span> <span class="n">value</span> <span class="o">=</span> <span class="n">dict</span><span class="p">[</span><span class="n">key</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">print_line</span><span class="p">(</span><span class="n">String</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#34; : &#34;</span> <span class="o">+</span> <span class="n">String</span><span class="p">(</span><span class="n">value</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// --- 删 (Delete) ---
+</span></span></span><span class="line"><span class="cl">    <span class="n">dict</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span> <span class="c1">// 删除键为 100 的条目
+</span></span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">removed</span> <span class="o">=</span> <span class="n">dict</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="s">&#34;name&#34;</span><span class="p">);</span> <span class="c1">// 返回是否删除成功
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="godot底层容器">Godot底层容器
+</h3><h4 id="vectort"><code>Vector&lt;T&gt;</code>
+</h4><p><strong>✨头文件</strong>:<code>#include &quot;core/templates/vector.h&quot;</code><br>
+<strong>✨作用</strong>:数组容器,具有以下特点:</p>
+<ol>
+<li>连续内存，类似 std::vector</li>
+<li>频繁随机访问、遍历时性能好</li>
+</ol>
+<p><strong>✨使用示例</strong>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">Vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">v</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 增：尾部插入
+</span></span></span><span class="line"><span class="cl"><span class="n">v</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">v</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">v</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">30</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 查：按下标访问
+</span></span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>           <span class="c1">// 20
+</span></span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="n">v</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>    <span class="c1">// 3
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 改：修改某个元素
+</span></span></span><span class="line"><span class="cl"><span class="n">v</span><span class="p">.</span><span class="n">write</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">200</span><span class="p">;</span>  <span class="c1">// Godot 4 的 Vector 用 write[]
+</span></span></span><span class="line"><span class="cl">                    <span class="c1">// 有些版本是 `v.set(1, 200);`
+</span></span></span><span class="line"><span class="cl">                    <span class="c1">// 或 `v[1] = 200`（取决于绑定）
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 查：遍历
+</span></span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">v</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">print_line</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 删：按下标删除
+</span></span></span><span class="line"><span class="cl"><span class="n">v</span><span class="p">.</span><span class="n">remove_at</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>   <span class="c1">// 删除第 0 个元素，现在内容 [200, 30]
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 查：是否包含某值（简单类型可以这样）
+</span></span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">idx</span> <span class="o">=</span> <span class="n">v</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="mi">30</span><span class="p">);</span>   <span class="c1">// 找到则返回 index，否则 -1
+</span></span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">idx</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">print_line</span><span class="p">(</span><span class="s">&#34;found 30 at &#34;</span><span class="p">,</span> <span class="n">idx</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="vmapkv"><code>VMap&lt;K,V&gt;</code>
+</h4><p><strong>✨头文件</strong>:<code>#include &quot;core/templates/vector.h&quot;</code><br>
+<strong>✨作用</strong>:基于Vector实现的关联容器（Map）它内部维护一个按照Key排序的Vector.具有以下特点</p>
+<ol>
+<li>内存连续，缓存友好（Cache Friendly）。</li>
+<li>查找使用二分查找，时间复杂度为𝑂(log𝑁)</li>
+<li>插入和删除需要移动元素，时间复杂度为O(N)。</li>
+</ol>
+<p><strong>✨使用示例</strong>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;core/templates/vmap.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">demo_vmap</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">VMap</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">player_names</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// --- 增 (Add) ---
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// 注意：insert 会检查键是否存在，存在则覆盖，不存在则保持排序插入
+</span></span></span><span class="line"><span class="cl">    <span class="n">player_names</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s">&#34;Alice&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">player_names</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s">&#34;Bob&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">player_names</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s">&#34;Boss&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// --- 查 (Read) ---
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// 检查是否存在
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">player_names</span><span class="p">.</span><span class="n">has</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 获取值，如果 key 不存在会 crash，所以最好先检查 has
+</span></span></span><span class="line"><span class="cl">        <span class="n">String</span> <span class="n">name</span> <span class="o">=</span> <span class="n">player_names</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span> 
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c1">// 或者使用 getptr，如果不存在返回 nullptr
+</span></span></span><span class="line"><span class="cl">        <span class="k">const</span> <span class="n">String</span> <span class="o">*</span><span class="n">name_ptr</span> <span class="o">=</span> <span class="n">player_names</span><span class="p">.</span><span class="n">getptr</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 查找索引（用于遍历内部 vector）
+</span></span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">idx</span> <span class="o">=</span> <span class="n">player_names</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span> <span class="c1">// 返回内部 vector 的 index
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">idx</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 通过 vector 索引访问
+</span></span></span><span class="line"><span class="cl">        <span class="n">String</span> <span class="n">val</span> <span class="o">=</span> <span class="n">player_names</span><span class="p">.</span><span class="n">get_value_at_index</span><span class="p">(</span><span class="n">idx</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// --- 改 (Update) ---
+</span></span></span><span class="line"><span class="cl">    <span class="n">player_names</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s">&#34;AliceUpdated&#34;</span><span class="p">);</span> <span class="c1">// insert 兼具更新功能
+</span></span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 如果你有索引，也可以通过索引改
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// player_names.get_value_at_index(0) = &#34;NewName&#34;;
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// --- 删 (Delete) ---
+</span></span></span><span class="line"><span class="cl">    <span class="n">player_names</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span> <span class="c1">// 移除 key 为 10 的元素
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="listt"><code>List&lt;T&gt;</code>
+</h4><p><strong>✨头文件</strong>:``<br>
+<strong>✨作用</strong>:<br>
+非连续内存： 节点散落在内存中，通过指针连接。
+插入/删除快： 在头部、尾部或任意已知节点处插入/删除元素是 $O(1)$ 操作。
+随机访问慢： 想要访问第 N 个元素（list[N]），必须从头遍历，是 $O(N)$ 操作。这是它和 Vector 最大的区别。
+迭代器： 使用 List<T>::Element * 指针作为迭代器
+<strong>✨使用示例</strong>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;core/templates/list.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;core/string/ustring.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">demo_list</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// --- 1. 创建 (Create) ---
+</span></span></span><span class="line"><span class="cl">    <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">chat_log</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// --- 2. 增 (Add) ---
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// 尾部添加 O(1)
+</span></span></span><span class="line"><span class="cl">    <span class="n">chat_log</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="s">&#34;Player joined&#34;</span><span class="p">);</span> 
+</span></span><span class="line"><span class="cl">    <span class="n">chat_log</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="s">&#34;Player said: Hello&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 头部添加 O(1) - 适合做队列
+</span></span></span><span class="line"><span class="cl">    <span class="n">chat_log</span><span class="p">.</span><span class="n">push_front</span><span class="p">(</span><span class="s">&#34;System: Welcome&#34;</span><span class="p">);</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 在特定位置插入
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// List 的插入通常依赖于 Element 指针
+</span></span></span><span class="line"><span class="cl">    <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;::</span><span class="n">Element</span> <span class="o">*</span><span class="n">E</span> <span class="o">=</span> <span class="n">chat_log</span><span class="p">.</span><span class="n">front</span><span class="p">();</span> <span class="c1">// 获取第一个节点 (&#34;System: Welcome&#34;)
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">E</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 在第一个节点后面插入
+</span></span></span><span class="line"><span class="cl">        <span class="n">chat_log</span><span class="p">.</span><span class="n">insert_after</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="s">&#34;System: Message of the day&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 此时顺序: 
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// [0] System: Welcome
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// [1] System: Message of the day
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// [2] Player joined
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// [3] Player said: Hello
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// --- 3. 查 (Read) ---
+</span></span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// A. 访问头尾 O(1)
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">chat_log</span><span class="p">.</span><span class="n">is_empty</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">String</span> <span class="n">first</span> <span class="o">=</span> <span class="n">chat_log</span><span class="p">.</span><span class="n">front</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">String</span> <span class="n">last</span> <span class="o">=</span> <span class="n">chat_log</span><span class="p">.</span><span class="n">back</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// B. 遍历 (推荐方式 1: 范围 for 循环 - Godot 4.x)
+</span></span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="n">String</span> <span class="o">&amp;</span><span class="nl">msg</span> <span class="p">:</span> <span class="n">chat_log</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">print_line</span><span class="p">(</span><span class="s">&#34;Log: &#34;</span> <span class="o">+</span> <span class="n">msg</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// C. 遍历 (传统方式/手动方式: 使用 Element 指针)
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// 这种方式在你需要操作节点(如删除当前节点)时很有用
+</span></span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;::</span><span class="n">Element</span> <span class="o">*</span><span class="n">E</span> <span class="o">=</span> <span class="n">chat_log</span><span class="p">.</span><span class="n">front</span><span class="p">();</span> <span class="n">E</span><span class="p">;</span> <span class="n">E</span> <span class="o">=</span> <span class="n">E</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// E 是节点指针，E-&gt;get() 获取值
+</span></span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">E</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">()</span> <span class="o">==</span> <span class="s">&#34;Player joined&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">print_line</span><span class="p">(</span><span class="s">&#34;Found join event!&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// D. 随机访问 (警告：极慢！)
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// List 重载了 []，但它是 O(N) 的，不建议在循环中使用
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// String val = chat_log[2]; // 性能差，慎用
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// --- 4. 改 (Update) ---
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// 通过节点指针直接修改
+</span></span></span><span class="line"><span class="cl">    <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;::</span><span class="n">Element</span> <span class="o">*</span><span class="n">msg_node</span> <span class="o">=</span> <span class="n">chat_log</span><span class="p">.</span><span class="n">back</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">msg_node</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">msg_node</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">()</span> <span class="o">=</span> <span class="s">&#34;Player said: Bye&#34;</span><span class="p">;</span> <span class="c1">// 修改值
+</span></span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// --- 5. 删 (Delete) ---
+</span></span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// A. 移除头尾 O(1)
+</span></span></span><span class="line"><span class="cl">    <span class="n">chat_log</span><span class="p">.</span><span class="n">pop_front</span><span class="p">();</span> <span class="c1">// 移除第一个
+</span></span></span><span class="line"><span class="cl">    <span class="n">chat_log</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>  <span class="c1">// 移除最后一个
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// B. 移除特定值 O(N) - 需要查找
+</span></span></span><span class="line"><span class="cl">    <span class="n">chat_log</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="s">&#34;Player joined&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// C. 通过迭代器移除 O(1) - 最高效的中间删除方式
+</span></span></span><span class="line"><span class="cl">    <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;::</span><span class="n">Element</span> <span class="o">*</span><span class="n">node_to_delete</span> <span class="o">=</span> <span class="n">chat_log</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 假设我们找到了要删的节点指针
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">node_to_delete</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">chat_log</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">node_to_delete</span><span class="p">);</span> <span class="c1">// 直接把这个节点摘除
+</span></span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 清空
+</span></span></span><span class="line"><span class="cl">    <span class="n">chat_log</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="vsett"><code>VSet&lt;T&gt;</code>
+</h4><p><strong>✨头文件</strong>:<code>#include &quot;core/templates/vset.h&quot;</code><br>
+<strong>✨作用</strong>:类似std::set, 内存紧凑，二分查找，不支持重复元素。
+<strong>✨使用示例</strong>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;core/templates/vset.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">demo_vset</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">VSet</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">unique_ids</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// --- 增 (Add) ---
+</span></span></span><span class="line"><span class="cl">    <span class="n">unique_ids</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">50</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">unique_ids</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">unique_ids</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">50</span><span class="p">);</span> <span class="c1">// 重复插入无效，集合中只有一个 50
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// 此时内部状态为有序：[10, 50]
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// --- 查 (Read) ---
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">unique_ids</span><span class="p">.</span><span class="n">has</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">print_line</span><span class="p">(</span><span class="s">&#34;ID 10 exists&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 查找索引
+</span></span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">idx</span> <span class="o">=</span> <span class="n">unique_ids</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="mi">50</span><span class="p">);</span> <span class="c1">// 返回 1
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 遍历
+</span></span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">unique_ids</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">val</span> <span class="o">=</span> <span class="n">unique_ids</span><span class="p">[</span><span class="n">i</span><span class="p">];</span> <span class="c1">// 像数组一样访问
+</span></span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// --- 改 (Update) ---
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// Set 通常不直接修改元素值（因为这会破坏排序），
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// 而是先 erase 旧值，再 insert 新值。
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// --- 删 (Delete) ---
+</span></span></span><span class="line"><span class="cl">    <span class="n">unique_ids</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="hashmapkv"><code>HashMap&lt;K,V&gt;</code>
+</h4><p><strong>✨头文件</strong>:<code>#include &quot;core/templates/hash_map.h&quot;</code><br>
+<strong>✨作用</strong>:基于哈希表实现,具有以下特点:</p>
+<ol>
+<li>平均查找、插入、删除时间复杂度为O(1)。</li>
+<li>无序（遍历顺序不确定）。</li>
+<li>适用场景： 需要快速查找大量数据，且不关心遍历顺序</li>
+</ol>
+<p><strong>✨使用示例</strong>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;core/templates/hash_map.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">demo_hashmap</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">inventory</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// --- 增 (Add) / 改 (Update) ---
+</span></span></span><span class="line"><span class="cl">    <span class="n">inventory</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="s">&#34;Apple&#34;</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">inventory</span><span class="p">[</span><span class="s">&#34;Banana&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span> <span class="c1">// 类似 std::map，如果不存在则创建，存在则更新
+</span></span></span><span class="line"><span class="cl">    <span class="n">inventory</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="s">&#34;Apple&#34;</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span> <span class="c1">// 更新 Apple 的值为 8
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// --- 查 (Read) ---
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">inventory</span><span class="p">.</span><span class="n">has</span><span class="p">(</span><span class="s">&#34;Banana&#34;</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="n">inventory</span><span class="p">[</span><span class="s">&#34;Banana&#34;</span><span class="p">];</span> <span class="c1">// 获取值
+</span></span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 使用 find 获取迭代器/指针，避免两次哈希计算
+</span></span></span><span class="line"><span class="cl">    <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;::</span><span class="n">Iterator</span> <span class="n">E</span> <span class="o">=</span> <span class="n">inventory</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#34;Apple&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">E</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">val</span> <span class="o">=</span> <span class="n">E</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// E-&gt;key 获取键
+</span></span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 遍历
+</span></span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="n">KeyValue</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="nl">E</span> <span class="p">:</span> <span class="n">inventory</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">print_line</span><span class="p">(</span><span class="n">E</span><span class="p">.</span><span class="n">key</span> <span class="o">+</span> <span class="s">&#34;: &#34;</span> <span class="o">+</span> <span class="n">itos</span><span class="p">(</span><span class="n">E</span><span class="p">.</span><span class="n">value</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// --- 删 (Delete) ---
+</span></span></span><span class="line"><span class="cl">    <span class="n">inventory</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="s">&#34;Banana&#34;</span><span class="p">);</span> <span class="c1">// 如果存在则删除
+</span></span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">removed</span> <span class="o">=</span> <span class="n">inventory</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span><span class="s">&#34;Apple&#34;</span><span class="p">);</span> <span class="c1">// remove 也是删除
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="rbmap">RBMap
+</h4><p>红黑树,有序遍历性能好</p>
+<h4 id="rbset">RBSet
+</h4><h2 id="class_db">class_db
+</h2><p><strong>路径</strong>：#include &ldquo;core/object/class_db.h&rdquo;</p>
+<p>在_bind_methods中进行类型和函数注册的时候，使用到的类型注册函数就来自该头文件</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>接口</th>
+					<th>作用</th>
+					<th>示例</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>ClassDB::bind_method</td>
+					<td>注册函数到脚本</td>
+					<td>ClassDB::bind_method(D_METHOD(&ldquo;test_print&rdquo;), &amp;CommandTool::test_print);</td>
+			</tr>
+	</tbody>
+</table></div>
+<h2 id="os">OS
+</h2><p><strong>路径</strong>：#include &ldquo;sence/gui/xxx.h&rdquo;</p>
+<p>提供了一系列操作系统层级的API，比如打印日、获取引擎运行时长等。</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>接口</th>
+					<th>作用</th>
+					<th>示例</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>get_ticks_usec</td>
+					<td>获取引擎运行时长，单位为微秒</td>
+					<td></td>
+			</tr>
+			<tr>
+					<td>get_ticks_msec</td>
+					<td>获取引擎运行时长，单位为毫秒</td>
+					<td></td>
+			</tr>
+			<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+			</tr>
+	</tbody>
+</table></div>
+<h2 id="callable">callable
+</h2><p><strong>路径</strong>：#include &ldquo;core/variant/callable.h&rdquo;</p>
+<p>godot自身提供了一套用于<strong>安全、类型检查</strong>的函数回调机制，也就是Callable，在进行信号连接时，我们就需要使用到它。</p>
+<p>类似 C++ 的 <code>std::function&lt;void()&gt;</code>，但它能在 Godot 对象系统中序列化、连接信号、跨语言调用。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">//基础构造函数，注意此处的method需要在_bind_method中被注册才能够通过字符串访问。
+</span></span></span><span class="line"><span class="cl"><span class="n">Callable</span> <span class="n">c</span> <span class="o">=</span> <span class="n">Callable</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="s">&#34;_on_something&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//更安全高效的绑定
+</span></span></span><span class="line"><span class="cl"><span class="n">Callable</span> <span class="n">c</span> <span class="o">=</span> <span class="n">callable_mp</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">MyClass</span><span class="o">::</span><span class="n">_on_timeout</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="gui">gui
+</h2><p><strong>基础路径</strong>：#include &ldquo;sence/gui/xxx.h&rdquo;</p>
+<h3 id="gui基础类">GUI基础类
+</h3><h4 id="control">Control
+</h4><div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th style="text-align: left">接口</th>
+					<th style="text-align: center">作用</th>
+					<th style="text-align: left">右对齐</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: left">set_mouse_filter</td>
+					<td style="text-align: center">设置鼠标/点击行为</td>
+					<td style="text-align: left">STOP <br> PASS <br> IGNORE</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>err_dialog_control-&gt;set_custom_minimum_size(Size2(600, 600) * EDSCALE);<br>
+err_dialog_control-&gt;connect(SceneStringName(draw), callable_mp(this, &amp;LyfTestEditor::test_draw));<br>
+err_dialog_control-&gt;draw_line(Point2(0,0), Point2(100,100),Color(1,0,0));</p>
+<h4 id="canvasitem">CanvasItem
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">draw_dashed_line</span><span class="p">(</span><span class="k">const</span> <span class="n">Point2</span> <span class="o">&amp;</span><span class="n">p_from</span><span class="p">,</span> <span class="k">const</span> <span class="n">Point2</span> <span class="o">&amp;</span><span class="n">p_to</span><span class="p">,</span> <span class="k">const</span> <span class="n">Color</span> <span class="o">&amp;</span><span class="n">p_color</span><span class="p">,</span> <span class="n">real_t</span> <span class="n">p_width</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">real_t</span> <span class="n">p_dash</span> <span class="o">=</span> <span class="mf">2.0</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">p_aligned</span> <span class="o">=</span> <span class="nb">true</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">p_antialiased</span> <span class="o">=</span> <span class="nb">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">draw_line</span><span class="p">(</span><span class="k">const</span> <span class="n">Point2</span> <span class="o">&amp;</span><span class="n">p_from</span><span class="p">,</span> <span class="k">const</span> <span class="n">Point2</span> <span class="o">&amp;</span><span class="n">p_to</span><span class="p">,</span> <span class="k">const</span> <span class="n">Color</span> <span class="o">&amp;</span><span class="n">p_color</span><span class="p">,</span> <span class="n">real_t</span> <span class="n">p_width</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">p_antialiased</span> <span class="o">=</span> <span class="nb">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">draw_polyline</span><span class="p">(</span><span class="k">const</span> <span class="n">Vector</span><span class="o">&lt;</span><span class="n">Point2</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">p_points</span><span class="p">,</span> <span class="k">const</span> <span class="n">Color</span> <span class="o">&amp;</span><span class="n">p_color</span><span class="p">,</span> <span class="n">real_t</span> <span class="n">p_width</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">p_antialiased</span> <span class="o">=</span> <span class="nb">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">draw_polyline_colors</span><span class="p">(</span><span class="k">const</span> <span class="n">Vector</span><span class="o">&lt;</span><span class="n">Point2</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">p_points</span><span class="p">,</span> <span class="k">const</span> <span class="n">Vector</span><span class="o">&lt;</span><span class="n">Color</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">p_colors</span><span class="p">,</span> <span class="n">real_t</span> <span class="n">p_width</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">p_antialiased</span> <span class="o">=</span> <span class="nb">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">draw_arc</span><span class="p">(</span><span class="k">const</span> <span class="n">Vector2</span> <span class="o">&amp;</span><span class="n">p_center</span><span class="p">,</span> <span class="n">real_t</span> <span class="n">p_radius</span><span class="p">,</span> <span class="n">real_t</span> <span class="n">p_start_angle</span><span class="p">,</span> <span class="n">real_t</span> <span class="n">p_end_angle</span><span class="p">,</span> <span class="kt">int</span> <span class="n">p_point_count</span><span class="p">,</span> <span class="k">const</span> <span class="n">Color</span> <span class="o">&amp;</span><span class="n">p_color</span><span class="p">,</span> <span class="n">real_t</span> <span class="n">p_width</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">p_antialiased</span> <span class="o">=</span> <span class="nb">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">draw_multiline</span><span class="p">(</span><span class="k">const</span> <span class="n">Vector</span><span class="o">&lt;</span><span class="n">Point2</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">p_points</span><span class="p">,</span> <span class="k">const</span> <span class="n">Color</span> <span class="o">&amp;</span><span class="n">p_color</span><span class="p">,</span> <span class="n">real_t</span> <span class="n">p_width</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">p_antialiased</span> <span class="o">=</span> <span class="nb">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">draw_multiline_colors</span><span class="p">(</span><span class="k">const</span> <span class="n">Vector</span><span class="o">&lt;</span><span class="n">Point2</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">p_points</span><span class="p">,</span> <span class="k">const</span> <span class="n">Vector</span><span class="o">&lt;</span><span class="n">Color</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">p_colors</span><span class="p">,</span> <span class="n">real_t</span> <span class="n">p_width</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">p_antialiased</span> <span class="o">=</span> <span class="nb">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">draw_rect</span><span class="p">(</span><span class="k">const</span> <span class="n">Rect2</span> <span class="o">&amp;</span><span class="n">p_rect</span><span class="p">,</span> <span class="k">const</span> <span class="n">Color</span> <span class="o">&amp;</span><span class="n">p_color</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">p_filled</span> <span class="o">=</span> <span class="nb">true</span><span class="p">,</span> <span class="n">real_t</span> <span class="n">p_width</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">p_antialiased</span> <span class="o">=</span> <span class="nb">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">draw_circle</span><span class="p">(</span><span class="k">const</span> <span class="n">Point2</span> <span class="o">&amp;</span><span class="n">p_pos</span><span class="p">,</span> <span class="n">real_t</span> <span class="n">p_radius</span><span class="p">,</span> <span class="k">const</span> <span class="n">Color</span> <span class="o">&amp;</span><span class="n">p_color</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">p_filled</span> <span class="o">=</span> <span class="nb">true</span><span class="p">,</span> <span class="n">real_t</span> <span class="n">p_width</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">p_antialiased</span> <span class="o">=</span> <span class="nb">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">draw_texture</span><span class="p">(</span><span class="k">const</span> <span class="n">Ref</span><span class="o">&lt;</span><span class="n">Texture2D</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">p_texture</span><span class="p">,</span> <span class="k">const</span> <span class="n">Point2</span> <span class="o">&amp;</span><span class="n">p_pos</span><span class="p">,</span> <span class="k">const</span> <span class="n">Color</span> <span class="o">&amp;</span><span class="n">p_modulate</span> <span class="o">=</span> <span class="n">Color</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">draw_texture_rect</span><span class="p">(</span><span class="k">const</span> <span class="n">Ref</span><span class="o">&lt;</span><span class="n">Texture2D</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">p_texture</span><span class="p">,</span> <span class="k">const</span> <span class="n">Rect2</span> <span class="o">&amp;</span><span class="n">p_rect</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">p_tile</span> <span class="o">=</span> <span class="nb">false</span><span class="p">,</span> <span class="k">const</span> <span class="n">Color</span> <span class="o">&amp;</span><span class="n">p_modulate</span> <span class="o">=</span> <span class="n">Color</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="kt">bool</span> <span class="n">p_transpose</span> <span class="o">=</span> <span class="nb">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">draw_texture_rect_region</span><span class="p">(</span><span class="k">const</span> <span class="n">Ref</span><span class="o">&lt;</span><span class="n">Texture2D</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">p_texture</span><span class="p">,</span> <span class="k">const</span> <span class="n">Rect2</span> <span class="o">&amp;</span><span class="n">p_rect</span><span class="p">,</span> <span class="k">const</span> <span class="n">Rect2</span> <span class="o">&amp;</span><span class="n">p_src_rect</span><span class="p">,</span> <span class="k">const</span> <span class="n">Color</span> <span class="o">&amp;</span><span class="n">p_modulate</span> <span class="o">=</span> <span class="n">Color</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="kt">bool</span> <span class="n">p_transpose</span> <span class="o">=</span> <span class="nb">false</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">p_clip_uv</span> <span class="o">=</span> <span class="nb">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">draw_msdf_texture_rect_region</span><span class="p">(</span><span class="k">const</span> <span class="n">Ref</span><span class="o">&lt;</span><span class="n">Texture2D</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">p_texture</span><span class="p">,</span> <span class="k">const</span> <span class="n">Rect2</span> <span class="o">&amp;</span><span class="n">p_rect</span><span class="p">,</span> <span class="k">const</span> <span class="n">Rect2</span> <span class="o">&amp;</span><span class="n">p_src_rect</span><span class="p">,</span> <span class="k">const</span> <span class="n">Color</span> <span class="o">&amp;</span><span class="n">p_modulate</span> <span class="o">=</span> <span class="n">Color</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="kt">double</span> <span class="n">p_outline</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="kt">double</span> <span class="n">p_pixel_range</span> <span class="o">=</span> <span class="mf">4.0</span><span class="p">,</span> <span class="kt">double</span> <span class="n">p_scale</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">draw_lcd_texture_rect_region</span><span class="p">(</span><span class="k">const</span> <span class="n">Ref</span><span class="o">&lt;</span><span class="n">Texture2D</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">p_texture</span><span class="p">,</span> <span class="k">const</span> <span class="n">Rect2</span> <span class="o">&amp;</span><span class="n">p_rect</span><span class="p">,</span> <span class="k">const</span> <span class="n">Rect2</span> <span class="o">&amp;</span><span class="n">p_src_rect</span><span class="p">,</span> <span class="k">const</span> <span class="n">Color</span> <span class="o">&amp;</span><span class="n">p_modulate</span> <span class="o">=</span> <span class="n">Color</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">draw_style_box</span><span class="p">(</span><span class="k">const</span> <span class="n">Ref</span><span class="o">&lt;</span><span class="n">StyleBox</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">p_style_box</span><span class="p">,</span> <span class="k">const</span> <span class="n">Rect2</span> <span class="o">&amp;</span><span class="n">p_rect</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">draw_primitive</span><span class="p">(</span><span class="k">const</span> <span class="n">Vector</span><span class="o">&lt;</span><span class="n">Point2</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">p_points</span><span class="p">,</span> <span class="k">const</span> <span class="n">Vector</span><span class="o">&lt;</span><span class="n">Color</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">p_colors</span><span class="p">,</span> <span class="k">const</span> <span class="n">Vector</span><span class="o">&lt;</span><span class="n">Point2</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">p_uvs</span><span class="p">,</span> <span class="n">Ref</span><span class="o">&lt;</span><span class="n">Texture2D</span><span class="o">&gt;</span> <span class="n">p_texture</span> <span class="o">=</span> <span class="n">Ref</span><span class="o">&lt;</span><span class="n">Texture2D</span><span class="o">&gt;</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">draw_polygon</span><span class="p">(</span><span class="k">const</span> <span class="n">Vector</span><span class="o">&lt;</span><span class="n">Point2</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">p_points</span><span class="p">,</span> <span class="k">const</span> <span class="n">Vector</span><span class="o">&lt;</span><span class="n">Color</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">p_colors</span><span class="p">,</span> <span class="k">const</span> <span class="n">Vector</span><span class="o">&lt;</span><span class="n">Point2</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">p_uvs</span> <span class="o">=</span> <span class="n">Vector</span><span class="o">&lt;</span><span class="n">Point2</span><span class="o">&gt;</span><span class="p">(),</span> <span class="n">Ref</span><span class="o">&lt;</span><span class="n">Texture2D</span><span class="o">&gt;</span> <span class="n">p_texture</span> <span class="o">=</span> <span class="n">Ref</span><span class="o">&lt;</span><span class="n">Texture2D</span><span class="o">&gt;</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">draw_colored_polygon</span><span class="p">(</span><span class="k">const</span> <span class="n">Vector</span><span class="o">&lt;</span><span class="n">Point2</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">p_points</span><span class="p">,</span> <span class="k">const</span> <span class="n">Color</span> <span class="o">&amp;</span><span class="n">p_color</span><span class="p">,</span> <span class="k">const</span> <span class="n">Vector</span><span class="o">&lt;</span><span class="n">Point2</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">p_uvs</span> <span class="o">=</span> <span class="n">Vector</span><span class="o">&lt;</span><span class="n">Point2</span><span class="o">&gt;</span><span class="p">(),</span> <span class="n">Ref</span><span class="o">&lt;</span><span class="n">Texture2D</span><span class="o">&gt;</span> <span class="n">p_texture</span> <span class="o">=</span> <span class="n">Ref</span><span class="o">&lt;</span><span class="n">Texture2D</span><span class="o">&gt;</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">draw_mesh</span><span class="p">(</span><span class="k">const</span> <span class="n">Ref</span><span class="o">&lt;</span><span class="n">Mesh</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">p_mesh</span><span class="p">,</span> <span class="k">const</span> <span class="n">Ref</span><span class="o">&lt;</span><span class="n">Texture2D</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">p_texture</span><span class="p">,</span> <span class="k">const</span> <span class="n">Transform2D</span> <span class="o">&amp;</span><span class="n">p_transform</span> <span class="o">=</span> <span class="n">Transform2D</span><span class="p">(),</span> <span class="k">const</span> <span class="n">Color</span> <span class="o">&amp;</span><span class="n">p_modulate</span> <span class="o">=</span> <span class="n">Color</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">draw_multimesh</span><span class="p">(</span><span class="k">const</span> <span class="n">Ref</span><span class="o">&lt;</span><span class="n">MultiMesh</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">p_multimesh</span><span class="p">,</span> <span class="k">const</span> <span class="n">Ref</span><span class="o">&lt;</span><span class="n">Texture2D</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">p_texture</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">draw_string</span><span class="p">(</span><span class="k">const</span> <span class="n">Ref</span><span class="o">&lt;</span><span class="n">Font</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">p_font</span><span class="p">,</span> <span class="k">const</span> <span class="n">Point2</span> <span class="o">&amp;</span><span class="n">p_pos</span><span class="p">,</span> <span class="k">const</span> <span class="n">String</span> <span class="o">&amp;</span><span class="n">p_text</span><span class="p">,</span> <span class="n">HorizontalAlignment</span> <span class="n">p_alignment</span> <span class="o">=</span> <span class="n">HORIZONTAL_ALIGNMENT_LEFT</span><span class="p">,</span> <span class="kt">float</span> <span class="n">p_width</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">p_font_size</span> <span class="o">=</span> <span class="n">Font</span><span class="o">::</span><span class="n">DEFAULT_FONT_SIZE</span><span class="p">,</span> <span class="k">const</span> <span class="n">Color</span> <span class="o">&amp;</span><span class="n">p_modulate</span> <span class="o">=</span> <span class="n">Color</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="n">BitField</span><span class="o">&lt;</span><span class="n">TextServer</span><span class="o">::</span><span class="n">JustificationFlag</span><span class="o">&gt;</span> <span class="n">p_jst_flags</span> <span class="o">=</span> <span class="n">TextServer</span><span class="o">::</span><span class="n">JUSTIFICATION_KASHIDA</span> <span class="o">|</span> <span class="n">TextServer</span><span class="o">::</span><span class="n">JUSTIFICATION_WORD_BOUND</span><span class="p">,</span> <span class="n">TextServer</span><span class="o">::</span><span class="n">Direction</span> <span class="n">p_direction</span> <span class="o">=</span> <span class="n">TextServer</span><span class="o">::</span><span class="n">DIRECTION_AUTO</span><span class="p">,</span> <span class="n">TextServer</span><span class="o">::</span><span class="n">Orientation</span> <span class="n">p_orientation</span> <span class="o">=</span> <span class="n">TextServer</span><span class="o">::</span><span class="n">ORIENTATION_HORIZONTAL</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">draw_multiline_string</span><span class="p">(</span><span class="k">const</span> <span class="n">Ref</span><span class="o">&lt;</span><span class="n">Font</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">p_font</span><span class="p">,</span> <span class="k">const</span> <span class="n">Point2</span> <span class="o">&amp;</span><span class="n">p_pos</span><span class="p">,</span> <span class="k">const</span> <span class="n">String</span> <span class="o">&amp;</span><span class="n">p_text</span><span class="p">,</span> <span class="n">HorizontalAlignment</span> <span class="n">p_alignment</span> <span class="o">=</span> <span class="n">HORIZONTAL_ALIGNMENT_LEFT</span><span class="p">,</span> <span class="kt">float</span> <span class="n">p_width</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">p_font_size</span> <span class="o">=</span> <span class="n">Font</span><span class="o">::</span><span class="n">DEFAULT_FONT_SIZE</span><span class="p">,</span> <span class="kt">int</span> <span class="n">p_max_lines</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="k">const</span> <span class="n">Color</span> <span class="o">&amp;</span><span class="n">p_modulate</span> <span class="o">=</span> <span class="n">Color</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="n">BitField</span><span class="o">&lt;</span><span class="n">TextServer</span><span class="o">::</span><span class="n">LineBreakFlag</span><span class="o">&gt;</span> <span class="n">p_brk_flags</span> <span class="o">=</span> <span class="n">TextServer</span><span class="o">::</span><span class="n">BREAK_MANDATORY</span> <span class="o">|</span> <span class="n">TextServer</span><span class="o">::</span><span class="n">BREAK_WORD_BOUND</span><span class="p">,</span> <span class="n">BitField</span><span class="o">&lt;</span><span class="n">TextServer</span><span class="o">::</span><span class="n">JustificationFlag</span><span class="o">&gt;</span> <span class="n">p_jst_flags</span> <span class="o">=</span> <span class="n">TextServer</span><span class="o">::</span><span class="n">JUSTIFICATION_KASHIDA</span> <span class="o">|</span> <span class="n">TextServer</span><span class="o">::</span><span class="n">JUSTIFICATION_WORD_BOUND</span><span class="p">,</span> <span class="n">TextServer</span><span class="o">::</span><span class="n">Direction</span> <span class="n">p_direction</span> <span class="o">=</span> <span class="n">TextServer</span><span class="o">::</span><span class="n">DIRECTION_AUTO</span><span class="p">,</span> <span class="n">TextServer</span><span class="o">::</span><span class="n">Orientation</span> <span class="n">p_orientation</span> <span class="o">=</span> <span class="n">TextServer</span><span class="o">::</span><span class="n">ORIENTATION_HORIZONTAL</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">draw_string_outline</span><span class="p">(</span><span class="k">const</span> <span class="n">Ref</span><span class="o">&lt;</span><span class="n">Font</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">p_font</span><span class="p">,</span> <span class="k">const</span> <span class="n">Point2</span> <span class="o">&amp;</span><span class="n">p_pos</span><span class="p">,</span> <span class="k">const</span> <span class="n">String</span> <span class="o">&amp;</span><span class="n">p_text</span><span class="p">,</span> <span class="n">HorizontalAlignment</span> <span class="n">p_alignment</span> <span class="o">=</span> <span class="n">HORIZONTAL_ALIGNMENT_LEFT</span><span class="p">,</span> <span class="kt">float</span> <span class="n">p_width</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">p_font_size</span> <span class="o">=</span> <span class="n">Font</span><span class="o">::</span><span class="n">DEFAULT_FONT_SIZE</span><span class="p">,</span> <span class="kt">int</span> <span class="n">p_size</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="k">const</span> <span class="n">Color</span> <span class="o">&amp;</span><span class="n">p_modulate</span> <span class="o">=</span> <span class="n">Color</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="n">BitField</span><span class="o">&lt;</span><span class="n">TextServer</span><span class="o">::</span><span class="n">JustificationFlag</span><span class="o">&gt;</span> <span class="n">p_jst_flags</span> <span class="o">=</span> <span class="n">TextServer</span><span class="o">::</span><span class="n">JUSTIFICATION_KASHIDA</span> <span class="o">|</span> <span class="n">TextServer</span><span class="o">::</span><span class="n">JUSTIFICATION_WORD_BOUND</span><span class="p">,</span> <span class="n">TextServer</span><span class="o">::</span><span class="n">Direction</span> <span class="n">p_direction</span> <span class="o">=</span> <span class="n">TextServer</span><span class="o">::</span><span class="n">DIRECTION_AUTO</span><span class="p">,</span> <span class="n">TextServer</span><span class="o">::</span><span class="n">Orientation</span> <span class="n">p_orientation</span> <span class="o">=</span> <span class="n">TextServer</span><span class="o">::</span><span class="n">ORIENTATION_HORIZONTAL</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">draw_multiline_string_outline</span><span class="p">(</span><span class="k">const</span> <span class="n">Ref</span><span class="o">&lt;</span><span class="n">Font</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">p_font</span><span class="p">,</span> <span class="k">const</span> <span class="n">Point2</span> <span class="o">&amp;</span><span class="n">p_pos</span><span class="p">,</span> <span class="k">const</span> <span class="n">String</span> <span class="o">&amp;</span><span class="n">p_text</span><span class="p">,</span> <span class="n">HorizontalAlignment</span> <span class="n">p_alignment</span> <span class="o">=</span> <span class="n">HORIZONTAL_ALIGNMENT_LEFT</span><span class="p">,</span> <span class="kt">float</span> <span class="n">p_width</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">p_font_size</span> <span class="o">=</span> <span class="n">Font</span><span class="o">::</span><span class="n">DEFAULT_FONT_SIZE</span><span class="p">,</span> <span class="kt">int</span> <span class="n">p_max_lines</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">p_size</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="k">const</span> <span class="n">Color</span> <span class="o">&amp;</span><span class="n">p_modulate</span> <span class="o">=</span> <span class="n">Color</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="n">BitField</span><span class="o">&lt;</span><span class="n">TextServer</span><span class="o">::</span><span class="n">LineBreakFlag</span><span class="o">&gt;</span> <span class="n">p_brk_flags</span> <span class="o">=</span> <span class="n">TextServer</span><span class="o">::</span><span class="n">BREAK_MANDATORY</span> <span class="o">|</span> <span class="n">TextServer</span><span class="o">::</span><span class="n">BREAK_WORD_BOUND</span><span class="p">,</span> <span class="n">BitField</span><span class="o">&lt;</span><span class="n">TextServer</span><span class="o">::</span><span class="n">JustificationFlag</span><span class="o">&gt;</span> <span class="n">p_jst_flags</span> <span class="o">=</span> <span class="n">TextServer</span><span class="o">::</span><span class="n">JUSTIFICATION_KASHIDA</span> <span class="o">|</span> <span class="n">TextServer</span><span class="o">::</span><span class="n">JUSTIFICATION_WORD_BOUND</span><span class="p">,</span> <span class="n">TextServer</span><span class="o">::</span><span class="n">Direction</span> <span class="n">p_direction</span> <span class="o">=</span> <span class="n">TextServer</span><span class="o">::</span><span class="n">DIRECTION_AUTO</span><span class="p">,</span> <span class="n">TextServer</span><span class="o">::</span><span class="n">Orientation</span> <span class="n">p_orientation</span> <span class="o">=</span> <span class="n">TextServer</span><span class="o">::</span><span class="n">ORIENTATION_HORIZONTAL</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">draw_char</span><span class="p">(</span><span class="k">const</span> <span class="n">Ref</span><span class="o">&lt;</span><span class="n">Font</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">p_font</span><span class="p">,</span> <span class="k">const</span> <span class="n">Point2</span> <span class="o">&amp;</span><span class="n">p_pos</span><span class="p">,</span> <span class="k">const</span> <span class="n">String</span> <span class="o">&amp;</span><span class="n">p_char</span><span class="p">,</span> <span class="kt">int</span> <span class="n">p_font_size</span> <span class="o">=</span> <span class="n">Font</span><span class="o">::</span><span class="n">DEFAULT_FONT_SIZE</span><span class="p">,</span> <span class="k">const</span> <span class="n">Color</span> <span class="o">&amp;</span><span class="n">p_modulate</span> <span class="o">=</span> <span class="n">Color</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">))</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">draw_char_outline</span><span class="p">(</span><span class="k">const</span> <span class="n">Ref</span><span class="o">&lt;</span><span class="n">Font</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">p_font</span><span class="p">,</span> <span class="k">const</span> <span class="n">Point2</span> <span class="o">&amp;</span><span class="n">p_pos</span><span class="p">,</span> <span class="k">const</span> <span class="n">String</span> <span class="o">&amp;</span><span class="n">p_char</span><span class="p">,</span> <span class="kt">int</span> <span class="n">p_font_size</span> <span class="o">=</span> <span class="n">Font</span><span class="o">::</span><span class="n">DEFAULT_FONT_SIZE</span><span class="p">,</span> <span class="kt">int</span> <span class="n">p_size</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="k">const</span> <span class="n">Color</span> <span class="o">&amp;</span><span class="n">p_modulate</span> <span class="o">=</span> <span class="n">Color</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">))</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">draw_set_transform</span><span class="p">(</span><span class="k">const</span> <span class="n">Point2</span> <span class="o">&amp;</span><span class="n">p_offset</span><span class="p">,</span> <span class="n">real_t</span> <span class="n">p_rot</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="k">const</span> <span class="n">Size2</span> <span class="o">&amp;</span><span class="n">p_scale</span> <span class="o">=</span> <span class="n">Size2</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">draw_set_transform_matrix</span><span class="p">(</span><span class="k">const</span> <span class="n">Transform2D</span> <span class="o">&amp;</span><span class="n">p_matrix</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">draw_animation_slice</span><span class="p">(</span><span class="kt">double</span> <span class="n">p_animation_length</span><span class="p">,</span> <span class="kt">double</span> <span class="n">p_slice_begin</span><span class="p">,</span> <span class="kt">double</span> <span class="n">p_slice_end</span><span class="p">,</span> <span class="kt">double</span> <span class="n">p_offset</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">draw_end_animation</span><span class="p">();</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="文本类">文本类
+</h3><h4 id="label">Label
+</h4><p><strong>✨头文件</strong>:<code>#include &quot;scene/gui/label.h&quot; </code><br>
+<strong>✨作用</strong>:Label是godot提供的UI控件，可以自适应内容的大小</p>
+<h4 id="richtextlabel">RichTextLabel
+</h4><p><strong>✨头文件</strong>:<code>#include &quot;scene/gui/rich_text_label.h&quot;</code><br>
+<strong>✨作用</strong>:RichTextLabel是godot提供的UI控件，可以使用BBcode来控制显示的内容，比如设置当行文本颜色等<br>
+<strong>✨使用示例</strong>:  <img src="/Godot/ImageTemp/image2%201.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="RichTextLabel"
+	
+	
+>))</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="n">screen_output_label</span><span class="o">-&gt;</span><span class="n">set_use_bbcode</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>	<span class="c1">//使用bbcode，开启才能正确显示[color=red]XXXX[\color]的bbcode格式文本
+</span></span></span><span class="line"><span class="cl"><span class="n">screen_output_label</span><span class="o">-&gt;</span><span class="n">set_fit_content</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>	<span class="c1">//自适应文本高度
+</span></span></span><span class="line"><span class="cl"><span class="n">screen_output_label</span><span class="o">-&gt;</span><span class="n">set_autowrap_mode</span><span class="p">(</span><span class="n">TextServer</span><span class="o">::</span><span class="n">AutowrapMode</span><span class="o">::</span><span class="n">AUTOWRAP_OFF</span><span class="p">);</span><span class="c1">//关闭宽度调整，与上方设置相结合，可以自适应宽高。
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="按钮类">按钮类
+</h3><h4 id="optionbutton">OptionButton
+</h4><p><strong>✨头文件</strong>:<code>#include &quot;scene/gui/option_button.h&quot;</code><br>
+<strong>✨作用</strong>:<code>OptionButton</code>是Godot中提供的一个GUI控件.其本质是一个<code>Button</code>的派生控件，通过内部包含一个<code>PopupMenu</code>实现下拉功能。有以下作用：</p>
+<ul>
+<li>显示一个下拉菜单。</li>
+<li>包含多个可选项（Items），每个 Item 有 文本、图标、ID、可用性。</li>
+<li>用户点击后，弹出<code>PopupMenu</code>供选择。</li>
+<li>支持回调 &amp; 信号（如 item_selected(int index)）。</li>
+</ul>
+<p><strong>✨使用示例</strong>:<img src="/Godot/ImageTemp/image1%201.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="OptionButton"
+	
+	
+>))</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 创建 OptionButton
+</span></span></span><span class="line"><span class="cl"><span class="n">option_button</span> <span class="o">=</span> <span class="n">memnew</span><span class="p">(</span><span class="n">OptionButton</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">add_child</span><span class="p">(</span><span class="n">option_button</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 添加选项
+</span></span></span><span class="line"><span class="cl"><span class="n">option_button</span><span class="o">-&gt;</span><span class="n">add_item</span><span class="p">(</span><span class="s">&#34;Easy&#34;</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">option_button</span><span class="o">-&gt;</span><span class="n">add_item</span><span class="p">(</span><span class="s">&#34;Normal&#34;</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">option_button</span><span class="o">-&gt;</span><span class="n">add_icon_item</span><span class="p">(</span><span class="n">p_icon</span><span class="p">,</span><span class="s">&#34;Hard&#34;</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 选择默认项
+</span></span></span><span class="line"><span class="cl"><span class="n">option_button</span><span class="o">-&gt;</span><span class="n">select</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="c1">// Normal
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 绑定信号
+</span></span></span><span class="line"><span class="cl"><span class="n">option_button</span><span class="o">-&gt;</span><span class="n">connect</span><span class="p">(</span><span class="s">&#34;item_selected&#34;</span><span class="p">,</span> <span class="n">Callable</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="s">&#34;_on_item_selected&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 加一个 Label 显示信息
+</span></span></span><span class="line"><span class="cl"><span class="n">info_label</span> <span class="o">=</span> <span class="n">memnew</span><span class="p">(</span><span class="n">Label</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">info_label</span><span class="o">-&gt;</span><span class="n">set_position</span><span class="p">(</span><span class="n">Vector2</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">40</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="n">add_child</span><span class="p">(</span><span class="n">info_label</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">info_label</span><span class="o">-&gt;</span><span class="n">set_text</span><span class="p">(</span><span class="s">&#34;Selected: Normal&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 信号回调
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">_on_item_selected</span><span class="p">(</span><span class="kt">int</span> <span class="n">index</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">id</span> <span class="o">=</span> <span class="n">option_button</span><span class="o">-&gt;</span><span class="n">get_item_id</span><span class="p">(</span><span class="n">index</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">String</span> <span class="n">name</span> <span class="o">=</span> <span class="n">option_button</span><span class="o">-&gt;</span><span class="n">get_item_text</span><span class="p">(</span><span class="n">index</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">info_label</span><span class="o">-&gt;</span><span class="n">set_text</span><span class="p">(</span><span class="s">&#34;Selected: &#34;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s">&#34; (ID = &#34;</span> <span class="o">+</span> <span class="n">String</span><span class="o">::</span><span class="n">num_int64</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#34;)&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="menubutton">MenuButton
+</h4><p><strong>✨头文件</strong>:<code>#include &quot;scene/gui/menu_button.h&quot;</code><br>
+<strong>✨作用</strong>:<br>
+<strong>✨使用示例</strong>:<br>
+<img src="/Godot/ImageTemp/image3.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="MenuButton"
+	
+	
+></p>
+<h3 id="弹窗类">弹窗类
+</h3><h4 id="acceptdialog">AcceptDialog
+</h4><p><strong>✨头文件</strong>:<code>#include &quot;scene/gui/dialogs.h</code><br>
+<strong>✨作用</strong>:<code>AcceptDialog</code>是Godot中最常用的<code>弹出式对话框（Popup）</code>之一，用来向用户显示信息，并提供一个“确认/接受”按钮。</p>
+<ul>
+<li>✔️自带“确认”按钮，用户点击后会发送<code>confirmed</code>信号。</li>
+<li>✔️自带<code>canceled</code>信号。</li>
+<li>✔️可以显示简单的信息，用于提醒用户。</li>
+</ul>
+<p><strong>✨使用示例</strong>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">//初始化
+</span></span></span><span class="line"><span class="cl"><span class="n">err_dialog</span> <span class="o">=</span> <span class="n">memnew</span><span class="p">(</span><span class="n">AcceptDialog</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">add_child</span><span class="p">(</span><span class="n">err_dialog</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">err_dialog</span><span class="o">-&gt;</span><span class="n">get_ok_button</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">set_text</span><span class="p">(</span><span class="s">&#34;不ok&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">err_dialog</span><span class="o">-&gt;</span><span class="n">get_ok_button</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">connect</span><span class="p">(</span><span class="s">&#34;pressed&#34;</span><span class="p">,</span><span class="n">callable_mp</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">LyfTestEditor</span><span class="o">::</span><span class="n">test_func</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//设置文本，并唤起弹窗
+</span></span></span><span class="line"><span class="cl"><span class="n">err_dialog</span><span class="o">-&gt;</span><span class="n">set_text</span><span class="p">(</span><span class="s">&#34;LyfTestEditorPlugin::MENU_OPTION_CREATE_111&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">err_dialog</span><span class="o">-&gt;</span><span class="n">popup_centered</span><span class="p">();</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="confirmationdialog">ConfirmationDialog
+</h4><p>头文件路径：<code>#include &quot;scene/gui/dialogs.h&quot;</code><br>
+<code>ConfirmationDialog</code>是Godot中用于确认/取消操作的标准弹窗（Popup），继承自 AcceptDialog。<br>
+相较于<code>AcceptDialog</code>多了一个<code>cancel</code>按钮，用户点击后会发送<code>canceled</code>信号。</p>
+<h2 id="thread">Thread
+</h2><p><strong>✨头文件</strong>:<code>#include &quot;core/os/thread.h&quot;</code><br>
+<strong>✨作用</strong>:Godot 提供的线程类，用于创建和管理线程。具有以下特点:</p>
+<ol>
+<li><strong>跨平台支持</strong>：在 Windows、Linux、macOS 等平台上统一接口</li>
+<li><strong>轻量级</strong>：适合后台任务、数据处理等场景</li>
+<li><strong>线程安全</strong>：需要配合 Mutex、Semaphore 等同步机制使用</li>
+</ol>
+<p><strong>⚠️ 重要注意事项</strong>:</p>
+<ul>
+<li><strong>不要在子线程中直接操作场景树</strong>：所有 GUI 操作必须在主线程进行</li>
+<li><strong>使用 call_deferred</strong>：如果需要在主线程执行代码，使用 <code>call_deferred</code> 或信号机制</li>
+<li><strong>避免阻塞主线程</strong>：耗时任务放在子线程中执行</li>
+</ul>
+<p><strong>✨使用示例</strong>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span><span class="lnt">88
+</span><span class="lnt">89
+</span><span class="lnt">90
+</span><span class="lnt">91
+</span><span class="lnt">92
+</span><span class="lnt">93
+</span><span class="lnt">94
+</span><span class="lnt">95
+</span><span class="lnt">96
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;core/os/thread.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;core/os/mutex.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;core/os/semaphore.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">ThreadExample</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Node</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">GDCLASS</span><span class="p">(</span><span class="n">ThreadExample</span><span class="p">,</span> <span class="n">Node</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Thread</span> <span class="o">*</span><span class="n">worker_thread</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Mutex</span> <span class="o">*</span><span class="n">mutex</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Semaphore</span> <span class="o">*</span><span class="n">semaphore</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">thread_active</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">shared_data</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ThreadExample</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">worker_thread</span> <span class="o">=</span> <span class="n">memnew</span><span class="p">(</span><span class="n">Thread</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">mutex</span> <span class="o">=</span> <span class="n">memnew</span><span class="p">(</span><span class="n">Mutex</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">semaphore</span> <span class="o">=</span> <span class="n">memnew</span><span class="p">(</span><span class="n">Semaphore</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">thread_active</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="o">~</span><span class="n">ThreadExample</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">thread_active</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">semaphore</span><span class="o">-&gt;</span><span class="n">post</span><span class="p">();</span> <span class="c1">// 唤醒线程使其退出
+</span></span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">worker_thread</span><span class="o">-&gt;</span><span class="n">is_started</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">worker_thread</span><span class="o">-&gt;</span><span class="n">wait_to_finish</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">memdelete</span><span class="p">(</span><span class="n">worker_thread</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">memdelete</span><span class="p">(</span><span class="n">mutex</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">memdelete</span><span class="p">(</span><span class="n">semaphore</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 线程工作函数
+</span></span></span><span class="line"><span class="cl">    <span class="k">static</span> <span class="kt">void</span> <span class="nf">_thread_function</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">p_userdata</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ThreadExample</span> <span class="o">*</span><span class="n">instance</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">ThreadExample</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">p_userdata</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="p">(</span><span class="n">instance</span><span class="o">-&gt;</span><span class="n">thread_active</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 等待信号（等待任务）
+</span></span></span><span class="line"><span class="cl">            <span class="n">instance</span><span class="o">-&gt;</span><span class="n">semaphore</span><span class="o">-&gt;</span><span class="n">wait</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">instance</span><span class="o">-&gt;</span><span class="n">thread_active</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c1">// 执行耗时任务（例如数据处理）
+</span></span></span><span class="line"><span class="cl">            <span class="n">Vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">local_data</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// 加锁访问共享数据
+</span></span></span><span class="line"><span class="cl">                <span class="n">MutexLock</span> <span class="n">lock</span><span class="p">(</span><span class="n">instance</span><span class="o">-&gt;</span><span class="n">mutex</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">local_data</span> <span class="o">=</span> <span class="n">instance</span><span class="o">-&gt;</span><span class="n">shared_data</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c1">// 处理数据（不涉及 GUI 操作）
+</span></span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">local_data</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">local_data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*=</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">// 示例：数据翻倍
+</span></span></span><span class="line"><span class="cl">                <span class="n">OS</span><span class="o">::</span><span class="n">get_singleton</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">delay_usec</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span> <span class="c1">// 模拟耗时操作
+</span></span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c1">// 处理完成后，通知主线程更新
+</span></span></span><span class="line"><span class="cl">            <span class="n">instance</span><span class="o">-&gt;</span><span class="n">call_deferred</span><span class="p">(</span><span class="s">&#34;_on_thread_complete&#34;</span><span class="p">,</span> <span class="n">local_data</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 启动线程
+</span></span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">start_thread</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ERR_FAIL_COND</span><span class="p">(</span><span class="n">worker_thread</span><span class="o">-&gt;</span><span class="n">is_started</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">        <span class="n">worker_thread</span><span class="o">-&gt;</span><span class="n">start</span><span class="p">(</span><span class="n">_thread_function</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 添加任务（从主线程调用）
+</span></span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">add_task</span><span class="p">(</span><span class="k">const</span> <span class="n">Vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">data</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">MutexLock</span> <span class="n">lock</span><span class="p">(</span><span class="n">mutex</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">shared_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">semaphore</span><span class="o">-&gt;</span><span class="n">post</span><span class="p">();</span> <span class="c1">// 唤醒工作线程
+</span></span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 线程完成回调（在主线程执行）
+</span></span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">_on_thread_complete</span><span class="p">(</span><span class="k">const</span> <span class="n">Vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">result</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 可以安全地操作 GUI
+</span></span></span><span class="line"><span class="cl">        <span class="n">print_line</span><span class="p">(</span><span class="s">&#34;Thread completed with &#34;</span> <span class="o">+</span> <span class="n">itos</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="o">+</span> <span class="s">&#34; items&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c1">// 更新 UI 等
+</span></span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">result</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">print_line</span><span class="p">(</span><span class="s">&#34;Result[&#34;</span> <span class="o">+</span> <span class="n">itos</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#34;] = &#34;</span> <span class="o">+</span> <span class="n">itos</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]));</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">protected</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">static</span> <span class="kt">void</span> <span class="n">_bind_methods</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ClassDB</span><span class="o">::</span><span class="n">bind_method</span><span class="p">(</span><span class="n">D_METHOD</span><span class="p">(</span><span class="s">&#34;start_thread&#34;</span><span class="p">),</span> <span class="o">&amp;</span><span class="n">ThreadExample</span><span class="o">::</span><span class="n">start_thread</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ClassDB</span><span class="o">::</span><span class="n">bind_method</span><span class="p">(</span><span class="n">D_METHOD</span><span class="p">(</span><span class="s">&#34;add_task&#34;</span><span class="p">,</span> <span class="s">&#34;data&#34;</span><span class="p">),</span> <span class="o">&amp;</span><span class="n">ThreadExample</span><span class="o">::</span><span class="n">add_task</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ClassDB</span><span class="o">::</span><span class="n">bind_method</span><span class="p">(</span><span class="n">D_METHOD</span><span class="p">(</span><span class="s">&#34;_on_thread_complete&#34;</span><span class="p">,</span> <span class="s">&#34;result&#34;</span><span class="p">),</span> <span class="o">&amp;</span><span class="n">ThreadExample</span><span class="o">::</span><span class="n">_on_thread_complete</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="线程同步工具">线程同步工具
+</h3><h4 id="mutex互斥锁">Mutex（互斥锁）
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;core/os/mutex.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Mutex</span> <span class="o">*</span><span class="n">mutex</span> <span class="o">=</span> <span class="n">memnew</span><span class="p">(</span><span class="n">Mutex</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 加锁
+</span></span></span><span class="line"><span class="cl"><span class="n">mutex</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 访问共享资源
+</span></span></span><span class="line"><span class="cl"><span class="n">critical_section</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 解锁
+</span></span></span><span class="line"><span class="cl"><span class="n">mutex</span><span class="o">-&gt;</span><span class="n">unlock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 使用 RAII 自动管理锁（推荐）
+</span></span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">MutexLock</span> <span class="nf">lock</span><span class="p">(</span><span class="n">mutex</span><span class="p">);</span> <span class="c1">// 构造时自动加锁
+</span></span></span><span class="line"><span class="cl">    <span class="n">critical_section</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c1">// 析构时自动解锁
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="semaphore信号量">Semaphore（信号量）
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;core/os/semaphore.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Semaphore</span> <span class="o">*</span><span class="n">semaphore</span> <span class="o">=</span> <span class="n">memnew</span><span class="p">(</span><span class="n">Semaphore</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 等待（阻塞直到有信号）
+</span></span></span><span class="line"><span class="cl"><span class="n">semaphore</span><span class="o">-&gt;</span><span class="n">wait</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 发送信号
+</span></span></span><span class="line"><span class="cl"><span class="n">semaphore</span><span class="o">-&gt;</span><span class="n">post</span><span class="p">();</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="常见使用场景">常见使用场景
+</h3><ol>
+<li><strong>异步资源加载</strong></li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">load_resources_async</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">worker_thread</span><span class="o">-&gt;</span><span class="n">start</span><span class="p">([](</span><span class="kt">void</span> <span class="o">*</span><span class="n">p_userdata</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 在子线程中加载资源
+</span></span></span><span class="line"><span class="cl">        <span class="n">Ref</span><span class="o">&lt;</span><span class="n">Texture2D</span><span class="o">&gt;</span> <span class="n">texture</span> <span class="o">=</span> <span class="n">ResourceLoader</span><span class="o">::</span><span class="n">load</span><span class="p">(</span><span class="s">&#34;res://texture.png&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c1">// 通过信号通知主线程
+</span></span></span><span class="line"><span class="cl">        <span class="n">Node</span> <span class="o">*</span><span class="n">node</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">Node</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">p_userdata</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">node</span><span class="o">-&gt;</span><span class="n">call_deferred</span><span class="p">(</span><span class="s">&#34;_on_resource_loaded&#34;</span><span class="p">,</span> <span class="n">texture</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span> <span class="k">this</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li><strong>后台数据处理</strong></li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">process_background_task</span><span class="p">(</span><span class="k">const</span> <span class="n">Vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">data</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">MutexLock</span> <span class="n">lock</span><span class="p">(</span><span class="n">mutex</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">task_queue</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">semaphore</span><span class="o">-&gt;</span><span class="n">post</span><span class="p">();</span> <span class="c1">// 唤醒工作线程
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li><strong>网络请求</strong></li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">fetch_data_async</span><span class="p">(</span><span class="k">const</span> <span class="n">String</span> <span class="o">&amp;</span><span class="n">url</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">worker_thread</span><span class="o">-&gt;</span><span class="n">start</span><span class="p">([</span><span class="n">url</span><span class="p">](</span><span class="kt">void</span> <span class="o">*</span><span class="n">p_userdata</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 执行网络请求
+</span></span></span><span class="line"><span class="cl">        <span class="n">String</span> <span class="n">result</span> <span class="o">=</span> <span class="n">http_request</span><span class="p">(</span><span class="n">url</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c1">// 返回结果到主线程
+</span></span></span><span class="line"><span class="cl">        <span class="n">Node</span> <span class="o">*</span><span class="n">node</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">Node</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">p_userdata</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">node</span><span class="o">-&gt;</span><span class="n">call_deferred</span><span class="p">(</span><span class="s">&#34;_on_data_received&#34;</span><span class="p">,</span> <span class="n">result</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span> <span class="k">this</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="config">Config
+</h2><p>GLOBAL_DEF(&ldquo;aaa/ccc/bbb111&rdquo;, false);</p>
+<h2 id="doc_classes">doc_classes
+</h2><p><code>doc_classes</code> 这一块本质上只做三件事：<strong>注册类</strong>、<strong>声明文档导出</strong>、<strong>提供 XML 文档</strong>。三者缺一不可。</p>
+<h3 id="1-注册类">1. 注册类
+</h3><p>先完成类绑定，并在 <code>register_types.cpp</code> 中注册到 <code>ClassDB</code>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">MyDemoNode</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Node</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">GDCLASS</span><span class="p">(</span><span class="n">MyDemoNode</span><span class="p">,</span> <span class="n">Node</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">add_value</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">protected</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">static</span> <span class="kt">void</span> <span class="n">_bind_methods</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ClassDB</span><span class="o">::</span><span class="n">bind_method</span><span class="p">(</span><span class="n">D_METHOD</span><span class="p">(</span><span class="s">&#34;add_value&#34;</span><span class="p">,</span> <span class="s">&#34;a&#34;</span><span class="p">,</span> <span class="s">&#34;b&#34;</span><span class="p">),</span> <span class="o">&amp;</span><span class="n">MyDemoNode</span><span class="o">::</span><span class="n">add_value</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;register_types.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;my_demo_node.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;core/object/class_db.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">initialize_your_module</span><span class="p">(</span><span class="n">ModuleInitializationLevel</span> <span class="n">p_level</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">p_level</span> <span class="o">!=</span> <span class="n">MODULE_INITIALIZATION_LEVEL_SCENE</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">ClassDB</span><span class="o">::</span><span class="n">register_class</span><span class="o">&lt;</span><span class="n">MyDemoNode</span><span class="o">&gt;</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里要区分两件事：</p>
+<ul>
+<li><code>_bind_methods()</code>：绑定方法</li>
+<li><code>ClassDB::register_class&lt;T&gt;()</code>：注册类</li>
+</ul>
+<p>只绑定方法、不注册类，文档不会对应到实际可用类型。</p>
+<h3 id="2-声明文档导出">2. 声明文档导出
+</h3><p>在模块的 <code>config.py</code> 中声明文档类和文档目录：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">get_doc_classes</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">		<span class="s2">&#34;SrManager&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">get_doc_path</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="s2">&#34;doc_classes&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>要求：</p>
+<ul>
+<li><code>get_doc_classes()</code> 中的类名必须和 <code>ClassDB</code> 注册名一致</li>
+<li><code>get_doc_path()</code> 一般返回模块下的 <code>doc_classes</code></li>
+</ul>
+<p>缺少这一步，XML 文件不会被文档系统收集。</p>
+<h3 id="3-提供-xml-文档">3. 提供 XML 文档
+</h3><p>目录结构通常如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">modules/your_module/
+</span></span><span class="line"><span class="cl">├── config.py
+</span></span><span class="line"><span class="cl">├── register_types.cpp
+</span></span><span class="line"><span class="cl">├── my_demo_node.h
+</span></span><span class="line"><span class="cl">├── my_demo_node.cpp
+</span></span><span class="line"><span class="cl">└── doc_classes/
+</span></span><span class="line"><span class="cl">    └── MyDemoNode.xml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>一个类对应一个 XML 文件，命名保持一致：</p>
+<ul>
+<li><code>ClassDB</code> 注册名：<code>MyDemoNode</code></li>
+<li>XML 文件名：<code>MyDemoNode.xml</code></li>
+<li>XML 类名：<code>&lt;class name=&quot;MyDemoNode&quot;&gt;</code></li>
+</ul>
+<p>最小模板：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;class</span> <span class="na">name=</span><span class="s">&#34;MyDemoNode&#34;</span> <span class="na">inherits=</span><span class="s">&#34;Node&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;brief_description&gt;</span>
+</span></span><span class="line"><span class="cl">        模块示例节点。
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/brief_description&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;description&gt;</span>
+</span></span><span class="line"><span class="cl">        用于演示模块类的 doc_classes 写法。
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/description&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;methods&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;method</span> <span class="na">name=</span><span class="s">&#34;add_value&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;return</span> <span class="na">type=</span><span class="s">&#34;int&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;param</span> <span class="na">index=</span><span class="s">&#34;0&#34;</span> <span class="na">name=</span><span class="s">&#34;a&#34;</span> <span class="na">type=</span><span class="s">&#34;int&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;param</span> <span class="na">index=</span><span class="s">&#34;1&#34;</span> <span class="na">name=</span><span class="s">&#34;b&#34;</span> <span class="na">type=</span><span class="s">&#34;int&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;description&gt;</span>
+</span></span><span class="line"><span class="cl">                返回两个整数之和。
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;/description&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;/method&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/methods&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/class&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>对工具类文档，建议优先写清楚：</p>
+<ul>
+<li>类职责</li>
+<li>主入口方法</li>
+<li>参数与返回值语义</li>
+<li>线程或生命周期限制</li>
+<li>副作用</li>
+</ul>
+<h3 id="检查清单">检查清单
+</h3><p>写完后至少检查 5 项：</p>
+<ul>
+<li>类是否在 <code>register_types.cpp</code> 中注册</li>
+<li>类名是否出现在 <code>get_doc_classes()</code> 中</li>
+<li><code>get_doc_path()</code> 是否指向 <code>doc_classes</code></li>
+<li>XML 文件名是否和类名一致</li>
+<li>XML 中的方法名、参数名是否和 <code>_bind_methods()</code> 一致</li>
+</ul>
+<h3 id="小结">小结
+</h3><p><code>doc_classes</code> 不是单独写一个 XML 文件就结束了，而是模块注册链路的一部分：</p>
+<ol>
+<li><code>ClassDB</code> 能找到类</li>
+<li><code>config.py</code> 能导出文档</li>
+<li><code>doc_classes</code> 能提供类说明</li>
+</ol>
+<p>对开发者工具类来说，重点不是描述得多详细，而是接口名、参数名、限制条件必须准确。</p>
+<h2 id="相关笔记">相关笔记
+</h2><ul>
+<li>[[Godot开发环境部署]]</li>
+<li>[[Godot GDExtension开发指南]]</li>
+<li>[[Godot动态类型系统RTTI]]</li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/godot/">Godot</a>
+        
+            <a href="/tags/modules/">Modules</a>
+        
+            <a href="/tags/%E5%AE%B9%E5%99%A8/">容器</a>
+        
+            <a href="/tags/gui/">GUI</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under <a class="link" href="https://github.com/Liyufei1"  target="_blank" rel="noopener"
+    >Liyufei1</a></span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        const elementsToRender = [".main-article", ".widget--toc"];
+
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/godot%E5%BC%95%E6%93%8E6%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/godot.png" loading="lazy" data-key="godot引擎6启动参数" data-hash="/godot.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【godot】七、godot的启动参数</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/godot%E5%BC%95%E6%93%8E5%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/godot.png" loading="lazy" data-key="godot引擎5编辑器插件" data-hash="/godot.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【godot】六、godot中的编辑器插件EditorPlugin</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/godot%E5%BC%95%E6%93%8E4%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/godot.png" loading="lazy" data-key="godot引擎4动态类型信息" data-hash="/godot.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【godot】五、godot中的动态类型信息系统RTTI</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/godot%E5%BC%95%E6%93%8E3%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/godot.png" loading="lazy" data-key="godot引擎3性能统计" data-hash="/godot.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【godot】四、性能统计</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/godot%E5%BC%95%E6%93%8E2gdextension%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/godot.png" loading="lazy" data-key="godot引擎2gdextension开发指南" data-hash="/godot.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【godot】三、GDExtension开发指南</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2026 李宇飞-Liyufei1
+    </section>
+    
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.32.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

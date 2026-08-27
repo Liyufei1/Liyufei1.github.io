@@ -901,6 +901,12 @@
 &lt;li&gt;Khronos Wiki: Validation Layers 与 LunarG SDK 文档 — VK_LAYER_KHRONOS_validation 的官方说明；&lt;/li&gt;
 &lt;li&gt;GLFW Window Guide — window hint 与 framebuffer size 语义。&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h2 id=&#34;相关笔记&#34;&gt;相关笔记
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;[[glfw]]&lt;/li&gt;
+&lt;li&gt;[[LearnOpengl]]&lt;/li&gt;
+&lt;li&gt;[[graphics]]&lt;/li&gt;
+&lt;/ul&gt;
 </description>
         </item>
         <item>
@@ -2019,8 +2025,26 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;h4 id=&#34;213-使用流程&#34;&gt;2.1.3、 使用流程
 &lt;/h4&gt;&lt;ol&gt;
-&lt;li&gt;在Build.cs中添加模块依赖![[image/5ac38512b5aa7e8584d0eb762f50db50.png]]&lt;/li&gt;
-&lt;li&gt;直接使用include下的文件![[d4aa8699a86cea053db9526a9f15d7fb.png]]&lt;/li&gt;
+&lt;li&gt;在Build.cs中添加模块依赖&lt;img src=&#34;https://Liyufei1.github.io/UE/ImageTemp/5ac38512b5aa7e8584d0eb762f50db50.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;示例&#34;
+	
+	
+&gt;&lt;/li&gt;
+&lt;li&gt;直接使用include下的文件&lt;img src=&#34;https://Liyufei1.github.io/UE/ImageTemp/d4aa8699a86cea053db9526a9f15d7fb.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;示例&#34;
+	
+	
+&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;22-封装为-ue-插件plugin&#34;&gt;2.2、 封装为 UE 插件（Plugin）
@@ -2173,9 +2197,36 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;h4 id=&#34;223-使用流程&#34;&gt;2.2.3、 使用流程
 &lt;/h4&gt;&lt;ol&gt;
-&lt;li&gt;添加插件依赖![[0c919f83dd34cc504f824addb7d71202.png]]&lt;/li&gt;
-&lt;li&gt;在Build.cs中添加模块依赖![[image/5ac38512b5aa7e8584d0eb762f50db50.png]]&lt;/li&gt;
-&lt;li&gt;直接使用include下的文件![[d4aa8699a86cea053db9526a9f15d7fb.png]]&lt;/li&gt;
+&lt;li&gt;添加插件依赖&lt;img src=&#34;https://Liyufei1.github.io/UE/ImageTemp/0c919f83dd34cc504f824addb7d71202.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;示例&#34;
+	
+	
+&gt;&lt;/li&gt;
+&lt;li&gt;在Build.cs中添加模块依赖&lt;img src=&#34;https://Liyufei1.github.io/UE/ImageTemp/5ac38512b5aa7e8584d0eb762f50db50.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;示例&#34;
+	
+	
+&gt;&lt;/li&gt;
+&lt;li&gt;直接使用include下的文件&lt;img src=&#34;https://Liyufei1.github.io/UE/ImageTemp/d4aa8699a86cea053db9526a9f15d7fb.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;示例&#34;
+	
+	
+&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;三常见踩坑点&#34;&gt;三、常见踩坑点
@@ -2196,6 +2247,10 @@
 &lt;p&gt;&lt;strong&gt;许可证审查&lt;/strong&gt;：集成前三方库前检查 License（MIT/BSD/Apache 2.0 通常安全；GPL/LGPL 需法务评估）。&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
+&lt;h2 id=&#34;相关笔记&#34;&gt;相关笔记
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;[[UECpp小技巧]]&lt;/li&gt;
+&lt;/ul&gt;
 </description>
         </item>
         <item>
@@ -2233,18 +2288,14 @@
 &lt;/ul&gt;
 &lt;h2 id=&#34;第1章-计算机系统漫游&#34;&gt;第1章 计算机系统漫游
 &lt;/h2&gt;&lt;h3 id=&#34;11-编译系统&#34;&gt;1.1 编译系统
-&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/1/image1-1.png&#34;
-	width=&#34;1575&#34;
-	height=&#34;705&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/1/image1-1_hu_5cda5a6c2e0a68f2.png 480w, https://Liyufei1.github.io/p/cpp-csapp-notes/image/1/image1-1_hu_9b3ecc6a48ea142f.png 1024w&#34;
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/Cpp/ImageTemp/image1-1.png&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;1-1&#34;
 	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;223&#34;
-		data-flex-basis=&#34;536px&#34;
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;一个 C 程序从源文件到最终的可执行文件，通常会经历以下四个阶段：&lt;/p&gt;
@@ -2257,18 +2308,14 @@
 &lt;p&gt;可以把这一过程理解为：先“整理”源代码，再“翻译”为汇编，再“转换”为机器指令，最后把程序运行所需的各个部分“拼装”起来。&lt;/p&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;12-计算机硬件组成&#34;&gt;1.2 计算机硬件组成
-&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/1/image1-2-1.png&#34;
-	width=&#34;1463&#34;
-	height=&#34;818&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/1/image1-2-1_hu_76a094c3c9e14696.png 480w, https://Liyufei1.github.io/p/cpp-csapp-notes/image/1/image1-2-1_hu_d5f2b7c2b961f468.png 1024w&#34;
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/Cpp/ImageTemp/image1-2-1.png&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;1-2-1&#34;
 	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;178&#34;
-		data-flex-basis=&#34;429px&#34;
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;一个典型的计算机系统通常由以下几个核心部分组成：&lt;/p&gt;
@@ -2286,18 +2333,14 @@
 &lt;li&gt;I/O Bus（输入输出总线）：为磁盘、键盘、显示器、网络设备等外设提供数据传输通道。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;从功能上看，CPU 负责“运算”，主存负责“存储”，而 I/O 系统则负责“与外界交互”，三者共同构成了一个完整的计算机系统。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/1/image1-2-2.png&#34;
-	width=&#34;1433&#34;
-	height=&#34;750&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/1/image1-2-2_hu_fd77c32248669b4c.png 480w, https://Liyufei1.github.io/p/cpp-csapp-notes/image/1/image1-2-2_hu_527279d29208f59e.png 1024w&#34;
+&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/Cpp/ImageTemp/image1-2-2.png&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;1-2-2&#34;
 	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;191&#34;
-		data-flex-basis=&#34;458px&#34;
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;在存储层次结构中，越靠上的存储设备速度越快，但容量越小、成本也越高；越靠下的存储设备容量越大，但访问速度越慢。&lt;/p&gt;
@@ -2305,18 +2348,14 @@
 因此，程序之所以能够高效运行，很大程度上依赖于这种分层存储设计。&lt;/p&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;13-操作系统硬件管理&#34;&gt;1.3 操作系统硬件管理
-&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/1/image1-3-1.png&#34;
-	width=&#34;1395&#34;
-	height=&#34;701&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/1/image1-3-1_hu_8ec342689e845b84.png 480w, https://Liyufei1.github.io/p/cpp-csapp-notes/image/1/image1-3-1_hu_8090b997fe86107d.png 1024w&#34;
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/Cpp/ImageTemp/image1-3-1.png&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;1-3-1&#34;
 	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;199&#34;
-		data-flex-basis=&#34;477px&#34;
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;应用程序通常不能直接操作底层硬件，而是要通过操作系统提供的接口来完成。&lt;br&gt;
@@ -2328,18 +2367,14 @@
 &lt;li&gt;File（文件）：对 I/O 设备的抽象。无论是磁盘、键盘、显示器，还是网络设备，操作系统都尽量用统一的文件式接口来组织和访问数据。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;这三种抽象降低了应用程序直接操作硬件的复杂度，也让系统在安全性、可移植性和并发执行方面更容易实现。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/1/image1-3-2.png&#34;
-	width=&#34;1313&#34;
-	height=&#34;768&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/1/image1-3-2_hu_3a47d63be8e27dc1.png 480w, https://Liyufei1.github.io/p/cpp-csapp-notes/image/1/image1-3-2_hu_7e2f5dec39a310e3.png 1024w&#34;
+&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/Cpp/ImageTemp/image1-3-2.png&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;1-3-2&#34;
 	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;170&#34;
-		data-flex-basis=&#34;410px&#34;
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;以一个进程的虚拟地址空间为例，通常可以划分为以下几个区域：&lt;/p&gt;
@@ -2358,18 +2393,14 @@
 &lt;/h2&gt;&lt;h3 id=&#34;21-信息存储&#34;&gt;2.1 信息存储
 &lt;/h3&gt;&lt;p&gt;计算机中的信息最终都是以二进制形式存储的，而这些二进制数据通常按字节组织。&lt;br&gt;
 不同机器的字长可能不同，例如常见的有 32 位和 64 位，这会影响指针、整数等数据类型所占用的字节数。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/2/image2-1-1.png&#34;
-	width=&#34;932&#34;
-	height=&#34;490&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/2/image2-1-1_hu_a8ecaac01b3e4c6d.png 480w, https://Liyufei1.github.io/p/cpp-csapp-notes/image/2/image2-1-1_hu_ab8ced6069fbfbf1.png 1024w&#34;
+&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/Cpp/ImageTemp/image2-1-1.png&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;2-1-1&#34;
 	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;190&#34;
-		data-flex-basis=&#34;456px&#34;
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;从图中可以看出：&lt;/p&gt;
@@ -2379,18 +2410,14 @@
 &lt;/ul&gt;
 &lt;p&gt;需要注意的是，数据类型的实际大小不仅与机器字长有关，也与编译器实现和平台约定有关。因此在编写底层代码时，不能只凭经验判断类型大小，最好结合具体平台确认。&lt;/p&gt;
 &lt;p&gt;除了“占多少字节”之外，数据在内存中“如何排列字节”也非常重要，这就是字节序问题。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/2/image2-1-2.png&#34;
-	width=&#34;775&#34;
-	height=&#34;417&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/2/image2-1-2_hu_7b86c5558cb5a3f8.png 480w, https://Liyufei1.github.io/p/cpp-csapp-notes/image/2/image2-1-2_hu_af71a73582080c9c.png 1024w&#34;
+&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/Cpp/ImageTemp/image2-1-2.png&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;2-1-2&#34;
 	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;185&#34;
-		data-flex-basis=&#34;446px&#34;
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;常见的字节序有两种：&lt;/p&gt;
@@ -2416,18 +2443,14 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/2/image2-2-1.png&#34;
-	width=&#34;1679&#34;
-	height=&#34;478&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/2/image2-2-1_hu_556dcf2009f2a3b7.png 480w, https://Liyufei1.github.io/p/cpp-csapp-notes/image/2/image2-2-1_hu_d9bcd8397de91dbc.png 1024w&#34;
+&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/Cpp/ImageTemp/image2-2-1.png&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;2-2-1&#34;
 	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;351&#34;
-		data-flex-basis=&#34;843px&#34;
 	
 &gt;&lt;br&gt;
 从二进制转换到十进制时：&lt;/p&gt;
@@ -2435,18 +2458,14 @@
 &lt;li&gt;对于无符号数，可以直接按每一位的权重求和。&lt;/li&gt;
 &lt;li&gt;对于补码表示的有符号数，如果最高位为 &lt;code&gt;0&lt;/code&gt;，表示非负数，转换方式与无符号数类似；如果最高位为 &lt;code&gt;1&lt;/code&gt;，则表示负数，需要按补码规则解释其值。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/2/image2-2-2.png&#34;
-	width=&#34;1410&#34;
-	height=&#34;719&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/2/image2-2-2_hu_3b1dacda7c3350c1.png 480w, https://Liyufei1.github.io/p/cpp-csapp-notes/image/2/image2-2-2_hu_2f642a7830071bd2.png 1024w&#34;
+&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/Cpp/ImageTemp/image2-2-2.png&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;2-2-2&#34;
 	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;196&#34;
-		data-flex-basis=&#34;470px&#34;
 	
 &gt;&lt;br&gt;
 由于补码规则的存在，在进行强制类型转换时，会出现直接预期之外的结果。&lt;br&gt;
@@ -2500,18 +2519,14 @@ $$ \lfloor x / 2^k \rfloor = (x + 2^k - 1) \gg k \quad (x \ge 0) $$&lt;p&gt;
 &lt;/p&gt;
 $$ \lfloor x / 2^k \rfloor = (x + 2^k - 1) \mid \sim(2^k - 1) \gg k \quad (x &lt; 0) $$&lt;hr&gt;
 &lt;h3 id=&#34;24-浮点数&#34;&gt;2.4 浮点数
-&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/2/image2-4-1.png&#34;
-	width=&#34;1477&#34;
-	height=&#34;752&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/2/image2-4-1_hu_e209a1052bbe291e.png 480w, https://Liyufei1.github.io/p/cpp-csapp-notes/image/2/image2-4-1_hu_6b8fdec258a77f5a.png 1024w&#34;
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/Cpp/ImageTemp/image2-4-1.png&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;2-4-1&#34;
 	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;196&#34;
-		data-flex-basis=&#34;471px&#34;
 	
 &gt;&lt;br&gt;
 浮点数由三个部分组成：&lt;/p&gt;
@@ -2527,34 +2542,26 @@ $$ \lfloor x / 2^k \rfloor = (x + 2^k - 1) \mid \sim(2^k - 1) \gg k \quad (x &lt
 &lt;/ul&gt;
 &lt;p&gt;float单精度浮点数，取值范围是：，小数的精度为
 double双精度浮点数，取值范围是：，小数的精度为&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/2/image2-4-2.png&#34;
-	width=&#34;1522&#34;
-	height=&#34;755&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/2/image2-4-2_hu_ec0188c79bc6f944.png 480w, https://Liyufei1.github.io/p/cpp-csapp-notes/image/2/image2-4-2_hu_6ed58b799526db2b.png 1024w&#34;
+&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/Cpp/ImageTemp/image2-4-2.png&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;2-4-2&#34;
 	
 	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;201&#34;
-		data-flex-basis=&#34;483px&#34;
-	
 &gt;&lt;br&gt;
 同时浮点数还能表示特殊值
 +0 \ -0 \ +∞ \ -∞ \ NaN&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/2/image2-4-3.png&#34;
-	width=&#34;827&#34;
-	height=&#34;485&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/2/image2-4-3_hu_5d4741b98999a257.png 480w, https://Liyufei1.github.io/p/cpp-csapp-notes/image/2/image2-4-3_hu_4836a292c22b437d.png 1024w&#34;
+&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/Cpp/ImageTemp/image2-4-3.png&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;2-4-3&#34;
 	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;170&#34;
-		data-flex-basis=&#34;409px&#34;
 	
 &gt;&lt;br&gt;
 由于浮点数精度有限，它会自动舍入，因此容易因为精度丢失，出现意料之外的情况，如上图。&lt;/p&gt;
@@ -2563,18 +2570,14 @@ double双精度浮点数，取值范围是：，小数的精度为&lt;/p&gt;
 &lt;/h3&gt;&lt;p&gt;程序的机器级表示，是理解计算机执行机制的核心。与高级语言屏蔽底层细节不同，汇编语言直接反映了 CPU 的运行逻辑——指令如何读写寄存器、如何访问内存、如何跳转。&lt;/p&gt;
 &lt;h4 id=&#34;调用者保存寄存器与被调用者保存寄存器&#34;&gt;调用者保存寄存器与被调用者保存寄存器
 &lt;/h4&gt;&lt;p&gt;在 x86-64 架构中，寄存器一共 16 个：&lt;code&gt;rax, rbx, rcx, rdx, rsi, rdi, rbp, rsp, r8~r15&lt;/code&gt;。其中有 8 个通用寄存器，它们的使用在函数调用时有明确约定。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/3/image3-1-2.png&#34;
-	width=&#34;1387&#34;
-	height=&#34;605&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/3/image3-1-2_hu_8c38b41f1b42ce69.png 480w, https://Liyufei1.github.io/p/cpp-csapp-notes/image/3/image3-1-2_hu_3321a79d4cdd19ee.png 1024w&#34;
+&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/Cpp/ImageTemp/image3-1-2.png&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;3-1-2&#34;
 	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;229&#34;
-		data-flex-basis=&#34;550px&#34;
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;调用者保存寄存器&lt;/strong&gt;（Caller-saved，也叫 Caller-clobbered）：
@@ -2620,18 +2623,14 @@ double双精度浮点数，取值范围是：，小数的精度为&lt;/p&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;32-寄存器和数据传输指令&#34;&gt;3.2 寄存器和数据传输指令
 &lt;/h3&gt;&lt;p&gt;x86-64 各寄存器的用途有一定约定，虽然部分可以混用，但遵循约定能让代码更易读。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/3/image3-2-0.png&#34;
-	width=&#34;1540&#34;
-	height=&#34;755&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/3/image3-2-0_hu_f4f6436415c2d630.png 480w, https://Liyufei1.github.io/p/cpp-csapp-notes/image/3/image3-2-0_hu_66340fe30f0a2316.png 1024w&#34;
+&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/Cpp/ImageTemp/image3-2-0.png&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;3-2-0&#34;
 	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;203&#34;
-		data-flex-basis=&#34;489px&#34;
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;常见用途：&lt;/p&gt;
@@ -2645,18 +2644,14 @@ double双精度浮点数，取值范围是：，小数的精度为&lt;/p&gt;
 &lt;li&gt;&lt;code&gt;rsp&lt;/code&gt; —— 栈指针，指向栈顶&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;rbp&lt;/code&gt; —— 基址指针，常用于栈帧定位&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/3/image3-2-1.png&#34;
-	width=&#34;1578&#34;
-	height=&#34;769&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/3/image3-2-1_hu_203b085ac49eba8f.png 480w, https://Liyufei1.github.io/p/cpp-csapp-notes/image/3/image3-2-1_hu_266f06e0657512a8.png 1024w&#34;
+&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/Cpp/ImageTemp/image3-2-1.png&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;3-2-1&#34;
 	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;205&#34;
-		data-flex-basis=&#34;492px&#34;
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;常见数据传输指令：&lt;/p&gt;
@@ -2678,18 +2673,14 @@ double双精度浮点数，取值范围是：，小数的精度为&lt;/p&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;33-栈与函数调用&#34;&gt;3.3 栈与函数调用
 &lt;/h3&gt;&lt;p&gt;栈是程序运行时最重要的内存区域之一，用于函数调用、局部变量存储和寄存器保存。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/3/image3-3-1.png&#34;
-	width=&#34;1562&#34;
-	height=&#34;640&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/cpp-csapp-notes/image/3/image3-3-1_hu_c0e7dc38bcf1318e.png 480w, https://Liyufei1.github.io/p/cpp-csapp-notes/image/3/image3-3-1_hu_bc7af67bfeb98751.png 1024w&#34;
+&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/Cpp/ImageTemp/image3-3-1.png&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;3-3-1&#34;
 	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;244&#34;
-		data-flex-basis=&#34;585px&#34;
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;栈的生长方向&lt;/strong&gt;：栈向下生长——每 push 一个值，&lt;code&gt;rsp&lt;/code&gt; 减小；每 pop 一个值，&lt;code&gt;rsp&lt;/code&gt; 增大。&lt;/p&gt;
@@ -3106,14 +3097,18 @@ double双精度浮点数，取值范围是：，小数的精度为&lt;/p&gt;
 &lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;待添加&amp;hellip;&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h2 id=&#34;相关笔记&#34;&gt;相关笔记
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;[[VibeCoding]]&lt;/li&gt;
+&lt;/ul&gt;
 </description>
         </item>
         <item>
         <title>AI-02-C&#43;&#43;中API Key的使用</title>
-        <link>https://Liyufei1.github.io/p/ai-02-c-%E4%B8%ADapi-key%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
+        <link>https://Liyufei1.github.io/p/ai-02-cpp%E4%B8%ADapikey%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
         <pubDate>Thu, 12 Feb 2026 00:00:00 +0800</pubDate>
         
-        <guid>https://Liyufei1.github.io/p/ai-02-c-%E4%B8%ADapi-key%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
+        <guid>https://Liyufei1.github.io/p/ai-02-cpp%E4%B8%ADapikey%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
         <description>&lt;img src="https://Liyufei1.github.io/AI.png" alt="Featured image of post AI-02-C&#43;&#43;中API Key的使用" /&gt;&lt;h2 id=&#34;-目录&#34;&gt;📋 目录
 &lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e7%ae%80%e4%bb%8b&#34; &gt;简介&lt;/a&gt;&lt;/li&gt;
@@ -4179,14 +4174,18 @@ double双精度浮点数，取值范围是：，小数的精度为&lt;/p&gt;
 &lt;li&gt;&lt;strong&gt;nlohmann/json&lt;/strong&gt;：https://github.com/nlohmann/json&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;祝您在C++ AI开发之旅中收获满满！🚀&lt;/p&gt;
+&lt;h2 id=&#34;相关笔记&#34;&gt;相关笔记
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;[[opencode简介]]&lt;/li&gt;
+&lt;/ul&gt;
 </description>
         </item>
         <item>
         <title>AI-01-AI编程工具opencode简介</title>
-        <link>https://Liyufei1.github.io/p/ai-01-ai%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7opencode%E7%AE%80%E4%BB%8B/</link>
+        <link>https://Liyufei1.github.io/p/ai-01-opencode-intro/</link>
         <pubDate>Wed, 11 Feb 2026 00:00:00 +0800</pubDate>
         
-        <guid>https://Liyufei1.github.io/p/ai-01-ai%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7opencode%E7%AE%80%E4%BB%8B/</guid>
+        <guid>https://Liyufei1.github.io/p/ai-01-opencode-intro/</guid>
         <description>&lt;img src="https://Liyufei1.github.io/AI.png" alt="Featured image of post AI-01-AI编程工具opencode简介" /&gt;&lt;h2 id=&#34;-目录&#34;&gt;📋 目录
 &lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e7%ae%80%e4%bb%8b&#34; &gt;简介&lt;/a&gt;&lt;/li&gt;
@@ -4220,18 +4219,14 @@ double双精度浮点数，取值范围是：，小数的精度为&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;安装完毕后,在&lt;code&gt;cmd&lt;/code&gt;中执行&lt;code&gt;opencode&lt;/code&gt;即可看到它的运行界面(见下图):&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/ai-01-ai%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7opencode%E7%AE%80%E4%BB%8B/1.png&#34;
-	width=&#34;1030&#34;
-	height=&#34;401&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/ai-01-ai%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7opencode%E7%AE%80%E4%BB%8B/1_hu_b19ae7fd0bc684a4.png 480w, https://Liyufei1.github.io/p/ai-01-ai%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7opencode%E7%AE%80%E4%BB%8B/1_hu_d9fa0e841cc8bdbe.png 1024w&#34;
+&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/AI/ImageTemp/1.png&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;运行界面&#34;
 	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;256&#34;
-		data-flex-basis=&#34;616px&#34;
 	
 &gt;&lt;/p&gt;
 &lt;hr&gt;
@@ -4444,6 +4439,11 @@ double双精度浮点数，取值范围是：，小数的精度为&lt;/p&gt;
 &lt;li&gt;Discord 社区：https://opencode.ai/discord&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;祝编码愉快！🚀&lt;/p&gt;
+&lt;h2 id=&#34;相关笔记&#34;&gt;相关笔记
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;[[VibeCoding]]&lt;/li&gt;
+&lt;li&gt;[[C++中APIKey的使用]]&lt;/li&gt;
+&lt;/ul&gt;
 </description>
         </item>
         <item>
@@ -4453,7 +4453,11 @@ double双精度浮点数，取值范围是：，小数的精度为&lt;/p&gt;
         
         <guid>https://Liyufei1.github.io/p/iflow-in-development/</guid>
         <description>&lt;img src="https://Liyufei1.github.io/AI.png" alt="Featured image of post Iflow在开发中的进阶教程" /&gt;&lt;h1 id=&#34;1-创建一个agent工作流&#34;&gt;1. 创建一个agent工作流
-&lt;/h1&gt;</description>
+&lt;/h1&gt;&lt;h2 id=&#34;相关笔记&#34;&gt;相关笔记
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;[[iFlow使用和部署教程]]&lt;/li&gt;
+&lt;/ul&gt;
+</description>
         </item>
         <item>
         <title>OpenGL学习随笔-Graphics</title>
@@ -4501,7 +4505,16 @@ double双精度浮点数，取值范围是：，小数的精度为&lt;/p&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;渲染管线&#34;&gt;渲染管线
 &lt;/h2&gt;&lt;h3 id=&#34;光栅化渲染管线&#34;&gt;光栅化渲染管线
-&lt;/h3&gt;&lt;p&gt;![[Pasted image 20260730174426.png]]
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/Render/ImageTemp/Pasted%20image%2020260730174426.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;图片&#34;
+	
+	
+&gt;
 &lt;em&gt;输入汇编器&lt;/em&gt; 从您指定的缓冲区中收集原始顶点数据，并且还可以使用索引缓冲区来重复某些元素，而无需复制顶点数据本身。&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;顶点着色器&lt;/em&gt; 为每个顶点运行，通常应用变换将顶点位置从模型空间转换为屏幕空间。它还将每个顶点的数据传递到管线下方。&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;细分着色器&lt;/em&gt; 允许您根据某些规则细分几何体，以提高网格质量。这通常用于使砖墙和楼梯等表面在靠近时看起来不那么平坦。&lt;/p&gt;
@@ -5001,6 +5014,12 @@ $$&lt;p&gt;其中：&lt;/p&gt;
 &lt;li&gt;材质与光源参数共同决定最终视觉结果&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;如果继续往下写，可以很自然地延伸到：纹理、法线贴图、多个光源、阴影映射、PBR 等内容。&lt;/p&gt;
+&lt;h2 id=&#34;相关笔记&#34;&gt;相关笔记
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;[[LearnOpengl]]&lt;/li&gt;
+&lt;li&gt;[[glsl]]&lt;/li&gt;
+&lt;li&gt;[[Vulkan初学]]&lt;/li&gt;
+&lt;/ul&gt;
 </description>
         </item>
         <item>
@@ -5362,6 +5381,11 @@ $$&lt;p&gt;其中：&lt;/p&gt;
 &lt;li&gt;学会阅读和编写最基础的着色器代码&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;后续继续学习光照、材质、阴影、后处理时，GLSL 会反复出现。越早熟悉它的语法和数据流，后面的 OpenGL 内容就越容易理解。&lt;/p&gt;
+&lt;h2 id=&#34;相关笔记&#34;&gt;相关笔记
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;[[LearnOpengl]]&lt;/li&gt;
+&lt;li&gt;[[graphics]]&lt;/li&gt;
+&lt;/ul&gt;
 </description>
         </item>
         <item>
@@ -5721,6 +5745,11 @@ $$&lt;p&gt;其中：&lt;/p&gt;
 &lt;li&gt;能在主循环里处理输入和交换缓冲&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;后面如果继续写 OpenGL 笔记，这篇内容可以作为“窗口初始化”部分的基础参考。&lt;/p&gt;
+&lt;h2 id=&#34;相关笔记&#34;&gt;相关笔记
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;[[LearnOpengl]]&lt;/li&gt;
+&lt;li&gt;[[Vulkan初学]]&lt;/li&gt;
+&lt;/ul&gt;
 </description>
         </item>
         <item>
@@ -6507,14 +6536,21 @@ $$&lt;p&gt;其中：&lt;/p&gt;
 &lt;li&gt;用纹理把图像数据引入到着色器计算中&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;如果把这些部分连起来，你就已经拥有了一个最基础的现代 OpenGL 渲染流程。&lt;/p&gt;
+&lt;h2 id=&#34;相关笔记&#34;&gt;相关笔记
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;[[glfw]]&lt;/li&gt;
+&lt;li&gt;[[glsl]]&lt;/li&gt;
+&lt;li&gt;[[graphics]]&lt;/li&gt;
+&lt;li&gt;[[Vulkan初学]]&lt;/li&gt;
+&lt;/ul&gt;
 </description>
         </item>
         <item>
         <title>【godot】七、godot的启动参数</title>
-        <link>https://Liyufei1.github.io/p/godot%E4%B8%83godot%E7%9A%84%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0/</link>
+        <link>https://Liyufei1.github.io/p/godot%E5%BC%95%E6%93%8E6%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0/</link>
         <pubDate>Sat, 20 Dec 2025 09:18:31 +0800</pubDate>
         
-        <guid>https://Liyufei1.github.io/p/godot%E4%B8%83godot%E7%9A%84%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0/</guid>
+        <guid>https://Liyufei1.github.io/p/godot%E5%BC%95%E6%93%8E6%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0/</guid>
         <description>&lt;img src="https://Liyufei1.github.io/godot.png" alt="Featured image of post 【godot】七、godot的启动参数" /&gt;&lt;h1 id=&#34;godot-44-启动参数完整指南&#34;&gt;Godot 4.4 启动参数完整指南
 &lt;/h1&gt;&lt;p&gt;Godot 引擎提供了丰富的命令行启动参数，允许开发者在运行时和编辑器中精细控制引擎行为。本文基于 Godot 4.4 源码，全面梳理了所有可用的启动参数，并按功能分类进行详细介绍。&lt;/p&gt;
 &lt;h2 id=&#34;目录&#34;&gt;目录
@@ -8233,14 +8269,18 @@ $$&lt;p&gt;其中：&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h2 id=&#34;总结&#34;&gt;总结
 &lt;/h2&gt;&lt;p&gt;Godot 4.4 的启动参数提供了对引擎各个方面的精细控制，从基本的运行模式到高级的调试和性能分析功能。合理使用这些参数可以大大提高开发效率和调试能力。在实际开发中，建议根据具体需求选择合适的参数组合，并注意参数之间的相互影响。&lt;/p&gt;
+&lt;h2 id=&#34;相关笔记&#34;&gt;相关笔记
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;[[Godot开发环境部署]]&lt;/li&gt;
+&lt;/ul&gt;
 </description>
         </item>
         <item>
         <title>iFlow CLI 使用和部署完整教程</title>
-        <link>https://Liyufei1.github.io/p/iflow-cli-%E4%BD%BF%E7%94%A8%E5%92%8C%E9%83%A8%E7%BD%B2%E5%AE%8C%E6%95%B4%E6%95%99%E7%A8%8B/</link>
+        <link>https://Liyufei1.github.io/p/iflow%E4%BD%BF%E7%94%A8%E5%92%8C%E9%83%A8%E7%BD%B2%E5%AE%8C%E6%95%B4%E6%95%99%E7%A8%8B/</link>
         <pubDate>Tue, 09 Dec 2025 10:00:00 +0800</pubDate>
         
-        <guid>https://Liyufei1.github.io/p/iflow-cli-%E4%BD%BF%E7%94%A8%E5%92%8C%E9%83%A8%E7%BD%B2%E5%AE%8C%E6%95%B4%E6%95%99%E7%A8%8B/</guid>
+        <guid>https://Liyufei1.github.io/p/iflow%E4%BD%BF%E7%94%A8%E5%92%8C%E9%83%A8%E7%BD%B2%E5%AE%8C%E6%95%B4%E6%95%99%E7%A8%8B/</guid>
         <description>&lt;img src="https://Liyufei1.github.io/AI.png" alt="Featured image of post iFlow CLI 使用和部署完整教程" /&gt;&lt;h1 id=&#34;iflow-cli-使用和部署完整教程&#34;&gt;iFlow CLI 使用和部署完整教程
 &lt;/h1&gt;&lt;h2 id=&#34;iflow初步认识&#34;&gt;iFlow初步认识
 &lt;/h2&gt;&lt;p&gt;iFlow CLI 是一款直接在终端中运行的强大 AI 助手。它能够无缝分析代码仓库、执行编程任务、理解上下文需求，通过自动化处理从简单的文件操作到复杂的工作流程，全面提升您的工作效率。&lt;/p&gt;
@@ -8500,28 +8540,28 @@ $$&lt;p&gt;其中：&lt;/p&gt;
     &gt;iFlow CLI GitHub仓库&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;如需加入社区交流，可以扫描官方微信群二维码：&lt;a class=&#34;link&#34; href=&#34;https://github.com/iflow-ai/iflow-cli/blob/main/assets/iflow-wechat.jpg&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;iFlow微信社区&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;相关笔记&#34;&gt;相关笔记
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;[[iflowForDev]]&lt;/li&gt;
+&lt;/ul&gt;
 </description>
         </item>
         <item>
         <title>【godot】六、godot中的编辑器插件EditorPlugin</title>
-        <link>https://Liyufei1.github.io/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/</link>
+        <link>https://Liyufei1.github.io/p/godot%E5%BC%95%E6%93%8E5%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6/</link>
         <pubDate>Thu, 20 Nov 2025 09:18:31 +0800</pubDate>
         
-        <guid>https://Liyufei1.github.io/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/</guid>
+        <guid>https://Liyufei1.github.io/p/godot%E5%BC%95%E6%93%8E5%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6/</guid>
         <description>&lt;img src="https://Liyufei1.github.io/godot.png" alt="Featured image of post 【godot】六、godot中的编辑器插件EditorPlugin" /&gt;&lt;h2 id=&#34;概述&#34;&gt;概述
 &lt;/h2&gt;&lt;p&gt;对于追求极客精神的小伙伴而言，对godot编辑器的改造无疑是一件非常酷的事情。它可以为godot编辑器添加一些定制化的操作，用于提升开发效率，加速工程实现。对于泛用的编辑器功能或是自定义功能类的调式补充界面，做成编辑器插件是非常不错的，比如：批量的实体放置、批量的材质复制、曲线的debug绘制等。
-&lt;img src=&#34;https://Liyufei1.github.io/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/image5.jpg&#34;
-	width=&#34;2469&#34;
-	height=&#34;1379&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/image5_hu_bdd318fc1b7a40a0.jpg 480w, https://Liyufei1.github.io/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/image5_hu_43116f9c036b950e.jpg 1024w&#34;
+&lt;img src=&#34;https://Liyufei1.github.io/Godot/ImageTemp/image5.jpg&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;image&#34;
 	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;179&#34;
-		data-flex-basis=&#34;429px&#34;
 	
 &gt;
 需要实现一个自定义的编辑器插件，会涉及到下方几个类：&lt;/p&gt;
@@ -8587,101 +8627,77 @@ $$&lt;p&gt;其中：&lt;/p&gt;
 &lt;h4 id=&#34;add_control_to_container&#34;&gt;add_control_to_container
 &lt;/h4&gt;&lt;p&gt;&lt;code&gt;add_control_to_container&lt;/code&gt;存在多个停靠位置:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;CONTAINER_TOOLBAR : 上方工具栏,&lt;img src=&#34;https://Liyufei1.github.io/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/toolbar.jpg&#34;
-	width=&#34;603&#34;
-	height=&#34;128&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/toolbar_hu_aae381f1a6ac7509.jpg 480w, https://Liyufei1.github.io/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/toolbar_hu_a340a6bb75c3e0e6.jpg 1024w&#34;
+&lt;li&gt;CONTAINER_TOOLBAR : 上方工具栏,&lt;img src=&#34;https://Liyufei1.github.io/Godot/ImageTemp/toolbar.jpg&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;toolbar&#34;
 	
 	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;471&#34;
-		data-flex-basis=&#34;1130px&#34;
-	
 &gt;&lt;/li&gt;
 &lt;li&gt;CONTAINER_SPATIAL_EDITOR_MENU :   3D视口上方菜单栏&lt;/li&gt;
 &lt;li&gt;CONTAINER_SPATIAL_EDITOR_SIDE_LEFT :   3D视口左方&lt;/li&gt;
 &lt;li&gt;CONTAINER_SPATIAL_EDITOR_SIDE_RIGHT :   3D视口右方&lt;/li&gt;
-&lt;li&gt;CONTAINER_SPATIAL_EDITOR_BOTTOM :   3D视口下方 &lt;img src=&#34;https://Liyufei1.github.io/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/image.png&#34;
-	width=&#34;1639&#34;
-	height=&#34;827&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/image_hu_167d41b51001dc71.png 480w, https://Liyufei1.github.io/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/image_hu_51d7ffa309c671a.png 1024w&#34;
+&lt;li&gt;CONTAINER_SPATIAL_EDITOR_BOTTOM :   3D视口下方 &lt;img src=&#34;https://Liyufei1.github.io/Godot/ImageTemp/image.png&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;menu_panel&#34;
 	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;198&#34;
-		data-flex-basis=&#34;475px&#34;
 	
 &gt;&lt;/li&gt;
 &lt;li&gt;CONTAINER_CANVAS_EDITOR_MENU :   2D视口上方菜单栏&lt;/li&gt;
 &lt;li&gt;CONTAINER_CANVAS_EDITOR_SIDE_LEFT :   2D视口左方&lt;/li&gt;
 &lt;li&gt;CONTAINER_CANVAS_EDITOR_SIDE_RIGHT :   2D视口右方&lt;/li&gt;
 &lt;li&gt;CONTAINER_CANVAS_EDITOR_BOTTOM :   2D视口下方&lt;/li&gt;
-&lt;li&gt;CONTAINER_INSPECTOR_BOTTOM : 检查器下方 &lt;img src=&#34;https://Liyufei1.github.io/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/penal1.jpg&#34;
-	width=&#34;761&#34;
-	height=&#34;195&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/penal1_hu_fb8bf75a42eaa2e7.jpg 480w, https://Liyufei1.github.io/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/penal1_hu_bf5d5dc7b5ae17f9.jpg 1024w&#34;
+&lt;li&gt;CONTAINER_INSPECTOR_BOTTOM : 检查器下方 &lt;img src=&#34;https://Liyufei1.github.io/Godot/ImageTemp/penal1.jpg&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;penal1&#34;
 	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;390&#34;
-		data-flex-basis=&#34;936px&#34;
 	
 &gt;&lt;/li&gt;
 &lt;li&gt;CONTAINER_PROJECT_SETTING_TAB_LEFT : 项目设置左侧&lt;/li&gt;
 &lt;li&gt;CONTAINER_PROJECT_SETTING_TAB_RIGHT : 项目设置右侧&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;add_control_to_bottom_panel&#34;&gt;add_control_to_bottom_panel
-&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/image2.jpg&#34;
-	width=&#34;1710&#34;
-	height=&#34;729&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/image2_hu_6dc100bf35be321d.jpg 480w, https://Liyufei1.github.io/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/image2_hu_80de0f51eb9021b.jpg 1024w&#34;
+&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/Godot/ImageTemp/image2.jpg&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;image2.jpg&#34;
 	
 	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;234&#34;
-		data-flex-basis=&#34;562px&#34;
-	
 &gt;&lt;/p&gt;
 &lt;h4 id=&#34;add_control_to_dock&#34;&gt;add_control_to_dock
-&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/image3.jpg&#34;
-	width=&#34;641&#34;
-	height=&#34;1369&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/image3_hu_a27ff5c448d27d43.jpg 480w, https://Liyufei1.github.io/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/image3_hu_9359469795aaaaef.jpg 1024w&#34;
+&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/Godot/ImageTemp/image3.jpg&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;image3.jpg&#34;
 	
 	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;46&#34;
-		data-flex-basis=&#34;112px&#34;
-	
 &gt;&lt;/p&gt;
 &lt;h4 id=&#34;add_tool_menu_item&#34;&gt;add_tool_menu_item
-&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/image4.jpg&#34;
-	width=&#34;707&#34;
-	height=&#34;522&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/image4_hu_16075bb8681efa46.jpg 480w, https://Liyufei1.github.io/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/image4_hu_5784ef8b8984f4b7.jpg 1024w&#34;
+&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/Godot/ImageTemp/image4.jpg&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;image4.jpg&#34;
 	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;135&#34;
-		data-flex-basis=&#34;325px&#34;
 	
 &gt;&lt;/p&gt;
 &lt;h3 id=&#34;处理用户选中的对象&#34;&gt;&lt;strong&gt;👉处理用户选中的对象&lt;/strong&gt;
@@ -8819,18 +8835,14 @@ $$&lt;p&gt;其中：&lt;/p&gt;
 			&lt;/tr&gt;
 	&lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/image.png&#34;
-	width=&#34;1639&#34;
-	height=&#34;827&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/image_hu_167d41b51001dc71.png 480w, https://Liyufei1.github.io/p/godot%E5%85%ADgodot%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E6%8F%92%E4%BB%B6editorplugin/image_hu_51d7ffa309c671a.png 1024w&#34;
+&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/Godot/ImageTemp/image.png&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;menu_panel&#34;
 	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;198&#34;
-		data-flex-basis=&#34;475px&#34;
 	
 &gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -8933,45 +8945,42 @@ $$&lt;p&gt;其中：&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;break&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description>
+&lt;/div&gt;&lt;h2 id=&#34;相关笔记&#34;&gt;相关笔记
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;[[Godot GDExtension开发指南]]&lt;/li&gt;
+&lt;li&gt;[[Godot动态类型系统RTTI]]&lt;/li&gt;
+&lt;/ul&gt;
+</description>
         </item>
         <item>
         <title>【godot】五、godot中的动态类型信息系统RTTI</title>
-        <link>https://Liyufei1.github.io/p/godot%E4%BA%94godot%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9Frtti/</link>
+        <link>https://Liyufei1.github.io/p/godot%E5%BC%95%E6%93%8E4%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF/</link>
         <pubDate>Fri, 07 Nov 2025 09:18:31 +0800</pubDate>
         
-        <guid>https://Liyufei1.github.io/p/godot%E4%BA%94godot%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9Frtti/</guid>
+        <guid>https://Liyufei1.github.io/p/godot%E5%BC%95%E6%93%8E4%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF/</guid>
         <description>&lt;img src="https://Liyufei1.github.io/godot.png" alt="Featured image of post 【godot】五、godot中的动态类型信息系统RTTI" /&gt;&lt;h2 id=&#34;概述&#34;&gt;概述
 &lt;/h2&gt;&lt;p&gt;在游戏开发中，动态性和灵活性是至关重要的特性。python，C#，java等编程语言，从语音层面就是支持反射或动态类型系统的，可以运行时动态地查看对象的类型、成员、方法，甚至动态调用或修改它们。而游戏引擎为了追求运行时的效率，一般会采用Cpp语言进行开发，Cpp语言本身不支持反射，所以各大游戏引擎都各显神通地添加了反射系统，以支持运行时动态类型信息。&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;在虚幻引擎当中，是通过UObject类来收集元信息的。通过UPROPTERTY()等宏标记，用UHT工具，在编译前进行一次头文件的生成，从而生成UPROPERTY()所标记的属性元信息的U类。对于虚幻的反射实现感兴趣的朋友，可以参考大钊在知乎上的文章：&lt;a class=&#34;link&#34; href=&#34;hhttps://zhuanlan.zhihu.com/p/24319968&#34; &gt;虚幻引擎的元信息机制&lt;/a&gt;
-&lt;img src=&#34;https://Liyufei1.github.io/p/godot%E4%BA%94godot%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9Frtti/image1.png&#34;
-	width=&#34;1304&#34;
-	height=&#34;770&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/godot%E4%BA%94godot%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9Frtti/image1_hu_6fbeb978912b3fd6.png 480w, https://Liyufei1.github.io/p/godot%E4%BA%94godot%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9Frtti/image1_hu_2c7f0402ad56942d.png 1024w&#34;
+&lt;img src=&#34;https://Liyufei1.github.io/Godot/ImageTemp/image1.png&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;虚幻代码&#34;
 	
 	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;169&#34;
-		data-flex-basis=&#34;406px&#34;
-	
 &gt;&lt;/li&gt;
 &lt;li&gt;在Unity中，反射系统由C#提供的。&lt;/li&gt;
-&lt;li&gt;在godot中，反射系统则是由名为&lt;code&gt;ClassDB&lt;/code&gt;提供，它记录了所有派生自&lt;code&gt;Object&lt;/code&gt;类的类型信息。在业务代码层，我们可以通过它提供的一系列静态方法来运行时访问类的类型信息，比如获取类的成员变量、方法、属性等信息。&lt;img src=&#34;https://Liyufei1.github.io/p/godot%E4%BA%94godot%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9Frtti/image2.png&#34;
-	width=&#34;1476&#34;
-	height=&#34;732&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/godot%E4%BA%94godot%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9Frtti/image2_hu_bfece0a8d86a1708.png 480w, https://Liyufei1.github.io/p/godot%E4%BA%94godot%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9Frtti/image2_hu_e1eb991803cbf1d8.png 1024w&#34;
+&lt;li&gt;在godot中，反射系统则是由名为&lt;code&gt;ClassDB&lt;/code&gt;提供，它记录了所有派生自&lt;code&gt;Object&lt;/code&gt;类的类型信息。在业务代码层，我们可以通过它提供的一系列静态方法来运行时访问类的类型信息，比如获取类的成员变量、方法、属性等信息。&lt;img src=&#34;https://Liyufei1.github.io/Godot/ImageTemp/image2.png&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;ClassDB&#34;
 	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;201&#34;
-		data-flex-basis=&#34;483px&#34;
 	
 &gt;&lt;/li&gt;
 &lt;/ol&gt;
@@ -10119,18 +10128,14 @@ $$&lt;p&gt;其中：&lt;/p&gt;
 &lt;li&gt;它是一个 虚拟属性（Variant::NIL） ，仅用于 UI 分组。&lt;/li&gt;
 &lt;li&gt;它配合add_property/ADD_PROPERTYI使用，可以创建一个定长数组属性。&lt;/li&gt;
 &lt;li&gt;它配合_set()/_get()/_get_property_list()使用，可以创建一个动态数组属性。&lt;/li&gt;
-&lt;li&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/godot%E4%BA%94godot%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9Frtti/add_array.png&#34;
-	width=&#34;470&#34;
-	height=&#34;270&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/godot%E4%BA%94godot%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9Frtti/add_array_hu_16ecd7ef02a158be.png 480w, https://Liyufei1.github.io/p/godot%E4%BA%94godot%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9Frtti/add_array_hu_974e91eb2ed34b0.png 1024w&#34;
+&lt;li&gt;&lt;img src=&#34;https://Liyufei1.github.io/Godot/ImageTemp/add_array.png&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;add_array.png&#34;
 	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;174&#34;
-		data-flex-basis=&#34;417px&#34;
 	
 &gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -10261,18 +10266,14 @@ $$&lt;p&gt;其中：&lt;/p&gt;
 &lt;li&gt;通常结合自定义的_setter_ 和 _getter_以及_get_property_list_使用&lt;/li&gt;
 &lt;li&gt;可以实现自定义的变长数组&lt;/li&gt;
 &lt;li&gt;它只注册长度属性本身&lt;/li&gt;
-&lt;li&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/godot%E4%BA%94godot%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9Frtti/add_array_count.png&#34;
-	width=&#34;547&#34;
-	height=&#34;527&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/godot%E4%BA%94godot%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9Frtti/add_array_count_hu_748cd8a443710995.png 480w, https://Liyufei1.github.io/p/godot%E4%BA%94godot%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9Frtti/add_array_count_hu_1af1e1d8f910c8d3.png 1024w&#34;
+&lt;li&gt;&lt;img src=&#34;https://Liyufei1.github.io/Godot/ImageTemp/add_array_count.png&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;add_array_count.png&#34;
 	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;103&#34;
-		data-flex-basis=&#34;249px&#34;
 	
 &gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -10454,18 +10455,14 @@ $$&lt;p&gt;其中：&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h4 id=&#34;add_property_group&#34;&gt;&lt;code&gt;add_property_group&lt;/code&gt;
 &lt;/h4&gt;&lt;p&gt;&lt;code&gt;ClassDB::add_property_group()&lt;/code&gt;用于在 Godot Inspector（属性面板）中创建一条分组标题，让多个属性显示在同一个折叠组下，从而让 Inspector 清晰整洁。
-&lt;img src=&#34;https://Liyufei1.github.io/p/godot%E4%BA%94godot%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9Frtti/add_group_sub.png&#34;
-	width=&#34;473&#34;
-	height=&#34;359&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/godot%E4%BA%94godot%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9Frtti/add_group_sub_hu_a6ccf75f377ba094.png 480w, https://Liyufei1.github.io/p/godot%E4%BA%94godot%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9Frtti/add_group_sub_hu_61f97e90dbc06b05.png 1024w&#34;
+&lt;img src=&#34;https://Liyufei1.github.io/Godot/ImageTemp/add_group_sub.png&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;add_group.png&#34;
 	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;131&#34;
-		data-flex-basis=&#34;316px&#34;
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;方法签名&lt;/strong&gt;&lt;/p&gt;
@@ -11563,31 +11560,33 @@ object中的GDCLASS(m_class, m_inherits)宏中包装了_get_property_listv方法
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;};&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description>
+&lt;/div&gt;&lt;h2 id=&#34;相关笔记&#34;&gt;相关笔记
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;[[Godot Modules开发指南]]&lt;/li&gt;
+&lt;li&gt;[[Godot GDExtension开发指南]]&lt;/li&gt;
+&lt;li&gt;[[Godot编辑器插件EditorPlugin]]&lt;/li&gt;
+&lt;/ul&gt;
+</description>
         </item>
         <item>
         <title>【godot】四、性能统计</title>
-        <link>https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/</link>
+        <link>https://Liyufei1.github.io/p/godot%E5%BC%95%E6%93%8E3%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/</link>
         <pubDate>Wed, 05 Nov 2025 09:18:31 +0800</pubDate>
         
-        <guid>https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/</guid>
+        <guid>https://Liyufei1.github.io/p/godot%E5%BC%95%E6%93%8E3%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/</guid>
         <description>&lt;img src="https://Liyufei1.github.io/godot.png" alt="Featured image of post 【godot】四、性能统计" /&gt;&lt;h2 id=&#34;性能分析相关&#34;&gt;性能分析相关
 &lt;/h2&gt;&lt;p&gt;godot作为相对成熟的游戏引擎，其本身就提供了相对完善的运行时性能监测工具。本文将对常用的运行时性能参数的获取和使用进行一个简易的说明，旨在帮助大家了解获取及理解这些参数。&lt;/p&gt;
 &lt;h3 id=&#34;performance&#34;&gt;Performance
 &lt;/h3&gt;&lt;p&gt;Performance是godot内置的性能数据存储器，它提供对许多与性能相关的不同监视器的访问，例如&lt;strong&gt;贴图内存使用情况&lt;/strong&gt; :RENDER_BUFFER_MEM_USED（在glbufferData的时候，会对申请的size进行累加）、&lt;strong&gt;绘制调用&lt;/strong&gt;:RENDER_TOTAL_DRAW_CALLS_IN_FRAME （gldraw的时候加一）&lt;strong&gt;FPS&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;这些值与编辑器的调试器面板中的监视选项卡中显示的值相同。通过使用该类的 &lt;strong&gt;get_monitor()&lt;/strong&gt; 方法，你可以从代码中访问该数据。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250828131418698.png&#34;
-	width=&#34;2019&#34;
-	height=&#34;650&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250828131418698_hu_f931fcda6cf923fd.png 480w, https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250828131418698_hu_7f31b8ddce28ab3c.png 1024w&#34;
+&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/Godot/ImageTemp/image-20250828131418698.png&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;image-20250828131418698&#34;
 	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;310&#34;
-		data-flex-basis=&#34;745px&#34;
 	
 &gt;&lt;/p&gt;
 &lt;ul&gt;
@@ -11693,114 +11692,86 @@ object中的GDCLASS(m_class, m_inherits)宏中包装了_get_property_listv方法
 &lt;/h4&gt;&lt;p&gt;Performance中的静态内存数据，包含了godot体系下的所有用户申请的内存，也即Variant中被标注的变量。&lt;/p&gt;
 &lt;p&gt;**注意：**cpp原生类型申请的内存空间并不会被统计进去。&lt;/p&gt;
 &lt;p&gt;该数据被实际存储在Memary类中，出于线程安全考虑，它被包装在一个原子类型中：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250828132259665.png&#34;
-	width=&#34;725&#34;
-	height=&#34;208&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250828132259665_hu_d102092f57eb58df.png 480w, https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250828132259665_hu_93c365e253275142.png 1024w&#34;
+&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/Godot/ImageTemp/image-20250828132259665.png&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;image-20250828132259665&#34;
 	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;348&#34;
-		data-flex-basis=&#34;836px&#34;
 	
 &gt;&lt;/p&gt;
 &lt;h4 id=&#34;render_&#34;&gt;&lt;strong&gt;RENDER_TEXTURE_MEM_USED&lt;/strong&gt;
 &lt;/h4&gt;&lt;p&gt;在gl渲染模式下，由于并没有RenderDevice层，都是直接使用的gl接口，因此数据的记录相对更加直接。&lt;/p&gt;
 &lt;p&gt;performancce中访问的&lt;strong&gt;RENDER_TEXTURE_MEM_USED&lt;/strong&gt;是通过**&lt;code&gt;RenderingServer&lt;/code&gt;&lt;strong&gt;提供的&lt;/strong&gt;&lt;code&gt;get_rendering_info&lt;/code&gt;**接口来获取的。&lt;/p&gt;
 &lt;p&gt;在往下走就是RGS::RendererUtilities提供的**&lt;code&gt;get_rendering_info&lt;/code&gt;**接口，在Utilities中，管理着gl申请出来的所有内存。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250828135026753.png&#34;
-	width=&#34;1129&#34;
-	height=&#34;234&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250828135026753_hu_d77495ee7bc56068.png 480w, https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250828135026753_hu_bf0723826f5cce95.png 1024w&#34;
+&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/Godot/ImageTemp/image-20250828135026753.png&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;image-20250828135026753&#34;
 	
 	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;482&#34;
-		data-flex-basis=&#34;1157px&#34;
-	
 &gt;&lt;/p&gt;
 &lt;p&gt;在每一次申请和删除渲染gl内存时，Utilities都会对内存大小的统计数字做出相应的增减。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250828135818702.png&#34;
-	width=&#34;1350&#34;
-	height=&#34;1221&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250828135818702_hu_3b7b6f0ad4a66599.png 480w, https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250828135818702_hu_587f7c20b9124b21.png 1024w&#34;
+&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/Godot/ImageTemp/image-20250828135818702.png&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;image-20250828135818702&#34;
 	
 	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;110&#34;
-		data-flex-basis=&#34;265px&#34;
-	
 &gt;&lt;/p&gt;
 &lt;p&gt;我们在日常开发中遇到的资源泄露报错，就来自于Utilities的析构函数。&lt;/p&gt;
 &lt;p&gt;当Utilities发生析构时，如果gl申请的内存未被完全释放，就会打印该条报错日志。（常由于孤立节点未被正确释放导致）&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250828140325345.png&#34;
-	width=&#34;1539&#34;
-	height=&#34;510&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250828140325345_hu_ba9de926bd65536c.png 480w, https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250828140325345_hu_6a801111d7533b7c.png 1024w&#34;
+&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/Godot/ImageTemp/image-20250828140325345.png&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;image-20250828140325345&#34;
 	
 	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;301&#34;
-		data-flex-basis=&#34;724px&#34;
-	
 &gt;&lt;/p&gt;
 &lt;h4 id=&#34;render_total_draw_calls_in_frame&#34;&gt;RENDER_TOTAL_DRAW_CALLS_IN_FRAME
 &lt;/h4&gt;&lt;p&gt;performancce中访问的&lt;strong&gt;RENDER_TOTAL_DRAW_CALLS_IN_FRAME&lt;/strong&gt;也是通过**&lt;code&gt;RenderingServer&lt;/code&gt;&lt;strong&gt;提供的&lt;/strong&gt;&lt;code&gt;get_rendering_info&lt;/code&gt;&lt;strong&gt;接口来获取的。而RenderingServer查询的数据，则来自&lt;/strong&gt;&lt;code&gt;RendererViewport&lt;/code&gt;**的total_draw_calls_used。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250828143848023.png&#34;
-	width=&#34;1016&#34;
-	height=&#34;290&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250828143848023_hu_ece597f7da7fa5f5.png 480w, https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250828143848023_hu_b6f218792230f1e0.png 1024w&#34;
+&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/Godot/ImageTemp/image-20250828143848023.png&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;image-20250828143848023&#34;
 	
 	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;350&#34;
-		data-flex-basis=&#34;840px&#34;
-	
 &gt;&lt;/p&gt;
 &lt;p&gt;RendererViewport中这组数据，则是在绘制阶段draw_viewports()时，收集累加激活状态的Viewport中的render_info中的数据。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250828144652636.png&#34;
-	width=&#34;1533&#34;
-	height=&#34;668&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250828144652636_hu_98457725cdf543d7.png 480w, https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250828144652636_hu_ae6e3d5555705e91.png 1024w&#34;
+&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/Godot/ImageTemp/image-20250828144652636.png&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;image-20250828144652636&#34;
 	
 	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;229&#34;
-		data-flex-basis=&#34;550px&#34;
-	
 &gt;&lt;/p&gt;
 &lt;p&gt;对于每个激活的Viewport中的drawcall，会在gl光栅化的阶段，也就是实际调用gl绘制函数的时候，进行一次增加。&lt;/p&gt;
 &lt;p&gt;**注意：**基于这一点，手动调用的绘制操作glDrawElements等，不会被统计进godot的Drawcall中。因此应尽量避免gl相关函数的直接调用。而应该通过godot的封装层RenderingServer来调用。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250828145943941.png&#34;
-	width=&#34;1604&#34;
-	height=&#34;1069&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250828145943941_hu_7237db19f8164603.png 480w, https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250828145943941_hu_740fd372ae7392d6.png 1024w&#34;
+&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/Godot/ImageTemp/image-20250828145943941.png&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;image-20250828145943941&#34;
 	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;150&#34;
-		data-flex-basis=&#34;360px&#34;
 	
 &gt;&lt;/p&gt;
 &lt;h3 id=&#34;renderingserver&#34;&gt;RenderingServer
@@ -11977,42 +11948,39 @@ object中的GDCLASS(m_class, m_inherits)宏中包装了_get_property_listv方法
 &lt;li&gt;物理：每秒在c++和GDScript物理处理函数中花费的平均CPU时间。&lt;/li&gt;
 &lt;li&gt;主线程时间：在主线程上设置场景所花费的时间。对于渲染基准测试，它作为加载时间度量。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250827113926201.png&#34;
-	width=&#34;1920&#34;
-	height=&#34;1080&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250827113926201_hu_8b4ca7c5984dcc4d.png 480w, https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250827113926201_hu_2f94d2a09571da04.png 1024w&#34;
+&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/Godot/ImageTemp/image-20250827113926201.png&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;image-20250827113926201&#34;
 	
 	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;177&#34;
-		data-flex-basis=&#34;426px&#34;
-	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250827094135263.png&#34;
-	width=&#34;1480&#34;
-	height=&#34;894&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250827094135263_hu_1246d1b0845d35ca.png 480w, https://Liyufei1.github.io/p/godot%E5%9B%9B%E6%80%A7%E8%83%BD%E7%BB%9F%E8%AE%A1/image-20250827094135263_hu_b340273c6d3c411e.png 1024w&#34;
+&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/Godot/ImageTemp/image-20250827094135263.png&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;image-20250827094135263&#34;
 	
 	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;165&#34;
-		data-flex-basis=&#34;397px&#34;
-	
 &gt;&lt;/p&gt;
+&lt;h2 id=&#34;相关笔记&#34;&gt;相关笔记
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;[[Godot GDExtension开发指南]]&lt;/li&gt;
+&lt;li&gt;[[Godot动态类型系统RTTI]]&lt;/li&gt;
+&lt;/ul&gt;
 </description>
         </item>
         <item>
         <title>【godot】三、GDExtension开发指南</title>
-        <link>https://Liyufei1.github.io/p/godot%E4%B8%89gdextension%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/</link>
+        <link>https://Liyufei1.github.io/p/godot%E5%BC%95%E6%93%8E2gdextension%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/</link>
         <pubDate>Tue, 04 Nov 2025 16:38:31 +0800</pubDate>
         
-        <guid>https://Liyufei1.github.io/p/godot%E4%B8%89gdextension%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/</guid>
+        <guid>https://Liyufei1.github.io/p/godot%E5%BC%95%E6%93%8E2gdextension%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/</guid>
         <description>&lt;img src="https://Liyufei1.github.io/godot.png" alt="Featured image of post 【godot】三、GDExtension开发指南" /&gt;&lt;h2 id=&#34;一src编写&#34;&gt;一、SRC编写
 &lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;Godot中不推荐使用#pragma once，而是推荐使用**#ifndef**的方式，来保证头文件的单次引用，参考下方行1。&lt;/li&gt;
@@ -13787,14 +13755,21 @@ object中的GDCLASS(m_class, m_inherits)宏中包装了_get_property_listv方法
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description>
+&lt;/div&gt;&lt;h2 id=&#34;相关笔记&#34;&gt;相关笔记
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;[[Godot开发环境部署]]&lt;/li&gt;
+&lt;li&gt;[[Godot Modules开发指南]]&lt;/li&gt;
+&lt;li&gt;[[Godot动态类型系统RTTI]]&lt;/li&gt;
+&lt;li&gt;[[Godot编辑器插件EditorPlugin]]&lt;/li&gt;
+&lt;/ul&gt;
+</description>
         </item>
         <item>
         <title>【godot】二、Modules开发指南</title>
-        <link>https://Liyufei1.github.io/p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/</link>
+        <link>https://Liyufei1.github.io/p/godot%E5%BC%95%E6%93%8E1modules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/</link>
         <pubDate>Tue, 04 Nov 2025 16:18:31 +0800</pubDate>
         
-        <guid>https://Liyufei1.github.io/p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/</guid>
+        <guid>https://Liyufei1.github.io/p/godot%E5%BC%95%E6%93%8E1modules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/</guid>
         <description>&lt;img src="https://Liyufei1.github.io/godot.png" alt="Featured image of post 【godot】二、Modules开发指南" /&gt;&lt;h1 id=&#34;modules开发指南&#34;&gt;Modules开发指南
 &lt;/h1&gt;&lt;p&gt;本文档是针对&lt;code&gt;Godot 4.4&lt;/code&gt;引擎的 Modules开发指南，为需要进行底层开发的开发者提供实用的参考。Godot Modules开发允许我们直接在引擎源码层面扩展功能，相比GDExtension具有更强大的能力和更深度的集成。本文涵盖了日志打印、容器类型、GUI组件、线程管理、配置系统等核心模块的常用头文件和最小使用示例，帮助你快速上手 Godot 引擎的 C++ 开发。&lt;/p&gt;
 &lt;h2 id=&#34;常用功能&#34;&gt;常用功能
@@ -13946,32 +13921,24 @@ object中的GDCLASS(m_class, m_inherits)宏中包装了_get_property_listv方法
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/image4.png&#34;
-	width=&#34;1192&#34;
-	height=&#34;562&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/image4_hu_cdf2ec93b4f12a2d.png 480w, https://Liyufei1.github.io/p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/image4_hu_881ba2db33451347.png 1024w&#34;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/Godot/ImageTemp/image4.png&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;使用示例&#34;
 	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;212&#34;
-		data-flex-basis=&#34;509px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/image5.png&#34;
-	width=&#34;787&#34;
-	height=&#34;119&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/image5_hu_be508eab87ce3878.png 480w, https://Liyufei1.github.io/p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/image5_hu_3f3fd244ce0db14a.png 1024w&#34;
+&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/Godot/ImageTemp/image5.png&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;使用示例&#34;
 	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;661&#34;
-		data-flex-basis=&#34;1587px&#34;
 	
 &gt;&lt;/p&gt;
 &lt;h2 id=&#34;容器&#34;&gt;容器
@@ -14837,21 +14804,16 @@ err_dialog_control-&amp;gt;draw_line(Point2(0,0), Point2(100,100),Color(1,0,0));
 &lt;h4 id=&#34;richtextlabel&#34;&gt;RichTextLabel
 &lt;/h4&gt;&lt;p&gt;&lt;strong&gt;✨头文件&lt;/strong&gt;:&lt;code&gt;#include &amp;quot;scene/gui/rich_text_label.h&amp;quot;&lt;/code&gt;&lt;br&gt;
 &lt;strong&gt;✨作用&lt;/strong&gt;:RichTextLabel是godot提供的UI控件，可以使用BBcode来控制显示的内容，比如设置当行文本颜色等&lt;br&gt;
-&lt;strong&gt;✨使用示例&lt;/strong&gt;:&lt;br&gt;
-&lt;img src=&#34;https://Liyufei1.github.io/p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/image2.png&#34;
-	width=&#34;679&#34;
-	height=&#34;254&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/image2_hu_471b1875b77f0f2.png 480w, https://Liyufei1.github.io/p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/image2_hu_7180241c118e6673.png 1024w&#34;
+&lt;strong&gt;✨使用示例&lt;/strong&gt;:  &lt;img src=&#34;https://Liyufei1.github.io/Godot/ImageTemp/image2%201.png&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;RichTextLabel&#34;
 	
 	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;267&#34;
-		data-flex-basis=&#34;641px&#34;
-	
-&gt;&lt;/p&gt;
+&gt;))&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -14874,21 +14836,16 @@ err_dialog_control-&amp;gt;draw_line(Point2(0,0), Point2(100,100),Color(1,0,0));
 &lt;li&gt;用户点击后，弹出&lt;code&gt;PopupMenu&lt;/code&gt;供选择。&lt;/li&gt;
 &lt;li&gt;支持回调 &amp;amp; 信号（如 item_selected(int index)）。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;✨使用示例&lt;/strong&gt;:
-&lt;img src=&#34;https://Liyufei1.github.io/p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/image1.png&#34;
-	width=&#34;645&#34;
-	height=&#34;169&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/image1_hu_8de5fb112c68c811.png 480w, https://Liyufei1.github.io/p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/image1_hu_e9849d8ddd545b01.png 1024w&#34;
+&lt;p&gt;&lt;strong&gt;✨使用示例&lt;/strong&gt;:&lt;img src=&#34;https://Liyufei1.github.io/Godot/ImageTemp/image1%201.png&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;OptionButton&#34;
 	
 	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;381&#34;
-		data-flex-basis=&#34;915px&#34;
-	
-&gt;&lt;/p&gt;
+&gt;))&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -14959,18 +14916,14 @@ err_dialog_control-&amp;gt;draw_line(Point2(0,0), Point2(100,100),Color(1,0,0));
 &lt;/h4&gt;&lt;p&gt;&lt;strong&gt;✨头文件&lt;/strong&gt;:&lt;code&gt;#include &amp;quot;scene/gui/menu_button.h&amp;quot;&lt;/code&gt;&lt;br&gt;
 &lt;strong&gt;✨作用&lt;/strong&gt;:&lt;br&gt;
 &lt;strong&gt;✨使用示例&lt;/strong&gt;:&lt;br&gt;
-&lt;img src=&#34;https://Liyufei1.github.io/p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/image3.png&#34;
-	width=&#34;490&#34;
-	height=&#34;119&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/image3_hu_6b7dab717ad5a16.png 480w, https://Liyufei1.github.io/p/godot%E4%BA%8Cmodules%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/image3_hu_2b73addfdda6f1f1.png 1024w&#34;
+&lt;img src=&#34;https://Liyufei1.github.io/Godot/ImageTemp/image3.png&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;MenuButton&#34;
 	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;411&#34;
-		data-flex-basis=&#34;988px&#34;
 	
 &gt;&lt;/p&gt;
 &lt;h3 id=&#34;弹窗类&#34;&gt;弹窗类
@@ -15563,14 +15516,20 @@ err_dialog_control-&amp;gt;draw_line(Point2(0,0), Point2(100,100),Color(1,0,0));
 &lt;li&gt;&lt;code&gt;doc_classes&lt;/code&gt; 能提供类说明&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;对开发者工具类来说，重点不是描述得多详细，而是接口名、参数名、限制条件必须准确。&lt;/p&gt;
+&lt;h2 id=&#34;相关笔记&#34;&gt;相关笔记
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;[[Godot开发环境部署]]&lt;/li&gt;
+&lt;li&gt;[[Godot GDExtension开发指南]]&lt;/li&gt;
+&lt;li&gt;[[Godot动态类型系统RTTI]]&lt;/li&gt;
+&lt;/ul&gt;
 </description>
         </item>
         <item>
         <title>【godot】一、开发环境部署及示例</title>
-        <link>https://Liyufei1.github.io/p/godot%E4%B8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/</link>
+        <link>https://Liyufei1.github.io/p/godot%E5%BC%95%E6%93%8E-0%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/</link>
         <pubDate>Tue, 04 Nov 2025 16:08:31 +0800</pubDate>
         
-        <guid>https://Liyufei1.github.io/p/godot%E4%B8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/</guid>
+        <guid>https://Liyufei1.github.io/p/godot%E5%BC%95%E6%93%8E-0%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/</guid>
         <description>&lt;img src="https://Liyufei1.github.io/godot.png" alt="Featured image of post 【godot】一、开发环境部署及示例" /&gt;&lt;h1 id=&#34;引擎编译&#34;&gt;引擎编译
 &lt;/h1&gt;&lt;p&gt;官方源码仓库：&lt;a class=&#34;link&#34; href=&#34;https://github.com/godotengine/godot.git&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;godot&lt;/a&gt;&lt;/p&gt;
@@ -15690,18 +15649,14 @@ err_dialog_control-&amp;gt;draw_line(Point2(0,0), Point2(100,100),Color(1,0,0));
     &gt;自定义 C++ 模块 — Godot Engine (4.x) 简体中文文档&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;文件及结构&#34;&gt;文件及结构
 &lt;/h3&gt;&lt;p&gt;新建一个模块需要以下文件及结构，存放在E:\Godot\Godot_Engine\modules目录底下 。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/godot%E4%B8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/modules-1.png&#34;
-	width=&#34;627&#34;
-	height=&#34;194&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/godot%E4%B8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/modules-1_hu_2b799d04691b8da4.png 480w, https://Liyufei1.github.io/p/godot%E4%B8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/modules-1_hu_41c0e06d52b3342d.png 1024w&#34;
+&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/Godot/ImageTemp/modules-1.png&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;module文件结构&#34;
 	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;323&#34;
-		data-flex-basis=&#34;775px&#34;
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;在E:\Godot\Godot_Engine\modules\register_module_types.gen.cpp文件中，会根据我们模块中的SCsub文件，自动生成实际的模块注册代码，如下：&lt;/p&gt;
@@ -15847,18 +15802,14 @@ err_dialog_control-&amp;gt;draw_line(Point2(0,0), Point2(100,100),Color(1,0,0));
 &lt;/div&gt;&lt;h3 id=&#34;register_types&#34;&gt;register_types
 &lt;/h3&gt;&lt;p&gt;该文件负责对自身模块中声明的godot类型进行&lt;strong&gt;类型注册&lt;/strong&gt;，同时也可以在相对较早的阶段（main函数的setup阶段）进行一些单例类的实例化。
 如果在进行编辑器工具类的开发，则工具类的实例化和注册，也是在该阶段进行的。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/godot%E4%B8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/modules-2.png&#34;
-	width=&#34;1772&#34;
-	height=&#34;691&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/godot%E4%B8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/modules-2_hu_e884ca1f05475c86.png 480w, https://Liyufei1.github.io/p/godot%E4%B8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/modules-2_hu_d100120a148eff2.png 1024w&#34;
+&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/Godot/ImageTemp/modules-2.png&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;模块注册时机代码&#34;
 	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;256&#34;
-		data-flex-basis=&#34;615px&#34;
 	
 &gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -15935,18 +15886,14 @@ err_dialog_control-&amp;gt;draw_line(Point2(0,0), Point2(100,100),Color(1,0,0));
 &lt;p&gt;对于GDExtension中编写的c++代码，需要进行特定的&lt;strong&gt;注册&lt;/strong&gt;和&lt;strong&gt;编译&lt;/strong&gt;流程，才能形成给godot用的动态链接库&lt;/p&gt;
 &lt;h3 id=&#34;项目组织结构&#34;&gt;项目组织结构
 &lt;/h3&gt;&lt;p&gt;对于带GDExtension的godot项目，它具有以下的基本结构&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/godot%E4%B8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/extrension-1.png&#34;
-	width=&#34;862&#34;
-	height=&#34;753&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/godot%E4%B8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/extrension-1_hu_18e0254b9d6c1f73.png 480w, https://Liyufei1.github.io/p/godot%E4%B8%80%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E5%8F%8A%E7%A4%BA%E4%BE%8B/extrension-1_hu_be97f4a3e1191845.png 1024w&#34;
+&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/Godot/ImageTemp/extrension-1.png&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;GDExtension的godot项目&#34;
 	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;114&#34;
-		data-flex-basis=&#34;274px&#34;
 	
 &gt;&lt;/p&gt;
 &lt;h3 id=&#34;examplegdextension&#34;&gt;example.gdextension
@@ -16368,15 +16315,21 @@ err_dialog_control-&amp;gt;draw_line(Point2(0,0), Point2(100,100),Color(1,0,0));
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;Default&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;library&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description>
+&lt;/div&gt;&lt;h2 id=&#34;相关笔记&#34;&gt;相关笔记
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;[[Godot Modules开发指南]]&lt;/li&gt;
+&lt;li&gt;[[Godot GDExtension开发指南]]&lt;/li&gt;
+&lt;li&gt;[[Godot启动参数]]&lt;/li&gt;
+&lt;/ul&gt;
+</description>
         </item>
         <item>
         <title>Blog Build</title>
-        <link>https://Liyufei1.github.io/p/blog-build/</link>
+        <link>https://Liyufei1.github.io/p/blog-with-hugo/</link>
         <pubDate>Mon, 03 Nov 2025 16:08:31 +0800</pubDate>
         
-        <guid>https://Liyufei1.github.io/p/blog-build/</guid>
-        <description>&lt;img src="https://Liyufei1.github.io/p/blog-build/guidao3.jpg" alt="Featured image of post Blog Build" /&gt;&lt;h2 id=&#34;前置工具&#34;&gt;前置工具
+        <guid>https://Liyufei1.github.io/p/blog-with-hugo/</guid>
+        <description>&lt;img src="https://Liyufei1.github.io/Blog/ImageBG/guidao3.jpg" alt="Featured image of post Blog Build" /&gt;&lt;h2 id=&#34;前置工具&#34;&gt;前置工具
 &lt;/h2&gt;&lt;ol&gt;
 &lt;li&gt;网站前端工具-hugo软件 ：&lt;a class=&#34;link&#34; href=&#34;https://gohugo.io/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;hugo&lt;/a&gt;&lt;/li&gt;
@@ -16563,18 +16516,14 @@ err_dialog_control-&amp;gt;draw_line(Point2(0,0), Point2(100,100),Color(1,0,0));
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;图片&#34;&gt;图片
-&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/blog-build/guidao2.jpg&#34;
-	width=&#34;4000&#34;
-	height=&#34;2469&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/blog-build/guidao2_hu_290625566ad1fe7f.jpg 480w, https://Liyufei1.github.io/p/blog-build/guidao2_hu_2251fc3b6d6b2af3.jpg 1024w&#34;
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/Blog/ImageBG/guidao2.jpg&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;图片说明&#34;
 	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;162&#34;
-		data-flex-basis=&#34;388px&#34;
 	
 &gt;
 &lt;code&gt;![图片说明](guidao2.jpg)&lt;/code&gt;&lt;/p&gt;
@@ -16582,83 +16531,63 @@ err_dialog_control-&amp;gt;draw_line(Point2(0,0), Point2(100,100),Color(1,0,0));
 &lt;/h2&gt;&lt;h3 id=&#34;创建本地新站点&#34;&gt;创建本地新站点
 &lt;/h3&gt;&lt;ol&gt;
 &lt;li&gt;运行命令&lt;code&gt;hugo new site dev&lt;/code&gt;，利用hugo创建本地新站点。创建完成后，可以运行命令&lt;code&gt;hugo server -D&lt;/code&gt;来运行新建的站点，在浏览器中可以验证是否创建成功。
-&lt;img src=&#34;https://Liyufei1.github.io/p/blog-build/runhugo.png&#34;
-	width=&#34;1176&#34;
-	height=&#34;511&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/blog-build/runhugo_hu_e8fced23b862a264.png 480w, https://Liyufei1.github.io/p/blog-build/runhugo_hu_40bf775e7be051ee.png 1024w&#34;
+&lt;img src=&#34;https://Liyufei1.github.io/Blog/ImageTemp/runhugo.png&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;命令行运行成功示例&#34;
 	
 	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;230&#34;
-		data-flex-basis=&#34;552px&#34;
-	
 &gt;&lt;/li&gt;
 &lt;li&gt;到上&lt;a class=&#34;link&#34; href=&#34;https://themes.gohugo.io/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;hugo-theme&lt;/a&gt;下载中意的主题（本博客采用stack），将下载的主题复制到新站点的themes文件夹下。
-&lt;img src=&#34;https://Liyufei1.github.io/p/blog-build/step2.png&#34;
-	width=&#34;1985&#34;
-	height=&#34;787&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/blog-build/step2_hu_e6164482008cde14.png 480w, https://Liyufei1.github.io/p/blog-build/step2_hu_f8f90289cbde20f6.png 1024w&#34;
+&lt;img src=&#34;https://Liyufei1.github.io/Blog/ImageTemp/step2.png&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;主题示例&#34;
 	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;252&#34;
-		data-flex-basis=&#34;605px&#34;
 	
 &gt;&lt;/li&gt;
 &lt;li&gt;此时执行命令&lt;code&gt;hugo server -D&lt;/code&gt;启动服务，在浏览器中访问本地地址，可以看到新建的模板网页
-&lt;img src=&#34;https://Liyufei1.github.io/p/blog-build/step3.png&#34;
-	width=&#34;1135&#34;
-	height=&#34;758&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/blog-build/step3_hu_e09a0d24b402a55e.png 480w, https://Liyufei1.github.io/p/blog-build/step3_hu_c24f60935de7fac7.png 1024w&#34;
+&lt;img src=&#34;https://Liyufei1.github.io/Blog/ImageTemp/step3.png&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;主题示例&#34;
 	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;149&#34;
-		data-flex-basis=&#34;359px&#34;
 	
 &gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;部署到github&#34;&gt;部署到github
 &lt;/h3&gt;&lt;ol&gt;
 &lt;li&gt;运行指令&lt;code&gt;hugo -D&lt;/code&gt;利用hugo构建静态网页，此时在我们的本地网站文件夹下方，可以看到生成了一个名为&lt;code&gt;public&lt;/code&gt;的文件夹，里面存放了静态网页。
-&lt;img src=&#34;https://Liyufei1.github.io/p/blog-build/step4.png&#34;
-	width=&#34;1684&#34;
-	height=&#34;722&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/blog-build/step4_hu_153264f9b3e3067a.png 480w, https://Liyufei1.github.io/p/blog-build/step4_hu_2432a091177af3b5.png 1024w&#34;
+&lt;img src=&#34;https://Liyufei1.github.io/Blog/ImageTemp/step4.png&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;目录示例&#34;
 	
 	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;233&#34;
-		data-flex-basis=&#34;559px&#34;
-	
 &gt;&lt;/li&gt;
 &lt;li&gt;创建github仓库，需要注意仓库命名为：&lt;code&gt;&amp;lt;github用户名&amp;gt;.github.io&lt;/code&gt;，只有按照这个规范命名，github才会将静态网页部署到githubPages中。&lt;/li&gt;
 &lt;li&gt;将public文件夹下的所有文件上传到步骤2中创建的github仓库中。然后在仓库中运行Pages配置，等待一段时间，即可看到静态网页。
-&lt;img src=&#34;https://Liyufei1.github.io/p/blog-build/step5.png&#34;
-	width=&#34;2099&#34;
-	height=&#34;1063&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/blog-build/step5_hu_852ce20cef28b17.png 480w, https://Liyufei1.github.io/p/blog-build/step5_hu_e35f73d9b67c73d8.png 1024w&#34;
+&lt;img src=&#34;https://Liyufei1.github.io/Blog/ImageTemp/step5.png&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Page配置示例&#34;
 	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;197&#34;
-		data-flex-basis=&#34;473px&#34;
 	
 &gt;&lt;/li&gt;
 &lt;/ol&gt;
@@ -16737,35 +16666,31 @@ err_dialog_control-&amp;gt;draw_line(Point2(0,0), Point2(100,100),Color(1,0,0));
 &lt;/div&gt;
 &lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;在github中创建TOKEN，并添加到blog仓库中。创建token时需要勾选&lt;code&gt;repo&lt;/code&gt;权限以及&lt;code&gt;workflow&lt;/code&gt;权限。创建完毕后，在blog仓库中配置该TOKEN。后续有代码提交时，就会自动构建静态网页并部署到githubPages中。
-&lt;img src=&#34;https://Liyufei1.github.io/p/blog-build/step6.png&#34;
-	width=&#34;2041&#34;
-	height=&#34;571&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/blog-build/step6_hu_639a7ff14ff302f.png 480w, https://Liyufei1.github.io/p/blog-build/step6_hu_7019630d52142f53.png 1024w&#34;
+&lt;img src=&#34;https://Liyufei1.github.io/Blog/ImageTemp/step6.png&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;TOKEN配置&#34;
 	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;357&#34;
-		data-flex-basis=&#34;857px&#34;
 	
 &gt;
-&lt;img src=&#34;https://Liyufei1.github.io/p/blog-build/step7.png&#34;
-	width=&#34;2037&#34;
-	height=&#34;1269&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/blog-build/step7_hu_b0668d66f3043974.png 480w, https://Liyufei1.github.io/p/blog-build/step7_hu_b8b65b6354b64fff.png 1024w&#34;
+&lt;img src=&#34;https://Liyufei1.github.io/Blog/ImageTemp/step7.png&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;TOKEN配置&#34;
 	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;160&#34;
-		data-flex-basis=&#34;385px&#34;
 	
 &gt;&lt;/li&gt;
 &lt;/ol&gt;
+&lt;h2 id=&#34;相关笔记&#34;&gt;相关笔记
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;[[数学公式排版]]&lt;/li&gt;
+&lt;/ul&gt;
 </description>
         </item>
         <item>
@@ -16774,7 +16699,7 @@ err_dialog_control-&amp;gt;draw_line(Point2(0,0), Point2(100,100),Color(1,0,0));
         <pubDate>Wed, 09 Sep 2020 00:00:00 +0000</pubDate>
         
         <guid>https://Liyufei1.github.io/p/test-chinese/</guid>
-        <description>&lt;img src="https://Liyufei1.github.io/p/test-chinese/helena-hertz-wWZzXlDpMog-unsplash.jpg" alt="Featured image of post Chinese Test" /&gt;&lt;h2 id=&#34;正文测试&#34;&gt;正文测试
+        <description>&lt;img src="https://Liyufei1.github.io/Blog/ImageTemp/helena-hertz-wWZzXlDpMog-unsplash.jpg" alt="Featured image of post Chinese Test" /&gt;&lt;h2 id=&#34;正文测试&#34;&gt;正文测试
 &lt;/h2&gt;&lt;p&gt;而这些并不是完全重要，更加重要的问题是， 带着这些问题，我们来审视一下学生会退会。 既然如何， 对我个人而言，学生会退会不仅仅是一个重大的事件，还可能会改变我的人生。 我们不得不面对一个非常尴尬的事实，那就是， 可是，即使是这样，学生会退会的出现仍然代表了一定的意义。 学生会退会，发生了会如何，不发生又会如何。 经过上述讨论， 生活中，若学生会退会出现了，我们就不得不考虑它出现了的事实。 学生会退会，到底应该如何实现。 这样看来， 在这种困难的抉择下，本人思来想去，寝食难安。 对我个人而言，学生会退会不仅仅是一个重大的事件，还可能会改变我的人生。 就我个人来说，学生会退会对我的意义，不能不说非常重大。 莎士比亚曾经提到过，人的一生是短的，但如果卑劣地过这一生，就太长了。这似乎解答了我的疑惑。 莫扎特说过一句富有哲理的话，谁和我一样用功，谁就会和我一样成功。这启发了我， 对我个人而言，学生会退会不仅仅是一个重大的事件，还可能会改变我的人生。 学生会退会，到底应该如何实现。 一般来说， 从这个角度来看， 这种事实对本人来说意义重大，相信对这个世界也是有一定意义的。 在这种困难的抉择下，本人思来想去，寝食难安。 了解清楚学生会退会到底是一种怎么样的存在，是解决一切问题的关键。 一般来说， 生活中，若学生会退会出现了，我们就不得不考虑它出现了的事实。 问题的关键究竟为何？ 而这些并不是完全重要，更加重要的问题是。&lt;/p&gt;
 &lt;p&gt;奥斯特洛夫斯基曾经说过，共同的事业，共同的斗争，可以使人们产生忍受一切的力量。　带着这句话，我们还要更加慎重的审视这个问题： 一般来讲，我们都必须务必慎重的考虑考虑。 既然如此， 这种事实对本人来说意义重大，相信对这个世界也是有一定意义的。 带着这些问题，我们来审视一下学生会退会。 我认为， 我认为， 在这种困难的抉择下，本人思来想去，寝食难安。 问题的关键究竟为何？ 每个人都不得不面对这些问题。 在面对这种问题时， 要想清楚，学生会退会，到底是一种怎么样的存在。 我认为， 既然如此， 每个人都不得不面对这些问题。 在面对这种问题时， 那么， 我认为， 学生会退会因何而发生。&lt;/p&gt;
 &lt;h2 id=&#34;引用&#34;&gt;引用
@@ -16787,58 +16712,42 @@ err_dialog_control-&amp;gt;draw_line(Point2(0,0), Point2(100,100),Color(1,0,0));
     &gt;最暖的憂傷 - 田馥甄&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2 id=&#34;图片&#34;&gt;图片
-&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/test-chinese/florian-klauer-nptLmg6jqDo-unsplash.jpg&#34;
-	width=&#34;667&#34;
-	height=&#34;1000&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/test-chinese/florian-klauer-nptLmg6jqDo-unsplash_hu_7b8a06820e6d5c.jpg 480w, https://Liyufei1.github.io/p/test-chinese/florian-klauer-nptLmg6jqDo-unsplash_hu_a347f10e565b40ff.jpg 1024w&#34;
+&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/Blog/ImageTemp/florian-klauer-nptLmg6jqDo-unsplash.jpg&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Photo by Florian Klauer on Unsplash&#34;
 	
 	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;66&#34;
-		data-flex-basis=&#34;160px&#34;
+&gt;  &lt;img src=&#34;https://Liyufei1.github.io/Blog/ImageTemp/luca-bravo-alS7ewQ41M8-unsplash.jpg&#34;
 	
-&gt;  &lt;img src=&#34;https://Liyufei1.github.io/p/test-chinese/luca-bravo-alS7ewQ41M8-unsplash.jpg&#34;
-	width=&#34;1000&#34;
-	height=&#34;667&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/test-chinese/luca-bravo-alS7ewQ41M8-unsplash_hu_258fc4da0cfc7de9.jpg 480w, https://Liyufei1.github.io/p/test-chinese/luca-bravo-alS7ewQ41M8-unsplash_hu_d415bcea096fe061.jpg 1024w&#34;
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Photo by Luca Bravo on Unsplash&#34;
 	
 	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;149&#34;
-		data-flex-basis=&#34;359px&#34;
-	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/p/test-chinese/helena-hertz-wWZzXlDpMog-unsplash.jpg&#34;
-	width=&#34;1000&#34;
-	height=&#34;750&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/test-chinese/helena-hertz-wWZzXlDpMog-unsplash_hu_dfbb0c559c3df461.jpg 480w, https://Liyufei1.github.io/p/test-chinese/helena-hertz-wWZzXlDpMog-unsplash_hu_212d0718b8e99eaa.jpg 1024w&#34;
+&lt;p&gt;&lt;img src=&#34;https://Liyufei1.github.io/Blog/ImageTemp/helena-hertz-wWZzXlDpMog-unsplash.jpg&#34;
+	
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Photo by Helena Hertz on Unsplash&#34;
 	
 	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;133&#34;
-		data-flex-basis=&#34;320px&#34;
+&gt;  &lt;img src=&#34;https://Liyufei1.github.io/Blog/ImageTemp/hudai-gayiran-3Od_VKcDEAA-unsplash.jpg&#34;
 	
-&gt;  &lt;img src=&#34;https://Liyufei1.github.io/p/test-chinese/hudai-gayiran-3Od_VKcDEAA-unsplash.jpg&#34;
-	width=&#34;667&#34;
-	height=&#34;1000&#34;
-	srcset=&#34;https://Liyufei1.github.io/p/test-chinese/hudai-gayiran-3Od_VKcDEAA-unsplash_hu_41819e288bf4a8c0.jpg 480w, https://Liyufei1.github.io/p/test-chinese/hudai-gayiran-3Od_VKcDEAA-unsplash_hu_1277885c87f69490.jpg 1024w&#34;
+	
+	
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Photo by Hudai Gayiran on Unsplash&#34;
 	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;66&#34;
-		data-flex-basis=&#34;160px&#34;
 	
 &gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -16848,9 +16757,9 @@ err_dialog_control-&amp;gt;draw_line(Point2(0,0), Point2(100,100),Color(1,0,0));
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;![&lt;span class=&#34;nt&#34;&gt;Photo by Florian Klauer on Unsplash&lt;/span&gt;](&lt;span class=&#34;na&#34;&gt;florian-klauer-nptLmg6jqDo-unsplash.jpg&lt;/span&gt;)  ![&lt;span class=&#34;nt&#34;&gt;Photo by Luca Bravo on Unsplash&lt;/span&gt;](&lt;span class=&#34;na&#34;&gt;luca-bravo-alS7ewQ41M8-unsplash.jpg&lt;/span&gt;) 
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;![&lt;span class=&#34;nt&#34;&gt;Photo by Florian Klauer on Unsplash&lt;/span&gt;](&lt;span class=&#34;na&#34;&gt;Blog/ImageTemp/florian-klauer-nptLmg6jqDo-unsplash.jpg&lt;/span&gt;)  ![&lt;span class=&#34;nt&#34;&gt;Photo by Luca Bravo on Unsplash&lt;/span&gt;](&lt;span class=&#34;na&#34;&gt;Blog/ImageTemp/luca-bravo-alS7ewQ41M8-unsplash.jpg&lt;/span&gt;) 
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;![&lt;span class=&#34;nt&#34;&gt;Photo by Helena Hertz on Unsplash&lt;/span&gt;](&lt;span class=&#34;na&#34;&gt;helena-hertz-wWZzXlDpMog-unsplash.jpg&lt;/span&gt;)  ![&lt;span class=&#34;nt&#34;&gt;Photo by Hudai Gayiran on Unsplash&lt;/span&gt;](&lt;span class=&#34;na&#34;&gt;hudai-gayiran-3Od_VKcDEAA-unsplash.jpg&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;![&lt;span class=&#34;nt&#34;&gt;Photo by Helena Hertz on Unsplash&lt;/span&gt;](&lt;span class=&#34;na&#34;&gt;Blog/ImageTemp/helena-hertz-wWZzXlDpMog-unsplash.jpg&lt;/span&gt;)  ![&lt;span class=&#34;nt&#34;&gt;Photo by Hudai Gayiran on Unsplash&lt;/span&gt;](&lt;span class=&#34;na&#34;&gt;Blog/ImageTemp/hudai-gayiran-3Od_VKcDEAA-unsplash.jpg&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;相册语法来自 &lt;a class=&#34;link&#34; href=&#34;https://typlog.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
@@ -16897,7 +16806,10 @@ err_dialog_control-&amp;gt;draw_line(Point2(0,0), Point2(100,100),Color(1,0,0));
 &lt;/p&gt;
 $$
  \varphi = 1+\frac{1} {1+\frac{1} {1+\frac{1} {1+\cdots} } } 
-$$</description>
+$$&lt;h2 id=&#34;相关笔记&#34;&gt;相关笔记
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;[[Hugo建站]]&lt;/li&gt;
+&lt;/ul&gt;</description>
         </item>
         <item>
         <title>UECpp的个人使用小技巧</title>
@@ -16905,7 +16817,7 @@ $$</description>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
         <guid>https://Liyufei1.github.io/p/uecpp%E7%9A%84%E4%B8%AA%E4%BA%BA%E4%BD%BF%E7%94%A8%E5%B0%8F%E6%8A%80%E5%B7%A7/</guid>
-        <description>&lt;h2 id=&#34;日志&#34;&gt;日志
+        <description>&lt;img src="https://Liyufei1.github.io/UE5.png" alt="Featured image of post UECpp的个人使用小技巧" /&gt;&lt;h2 id=&#34;日志&#34;&gt;日志
 &lt;/h2&gt;&lt;h3 id=&#34;使用自定义日志类别&#34;&gt;使用自定义日志类别
 &lt;/h3&gt;&lt;p&gt;默认的 &lt;code&gt;UE_LOG(LogTemp, ...)&lt;/code&gt; 所有人的日志混在一个类别里，既不方便筛选，也无法单独控制 Verbosity。建议每个模块都定义自己的日志类别。&lt;/p&gt;
 &lt;h4 id=&#34;1-声明自定义-log-category&#34;&gt;1. 声明自定义 Log Category
@@ -17057,6 +16969,10 @@ $$</description>
 &lt;li&gt;&lt;strong&gt;Shipping 包体优化&lt;/strong&gt;：将第三个参数设为 &lt;code&gt;Warning&lt;/code&gt;，所有 &lt;code&gt;Verbose&lt;/code&gt;/&lt;code&gt;Log&lt;/code&gt; 级别的日志在编译期被剥离，零运行时开销。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;带上上下文信息&lt;/strong&gt;：&lt;code&gt;UE_LOG&lt;/code&gt; 支持格式化字符串，建议始终带上关键变量值，比 &lt;code&gt;GEngine-&amp;gt;AddOnScreenDebugMessage&lt;/code&gt; 更灵活。&lt;/li&gt;
 &lt;/ol&gt;
+&lt;h2 id=&#34;相关笔记&#34;&gt;相关笔记
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;[[UE三方库接入]]&lt;/li&gt;
+&lt;/ul&gt;
 </description>
         </item>
         <item>
@@ -17089,7 +17005,12 @@ $$</description>
 &lt;/h4&gt;&lt;p&gt;Matt Pocock 系列技能包的索引总结，当你不知道该用哪个技能时，可以问问它&lt;/p&gt;
 &lt;h3 id=&#34;开发流程&#34;&gt;开发流程
 &lt;/h3&gt;&lt;h3 id=&#34;代码维护&#34;&gt;代码维护
-&lt;/h3&gt;</description>
+&lt;/h3&gt;&lt;h2 id=&#34;相关笔记&#34;&gt;相关笔记
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;[[opencode简介]]&lt;/li&gt;
+&lt;li&gt;[[openclow]]&lt;/li&gt;
+&lt;/ul&gt;
+</description>
         </item>
         
     </channel>

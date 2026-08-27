@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>工作流 on 李宇飞-Liyufei1</title>
+        <link>https://Liyufei1.github.io/tags/%E5%B7%A5%E4%BD%9C%E6%B5%81/</link>
+        <description>Recent content in 工作流 on 李宇飞-Liyufei1</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <copyright>李宇飞-Liyufei1</copyright>
+        <lastBuildDate>Thu, 15 Jan 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://Liyufei1.github.io/tags/%E5%B7%A5%E4%BD%9C%E6%B5%81/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Iflow在开发中的进阶教程</title>
+        <link>https://Liyufei1.github.io/p/iflow-in-development/</link>
+        <pubDate>Thu, 15 Jan 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://Liyufei1.github.io/p/iflow-in-development/</guid>
+        <description>&lt;img src="https://Liyufei1.github.io/AI.png" alt="Featured image of post Iflow在开发中的进阶教程" /&gt;&lt;h1 id=&#34;1-创建一个agent工作流&#34;&gt;1. 创建一个agent工作流
+&lt;/h1&gt;&lt;h2 id=&#34;相关笔记&#34;&gt;相关笔记
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;[[iFlow使用和部署教程]]&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

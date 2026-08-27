@@ -10,7 +10,7 @@
 <meta property='og:description' content="深入理解计算机系统一书的学习笔记">
 <meta property='og:url' content='https://Liyufei1.github.io/p/cpp-csapp-notes/'>
 <meta property='og:site_name' content='李宇飞-Liyufei1'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-05-08T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-05-08T00:00:00&#43;00:00'/><meta property='og:image' content='https://Liyufei1.github.io/csapp.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='CSAPP' /><meta property='article:tag' content='计算机系统' /><meta property='article:tag' content='汇编' /><meta property='article:published_time' content='2026-05-08T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-05-08T00:00:00&#43;00:00'/><meta property='og:image' content='https://Liyufei1.github.io/csapp.png' />
 <meta name="twitter:title" content="cpp-csapp学习笔记">
 <meta name="twitter:description" content="深入理解计算机系统一书的学习笔记"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://Liyufei1.github.io/csapp.png' />
@@ -438,18 +438,14 @@
 </ul>
 <h2 id="第1章-计算机系统漫游">第1章 计算机系统漫游
 </h2><h3 id="11-编译系统">1.1 编译系统
-</h3><p><img src="/p/cpp-csapp-notes/image/1/image1-1.png"
-	width="1575"
-	height="705"
-	srcset="/p/cpp-csapp-notes/image/1/image1-1_hu_5cda5a6c2e0a68f2.png 480w, /p/cpp-csapp-notes/image/1/image1-1_hu_9b3ecc6a48ea142f.png 1024w"
+</h3><p><img src="/Cpp/ImageTemp/image1-1.png"
+	
+	
+	
 	loading="lazy"
 	
 		alt="1-1"
 	
-	
-		class="gallery-image" 
-		data-flex-grow="223"
-		data-flex-basis="536px"
 	
 ></p>
 <p>一个 C 程序从源文件到最终的可执行文件，通常会经历以下四个阶段：</p>
@@ -462,18 +458,14 @@
 <p>可以把这一过程理解为：先“整理”源代码，再“翻译”为汇编，再“转换”为机器指令，最后把程序运行所需的各个部分“拼装”起来。</p>
 <hr>
 <h3 id="12-计算机硬件组成">1.2 计算机硬件组成
-</h3><p><img src="/p/cpp-csapp-notes/image/1/image1-2-1.png"
-	width="1463"
-	height="818"
-	srcset="/p/cpp-csapp-notes/image/1/image1-2-1_hu_76a094c3c9e14696.png 480w, /p/cpp-csapp-notes/image/1/image1-2-1_hu_d5f2b7c2b961f468.png 1024w"
+</h3><p><img src="/Cpp/ImageTemp/image1-2-1.png"
+	
+	
+	
 	loading="lazy"
 	
 		alt="1-2-1"
 	
-	
-		class="gallery-image" 
-		data-flex-grow="178"
-		data-flex-basis="429px"
 	
 ></p>
 <p>一个典型的计算机系统通常由以下几个核心部分组成：</p>
@@ -491,18 +483,14 @@
 <li>I/O Bus（输入输出总线）：为磁盘、键盘、显示器、网络设备等外设提供数据传输通道。</li>
 </ol>
 <p>从功能上看，CPU 负责“运算”，主存负责“存储”，而 I/O 系统则负责“与外界交互”，三者共同构成了一个完整的计算机系统。</p>
-<p><img src="/p/cpp-csapp-notes/image/1/image1-2-2.png"
-	width="1433"
-	height="750"
-	srcset="/p/cpp-csapp-notes/image/1/image1-2-2_hu_fd77c32248669b4c.png 480w, /p/cpp-csapp-notes/image/1/image1-2-2_hu_527279d29208f59e.png 1024w"
+<p><img src="/Cpp/ImageTemp/image1-2-2.png"
+	
+	
+	
 	loading="lazy"
 	
 		alt="1-2-2"
 	
-	
-		class="gallery-image" 
-		data-flex-grow="191"
-		data-flex-basis="458px"
 	
 ></p>
 <p>在存储层次结构中，越靠上的存储设备速度越快，但容量越小、成本也越高；越靠下的存储设备容量越大，但访问速度越慢。</p>
@@ -510,18 +498,14 @@
 因此，程序之所以能够高效运行，很大程度上依赖于这种分层存储设计。</p>
 <hr>
 <h3 id="13-操作系统硬件管理">1.3 操作系统硬件管理
-</h3><p><img src="/p/cpp-csapp-notes/image/1/image1-3-1.png"
-	width="1395"
-	height="701"
-	srcset="/p/cpp-csapp-notes/image/1/image1-3-1_hu_8ec342689e845b84.png 480w, /p/cpp-csapp-notes/image/1/image1-3-1_hu_8090b997fe86107d.png 1024w"
+</h3><p><img src="/Cpp/ImageTemp/image1-3-1.png"
+	
+	
+	
 	loading="lazy"
 	
 		alt="1-3-1"
 	
-	
-		class="gallery-image" 
-		data-flex-grow="199"
-		data-flex-basis="477px"
 	
 ></p>
 <p>应用程序通常不能直接操作底层硬件，而是要通过操作系统提供的接口来完成。<br>
@@ -533,18 +517,14 @@
 <li>File（文件）：对 I/O 设备的抽象。无论是磁盘、键盘、显示器，还是网络设备，操作系统都尽量用统一的文件式接口来组织和访问数据。</li>
 </ul>
 <p>这三种抽象降低了应用程序直接操作硬件的复杂度，也让系统在安全性、可移植性和并发执行方面更容易实现。</p>
-<p><img src="/p/cpp-csapp-notes/image/1/image1-3-2.png"
-	width="1313"
-	height="768"
-	srcset="/p/cpp-csapp-notes/image/1/image1-3-2_hu_3a47d63be8e27dc1.png 480w, /p/cpp-csapp-notes/image/1/image1-3-2_hu_7e2f5dec39a310e3.png 1024w"
+<p><img src="/Cpp/ImageTemp/image1-3-2.png"
+	
+	
+	
 	loading="lazy"
 	
 		alt="1-3-2"
 	
-	
-		class="gallery-image" 
-		data-flex-grow="170"
-		data-flex-basis="410px"
 	
 ></p>
 <p>以一个进程的虚拟地址空间为例，通常可以划分为以下几个区域：</p>
@@ -563,18 +543,14 @@
 </h2><h3 id="21-信息存储">2.1 信息存储
 </h3><p>计算机中的信息最终都是以二进制形式存储的，而这些二进制数据通常按字节组织。<br>
 不同机器的字长可能不同，例如常见的有 32 位和 64 位，这会影响指针、整数等数据类型所占用的字节数。</p>
-<p><img src="/p/cpp-csapp-notes/image/2/image2-1-1.png"
-	width="932"
-	height="490"
-	srcset="/p/cpp-csapp-notes/image/2/image2-1-1_hu_a8ecaac01b3e4c6d.png 480w, /p/cpp-csapp-notes/image/2/image2-1-1_hu_ab8ced6069fbfbf1.png 1024w"
+<p><img src="/Cpp/ImageTemp/image2-1-1.png"
+	
+	
+	
 	loading="lazy"
 	
 		alt="2-1-1"
 	
-	
-		class="gallery-image" 
-		data-flex-grow="190"
-		data-flex-basis="456px"
 	
 ></p>
 <p>从图中可以看出：</p>
@@ -584,18 +560,14 @@
 </ul>
 <p>需要注意的是，数据类型的实际大小不仅与机器字长有关，也与编译器实现和平台约定有关。因此在编写底层代码时，不能只凭经验判断类型大小，最好结合具体平台确认。</p>
 <p>除了“占多少字节”之外，数据在内存中“如何排列字节”也非常重要，这就是字节序问题。</p>
-<p><img src="/p/cpp-csapp-notes/image/2/image2-1-2.png"
-	width="775"
-	height="417"
-	srcset="/p/cpp-csapp-notes/image/2/image2-1-2_hu_7b86c5558cb5a3f8.png 480w, /p/cpp-csapp-notes/image/2/image2-1-2_hu_af71a73582080c9c.png 1024w"
+<p><img src="/Cpp/ImageTemp/image2-1-2.png"
+	
+	
+	
 	loading="lazy"
 	
 		alt="2-1-2"
 	
-	
-		class="gallery-image" 
-		data-flex-grow="185"
-		data-flex-basis="446px"
 	
 ></p>
 <p>常见的字节序有两种：</p>
@@ -621,18 +593,14 @@
 </ul>
 </li>
 </ul>
-<p><img src="/p/cpp-csapp-notes/image/2/image2-2-1.png"
-	width="1679"
-	height="478"
-	srcset="/p/cpp-csapp-notes/image/2/image2-2-1_hu_556dcf2009f2a3b7.png 480w, /p/cpp-csapp-notes/image/2/image2-2-1_hu_d9bcd8397de91dbc.png 1024w"
+<p><img src="/Cpp/ImageTemp/image2-2-1.png"
+	
+	
+	
 	loading="lazy"
 	
 		alt="2-2-1"
 	
-	
-		class="gallery-image" 
-		data-flex-grow="351"
-		data-flex-basis="843px"
 	
 ><br>
 从二进制转换到十进制时：</p>
@@ -640,18 +608,14 @@
 <li>对于无符号数，可以直接按每一位的权重求和。</li>
 <li>对于补码表示的有符号数，如果最高位为 <code>0</code>，表示非负数，转换方式与无符号数类似；如果最高位为 <code>1</code>，则表示负数，需要按补码规则解释其值。</li>
 </ul>
-<p><img src="/p/cpp-csapp-notes/image/2/image2-2-2.png"
-	width="1410"
-	height="719"
-	srcset="/p/cpp-csapp-notes/image/2/image2-2-2_hu_3b1dacda7c3350c1.png 480w, /p/cpp-csapp-notes/image/2/image2-2-2_hu_2f642a7830071bd2.png 1024w"
+<p><img src="/Cpp/ImageTemp/image2-2-2.png"
+	
+	
+	
 	loading="lazy"
 	
 		alt="2-2-2"
 	
-	
-		class="gallery-image" 
-		data-flex-grow="196"
-		data-flex-basis="470px"
 	
 ><br>
 由于补码规则的存在，在进行强制类型转换时，会出现直接预期之外的结果。<br>
@@ -705,18 +669,14 @@ $$ \lfloor x / 2^k \rfloor = (x + 2^k - 1) \gg k \quad (x \ge 0) $$<p>
 </p>
 $$ \lfloor x / 2^k \rfloor = (x + 2^k - 1) \mid \sim(2^k - 1) \gg k \quad (x < 0) $$<hr>
 <h3 id="24-浮点数">2.4 浮点数
-</h3><p><img src="/p/cpp-csapp-notes/image/2/image2-4-1.png"
-	width="1477"
-	height="752"
-	srcset="/p/cpp-csapp-notes/image/2/image2-4-1_hu_e209a1052bbe291e.png 480w, /p/cpp-csapp-notes/image/2/image2-4-1_hu_6b8fdec258a77f5a.png 1024w"
+</h3><p><img src="/Cpp/ImageTemp/image2-4-1.png"
+	
+	
+	
 	loading="lazy"
 	
 		alt="2-4-1"
 	
-	
-		class="gallery-image" 
-		data-flex-grow="196"
-		data-flex-basis="471px"
 	
 ><br>
 浮点数由三个部分组成：</p>
@@ -732,34 +692,26 @@ $$ \lfloor x / 2^k \rfloor = (x + 2^k - 1) \mid \sim(2^k - 1) \gg k \quad (x < 0
 </ul>
 <p>float单精度浮点数，取值范围是：，小数的精度为
 double双精度浮点数，取值范围是：，小数的精度为</p>
-<p><img src="/p/cpp-csapp-notes/image/2/image2-4-2.png"
-	width="1522"
-	height="755"
-	srcset="/p/cpp-csapp-notes/image/2/image2-4-2_hu_ec0188c79bc6f944.png 480w, /p/cpp-csapp-notes/image/2/image2-4-2_hu_6ed58b799526db2b.png 1024w"
+<p><img src="/Cpp/ImageTemp/image2-4-2.png"
+	
+	
+	
 	loading="lazy"
 	
 		alt="2-4-2"
 	
 	
-		class="gallery-image" 
-		data-flex-grow="201"
-		data-flex-basis="483px"
-	
 ><br>
 同时浮点数还能表示特殊值
 +0 \ -0 \ +∞ \ -∞ \ NaN</p>
-<p><img src="/p/cpp-csapp-notes/image/2/image2-4-3.png"
-	width="827"
-	height="485"
-	srcset="/p/cpp-csapp-notes/image/2/image2-4-3_hu_5d4741b98999a257.png 480w, /p/cpp-csapp-notes/image/2/image2-4-3_hu_4836a292c22b437d.png 1024w"
+<p><img src="/Cpp/ImageTemp/image2-4-3.png"
+	
+	
+	
 	loading="lazy"
 	
 		alt="2-4-3"
 	
-	
-		class="gallery-image" 
-		data-flex-grow="170"
-		data-flex-basis="409px"
 	
 ><br>
 由于浮点数精度有限，它会自动舍入，因此容易因为精度丢失，出现意料之外的情况，如上图。</p>
@@ -768,18 +720,14 @@ double双精度浮点数，取值范围是：，小数的精度为</p>
 </h3><p>程序的机器级表示，是理解计算机执行机制的核心。与高级语言屏蔽底层细节不同，汇编语言直接反映了 CPU 的运行逻辑——指令如何读写寄存器、如何访问内存、如何跳转。</p>
 <h4 id="调用者保存寄存器与被调用者保存寄存器">调用者保存寄存器与被调用者保存寄存器
 </h4><p>在 x86-64 架构中，寄存器一共 16 个：<code>rax, rbx, rcx, rdx, rsi, rdi, rbp, rsp, r8~r15</code>。其中有 8 个通用寄存器，它们的使用在函数调用时有明确约定。</p>
-<p><img src="/p/cpp-csapp-notes/image/3/image3-1-2.png"
-	width="1387"
-	height="605"
-	srcset="/p/cpp-csapp-notes/image/3/image3-1-2_hu_8c38b41f1b42ce69.png 480w, /p/cpp-csapp-notes/image/3/image3-1-2_hu_3321a79d4cdd19ee.png 1024w"
+<p><img src="/Cpp/ImageTemp/image3-1-2.png"
+	
+	
+	
 	loading="lazy"
 	
 		alt="3-1-2"
 	
-	
-		class="gallery-image" 
-		data-flex-grow="229"
-		data-flex-basis="550px"
 	
 ></p>
 <p><strong>调用者保存寄存器</strong>（Caller-saved，也叫 Caller-clobbered）：
@@ -825,18 +773,14 @@ double双精度浮点数，取值范围是：，小数的精度为</p>
 <hr>
 <h3 id="32-寄存器和数据传输指令">3.2 寄存器和数据传输指令
 </h3><p>x86-64 各寄存器的用途有一定约定，虽然部分可以混用，但遵循约定能让代码更易读。</p>
-<p><img src="/p/cpp-csapp-notes/image/3/image3-2-0.png"
-	width="1540"
-	height="755"
-	srcset="/p/cpp-csapp-notes/image/3/image3-2-0_hu_f4f6436415c2d630.png 480w, /p/cpp-csapp-notes/image/3/image3-2-0_hu_66340fe30f0a2316.png 1024w"
+<p><img src="/Cpp/ImageTemp/image3-2-0.png"
+	
+	
+	
 	loading="lazy"
 	
 		alt="3-2-0"
 	
-	
-		class="gallery-image" 
-		data-flex-grow="203"
-		data-flex-basis="489px"
 	
 ></p>
 <p>常见用途：</p>
@@ -850,18 +794,14 @@ double双精度浮点数，取值范围是：，小数的精度为</p>
 <li><code>rsp</code> —— 栈指针，指向栈顶</li>
 <li><code>rbp</code> —— 基址指针，常用于栈帧定位</li>
 </ul>
-<p><img src="/p/cpp-csapp-notes/image/3/image3-2-1.png"
-	width="1578"
-	height="769"
-	srcset="/p/cpp-csapp-notes/image/3/image3-2-1_hu_203b085ac49eba8f.png 480w, /p/cpp-csapp-notes/image/3/image3-2-1_hu_266f06e0657512a8.png 1024w"
+<p><img src="/Cpp/ImageTemp/image3-2-1.png"
+	
+	
+	
 	loading="lazy"
 	
 		alt="3-2-1"
 	
-	
-		class="gallery-image" 
-		data-flex-grow="205"
-		data-flex-basis="492px"
 	
 ></p>
 <p>常见数据传输指令：</p>
@@ -883,18 +823,14 @@ double双精度浮点数，取值范围是：，小数的精度为</p>
 <hr>
 <h3 id="33-栈与函数调用">3.3 栈与函数调用
 </h3><p>栈是程序运行时最重要的内存区域之一，用于函数调用、局部变量存储和寄存器保存。</p>
-<p><img src="/p/cpp-csapp-notes/image/3/image3-3-1.png"
-	width="1562"
-	height="640"
-	srcset="/p/cpp-csapp-notes/image/3/image3-3-1_hu_c0e7dc38bcf1318e.png 480w, /p/cpp-csapp-notes/image/3/image3-3-1_hu_bc7af67bfeb98751.png 1024w"
+<p><img src="/Cpp/ImageTemp/image3-3-1.png"
+	
+	
+	
 	loading="lazy"
 	
 		alt="3-3-1"
 	
-	
-		class="gallery-image" 
-		data-flex-grow="244"
-		data-flex-basis="585px"
 	
 ></p>
 <p><strong>栈的生长方向</strong>：栈向下生长——每 push 一个值，<code>rsp</code> 减小；每 pop 一个值，<code>rsp</code> 增大。</p>
@@ -1125,6 +1061,16 @@ double双精度浮点数，取值范围是：，小数的精度为</p>
 
     <footer class="article-footer">
     
+    <section class="article-tags">
+        
+            <a href="/tags/csapp/">CSAPP</a>
+        
+            <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/">计算机系统</a>
+        
+            <a href="/tags/%E6%B1%87%E7%BC%96/">汇编</a>
+        
+    </section>
+
 
     
     <section class="article-copyright">
@@ -1187,25 +1133,6 @@ double双精度浮点数，取值范围是：，小数的精度为</p>
         <div class="flex article-list--tile">
             
                 
-<article class="has-image">
-    <a href="/p/vulkan%E5%88%9D%E5%AD%A6%E9%9A%8F%E7%AC%94%E4%BB%8E%E9%9B%B6%E5%88%B0%E4%BA%A4%E6%8D%A2%E9%93%BE/">
-        
-        
-            <div class="article-image">
-                
-                    <img src="/OpenGL.png" loading="lazy" data-key="" data-hash="/OpenGL.png"/>
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">Vulkan初学随笔：从零到交换链</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
 <article class="">
     <a href="/p/cpp-boost-graph-notes/">
         
@@ -1220,31 +1147,18 @@ double双精度浮点数，取值范围是：，小数的精度为</p>
             
                 
 <article class="has-image">
-    <a href="/p/ue-%E5%BC%95%E5%85%A5%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/">
+    <a href="/p/ai-02-cpp%E4%B8%ADapikey%E7%9A%84%E4%BD%BF%E7%94%A8/">
         
         
             <div class="article-image">
                 
-                    <img src="/UE5.png" loading="lazy" data-key="" data-hash="/UE5.png"/>
+                    <img src="/AI.png" loading="lazy" data-key="ai-02-cpp中APIKey的使用" data-hash="/AI.png"/>
                 
             </div>
         
 
         <div class="article-details">
-            <h2 class="article-title">UE 引入第三方库的几种方式</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/p/uecpp%E7%9A%84%E4%B8%AA%E4%BA%BA%E4%BD%BF%E7%94%A8%E5%B0%8F%E6%8A%80%E5%B7%A7/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">UECpp的个人使用小技巧</h2>
+            <h2 class="article-title">AI-02-C&#43;&#43;中API Key的使用</h2>
         </div>
     </a>
 </article>
