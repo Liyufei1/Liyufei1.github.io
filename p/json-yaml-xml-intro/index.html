@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="介绍 JSON、YAML、XML、TOML 四种明文数据格式的语法与示例，帮助快速上手书写">
+<title>四种常见明文数据格式：JSON、YAML、XML、TOML</title>
+
+<link rel='canonical' href='https://Liyufei1.github.io/p/json-yaml-xml-intro/'>
+
+<link rel="stylesheet" href="/scss/style.min.6ba8b9ea95cedbd14d34969a3a28210289d3a74cba725c37699a1455f78e7135.css"><meta property='og:title' content="四种常见明文数据格式：JSON、YAML、XML、TOML">
+<meta property='og:description' content="介绍 JSON、YAML、XML、TOML 四种明文数据格式的语法与示例，帮助快速上手书写">
+<meta property='og:url' content='https://Liyufei1.github.io/p/json-yaml-xml-intro/'>
+<meta property='og:site_name' content='李宇飞-Liyufei1'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='JSON' /><meta property='article:tag' content='YAML' /><meta property='article:tag' content='XML' /><meta property='article:tag' content='TOML' /><meta property='article:tag' content='数据格式' /><meta property='article:published_time' content='2026-09-09T00:00:00&#43;08:00'/><meta property='article:modified_time' content='2026-09-09T00:00:00&#43;08:00'/>
+<meta name="twitter:title" content="四种常见明文数据格式：JSON、YAML、XML、TOML">
+<meta name="twitter:description" content="介绍 JSON、YAML、XML、TOML 四种明文数据格式的语法与示例，帮助快速上手书写">
+    <link rel="shortcut icon" href="/favicon.png" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/guidao1Icon_hu_83955a0cc47acc4c.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🤣</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">李宇飞-Liyufei1</a></h1>
+            <h2 class="site-description">存放学习随笔的个人博客,主要有:Godot、Unreal、Blog、Cpp.
+ 下方是个人的b站、gitbug链接:</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://space.bilibili.com/7531504?spm_id_from=333.1007.0.0'
+                        target="_blank"
+                        title="Bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/Liyufei1'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友情链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://Liyufei1.github.io/en/" >English</option>
+                                
+                                    <option value="https://Liyufei1.github.io/" selected>中文</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#概述">概述</a></li>
+    <li><a href="#json">JSON</a>
+      <ol>
+        <li><a href="#什么是-json">什么是 JSON</a></li>
+        <li><a href="#两种结构">两种结构</a></li>
+        <li><a href="#六种值类型">六种值类型</a></li>
+        <li><a href="#示例">示例</a></li>
+        <li><a href="#注意事项易错点">注意事项（易错点）</a></li>
+      </ol>
+    </li>
+    <li><a href="#yaml">YAML</a>
+      <ol>
+        <li><a href="#什么是-yaml">什么是 YAML</a></li>
+        <li><a href="#语法规则">语法规则</a>
+          <ol>
+            <li><a href="#1-键值对">1. 键值对</a></li>
+            <li><a href="#2-层级用缩进表示">2. 层级用缩进表示</a></li>
+            <li><a href="#3-列表">3. 列表</a></li>
+            <li><a href="#4-行内写法flow-风格">4. 行内写法（Flow 风格）</a></li>
+            <li><a href="#5-注释">5. 注释</a></li>
+            <li><a href="#6-多行字符串">6. 多行字符串</a></li>
+            <li><a href="#7-锚点与引用">7. 锚点与引用</a></li>
+          </ol>
+        </li>
+        <li><a href="#完整示例">完整示例</a></li>
+        <li><a href="#注意事项易错点-1">注意事项（易错点）</a></li>
+      </ol>
+    </li>
+    <li><a href="#xml">XML</a>
+      <ol>
+        <li><a href="#什么是-xml">什么是 XML</a></li>
+        <li><a href="#语法规则-1">语法规则</a>
+          <ol>
+            <li><a href="#1-必须有一个根元素">1. 必须有一个根元素</a></li>
+            <li><a href="#2-标签必须正确嵌套">2. 标签必须正确嵌套</a></li>
+            <li><a href="#3-属性">3. 属性</a></li>
+            <li><a href="#4-注释">4. 注释</a></li>
+            <li><a href="#5-特殊字符转义">5. 特殊字符转义</a></li>
+          </ol>
+        </li>
+        <li><a href="#完整示例-1">完整示例</a></li>
+        <li><a href="#注意事项易错点-2">注意事项（易错点）</a></li>
+      </ol>
+    </li>
+    <li><a href="#toml">TOML</a>
+      <ol>
+        <li><a href="#什么是-toml">什么是 TOML</a></li>
+        <li><a href="#语法规则-2">语法规则</a>
+          <ol>
+            <li><a href="#1-键值对-1">1. 键值对</a></li>
+            <li><a href="#2-表table">2. 表（Table）</a></li>
+            <li><a href="#3-数组与内联表">3. 数组与内联表</a></li>
+            <li><a href="#4-字符串">4. 字符串</a></li>
+            <li><a href="#5-注释-1">5. 注释</a></li>
+            <li><a href="#6-表数组array-of-tables">6. 表数组（Array of Tables）</a></li>
+          </ol>
+        </li>
+        <li><a href="#完整示例-2">完整示例</a></li>
+        <li><a href="#注意事项易错点-3">注意事项（易错点）</a></li>
+      </ol>
+    </li>
+    <li><a href="#四种格式对比">四种格式对比</a>
+      <ol>
+        <li><a href="#如何选择">如何选择</a></li>
+      </ol>
+    </li>
+    <li><a href="#小结">小结</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/misc/" style="background-color: #2a9d8f; color: #e9e5e5ff;">
+                Misc
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/json-yaml-xml-intro/">四种常见明文数据格式：JSON、YAML、XML、TOML</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            介绍 JSON、YAML、XML、TOML 四种明文数据格式的语法与示例，帮助快速上手书写
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published" datetime='2026-09-09T00:00:00&#43;08:00'>2026-09-09</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 9 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="概述">概述
+</h2><p>在开发中，我们经常需要把数据<strong>保存成文件</strong>、在<strong>网络之间传输</strong>，或者<strong>让程序和人之间交换信息</strong>。这时就需要一种&quot;明文数据格式&quot;——用纯文本（可读字符）来表达结构化的数据。</p>
+<p>明文数据格式的好处是显而易见的：</p>
+<ol>
+<li><strong>可读性</strong>：直接用编辑器打开就能看懂，方便排查问题；</li>
+<li><strong>跨语言</strong>：几乎所有编程语言都能解析，与具体语言无关；</li>
+<li><strong>易调试</strong>：不需要专门的工具，肉眼即可检查。</li>
+</ol>
+<p>最常见的四种明文数据格式分别是 <strong>JSON</strong>、<strong>YAML</strong>、<strong>XML</strong> 和 <strong>TOML</strong>。下面逐一介绍它们的语法与示例。</p>
+<hr>
+<h2 id="json">JSON
+</h2><h3 id="什么是-json">什么是 JSON
+</h3><p>JSON（JavaScript Object Notation）是目前使用最广泛的数据交换格式。它源自 JavaScript，但已成为独立的、跨语言的标准，常用于前后端接口、配置文件、API 返回数据等场景。</p>
+<p>JSON 的本质是<strong>两种结构 + 六种值类型</strong>的组合。</p>
+<h3 id="两种结构">两种结构
+</h3><p><strong>对象（Object）</strong>：用花括号 <code>{}</code> 包裹，由若干&quot;键值对&quot;组成，键值对之间用逗号分隔。</p>
+<p><strong>数组（Array）</strong>：用方括号 <code>[]</code> 包裹，由若干&quot;值&quot;组成，值之间用逗号分隔。</p>
+<h3 id="六种值类型">六种值类型
+</h3><div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>类型</th>
+					<th>说明</th>
+					<th>示例</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>字符串 string</td>
+					<td>必须用<strong>双引号</strong>包裹</td>
+					<td><code>&quot;hello&quot;</code></td>
+			</tr>
+			<tr>
+					<td>数字 number</td>
+					<td>整数或小数，不带引号</td>
+					<td><code>42</code>、<code>3.14</code></td>
+			</tr>
+			<tr>
+					<td>布尔 boolean</td>
+					<td>只能是 <code>true</code> 或 <code>false</code></td>
+					<td><code>true</code></td>
+			</tr>
+			<tr>
+					<td>空值 null</td>
+					<td>表示&quot;无&quot;</td>
+					<td><code>null</code></td>
+			</tr>
+			<tr>
+					<td>对象 object</td>
+					<td>嵌套的对象</td>
+					<td><code>{ &quot;a&quot;: 1 }</code></td>
+			</tr>
+			<tr>
+					<td>数组 array</td>
+					<td>嵌套的数组</td>
+					<td><code>[1, 2, 3]</code></td>
+			</tr>
+	</tbody>
+</table></div>
+<h3 id="示例">示例
+</h3><p>下面是一个完整的 JSON 对象，包含了所有类型：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;李宇飞&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;age&#34;</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;height&#34;</span><span class="p">:</span> <span class="mf">175.5</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;isStudent&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;hobbies&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;编程&#34;</span><span class="p">,</span> <span class="s2">&#34;游戏&#34;</span><span class="p">,</span> <span class="s2">&#34;阅读&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;address&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;city&#34;</span><span class="p">:</span> <span class="s2">&#34;北京&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;zip&#34;</span><span class="p">:</span> <span class="s2">&#34;100000&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;nickname&#34;</span><span class="p">:</span> <span class="kc">null</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>数组也可以作为顶层结构：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">[</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span> <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;张三&#34;</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span> <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;李四&#34;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="注意事项易错点">注意事项（易错点）
+</h3><p>JSON 的规则比较严格，初学者常在这里踩坑：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="c1">// ✗ 错误写法
+</span></span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="err">name:</span> <span class="nt">&#34;李宇飞&#34;</span><span class="p">,</span>          <span class="c1">// 1. 键没有加双引号
+</span></span></span><span class="line"><span class="cl">  <span class="err">&#39;age&#39;:</span> <span class="err">24,</span>               <span class="c1">// 2. 键用了单引号
+</span></span></span><span class="line"><span class="cl">  <span class="nt">&#34;isStudent&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>      <span class="c1">// 3. 注释 —— JSON 不支持注释
+</span></span></span><span class="line"><span class="cl">  <span class="err">&#39;nickname&#39;:</span> <span class="nt">&#34;lyf&#34;</span><span class="p">,</span>       <span class="c1">// 4. 结尾多了逗号（尾逗号）
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>正确的写法应始终：</p>
+<ul>
+<li>键和字符串值都用<strong>双引号</strong> <code>&quot;</code>，不能用单引号；</li>
+<li>对象/数组最后一个元素后面<strong>不能加逗号</strong>；</li>
+<li><strong>不支持注释</strong>；</li>
+<li>布尔值 <code>true</code>/<code>false</code> 和空值 <code>null</code> 都是<strong>小写</strong>。</li>
+</ul>
+<hr>
+<h2 id="yaml">YAML
+</h2><h3 id="什么是-yaml">什么是 YAML
+</h3><p>YAML（YAML Ain&rsquo;t Markup Language）是一种以<strong>缩进</strong>表达层级关系的数据格式。它比 JSON 更简洁、更接近自然阅读习惯，因此大量用于配置文件（如 Docker、Kubernetes、Hugo、CI 工作流等）。</p>
+<h3 id="语法规则">语法规则
+</h3><h4 id="1-键值对">1. 键值对
+</h4><p>用 <code>key: value</code> 表示，冒号后必须跟一个空格。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">李宇飞</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">age</span><span class="p">:</span><span class="w"> </span><span class="m">24</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="2-层级用缩进表示">2. 层级用缩进表示
+</h4><p>子级内容通过缩进（通常 2 个空格）嵌套在父级下方。<strong>同一层级的缩进必须严格一致</strong>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">person</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">李宇飞</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">age</span><span class="p">:</span><span class="w"> </span><span class="m">24</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="3-列表">3. 列表
+</h4><p>用 <code>- </code>（短横线 + 空格）表示列表项。列表也可以嵌套。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">hobbies</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">编程</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">游戏</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">阅读</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="4-行内写法flow-风格">4. 行内写法（Flow 风格）
+</h4><p>除了用缩进逐行书写，YAML 还提供了一种<strong>行内写法</strong>（Flow Style），用方括号 <code>[]</code> 和花括号 <code>{}</code> 在<strong>一行内</strong>表达列表和键值对，风格与 JSON 相似。</p>
+<p><strong><code>[]</code> —— 行内数组</strong>：等价于列表，元素之间用逗号分隔。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># 缩进写法（列表）</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">hobbies</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">编程</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">游戏</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">阅读</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c"># 行内写法（数组）</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">hobbies</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">编程, 游戏, 阅读]</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong><code>{}</code> —— 行内对象</strong>：等价于键值对，键值对之间用逗号分隔。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># 缩进写法（层级）</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">address</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">city</span><span class="p">:</span><span class="w"> </span><span class="l">北京</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">zip</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;100000&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c"># 行内写法（对象）</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">address</span><span class="p">:</span><span class="w"> </span>{<span class="nt">city</span><span class="p">:</span><span class="w"> </span><span class="nt">北京, zip</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;100000&#34;</span>}<span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>两者还可以互相嵌套：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># 对象里套数组、数组里套对象</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">person</span><span class="p">:</span><span class="w"> </span>{<span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="nt">李宇飞, age</span><span class="p">:</span><span class="w"> </span><span class="nt">24, hobbies</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">编程, 游戏]}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">users</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>{<span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="nt">1, name</span><span class="p">:</span><span class="w"> </span><span class="l">张三}, {id: 2, name: 李四}]</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>提示：行内写法省空间、适合简短数据；但内容一多就不好读，一般<strong>复杂结构仍建议用缩进写法</strong>。</p>
+</blockquote>
+<h4 id="5-注释">5. 注释
+</h4><p>用 <code>#</code> 开头，从 <code>#</code> 到行尾都是注释。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">李宇飞  </span><span class="w"> </span><span class="c"># 这是姓名</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c"># 这是一整行注释</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="6-多行字符串">6. 多行字符串
+</h4><p><code>|</code> 保留换行，<code>&gt;</code> 把多行折叠成一行（中间用空格连接）。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># 保留换行</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
+</span></span></span><span class="line"><span class="cl"><span class="sd">  这是第一行
+</span></span></span><span class="line"><span class="cl"><span class="sd">  这是第二行
+</span></span></span><span class="line"><span class="cl"><span class="sd">  这是第三行</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c"># 折叠为一行</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">summary</span><span class="p">:</span><span class="w"> </span><span class="p">&gt;</span><span class="sd">
+</span></span></span><span class="line"><span class="cl"><span class="sd">  这是第一句
+</span></span></span><span class="line"><span class="cl"><span class="sd">  这是第二句
+</span></span></span><span class="line"><span class="cl"><span class="sd">  这是第三句</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="7-锚点与引用">7. 锚点与引用
+</h4><p>用 <code>&amp;</code> 定义锚点，用 <code>*</code> 引用，可以避免重复书写相同内容。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">defaults</span><span class="p">:</span><span class="w"> </span><span class="cp">&amp;default</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">timeout</span><span class="p">:</span><span class="w"> </span><span class="m">30</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">retry</span><span class="p">:</span><span class="w"> </span><span class="m">3</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">server</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">&lt;&lt;</span><span class="p">:</span><span class="w"> </span><span class="cp">*default</span><span class="w">          </span><span class="c"># 合并 defaults 的内容</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l">example.com</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="完整示例">完整示例
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># 一个用户信息配置</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">李宇飞</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">age</span><span class="p">:</span><span class="w"> </span><span class="m">24</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">is_student</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">hobbies</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">编程</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">游戏</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">阅读</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">address</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">city</span><span class="p">:</span><span class="w"> </span><span class="l">北京</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">zip</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;100000&#34;</span><span class="w">   </span><span class="c"># 纯数字的邮编加引号，避免被解析为数字</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">nickname</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="注意事项易错点-1">注意事项（易错点）
+</h3><ul>
+<li><strong>缩进必须用空格</strong>，不能混用 Tab 和空格（这是最常见的报错来源）；</li>
+<li>冒号后要<strong>留一个空格</strong>；</li>
+<li>字符串默认可以不加引号，但包含特殊字符（如 <code>:</code>、<code>#</code>、开头是数字）时应加引号；</li>
+<li>布尔值、数字、<code>null</code> 会被解析成对应类型，纯数字字符串建议加引号；</li>
+<li>同一层级的缩进必须完全一致，否则层级关系会错乱。</li>
+</ul>
+<hr>
+<h2 id="xml">XML
+</h2><h3 id="什么是-xml">什么是 XML
+</h3><p>XML（eXtensible Markup Language）是一种用<strong>标签</strong>标记数据结构的格式，历史悠久、规范严格。它曾广泛用于 Web 服务（SOAP）、配置文件（如 Android 的 <code>AndroidManifest.xml</code>）、Office 文档等。</p>
+<p>XML 的核心是<strong>标签</strong>，一个标签由尖括号包裹，成对出现：开始标签 <code>&lt;tag&gt;</code> 和结束标签 <code>&lt;/tag&gt;</code>。</p>
+<h3 id="语法规则-1">语法规则
+</h3><h4 id="1-必须有一个根元素">1. 必须有一个根元素
+</h4><p>整个文档有且只有一个最外层的元素，其他元素都嵌套在它里面。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;root&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="c">&lt;!-- 其他元素 --&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/root&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="2-标签必须正确嵌套">2. 标签必须正确嵌套
+</h4><p>开始标签和结束标签必须成对、正确嵌套，不能交叉。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="c">&lt;!-- ✗ 错误：交叉嵌套 --&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;a&gt;&lt;b&gt;</span>内容<span class="nt">&lt;/a&gt;&lt;/b&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">&lt;!-- ✓ 正确 --&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;a&gt;&lt;b&gt;</span>内容<span class="nt">&lt;/b&gt;&lt;/a&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="3-属性">3. 属性
+</h4><p>元素的开始标签里可以写属性，格式为 <code>属性名=&quot;值&quot;</code>，值<strong>必须加引号</strong>（双引号或单引号均可）。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;person</span> <span class="na">age=</span><span class="s">&#34;24&#34;</span> <span class="na">city=</span><span class="s">&#34;北京&#34;</span><span class="nt">&gt;</span>李宇飞<span class="nt">&lt;/person&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="4-注释">4. 注释
+</h4><p>用 <code>&lt;!-- 注释内容 --&gt;</code> 表示。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="c">&lt;!-- 这是一条注释 --&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="5-特殊字符转义">5. 特殊字符转义
+</h4><p>文本内容中不能直接出现 <code>&lt;</code>、<code>&amp;</code> 等字符，需要转义：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>原字符</th>
+					<th>转义写法</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>&lt;</code></td>
+					<td><code>&amp;lt;</code></td>
+			</tr>
+			<tr>
+					<td><code>&gt;</code></td>
+					<td><code>&amp;gt;</code></td>
+			</tr>
+			<tr>
+					<td><code>&amp;</code></td>
+					<td><code>&amp;amp;</code></td>
+			</tr>
+			<tr>
+					<td><code>&quot;</code></td>
+					<td><code>&amp;quot;</code></td>
+			</tr>
+			<tr>
+					<td><code>'</code></td>
+					<td><code>&amp;apos;</code></td>
+			</tr>
+	</tbody>
+</table></div>
+<h3 id="完整示例-1">完整示例
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;people&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;person</span> <span class="na">id=</span><span class="s">&#34;1&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;name&gt;</span>李宇飞<span class="nt">&lt;/name&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;age&gt;</span>24<span class="nt">&lt;/age&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;hobbies&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;hobby&gt;</span>编程<span class="nt">&lt;/hobby&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;hobby&gt;</span>游戏<span class="nt">&lt;/hobby&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;hobby&gt;</span>阅读<span class="nt">&lt;/hobby&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;/hobbies&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/person&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;person</span> <span class="na">id=</span><span class="s">&#34;2&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;name&gt;</span>张三<span class="nt">&lt;/name&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;age&gt;</span>30<span class="nt">&lt;/age&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/person&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/people&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="注意事项易错点-2">注意事项（易错点）
+</h3><ul>
+<li>标签名<strong>大小写敏感</strong>，<code>&lt;Name&gt;</code> 和 <code>&lt;name&gt;</code> 是不同的标签；</li>
+<li>必须有且只有一个<strong>根元素</strong>；</li>
+<li>属性值必须加引号；</li>
+<li>结束标签不能省略（除非是自闭合标签，如 <code>&lt;br/&gt;</code>）；</li>
+<li>文本中出现 <code>&lt;</code>、<code>&amp;</code> 时必须转义。</li>
+</ul>
+<hr>
+<h2 id="toml">TOML
+</h2><h3 id="什么是-toml">什么是 TOML
+</h3><p>TOML（Tom&rsquo;s Obvious, Minimal Language）是一种<strong>专门为配置文件设计</strong>的数据格式，名字里的&quot;Obvious、Minimal&quot;点明了它的目标：规则明确、歧义少、保持最小化。它常见于工具链的配置文件，例如 Rust 的 <code>Cargo.toml</code>、Python 的 <code>pyproject.toml</code>，Hugo 也支持用 <code>config.toml</code> 配置站点。</p>
+<p>TOML 的核心是<strong>键值对 + 表（Table）</strong>，比 JSON 更宽松（支持注释、字符串可省略转义），又比 YAML 更严格（没有缩进敏感问题）。</p>
+<h3 id="语法规则-2">语法规则
+</h3><h4 id="1-键值对-1">1. 键值对
+</h4><p>用 <code>key = value</code> 表示，等号两侧通常各加一个空格；字符串值必须加引号。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;李宇飞&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">age</span> <span class="p">=</span> <span class="mi">24</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="2-表table">2. 表（Table）
+</h4><p>用 <code>[表名]</code> 声明一个表，它下面的键值对都属于这个表，直到遇到下一个表头为止。写在最顶层的键值对属于&quot;根表&quot;，无需声明。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;李宇飞&#34;</span>        <span class="c"># 属于根表</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">address</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nx">city</span> <span class="p">=</span> <span class="s2">&#34;北京&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">zip</span> <span class="p">=</span> <span class="s2">&#34;100000&#34;</span>          <span class="c"># 属于 address 表</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="3-数组与内联表">3. 数组与内联表
+</h4><p>数组用方括号 <code>[]</code>，元素用逗号分隔；内联表用花括号 <code>{}</code>，等价于一张表，写在一行内。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="nx">hobbies</span> <span class="p">=</span> <span class="p">[</span><span class="s2">&#34;编程&#34;</span><span class="p">,</span> <span class="s2">&#34;游戏&#34;</span><span class="p">,</span> <span class="s2">&#34;阅读&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">point</span> <span class="p">=</span> <span class="p">{</span> <span class="nx">x</span> <span class="p">=</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">y</span> <span class="p">=</span> <span class="mi">2</span> <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="4-字符串">4. 字符串
+</h4><p>TOML 提供多种字符串写法：</p>
+<ul>
+<li><strong>基本字符串</strong> <code>&quot;...&quot;</code>：支持转义（如 <code>\n</code>、<code>\&quot;</code>、<code>\\</code>）；</li>
+<li><strong>字面量字符串</strong> <code>'...'</code>：不转义，所见即所得；</li>
+<li><strong>多行字符串</strong> <code>&quot;&quot;&quot;...&quot;&quot;&quot;</code> 或 <code>'''...'''</code>：可跨行书写。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="nx">path</span> <span class="p">=</span> <span class="s2">&#34;C:\\Users\\lyf&#34;</span>    <span class="c"># 基本字符串，反斜杠需转义</span>
+</span></span><span class="line"><span class="cl"><span class="nx">path2</span> <span class="p">=</span> <span class="s1">&#39;C:\Users\lyf&#39;</span>     <span class="c"># 字面量字符串，无需转义</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">desc</span> <span class="p">=</span> <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">第一行
+</span></span></span><span class="line"><span class="cl"><span class="s2">第二行
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="5-注释-1">5. 注释
+</h4><p>用 <code>#</code> 开头，从 <code>#</code> 到行尾都是注释。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;李宇飞&#34;</span>   <span class="c"># 这是姓名</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="6-表数组array-of-tables">6. 表数组（Array of Tables）
+</h4><p>用 <code>[[表名]]</code> 声明一个&quot;表的数组&quot;，用来表达多个同结构对象（如用户列表、商品列表）。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="p">[[</span><span class="nx">users</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl"><span class="nx">id</span> <span class="p">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;张三&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">[[</span><span class="nx">users</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl"><span class="nx">id</span> <span class="p">=</span> <span class="mi">2</span>
+</span></span><span class="line"><span class="cl"><span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;李四&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="完整示例-2">完整示例
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="c"># 一个用户信息配置</span>
+</span></span><span class="line"><span class="cl"><span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;李宇飞&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">age</span> <span class="p">=</span> <span class="mi">24</span>
+</span></span><span class="line"><span class="cl"><span class="nx">is_student</span> <span class="p">=</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl"><span class="nx">height</span> <span class="p">=</span> <span class="mf">175.5</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">hobbies</span> <span class="p">=</span> <span class="p">[</span><span class="s2">&#34;编程&#34;</span><span class="p">,</span> <span class="s2">&#34;游戏&#34;</span><span class="p">,</span> <span class="s2">&#34;阅读&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">address</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nx">city</span> <span class="p">=</span> <span class="s2">&#34;北京&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">zip</span> <span class="p">=</span> <span class="s2">&#34;100000&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="注意事项易错点-3">注意事项（易错点）
+</h3><ul>
+<li>字符串必须加引号，数字、布尔值不加引号，且布尔值 <code>true</code>/<code>false</code> <strong>小写</strong>；</li>
+<li><strong>没有 <code>null</code> 值</strong>，用&quot;省略该键&quot;来表示没有值；</li>
+<li>同一个键不能重复定义，重复会报错；</li>
+<li>表名、键名<strong>大小写敏感</strong>；</li>
+<li>表一旦用 <code>[表名]</code> 声明后，就不能再在它之后继续写根表的键值对（层级要清晰）；</li>
+<li>日期时间使用 ISO 8601 格式，例如 <code>2026-09-09T10:00:00+08:00</code>。</li>
+</ul>
+<hr>
+<h2 id="四种格式对比">四种格式对比
+</h2><div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>维度</th>
+					<th>JSON</th>
+					<th>YAML</th>
+					<th>XML</th>
+					<th>TOML</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>可读性</td>
+					<td>高</td>
+					<td><strong>最高</strong></td>
+					<td>较低（标签冗长）</td>
+					<td>高</td>
+			</tr>
+			<tr>
+					<td>是否支持注释</td>
+					<td>✗ 不支持</td>
+					<td>✓ 支持</td>
+					<td>✓ 支持</td>
+					<td>✓ 支持</td>
+			</tr>
+			<tr>
+					<td>数据体积</td>
+					<td>较小</td>
+					<td><strong>最小</strong></td>
+					<td>最大</td>
+					<td>较小</td>
+			</tr>
+			<tr>
+					<td>层级表达</td>
+					<td>花括号/方括号</td>
+					<td><strong>缩进</strong></td>
+					<td>标签</td>
+					<td>表头 + 键值对</td>
+			</tr>
+			<tr>
+					<td>解析复杂度</td>
+					<td>低</td>
+					<td>中（缩进敏感）</td>
+					<td>中</td>
+					<td>低</td>
+			</tr>
+			<tr>
+					<td>典型用途</td>
+					<td>API 数据、前后端交互</td>
+					<td>配置文件</td>
+					<td>老系统、文档、SOAP</td>
+					<td>配置文件（Cargo、pyproject）</td>
+			</tr>
+	</tbody>
+</table></div>
+<h3 id="如何选择">如何选择
+</h3><ul>
+<li><strong>接口传输 / 程序间交换数据</strong> → 优先用 <strong>JSON</strong>，通用性强、各语言原生支持好；</li>
+<li><strong>写配置文件 / 追求简洁可读</strong> → 优先用 <strong>YAML</strong>，适合人频繁编辑的场景；</li>
+<li><strong>写配置文件 / 需要规则严格、类型明确</strong> → 用 <strong>TOML</strong>，歧义少、适合工具链解析（如 Rust 的 <code>Cargo.toml</code>、Python 的 <code>pyproject.toml</code>）；</li>
+<li><strong>对接老系统 / 强类型文档</strong> → 用 <strong>XML</strong>，规范严谨、校验能力强（配合 Schema）。</li>
+</ul>
+<hr>
+<h2 id="小结">小结
+</h2><p>四种格式本质上都是在表达同一类东西：<strong>把有结构的数据写成纯文本</strong>。区别只在于&quot;用什么符号来标记结构&quot;——JSON 用括号，YAML 用缩进，XML 用标签，TOML 用表头。</p>
+<p>对于日常开发，记住一句就够了：</p>
+<ul>
+<li>要<strong>交换数据</strong>，写 JSON；</li>
+<li>要<strong>写配置、追求简洁</strong>，写 YAML；</li>
+<li>要<strong>写配置、要求规则严格</strong>，写 TOML；</li>
+<li>要<strong>对接老系统</strong>，写 XML。</li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/json/">JSON</a>
+        
+            <a href="/tags/yaml/">YAML</a>
+        
+            <a href="/tags/xml/">XML</a>
+        
+            <a href="/tags/toml/">TOML</a>
+        
+            <a href="/tags/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F/">数据格式</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under <a class="link" href="https://github.com/Liyufei1"  target="_blank" rel="noopener"
+    >Liyufei1</a></span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        const elementsToRender = [".main-article", ".widget--toc"];
+
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2026 李宇飞-Liyufei1
+    </section>
+    
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.32.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>多智能体 on 李宇飞-Liyufei1</title>
+        <link>https://Liyufei1.github.io/tags/%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93/</link>
+        <description>Recent content in 多智能体 on 李宇飞-Liyufei1</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <copyright>李宇飞-Liyufei1</copyright>
+        <lastBuildDate>Thu, 10 Sep 2026 00:00:00 +0800</lastBuildDate><atom:link href="https://Liyufei1.github.io/tags/%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>多 Agent 协作：角色设定与 WorkRoom 工作间方向</title>
+        <link>https://Liyufei1.github.io/p/multi-agent-collab-roles-workroom/</link>
+        <pubDate>Thu, 10 Sep 2026 00:00:00 +0800</pubDate>
+        
+        <guid>https://Liyufei1.github.io/p/multi-agent-collab-roles-workroom/</guid>
+        <description>&lt;img src="https://Liyufei1.github.io/AI.png" alt="Featured image of post 多 Agent 协作：角色设定与 WorkRoom 工作间方向" /&gt;&lt;h2 id=&#34;-目录&#34;&gt;📋 目录
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e6%a6%82%e8%bf%b0&#34; &gt;概述&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e4%b8%ba%e4%bb%80%e4%b9%88%e8%a6%81%e5%a4%9a-agent-%e5%8d%8f%e4%bd%9c&#34; &gt;为什么要多 Agent 协作&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e7%bb%99-agent-%e8%ae%be%e5%ae%9a%e8%a7%92%e8%89%b2&#34; &gt;给 Agent 设定角色&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e5%a4%9a-agent-%e7%9a%84%e7%bc%96%e6%8e%92%e6%a8%a1%e5%bc%8f&#34; &gt;多 Agent 的编排模式&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#agent-workroom-%e5%b7%a5%e4%bd%9c%e9%97%b4%e6%96%b9%e5%90%91&#34; &gt;Agent WorkRoom 工作间方向&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e5%bc%80%e6%ba%90%e5%b7%a5%e7%a8%8b%e7%9b%98%e7%82%b9&#34; &gt;开源工程盘点&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e6%80%8e%e4%b9%88%e9%80%89&#34; &gt;怎么选&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;#%e5%b0%8f%e7%bb%93&#34; &gt;小结&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;概述&#34;&gt;概述
+&lt;/h2&gt;&lt;p&gt;随着单个 LLM 的能力趋于成熟，2025 年下半年起，&amp;ldquo;多 Agent 协作&amp;quot;成了 AI 应用层的热门方向。这篇文章想讲清楚三件互相咬合的事：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;多 Agent 协作&lt;/strong&gt; —— 为什么要让多个 Agent 一起干活，而不是一个 Agent 扛下所有；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;给 Agent 设定角色&lt;/strong&gt; —— 怎么把一个&amp;quot;万能助手&amp;quot;拆成各司其职的&amp;quot;专家&amp;rdquo;；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;WorkRoom 工作间方向&lt;/strong&gt; —— 更前沿的一种做法：不再纠结&amp;quot;选哪个 Agent 框架&amp;quot;，而是让已有的多个 Agent（Claude Code、Codex、OpenCode、Cursor……）&lt;strong&gt;共享同一个工作间&lt;/strong&gt;，一起协作。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;文章最后会重点盘点&lt;strong&gt;已经开源、已经落地实现&lt;/strong&gt;的相关工程，方便直接上手。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;为什么要多-agent-协作&#34;&gt;为什么要多 Agent 协作
+&lt;/h2&gt;&lt;p&gt;单个 Agent（哪怕是能力最强的模型）在实际工程里有几个绕不过去的短板：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;上下文有限&lt;/strong&gt;：一个对话窗口装不下超大项目的全部信息，塞多了反而让模型&amp;quot;抓不住重点&amp;quot;；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;职责混杂&lt;/strong&gt;：既当产品经理、又当架构师、又写代码、又做测试，容易顾此失彼、前后矛盾；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;幻觉会级联&lt;/strong&gt;：一个环节出错的结论，会被当成&amp;quot;既定事实&amp;quot;继续往下推导，越错越远。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;多 Agent 协作的核心思路，就是把一个大任务&lt;strong&gt;拆成多个职责清晰的小角色&lt;/strong&gt;，让它们各管一段、互相校验。这和人类团队的分工协作是同一个逻辑。&lt;/p&gt;
+&lt;p&gt;带来的直接好处：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;每个 Agent 的上下文更小、更聚焦，表现更稳定；&lt;/li&gt;
+&lt;li&gt;不同角色可以并行工作，缩短总耗时；&lt;/li&gt;
+&lt;li&gt;关键环节可以用&amp;quot;另一个 Agent 来审查/质疑&amp;quot;，抑制幻觉级联。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;给-agent-设定角色&#34;&gt;给 Agent 设定角色
+&lt;/h2&gt;&lt;h3 id=&#34;角色的本质&#34;&gt;角色的本质
+&lt;/h3&gt;&lt;p&gt;一句话概括：&lt;strong&gt;角色 = 一段系统提示词（人设 + 职责边界） + 工具集 + 权限&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;所谓&amp;quot;设定角色&amp;quot;，本质上就是给模型一段专门的身份描述，约束它&amp;quot;你是谁、该做什么、不该做什么、能调用哪些工具&amp;quot;。区别只在于不同框架把这层抽象暴露成什么 API。&lt;/p&gt;
+&lt;h3 id=&#34;三种典型做法&#34;&gt;三种典型做法
+&lt;/h3&gt;&lt;h4 id=&#34;1-角色扮演式crewai&#34;&gt;1. 角色扮演式：CrewAI
+&lt;/h4&gt;&lt;p&gt;CrewAI 用 &lt;code&gt;role / goal / backstory&lt;/code&gt; 三个字段把角色拟人化，是上手最快、最直观的一种：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;crewai&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Agent&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Task&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Crew&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Process&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;researcher&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Agent&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;role&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;资深研究员&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;goal&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;调研多 Agent 框架的最新进展&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;backstory&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;你拥有十年技术调研经验，擅长从杂乱信息中提炼结论。&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;writer&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Agent&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;role&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;技术写手&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;goal&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;把调研结果写成易读的文章&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;backstory&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;你擅长把技术内容讲得通俗易懂。&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;research_task&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Task&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;description&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;调研主流多 Agent 框架的差异&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;agent&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;researcher&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;write_task&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Task&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;description&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;基于调研结果撰写一篇对比文章&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;agent&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;writer&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;crew&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Crew&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;agents&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;researcher&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;writer&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;tasks&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;research_task&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;write_task&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;process&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Process&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sequential&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;   &lt;span class=&#34;c1&#34;&gt;# 顺序执行：研究员 → 写手&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;crew&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;kickoff&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;2-sop-装配线式metagpt&#34;&gt;2. SOP 装配线式：MetaGPT
+&lt;/h4&gt;&lt;p&gt;MetaGPT 把&amp;quot;角色&amp;quot;进一步固化成一条&lt;strong&gt;软件公司流水线&lt;/strong&gt;：&lt;code&gt;产品经理 → 架构师 → 工程师 → QA&lt;/code&gt;。它强制每个角色产出结构化中间产物（PRD、系统设计、API 规范），再交给下一个角色，用&amp;quot;文档&amp;quot;约束协作，从而抑制幻觉级联。&lt;/p&gt;
+&lt;p&gt;它的核心公式是 &lt;code&gt;Code = SOP(Team)&lt;/code&gt;——重点不是&amp;quot;写代码&amp;quot;，而是&lt;strong&gt;用标准作业流程（SOP）组织一群 Agent&lt;/strong&gt;。这套&amp;quot;角色 + 结构化产物 + 预算熔断&amp;quot;的设计思想，比它本身的代码更值得学。&lt;/p&gt;
+&lt;h4 id=&#34;3-声明式-subagentclaude-code--opencode&#34;&gt;3. 声明式 Subagent：Claude Code / OpenCode
+&lt;/h4&gt;&lt;p&gt;在编码类工具里，&amp;ldquo;角色&amp;quot;通常就是&lt;strong&gt;一个 Markdown 文件&lt;/strong&gt;。例如 Claude Code 的 &lt;code&gt;.claude/agents/&lt;/code&gt;（或 &lt;code&gt;.agents/&lt;/code&gt;）目录下放一个：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nn&#34;&gt;---&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;code-reviewer&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;description&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;只做代码审查，不改动任何代码&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;tools&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;Read, Grep, Glob&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nn&#34;&gt;---&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;你是一名严格的代码审查员。你的任务是指出缺陷、风险与可读性问题，
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;并给出修改建议，但绝不直接修改文件。
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;OpenCode 也有类似的 &lt;code&gt;~/.config/opencode/agent/*.md&lt;/code&gt; 自定义 Agent 机制。声明式的好处是：角色可版本管理、可复用、可团队共享——它本身就是你博客仓库里 &lt;code&gt;.claude/agents&lt;/code&gt; 和 &lt;code&gt;.agents&lt;/code&gt; 目录正在做的事。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;多-agent-的编排模式&#34;&gt;多 Agent 的编排模式
+&lt;/h2&gt;&lt;p&gt;角色定了之后，还要决定&lt;strong&gt;这些角色之间怎么协作&lt;/strong&gt;。主流框架提供了几种典型的&amp;quot;拓扑&amp;rdquo;：&lt;/p&gt;
+&lt;table&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;编排模式&lt;/th&gt;
+					&lt;th&gt;说明&lt;/th&gt;
+					&lt;th&gt;代表实现&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;群聊 / 对话式&lt;/td&gt;
+					&lt;td&gt;多个 Agent 在一个对话里轮流发言，由调度器决定谁说话&lt;/td&gt;
+					&lt;td&gt;AutoGen 的 RoundRobinGroupChat、SelectorGroupChat&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;图编排&lt;/td&gt;
+					&lt;td&gt;用&amp;quot;节点 + 条件边&amp;quot;显式定义流程，像状态机一样可控&lt;/td&gt;
+					&lt;td&gt;LangGraph&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;主管 - 执行&lt;/td&gt;
+					&lt;td&gt;一个 Manager/Supervisor 负责拆任务、分派、验收&lt;/td&gt;
+					&lt;td&gt;CrewAI 的 Process.hierarchical、LangGraph Supervisor&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;流水线 / SOP&lt;/td&gt;
+					&lt;td&gt;固定顺序，上一个角色的产出是下一个的输入&lt;/td&gt;
+					&lt;td&gt;MetaGPT、CrewAI 的 Process.sequential&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;交接 Handoff&lt;/td&gt;
+					&lt;td&gt;Agent A 干到一半，把控制权&amp;quot;转交&amp;quot;给更合适的 Agent B&lt;/td&gt;
+					&lt;td&gt;AutoGen Swarm、OpenAI Agents SDK 的 handoff&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;选哪种模式，取决于任务是&amp;quot;流程固定&amp;quot;还是&amp;quot;需要动态探索&amp;quot;：流程固定用流水线/图编排最稳，开放探索用群聊/交接更灵活。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;agent-workroom-工作间方向&#34;&gt;Agent WorkRoom 工作间方向
+&lt;/h2&gt;&lt;h3 id=&#34;什么是-workroom&#34;&gt;什么是 WorkRoom
+&lt;/h3&gt;&lt;p&gt;上面讲的多 Agent 框架，大多是在&lt;strong&gt;一个程序进程里&lt;/strong&gt;编排多个角色。而 &amp;ldquo;WorkRoom&amp;rdquo;（工作间 / 房间）是 2025 年末开始冒头的一种更务实的方向：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;不再造一个新的 Agent 框架，而是给&lt;strong&gt;已有的、不同厂商的 CLI Agent&lt;/strong&gt;（Claude Code、Codex CLI、OpenCode、Cursor、OpenClaw……）提供一个&lt;strong&gt;共享的工作空间&lt;/strong&gt;，让它们像在一个聊天室里一样协作。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;它的几个标志性特征：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;房间 / 线程&lt;/strong&gt;：多个 Agent 处在同一个共享上下文里，能看到彼此的动作和产物；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;@提及路由&lt;/strong&gt;：用 &lt;code&gt;@claude 审查 API、@codex 写测试&lt;/code&gt; 这种自然语言把任务派给具体 Agent；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;共享文件 / 浏览器&lt;/strong&gt;：Agent 不止&amp;quot;聊天&amp;quot;，还共同读写同一批文件、同一个浏览器；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;审批与门禁&lt;/strong&gt;：人对关键操作（改文件、执行命令）保留最终裁决权。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这个方向的洞察很朴素：&lt;strong&gt;不同 Agent 各有所长，与其逼一个 Agent 面面俱到，不如让一群现成的 Agent 同处一室、互相补位。&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;已开源实现的工程&#34;&gt;已开源实现的工程
+&lt;/h3&gt;&lt;h4 id=&#34;openagents-workspace--slack-for-agents&#34;&gt;OpenAgents Workspace —— &amp;ldquo;Slack for agents&amp;rdquo;
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;一句话&lt;/strong&gt;：面向 AI Agent 的协作操作系统，浏览器里开一个共享工作空间。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;核心能力&lt;/strong&gt;：共享线程、共享文件、共享浏览器；用 &lt;code&gt;@mention&lt;/code&gt; 把任务派给不同 Agent（例如 &lt;code&gt;@claude 审查 API，@codex 写集成测试&lt;/code&gt;）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;组成&lt;/strong&gt;：Workspace（浏览器协作）+ Launcher（&lt;code&gt;agn&lt;/code&gt; CLI，负责安装/管理 Agent）+ Network SDK（扩展层）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;现状&lt;/strong&gt;：Apache 2.0，约 3.3k stars，已支持 Claude Code、Codex CLI、OpenCode、Cursor、OpenClaw、Hermes 等。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;opengrove--本地优先的-agent-之家&#34;&gt;OpenGrove —— 本地优先的 Agent 之家
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;一句话&lt;/strong&gt;：local-first 的工作空间，把多个 coding Agent&amp;quot;收编&amp;quot;到同一个屋檐下。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;核心能力&lt;/strong&gt;：&lt;code&gt;Rooms&lt;/code&gt;（私聊 / 群聊）+ &lt;code&gt;@mention&lt;/code&gt; 路由到具体 Agent；本地记忆、产物、运行轨迹都存成你自己拥有的本地文件；文件改动 / 命令执行需显式审批。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;多内核&lt;/strong&gt;：一套 UI 里切换 Codex、Claude Code、Hermes、OpenCode、Copilot、Kimi、Qwen Code 等 13+ 内核。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;本地优先&lt;/strong&gt;：默认跑在 &lt;code&gt;127.0.0.1&lt;/code&gt;，远程协作是可选项（经 Matrix/Tuwunel）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;agentwork--自主编排器&#34;&gt;AgentWork —— 自主编排器
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;一句话&lt;/strong&gt;：&amp;ldquo;You manage. Agents work 24/7.&amp;quot;——面向自主任务编排。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;核心能力&lt;/strong&gt;：&lt;code&gt;Rooms&lt;/code&gt; 与 &lt;code&gt;Meetings&lt;/code&gt; 概念，支持自主会议编排与任务生成；Node.js daemon + REST API + SQLite；支持 9 家厂商、80+ 模型；带 Git 自动化、Telegram/Slack/Discord 机器人、MCP Server、VS Code 插件。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;multi-agent-workbench--结构化-task-room&#34;&gt;Multi-Agent Workbench —— 结构化 Task Room
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;一句话&lt;/strong&gt;：浏览器里的结构化 &amp;ldquo;Task Room&amp;rdquo;，让多个 CLI Agent 并排干活。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;核心能力&lt;/strong&gt;：一个房间 = 目标 + 成员 + 时间线 + 决策 + 审批 + 产物；Claude Code、Codex、通用 PTY CLI 在同一房间内按明确角色协作；角色卡片、带决策门禁的编排器、事件溯源（23 类事件）、git worktree 隔离。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;特点&lt;/strong&gt;：本地优先，无账号、无云端、无遥测。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;其他值得关注&#34;&gt;其他值得关注
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Buzz（Block）&lt;/strong&gt;：可自托管的人机协作工作空间，基于 Nostr 中继。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;OCWS（OpenClaw Workspace Spec）&lt;/strong&gt;：为&amp;quot;一人公司 / 多机器人协作&amp;quot;设计的轻量工作空间协议，用目录结构 + 通知文件来协调多个 Agent。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;开源工程盘点&#34;&gt;开源工程盘点
+&lt;/h2&gt;&lt;h3 id=&#34;主流多-agent-编排框架&#34;&gt;主流多 Agent 编排框架
+&lt;/h3&gt;&lt;table&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;框架&lt;/th&gt;
+					&lt;th&gt;定位&lt;/th&gt;
+					&lt;th&gt;协作模式&lt;/th&gt;
+					&lt;th&gt;Stars（约）&lt;/th&gt;
+					&lt;th&gt;一句话点评&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;AutoGen&lt;/strong&gt;（微软）&lt;/td&gt;
+					&lt;td&gt;通用多 Agent 框架&lt;/td&gt;
+					&lt;td&gt;群聊 / Swarm / 图编排，拓扑最全&lt;/td&gt;
+					&lt;td&gt;42k+&lt;/td&gt;
+					&lt;td&gt;2026-04 与 Semantic Kernel 合并为 Microsoft Agent Framework 1.0，社区另立 AG2 分支&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;MetaGPT&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;软件公司模拟器&lt;/td&gt;
+					&lt;td&gt;SOP 流水线&lt;/td&gt;
+					&lt;td&gt;48k+&lt;/td&gt;
+					&lt;td&gt;思想（SOP + 结构化产物）最值得学，通用性弱&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;CrewAI&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;角色扮演式编排&lt;/td&gt;
+					&lt;td&gt;顺序 / 层级&lt;/td&gt;
+					&lt;td&gt;28k+&lt;/td&gt;
+					&lt;td&gt;上手最快，&lt;code&gt;role/goal/backstory&lt;/code&gt; 拟人化 API&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;LangGraph&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;图/状态机编排&lt;/td&gt;
+					&lt;td&gt;节点 + 条件边&lt;/td&gt;
+					&lt;td&gt;12k+&lt;/td&gt;
+					&lt;td&gt;控制力与生产可靠性最强，学习曲线陡&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;blockquote&gt;
+&lt;p&gt;注意：AutoGen 在 0.2 → 0.4 版本重构时废弃了大量旧 API（如 &lt;code&gt;ConversableAgent&lt;/code&gt;），网上约一半教程已失效，搜资料务必先确认版本。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;workroom-工作间类工程&#34;&gt;WorkRoom 工作间类工程
+&lt;/h3&gt;&lt;table&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;工程&lt;/th&gt;
+					&lt;th&gt;定位&lt;/th&gt;
+					&lt;th&gt;协作单元&lt;/th&gt;
+					&lt;th&gt;本地优先&lt;/th&gt;
+					&lt;th&gt;License&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;OpenAgents Workspace&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;Agent 的协作 OS&lt;/td&gt;
+					&lt;td&gt;线程 + @mention&lt;/td&gt;
+					&lt;td&gt;否（浏览器工作空间）&lt;/td&gt;
+					&lt;td&gt;Apache 2.0&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;OpenGrove&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;local-first Agent 之家&lt;/td&gt;
+					&lt;td&gt;Rooms + @mention&lt;/td&gt;
+					&lt;td&gt;是&lt;/td&gt;
+					&lt;td&gt;未注明&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;AgentWork&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;自主任务编排器&lt;/td&gt;
+					&lt;td&gt;Rooms + Meetings&lt;/td&gt;
+					&lt;td&gt;是&lt;/td&gt;
+					&lt;td&gt;未注明&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;Multi-Agent Workbench&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;结构化 Task Room&lt;/td&gt;
+					&lt;td&gt;Task Room + 角色卡片&lt;/td&gt;
+					&lt;td&gt;是&lt;/td&gt;
+					&lt;td&gt;未注明&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;怎么选&#34;&gt;怎么选
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;想在一个框架里快速搭一套多 Agent 流程&lt;/strong&gt; → 先试 &lt;strong&gt;CrewAI&lt;/strong&gt;，角色概念直观、从 0 到 Demo 最快；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;流程固定、要求高可靠 / 合规&lt;/strong&gt;（金融、医疗审批）→ &lt;strong&gt;LangGraph&lt;/strong&gt;，图编排可控、可回放调试；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;想研究多 Agent 的&amp;quot;正确姿势&amp;rdquo;（SOP、结构化产物）&lt;/strong&gt; → 读 &lt;strong&gt;MetaGPT&lt;/strong&gt; 的源码与思想；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;已有多个 CLI Agent，想让它们&amp;quot;同处一室&amp;quot;协作&lt;/strong&gt; → 直接上 &lt;strong&gt;WorkRoom 类工程&lt;/strong&gt;：本地优先选 &lt;strong&gt;OpenGrove&lt;/strong&gt; / &lt;strong&gt;Multi-Agent Workbench&lt;/strong&gt;，想浏览器协作选 &lt;strong&gt;OpenAgents Workspace&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;小结&#34;&gt;小结
+&lt;/h2&gt;&lt;p&gt;多 Agent 协作的三个层次，本质上是同一件事的三种切面：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;角色&lt;/strong&gt;解决&amp;quot;谁来干、干什么&amp;quot;；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;编排模式&lt;/strong&gt;解决&amp;quot;怎么配合&amp;quot;；&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;WorkRoom 工作间&lt;/strong&gt;解决&amp;quot;在哪儿一起干&amp;quot;。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;而 WorkRoom 方向特别值得关注：它绕开了&amp;quot;再造一个框架&amp;quot;的军备竞赛，转而解决更实际的问题——&lt;strong&gt;把现成的、各有所长的 Agent 组织起来&lt;/strong&gt;。对普通开发者来说，这可能比再学一个新框架更省力、也更快见效。&lt;/p&gt;
+&lt;h2 id=&#34;相关笔记&#34;&gt;相关笔记
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;[[opencode简介]]&lt;/li&gt;
+&lt;li&gt;[[VibeCoding]]&lt;/li&gt;
+&lt;li&gt;[[iFlow使用和部署教程]]&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

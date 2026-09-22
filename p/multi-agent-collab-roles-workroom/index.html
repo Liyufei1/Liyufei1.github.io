@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="梳理多智能体协作的两大核心——给 Agent 设定角色、共享 WorkRoom 工作间，并盘点已开源实现的相关工程">
+<title>多 Agent 协作：角色设定与 WorkRoom 工作间方向</title>
+
+<link rel='canonical' href='https://Liyufei1.github.io/p/multi-agent-collab-roles-workroom/'>
+
+<link rel="stylesheet" href="/scss/style.min.6ba8b9ea95cedbd14d34969a3a28210289d3a74cba725c37699a1455f78e7135.css"><meta property='og:title' content="多 Agent 协作：角色设定与 WorkRoom 工作间方向">
+<meta property='og:description' content="梳理多智能体协作的两大核心——给 Agent 设定角色、共享 WorkRoom 工作间，并盘点已开源实现的相关工程">
+<meta property='og:url' content='https://Liyufei1.github.io/p/multi-agent-collab-roles-workroom/'>
+<meta property='og:site_name' content='李宇飞-Liyufei1'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='AI' /><meta property='article:tag' content='多Agent' /><meta property='article:tag' content='多智能体' /><meta property='article:tag' content='Agent' /><meta property='article:tag' content='WorkRoom' /><meta property='article:tag' content='AutoGen' /><meta property='article:tag' content='CrewAI' /><meta property='article:tag' content='MetaGPT' /><meta property='article:tag' content='LangGraph' /><meta property='article:tag' content='开源' /><meta property='article:published_time' content='2026-09-10T00:00:00&#43;08:00'/><meta property='article:modified_time' content='2026-09-10T00:00:00&#43;08:00'/><meta property='og:image' content='https://Liyufei1.github.io/AI.png' />
+<meta name="twitter:title" content="多 Agent 协作：角色设定与 WorkRoom 工作间方向">
+<meta name="twitter:description" content="梳理多智能体协作的两大核心——给 Agent 设定角色、共享 WorkRoom 工作间，并盘点已开源实现的相关工程"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://Liyufei1.github.io/AI.png' />
+    <link rel="shortcut icon" href="/favicon.png" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/guidao1Icon_hu_83955a0cc47acc4c.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🤣</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">李宇飞-Liyufei1</a></h1>
+            <h2 class="site-description">存放学习随笔的个人博客,主要有:Godot、Unreal、Blog、Cpp.
+ 下方是个人的b站、gitbug链接:</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://space.bilibili.com/7531504?spm_id_from=333.1007.0.0'
+                        target="_blank"
+                        title="Bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/Liyufei1'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友情链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://Liyufei1.github.io/en/" >English</option>
+                                
+                                    <option value="https://Liyufei1.github.io/" selected>中文</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#-目录">📋 目录</a></li>
+    <li><a href="#概述">概述</a></li>
+    <li><a href="#为什么要多-agent-协作">为什么要多 Agent 协作</a></li>
+    <li><a href="#给-agent-设定角色">给 Agent 设定角色</a>
+      <ol>
+        <li><a href="#角色的本质">角色的本质</a></li>
+        <li><a href="#三种典型做法">三种典型做法</a>
+          <ol>
+            <li><a href="#1-角色扮演式crewai">1. 角色扮演式：CrewAI</a></li>
+            <li><a href="#2-sop-装配线式metagpt">2. SOP 装配线式：MetaGPT</a></li>
+            <li><a href="#3-声明式-subagentclaude-code--opencode">3. 声明式 Subagent：Claude Code / OpenCode</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#多-agent-的编排模式">多 Agent 的编排模式</a></li>
+    <li><a href="#agent-workroom-工作间方向">Agent WorkRoom 工作间方向</a>
+      <ol>
+        <li><a href="#什么是-workroom">什么是 WorkRoom</a></li>
+        <li><a href="#已开源实现的工程">已开源实现的工程</a>
+          <ol>
+            <li><a href="#openagents-workspace--slack-for-agents">OpenAgents Workspace —— &ldquo;Slack for agents&rdquo;</a></li>
+            <li><a href="#opengrove--本地优先的-agent-之家">OpenGrove —— 本地优先的 Agent 之家</a></li>
+            <li><a href="#agentwork--自主编排器">AgentWork —— 自主编排器</a></li>
+            <li><a href="#multi-agent-workbench--结构化-task-room">Multi-Agent Workbench —— 结构化 Task Room</a></li>
+            <li><a href="#其他值得关注">其他值得关注</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#开源工程盘点">开源工程盘点</a>
+      <ol>
+        <li><a href="#主流多-agent-编排框架">主流多 Agent 编排框架</a></li>
+        <li><a href="#workroom-工作间类工程">WorkRoom 工作间类工程</a></li>
+      </ol>
+    </li>
+    <li><a href="#怎么选">怎么选</a></li>
+    <li><a href="#小结">小结</a></li>
+    <li><a href="#相关笔记">相关笔记</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/multi-agent-collab-roles-workroom/">
+                
+                    <img src="/AI.png" loading="lazy" alt="Featured image of post 多 Agent 协作：角色设定与 WorkRoom 工作间方向" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/ai/" >
+                AI
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/multi-agent-collab-roles-workroom/">多 Agent 协作：角色设定与 WorkRoom 工作间方向</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            梳理多智能体协作的两大核心——给 Agent 设定角色、共享 WorkRoom 工作间，并盘点已开源实现的相关工程
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published" datetime='2026-09-10T00:00:00&#43;08:00'>2026-09-10</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 9 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="-目录">📋 目录
+</h2><ul>
+<li><a class="link" href="#%e6%a6%82%e8%bf%b0" >概述</a></li>
+<li><a class="link" href="#%e4%b8%ba%e4%bb%80%e4%b9%88%e8%a6%81%e5%a4%9a-agent-%e5%8d%8f%e4%bd%9c" >为什么要多 Agent 协作</a></li>
+<li><a class="link" href="#%e7%bb%99-agent-%e8%ae%be%e5%ae%9a%e8%a7%92%e8%89%b2" >给 Agent 设定角色</a></li>
+<li><a class="link" href="#%e5%a4%9a-agent-%e7%9a%84%e7%bc%96%e6%8e%92%e6%a8%a1%e5%bc%8f" >多 Agent 的编排模式</a></li>
+<li><a class="link" href="#agent-workroom-%e5%b7%a5%e4%bd%9c%e9%97%b4%e6%96%b9%e5%90%91" >Agent WorkRoom 工作间方向</a></li>
+<li><a class="link" href="#%e5%bc%80%e6%ba%90%e5%b7%a5%e7%a8%8b%e7%9b%98%e7%82%b9" >开源工程盘点</a></li>
+<li><a class="link" href="#%e6%80%8e%e4%b9%88%e9%80%89" >怎么选</a></li>
+<li><a class="link" href="#%e5%b0%8f%e7%bb%93" >小结</a></li>
+</ul>
+<hr>
+<h2 id="概述">概述
+</h2><p>随着单个 LLM 的能力趋于成熟，2025 年下半年起，&ldquo;多 Agent 协作&quot;成了 AI 应用层的热门方向。这篇文章想讲清楚三件互相咬合的事：</p>
+<ol>
+<li><strong>多 Agent 协作</strong> —— 为什么要让多个 Agent 一起干活，而不是一个 Agent 扛下所有；</li>
+<li><strong>给 Agent 设定角色</strong> —— 怎么把一个&quot;万能助手&quot;拆成各司其职的&quot;专家&rdquo;；</li>
+<li><strong>WorkRoom 工作间方向</strong> —— 更前沿的一种做法：不再纠结&quot;选哪个 Agent 框架&quot;，而是让已有的多个 Agent（Claude Code、Codex、OpenCode、Cursor……）<strong>共享同一个工作间</strong>，一起协作。</li>
+</ol>
+<p>文章最后会重点盘点<strong>已经开源、已经落地实现</strong>的相关工程，方便直接上手。</p>
+<hr>
+<h2 id="为什么要多-agent-协作">为什么要多 Agent 协作
+</h2><p>单个 Agent（哪怕是能力最强的模型）在实际工程里有几个绕不过去的短板：</p>
+<ol>
+<li><strong>上下文有限</strong>：一个对话窗口装不下超大项目的全部信息，塞多了反而让模型&quot;抓不住重点&quot;；</li>
+<li><strong>职责混杂</strong>：既当产品经理、又当架构师、又写代码、又做测试，容易顾此失彼、前后矛盾；</li>
+<li><strong>幻觉会级联</strong>：一个环节出错的结论，会被当成&quot;既定事实&quot;继续往下推导，越错越远。</li>
+</ol>
+<p>多 Agent 协作的核心思路，就是把一个大任务<strong>拆成多个职责清晰的小角色</strong>，让它们各管一段、互相校验。这和人类团队的分工协作是同一个逻辑。</p>
+<p>带来的直接好处：</p>
+<ul>
+<li>每个 Agent 的上下文更小、更聚焦，表现更稳定；</li>
+<li>不同角色可以并行工作，缩短总耗时；</li>
+<li>关键环节可以用&quot;另一个 Agent 来审查/质疑&quot;，抑制幻觉级联。</li>
+</ul>
+<hr>
+<h2 id="给-agent-设定角色">给 Agent 设定角色
+</h2><h3 id="角色的本质">角色的本质
+</h3><p>一句话概括：<strong>角色 = 一段系统提示词（人设 + 职责边界） + 工具集 + 权限</strong>。</p>
+<p>所谓&quot;设定角色&quot;，本质上就是给模型一段专门的身份描述，约束它&quot;你是谁、该做什么、不该做什么、能调用哪些工具&quot;。区别只在于不同框架把这层抽象暴露成什么 API。</p>
+<h3 id="三种典型做法">三种典型做法
+</h3><h4 id="1-角色扮演式crewai">1. 角色扮演式：CrewAI
+</h4><p>CrewAI 用 <code>role / goal / backstory</code> 三个字段把角色拟人化，是上手最快、最直观的一种：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">crewai</span> <span class="kn">import</span> <span class="n">Agent</span><span class="p">,</span> <span class="n">Task</span><span class="p">,</span> <span class="n">Crew</span><span class="p">,</span> <span class="n">Process</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">researcher</span> <span class="o">=</span> <span class="n">Agent</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">role</span><span class="o">=</span><span class="s2">&#34;资深研究员&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">goal</span><span class="o">=</span><span class="s2">&#34;调研多 Agent 框架的最新进展&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">backstory</span><span class="o">=</span><span class="s2">&#34;你拥有十年技术调研经验，擅长从杂乱信息中提炼结论。&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">writer</span> <span class="o">=</span> <span class="n">Agent</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">role</span><span class="o">=</span><span class="s2">&#34;技术写手&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">goal</span><span class="o">=</span><span class="s2">&#34;把调研结果写成易读的文章&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">backstory</span><span class="o">=</span><span class="s2">&#34;你擅长把技术内容讲得通俗易懂。&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">research_task</span> <span class="o">=</span> <span class="n">Task</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&#34;调研主流多 Agent 框架的差异&#34;</span><span class="p">,</span> <span class="n">agent</span><span class="o">=</span><span class="n">researcher</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">write_task</span> <span class="o">=</span> <span class="n">Task</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&#34;基于调研结果撰写一篇对比文章&#34;</span><span class="p">,</span> <span class="n">agent</span><span class="o">=</span><span class="n">writer</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">crew</span> <span class="o">=</span> <span class="n">Crew</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">agents</span><span class="o">=</span><span class="p">[</span><span class="n">researcher</span><span class="p">,</span> <span class="n">writer</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="n">tasks</span><span class="o">=</span><span class="p">[</span><span class="n">research_task</span><span class="p">,</span> <span class="n">write_task</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="n">process</span><span class="o">=</span><span class="n">Process</span><span class="o">.</span><span class="n">sequential</span><span class="p">,</span>   <span class="c1"># 顺序执行：研究员 → 写手</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">crew</span><span class="o">.</span><span class="n">kickoff</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="2-sop-装配线式metagpt">2. SOP 装配线式：MetaGPT
+</h4><p>MetaGPT 把&quot;角色&quot;进一步固化成一条<strong>软件公司流水线</strong>：<code>产品经理 → 架构师 → 工程师 → QA</code>。它强制每个角色产出结构化中间产物（PRD、系统设计、API 规范），再交给下一个角色，用&quot;文档&quot;约束协作，从而抑制幻觉级联。</p>
+<p>它的核心公式是 <code>Code = SOP(Team)</code>——重点不是&quot;写代码&quot;，而是<strong>用标准作业流程（SOP）组织一群 Agent</strong>。这套&quot;角色 + 结构化产物 + 预算熔断&quot;的设计思想，比它本身的代码更值得学。</p>
+<h4 id="3-声明式-subagentclaude-code--opencode">3. 声明式 Subagent：Claude Code / OpenCode
+</h4><p>在编码类工具里，&ldquo;角色&quot;通常就是<strong>一个 Markdown 文件</strong>。例如 Claude Code 的 <code>.claude/agents/</code>（或 <code>.agents/</code>）目录下放一个：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl"><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">code-reviewer</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l">只做代码审查，不改动任何代码</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">tools</span><span class="p">:</span><span class="w"> </span><span class="l">Read, Grep, Glob</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl">你是一名严格的代码审查员。你的任务是指出缺陷、风险与可读性问题，
+</span></span><span class="line"><span class="cl">并给出修改建议，但绝不直接修改文件。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>OpenCode 也有类似的 <code>~/.config/opencode/agent/*.md</code> 自定义 Agent 机制。声明式的好处是：角色可版本管理、可复用、可团队共享——它本身就是你博客仓库里 <code>.claude/agents</code> 和 <code>.agents</code> 目录正在做的事。</p>
+<hr>
+<h2 id="多-agent-的编排模式">多 Agent 的编排模式
+</h2><p>角色定了之后，还要决定<strong>这些角色之间怎么协作</strong>。主流框架提供了几种典型的&quot;拓扑&rdquo;：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>编排模式</th>
+					<th>说明</th>
+					<th>代表实现</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>群聊 / 对话式</td>
+					<td>多个 Agent 在一个对话里轮流发言，由调度器决定谁说话</td>
+					<td>AutoGen 的 RoundRobinGroupChat、SelectorGroupChat</td>
+			</tr>
+			<tr>
+					<td>图编排</td>
+					<td>用&quot;节点 + 条件边&quot;显式定义流程，像状态机一样可控</td>
+					<td>LangGraph</td>
+			</tr>
+			<tr>
+					<td>主管 - 执行</td>
+					<td>一个 Manager/Supervisor 负责拆任务、分派、验收</td>
+					<td>CrewAI 的 Process.hierarchical、LangGraph Supervisor</td>
+			</tr>
+			<tr>
+					<td>流水线 / SOP</td>
+					<td>固定顺序，上一个角色的产出是下一个的输入</td>
+					<td>MetaGPT、CrewAI 的 Process.sequential</td>
+			</tr>
+			<tr>
+					<td>交接 Handoff</td>
+					<td>Agent A 干到一半，把控制权&quot;转交&quot;给更合适的 Agent B</td>
+					<td>AutoGen Swarm、OpenAI Agents SDK 的 handoff</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>选哪种模式，取决于任务是&quot;流程固定&quot;还是&quot;需要动态探索&quot;：流程固定用流水线/图编排最稳，开放探索用群聊/交接更灵活。</p>
+<hr>
+<h2 id="agent-workroom-工作间方向">Agent WorkRoom 工作间方向
+</h2><h3 id="什么是-workroom">什么是 WorkRoom
+</h3><p>上面讲的多 Agent 框架，大多是在<strong>一个程序进程里</strong>编排多个角色。而 &ldquo;WorkRoom&rdquo;（工作间 / 房间）是 2025 年末开始冒头的一种更务实的方向：</p>
+<blockquote>
+<p>不再造一个新的 Agent 框架，而是给<strong>已有的、不同厂商的 CLI Agent</strong>（Claude Code、Codex CLI、OpenCode、Cursor、OpenClaw……）提供一个<strong>共享的工作空间</strong>，让它们像在一个聊天室里一样协作。</p>
+</blockquote>
+<p>它的几个标志性特征：</p>
+<ul>
+<li><strong>房间 / 线程</strong>：多个 Agent 处在同一个共享上下文里，能看到彼此的动作和产物；</li>
+<li><strong>@提及路由</strong>：用 <code>@claude 审查 API、@codex 写测试</code> 这种自然语言把任务派给具体 Agent；</li>
+<li><strong>共享文件 / 浏览器</strong>：Agent 不止&quot;聊天&quot;，还共同读写同一批文件、同一个浏览器；</li>
+<li><strong>审批与门禁</strong>：人对关键操作（改文件、执行命令）保留最终裁决权。</li>
+</ul>
+<p>这个方向的洞察很朴素：<strong>不同 Agent 各有所长，与其逼一个 Agent 面面俱到，不如让一群现成的 Agent 同处一室、互相补位。</strong></p>
+<h3 id="已开源实现的工程">已开源实现的工程
+</h3><h4 id="openagents-workspace--slack-for-agents">OpenAgents Workspace —— &ldquo;Slack for agents&rdquo;
+</h4><ul>
+<li><strong>一句话</strong>：面向 AI Agent 的协作操作系统，浏览器里开一个共享工作空间。</li>
+<li><strong>核心能力</strong>：共享线程、共享文件、共享浏览器；用 <code>@mention</code> 把任务派给不同 Agent（例如 <code>@claude 审查 API，@codex 写集成测试</code>）。</li>
+<li><strong>组成</strong>：Workspace（浏览器协作）+ Launcher（<code>agn</code> CLI，负责安装/管理 Agent）+ Network SDK（扩展层）。</li>
+<li><strong>现状</strong>：Apache 2.0，约 3.3k stars，已支持 Claude Code、Codex CLI、OpenCode、Cursor、OpenClaw、Hermes 等。</li>
+</ul>
+<h4 id="opengrove--本地优先的-agent-之家">OpenGrove —— 本地优先的 Agent 之家
+</h4><ul>
+<li><strong>一句话</strong>：local-first 的工作空间，把多个 coding Agent&quot;收编&quot;到同一个屋檐下。</li>
+<li><strong>核心能力</strong>：<code>Rooms</code>（私聊 / 群聊）+ <code>@mention</code> 路由到具体 Agent；本地记忆、产物、运行轨迹都存成你自己拥有的本地文件；文件改动 / 命令执行需显式审批。</li>
+<li><strong>多内核</strong>：一套 UI 里切换 Codex、Claude Code、Hermes、OpenCode、Copilot、Kimi、Qwen Code 等 13+ 内核。</li>
+<li><strong>本地优先</strong>：默认跑在 <code>127.0.0.1</code>，远程协作是可选项（经 Matrix/Tuwunel）。</li>
+</ul>
+<h4 id="agentwork--自主编排器">AgentWork —— 自主编排器
+</h4><ul>
+<li><strong>一句话</strong>：&ldquo;You manage. Agents work 24/7.&quot;——面向自主任务编排。</li>
+<li><strong>核心能力</strong>：<code>Rooms</code> 与 <code>Meetings</code> 概念，支持自主会议编排与任务生成；Node.js daemon + REST API + SQLite；支持 9 家厂商、80+ 模型；带 Git 自动化、Telegram/Slack/Discord 机器人、MCP Server、VS Code 插件。</li>
+</ul>
+<h4 id="multi-agent-workbench--结构化-task-room">Multi-Agent Workbench —— 结构化 Task Room
+</h4><ul>
+<li><strong>一句话</strong>：浏览器里的结构化 &ldquo;Task Room&rdquo;，让多个 CLI Agent 并排干活。</li>
+<li><strong>核心能力</strong>：一个房间 = 目标 + 成员 + 时间线 + 决策 + 审批 + 产物；Claude Code、Codex、通用 PTY CLI 在同一房间内按明确角色协作；角色卡片、带决策门禁的编排器、事件溯源（23 类事件）、git worktree 隔离。</li>
+<li><strong>特点</strong>：本地优先，无账号、无云端、无遥测。</li>
+</ul>
+<h4 id="其他值得关注">其他值得关注
+</h4><ul>
+<li><strong>Buzz（Block）</strong>：可自托管的人机协作工作空间，基于 Nostr 中继。</li>
+<li><strong>OCWS（OpenClaw Workspace Spec）</strong>：为&quot;一人公司 / 多机器人协作&quot;设计的轻量工作空间协议，用目录结构 + 通知文件来协调多个 Agent。</li>
+</ul>
+<hr>
+<h2 id="开源工程盘点">开源工程盘点
+</h2><h3 id="主流多-agent-编排框架">主流多 Agent 编排框架
+</h3><div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>框架</th>
+					<th>定位</th>
+					<th>协作模式</th>
+					<th>Stars（约）</th>
+					<th>一句话点评</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>AutoGen</strong>（微软）</td>
+					<td>通用多 Agent 框架</td>
+					<td>群聊 / Swarm / 图编排，拓扑最全</td>
+					<td>42k+</td>
+					<td>2026-04 与 Semantic Kernel 合并为 Microsoft Agent Framework 1.0，社区另立 AG2 分支</td>
+			</tr>
+			<tr>
+					<td><strong>MetaGPT</strong></td>
+					<td>软件公司模拟器</td>
+					<td>SOP 流水线</td>
+					<td>48k+</td>
+					<td>思想（SOP + 结构化产物）最值得学，通用性弱</td>
+			</tr>
+			<tr>
+					<td><strong>CrewAI</strong></td>
+					<td>角色扮演式编排</td>
+					<td>顺序 / 层级</td>
+					<td>28k+</td>
+					<td>上手最快，<code>role/goal/backstory</code> 拟人化 API</td>
+			</tr>
+			<tr>
+					<td><strong>LangGraph</strong></td>
+					<td>图/状态机编排</td>
+					<td>节点 + 条件边</td>
+					<td>12k+</td>
+					<td>控制力与生产可靠性最强，学习曲线陡</td>
+			</tr>
+	</tbody>
+</table></div>
+<blockquote>
+<p>注意：AutoGen 在 0.2 → 0.4 版本重构时废弃了大量旧 API（如 <code>ConversableAgent</code>），网上约一半教程已失效，搜资料务必先确认版本。</p>
+</blockquote>
+<h3 id="workroom-工作间类工程">WorkRoom 工作间类工程
+</h3><div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>工程</th>
+					<th>定位</th>
+					<th>协作单元</th>
+					<th>本地优先</th>
+					<th>License</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>OpenAgents Workspace</strong></td>
+					<td>Agent 的协作 OS</td>
+					<td>线程 + @mention</td>
+					<td>否（浏览器工作空间）</td>
+					<td>Apache 2.0</td>
+			</tr>
+			<tr>
+					<td><strong>OpenGrove</strong></td>
+					<td>local-first Agent 之家</td>
+					<td>Rooms + @mention</td>
+					<td>是</td>
+					<td>未注明</td>
+			</tr>
+			<tr>
+					<td><strong>AgentWork</strong></td>
+					<td>自主任务编排器</td>
+					<td>Rooms + Meetings</td>
+					<td>是</td>
+					<td>未注明</td>
+			</tr>
+			<tr>
+					<td><strong>Multi-Agent Workbench</strong></td>
+					<td>结构化 Task Room</td>
+					<td>Task Room + 角色卡片</td>
+					<td>是</td>
+					<td>未注明</td>
+			</tr>
+	</tbody>
+</table></div>
+<hr>
+<h2 id="怎么选">怎么选
+</h2><ul>
+<li><strong>想在一个框架里快速搭一套多 Agent 流程</strong> → 先试 <strong>CrewAI</strong>，角色概念直观、从 0 到 Demo 最快；</li>
+<li><strong>流程固定、要求高可靠 / 合规</strong>（金融、医疗审批）→ <strong>LangGraph</strong>，图编排可控、可回放调试；</li>
+<li><strong>想研究多 Agent 的&quot;正确姿势&rdquo;（SOP、结构化产物）</strong> → 读 <strong>MetaGPT</strong> 的源码与思想；</li>
+<li><strong>已有多个 CLI Agent，想让它们&quot;同处一室&quot;协作</strong> → 直接上 <strong>WorkRoom 类工程</strong>：本地优先选 <strong>OpenGrove</strong> / <strong>Multi-Agent Workbench</strong>，想浏览器协作选 <strong>OpenAgents Workspace</strong>。</li>
+</ul>
+<hr>
+<h2 id="小结">小结
+</h2><p>多 Agent 协作的三个层次，本质上是同一件事的三种切面：</p>
+<ol>
+<li><strong>角色</strong>解决&quot;谁来干、干什么&quot;；</li>
+<li><strong>编排模式</strong>解决&quot;怎么配合&quot;；</li>
+<li><strong>WorkRoom 工作间</strong>解决&quot;在哪儿一起干&quot;。</li>
+</ol>
+<p>而 WorkRoom 方向特别值得关注：它绕开了&quot;再造一个框架&quot;的军备竞赛，转而解决更实际的问题——<strong>把现成的、各有所长的 Agent 组织起来</strong>。对普通开发者来说，这可能比再学一个新框架更省力、也更快见效。</p>
+<h2 id="相关笔记">相关笔记
+</h2><ul>
+<li>[[opencode简介]]</li>
+<li>[[VibeCoding]]</li>
+<li>[[iFlow使用和部署教程]]</li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/ai/">AI</a>
+        
+            <a href="/tags/%E5%A4%9Aagent/">多Agent</a>
+        
+            <a href="/tags/%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93/">多智能体</a>
+        
+            <a href="/tags/agent/">Agent</a>
+        
+            <a href="/tags/workroom/">WorkRoom</a>
+        
+            <a href="/tags/autogen/">AutoGen</a>
+        
+            <a href="/tags/crewai/">CrewAI</a>
+        
+            <a href="/tags/metagpt/">MetaGPT</a>
+        
+            <a href="/tags/langgraph/">LangGraph</a>
+        
+            <a href="/tags/%E5%BC%80%E6%BA%90/">开源</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under <a class="link" href="https://github.com/Liyufei1"  target="_blank" rel="noopener"
+    >Liyufei1</a></span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        const elementsToRender = [".main-article", ".widget--toc"];
+
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/ai-03-openclow/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/AI.png" loading="lazy" data-key="ai-03-openclow" data-hash="/AI.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">AI-03-OpenClow</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/iflow-in-development/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/AI.png" loading="lazy" data-key="iflow-in-development" data-hash="/AI.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Iflow在开发中的进阶教程</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/ai-02-cpp%E4%B8%ADapikey%E7%9A%84%E4%BD%BF%E7%94%A8/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/AI.png" loading="lazy" data-key="ai-02-cpp中APIKey的使用" data-hash="/AI.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">AI-02-C&#43;&#43;中API Key的使用</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/ai-01-opencode-intro/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/AI.png" loading="lazy" data-key="ai-01-opencode-intro" data-hash="/AI.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">AI-01-AI编程工具opencode简介</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/iflow%E4%BD%BF%E7%94%A8%E5%92%8C%E9%83%A8%E7%BD%B2%E5%AE%8C%E6%95%B4%E6%95%99%E7%A8%8B/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="/AI.png" loading="lazy" data-key="iflow使用和部署完整教程" data-hash="/AI.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">iFlow CLI 使用和部署完整教程</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2026 李宇飞-Liyufei1
+    </section>
+    
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.32.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

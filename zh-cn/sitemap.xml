@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://Liyufei1.github.io/</loc>
-    <lastmod>2026-07-28T00:00:00+00:00</lastmod>
+    <lastmod>2026-09-10T00:00:00+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -15,8 +15,20 @@
                 href="https://Liyufei1.github.io/"
                 />
   </url><url>
+    <loc>https://Liyufei1.github.io/tags/agent/</loc>
+    <lastmod>2026-09-10T00:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://Liyufei1.github.io/categories/ai/</loc>
+    <lastmod>2026-09-10T00:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://Liyufei1.github.io/tags/ai/</loc>
+    <lastmod>2026-09-10T00:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://Liyufei1.github.io/tags/autogen/</loc>
+    <lastmod>2026-09-10T00:00:00+08:00</lastmod>
+  </url><url>
     <loc>https://Liyufei1.github.io/categories/</loc>
-    <lastmod>2026-07-28T00:00:00+00:00</lastmod>
+    <lastmod>2026-09-10T00:00:00+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -28,17 +40,20 @@
                 href="https://Liyufei1.github.io/categories/"
                 />
   </url><url>
-    <loc>https://Liyufei1.github.io/tags/glfw/</loc>
-    <lastmod>2026-07-28T00:00:00+00:00</lastmod>
+    <loc>https://Liyufei1.github.io/tags/crewai/</loc>
+    <lastmod>2026-09-10T00:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://Liyufei1.github.io/tags/langgraph/</loc>
+    <lastmod>2026-09-10T00:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://Liyufei1.github.io/tags/metagpt/</loc>
+    <lastmod>2026-09-10T00:00:00+08:00</lastmod>
   </url><url>
     <loc>https://Liyufei1.github.io/post/</loc>
-    <lastmod>2026-07-28T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://Liyufei1.github.io/categories/render/</loc>
-    <lastmod>2026-07-28T00:00:00+00:00</lastmod>
+    <lastmod>2026-09-10T00:00:00+08:00</lastmod>
   </url><url>
     <loc>https://Liyufei1.github.io/tags/</loc>
-    <lastmod>2026-07-28T00:00:00+00:00</lastmod>
+    <lastmod>2026-09-10T00:00:00+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -49,6 +64,66 @@
                 hreflang="en-us"
                 href="https://Liyufei1.github.io/tags/"
                 />
+  </url><url>
+    <loc>https://Liyufei1.github.io/tags/workroom/</loc>
+    <lastmod>2026-09-10T00:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://Liyufei1.github.io/p/multi-agent-collab-roles-workroom/</loc>
+    <lastmod>2026-09-10T00:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://Liyufei1.github.io/tags/%E5%A4%9Aagent/</loc>
+    <lastmod>2026-09-10T00:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://Liyufei1.github.io/tags/%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93/</loc>
+    <lastmod>2026-09-10T00:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://Liyufei1.github.io/tags/%E5%BC%80%E6%BA%90/</loc>
+    <lastmod>2026-09-10T00:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://Liyufei1.github.io/tags/json/</loc>
+    <lastmod>2026-09-09T00:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://Liyufei1.github.io/categories/misc/</loc>
+    <lastmod>2026-09-09T00:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://Liyufei1.github.io/tags/toml/</loc>
+    <lastmod>2026-09-09T00:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://Liyufei1.github.io/tags/xml/</loc>
+    <lastmod>2026-09-09T00:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://Liyufei1.github.io/tags/yaml/</loc>
+    <lastmod>2026-09-09T00:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://Liyufei1.github.io/tags/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F/</loc>
+    <lastmod>2026-09-09T00:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://Liyufei1.github.io/p/json-yaml-xml-intro/</loc>
+    <lastmod>2026-09-09T00:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://Liyufei1.github.io/categories/blog/</loc>
+    <lastmod>2026-09-04T00:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://Liyufei1.github.io/tags/mcp/</loc>
+    <lastmod>2026-09-04T00:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://Liyufei1.github.io/tags/obsidian/</loc>
+    <lastmod>2026-09-04T00:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://Liyufei1.github.io/p/obsidian-ai/</loc>
+    <lastmod>2026-09-04T00:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://Liyufei1.github.io/tags/rag/</loc>
+    <lastmod>2026-09-04T00:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://Liyufei1.github.io/tags/%E7%9F%A5%E8%AF%86%E5%BA%93/</loc>
+    <lastmod>2026-09-04T00:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://Liyufei1.github.io/tags/glfw/</loc>
+    <lastmod>2026-07-28T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Liyufei1.github.io/categories/render/</loc>
+    <lastmod>2026-07-28T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://Liyufei1.github.io/tags/vulkan/</loc>
     <lastmod>2026-07-28T00:00:00+00:00</lastmod>
@@ -109,15 +184,6 @@
   </url><url>
     <loc>https://Liyufei1.github.io/tags/python/</loc>
     <lastmod>2026-03-11T00:00:00+08:00</lastmod>
-  </url><url>
-    <loc>https://Liyufei1.github.io/tags/agent/</loc>
-    <lastmod>2026-02-24T00:00:00+08:00</lastmod>
-  </url><url>
-    <loc>https://Liyufei1.github.io/categories/ai/</loc>
-    <lastmod>2026-02-24T00:00:00+08:00</lastmod>
-  </url><url>
-    <loc>https://Liyufei1.github.io/tags/ai/</loc>
-    <lastmod>2026-02-24T00:00:00+08:00</lastmod>
   </url><url>
     <loc>https://Liyufei1.github.io/p/ai-03-openclow/</loc>
     <lastmod>2026-02-24T00:00:00+08:00</lastmod>
@@ -278,9 +344,6 @@
     <loc>https://Liyufei1.github.io/tags/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</loc>
     <lastmod>2025-11-04T16:08:31+08:00</lastmod>
   </url><url>
-    <loc>https://Liyufei1.github.io/categories/blog/</loc>
-    <lastmod>2025-11-03T16:08:31+08:00</lastmod>
-  </url><url>
     <loc>https://Liyufei1.github.io/p/blog-with-hugo/</loc>
     <lastmod>2025-11-03T16:08:31+08:00</lastmod>
   </url><url>
@@ -318,8 +381,6 @@
     <lastmod>2019-03-08T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://Liyufei1.github.io/tags/claude/</loc>
-  </url><url>
-    <loc>https://Liyufei1.github.io/categories/misc/</loc>
   </url><url>
     <loc>https://Liyufei1.github.io/categories/test/</loc>
   </url><url>
